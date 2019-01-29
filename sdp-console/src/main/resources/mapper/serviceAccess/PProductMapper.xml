@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.serviceAccess.mapper.PProductMapper">
+
+	<select id="findAll" parameterType="com.sdp.serviceAccess.entity.PProduct"
+		resultType="com.sdp.serviceAccess.entity.PProduct">
+		select 
+		product_id "productId",
+		product_name "productName",
+		product_type_id "productTypeId",
+		product_vesion "productVersion",
+		product_status "productStatus",
+		product_introd "productIntrod",
+		detailed_introd "detailedIntrod",
+		product_attr "productAttr",
+		example_attr "exampleAttr",
+		node_attr "nodeAttr",
+		rely_on_attr "relyOnAttr",
+		is_show_instance "showInstance",
+		api_addr "apiAddr",
+		order_type "orderType",
+		sort_id
+		"sortId",
+		create_date "createDate",
+		create_by "createBy",
+		tenant_id 
+		"tenantId" 
+		from p_product 
+		where 1=1 
+		<if test="tenantId !=null and tenantId !=''">
+			and tenantId=#{tenantId} 
+		</if>
+		order by sort_id 
+	</select>
+
+	<select id="findById" parameterType="com.sdp.serviceAccess.entity.PProduct"
+		resultType="com.sdp.serviceAccess.entity.PProduct">
+		select 
+		product_id "productId",
+		product_name "productName",
+		product_type_id "productTypeId",
+		product_vesion "productVersion",
+		product_status "productStatus",
+		product_introd "productIntrod",
+		detailed_introd "detailedIntrod",
+		is_show_instance "showInstance",
+		product_attr "productAttr",
+		example_attr "exampleAttr",
+		node_attr "nodeAttr",
+		rely_on_attr "relyOnAttr",
+		product_logo
+		"productLogo",
+		api_addr "apiAddr",
+		order_type "orderType",
+		sort_id
+		"sortId",
+		create_date "createDate",
+		create_by "createBy",
+		tenant_id 
+		"tenantId" 
+		from p_product 
+		where 1=1 
+		<if test="tenantId !=null and tenantId !=''">
+			and tenant_id=#{tenantId} 
+		</if>
+		<if test="productId!=null and productId!=''">
+			and product_id= #{productId} 
+		</if>
+		<if test="productStatus!=null and productStatus!=''">
+		    and product_status = #{productStatus}
+		</if>
+	</select>
+
+	<select id="findAllByCondition" parameterType="com.sdp.serviceAccess.entity.PProduct"
+		resultType="com.sdp.serviceAccess.entity.PProduct">
+		select 
+		product_id "productId",
+		product_name "productName",
+		product_type_id "productTypeId",
+		product_vesion "productVersion",
+		product_status "productStatus",
+		product_introd "productIntrod",
+		detailed_introd "detailedIntrod",
+		is_show_instance "showInstance",
+		product_attr "productAttr",
+		example_attr "exampleAttr",
+		node_attr "nodeAttr",
+		rely_on_attr "relyOnAttr",
+		api_addr "apiAddr",
+		order_type "orderType",
+		sort_id
+		"sortId",
+		create_date "createDate",
+		create_by "createBy",
+		tenant_id
+		"tenantId"
+		from p_product
+		where 1=1 
+		<if test="tenantId != null and tenantId != ''">
+			and tenant_id=#{tenantId} 
+		</if>
+		<if test = "createBy != null and createBy != ''">
+		    and create_by = #{createBy} 
+		</if>
+		<if test="productId != null and productId != ''">
+			and product_id=#{productId}
+		</if>
+		<if test="productTypeId != null and productTypeId != ''">
+			and product_type_id = #{productTypeId} 
+		</if>
+		<if test="productStatus != null and productStatus != ''">
+			and product_status =#{productStatus} 
+		</if>
+		<if
+			test="(productId != null and productId !='') or (productName !=null and productName != '')">
+			and (product_id like concat('%',#{productId},'%') or
+			product_name like
+			concat('%',#{productName},'%')) 
+		</if>
+		order by sort_id
+	</select>
+
+	<insert id="saveSingle" parameterType="com.sdp.serviceAccess.entity.PProduct">
+		insert into p_product 
+		(product_id ,
+		product_name ,
+		product_type_id,
+		product_vesion ,
+		product_status ,
+		product_introd ,
+		detailed_introd,
+		product_attr ,
+		example_attr ,
+		node_attr,
+		rely_on_attr,
+		product_logo ,
+		api_addr ,
+		order_type ,
+		is_show_instance,
+		sort_id ,
+		create_date,
+		create_by,
+		tenant_id)
+		values(
+		#{productId,jdbcType=VARCHAR},
+		#{productName,jdbcType=VARCHAR},
+		#{productTypeId,jdbcType=VARCHAR},
+		#{productVersion,jdbcType=VARCHAR},
+		#{productStatus,jdbcType=VARCHAR},
+		#{productIntrod,jdbcType=VARCHAR},
+		#{detailedIntrod,jdbcType=VARCHAR},
+		#{productAttr,jdbcType=VARCHAR},
+		#{exampleAttr,jdbcType=VARCHAR},
+		#{nodeAttr,jdbcType=VARCHAR},
+		#{relyOnAttr,jdbcType=VARCHAR},
+		#{productLogo,jdbcType=BLOB},
+		#{apiAddr,jdbcType=VARCHAR},
+		#{orderType,jdbcType=VARCHAR},
+		#{showInstance,jdbcType=VARCHAR},
+		#{sortId,jdbcType=INTEGER},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{createBy,jdbcType=VARCHAR},
+		#{tenantId,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.sdp.serviceAccess.entity.PProduct">
+		update p_product 
+		set 
+		product_id =#{productId,jdbcType=VARCHAR},
+		product_name =#{productName,jdbcType=VARCHAR},
+		product_type_id=#{productTypeId,jdbcType=VARCHAR},
+		product_vesion =#{productVersion,jdbcType=VARCHAR},
+		product_logo=#{productLogo,jdbcType=BLOB},
+		product_status =#{productStatus,jdbcType=VARCHAR},
+		product_introd =#{productIntrod,jdbcType=VARCHAR},
+		detailed_introd=#{detailedIntrod,jdbcType=VARCHAR},
+		product_attr =#{productAttr,jdbcType=VARCHAR},
+		example_attr =#{exampleAttr,jdbcType=VARCHAR},
+		node_attr =#{nodeAttr,jdbcType=VARCHAR},
+		is_show_instance=#{showInstance,jdbcType=VARCHAR},
+		<if test="relyOnAttr!=null and relyOnAttr !=''">
+		rely_on_attr=#{relyOnAttr,jdbcType=VARCHAR},
+		</if>
+		api_addr =#{apiAddr,jdbcType=VARCHAR},
+		order_type =#{orderType,jdbcType=VARCHAR},
+		sort_id =#{sortId,jdbcType=INTEGER},
+		create_date =#{createDate,jdbcType=TIMESTAMP},
+		create_by =#{createBy,jdbcType=VARCHAR},
+		tenant_id =#{tenantId,jdbcType=VARCHAR} 
+		where 1=1 
+		and  product_id = #{productId}
+	</update>
+	
+	<delete id="delete" parameterType="com.sdp.serviceAccess.entity.PProduct">
+		delete from p_product
+		where 1=1
+		and tenant_id = #{tenantId}
+		and product_id = 
+		#{productId}
+	</delete>
+	
+	<select id="maxSort" resultType="java.lang.Integer">
+	select max(sort_id) "maxSort" from p_product  
+	</select>
+	
+	<select id="findAllByConditionAndPage" parameterType="java.util.Map"
+		resultType="com.sdp.serviceAccess.entity.PProduct">
+		select 
+		a.product_id "productId",
+		a.product_name "productName",
+		a.product_type_id "productTypeId",
+		b.product_type_name "productTypeName",
+		a.product_vesion "productVersion",
+		a.product_status "productStatus",
+		a.product_introd "productIntrod",
+		a.detailed_introd "detailedIntrod",
+		a.is_show_instance "showInstance",
+		a.api_addr "apiAddr",
+		a.order_type "orderType",
+		a.sort_id
+		"sortId",
+		a.create_date "createDate",
+		a.create_by "createBy",
+		a.tenant_id
+		"tenantId"
+		from p_product a left join p_product_type b 
+		on a.product_type_id= b.product_type_id 
+		where 1=1 
+		<if test="tenantId != null and tenantId != ''">
+			and a.tenant_id=#{tenantId}
+		</if>
+		<if test="loginId != null and loginId != ''">
+			and a.create_by=#{loginId}
+		</if>
+		<if test="productTypeId != null and productTypeId != ''">
+			and a.product_type_id = #{productTypeId}
+		</if>
+		<if test="productStatus != null and productStatus != ''">
+			and a.product_status =#{productStatus}
+		</if>
+		<if test = "orderType !=null and orderType!=''">
+		    and a.order_type = #{orderType} 
+		</if>
+		<if
+			test="(productId != null and productId !='') or (productName !=null and productName != '')">
+			and (a.product_id like concat('%',#{productId},'%') or
+			a.product_name like
+			concat('%',#{productName},'%')) 
+		</if>
+		<if test="null != productIds and productIds.size > 0">
+             and a.product_id in 
+             <foreach collection="productIds" item="productId" index="index" open="(" separator=","  close=")">
+             #{productId}
+             </foreach>
+        </if>
+		order by a.sort_id 
+		<if test="sortType !=null and sortType != '' ">
+		    ${sortType}  
+		</if>
+		limit #{startNo},#{size}
+	</select>
+	
+	<select id ="count" parameterType="java.util.Map" resultType="java.lang.Integer">
+	select count(1) "ctn" from p_product  
+	where 1=1 
+		<if test="tenantId != null and tenantId != ''">
+			and tenant_id=#{tenantId} 
+		</if>
+		<if test="loginId != null and loginId != ''">
+			and create_by=#{loginId}
+		</if>
+		<if test="productTypeId != null and productTypeId != ''">
+			and product_type_id = #{productTypeId} 
+		</if>
+		<if test="productStatus != null and productStatus != ''">
+			and product_status =#{productStatus} 
+		</if>
+		<if test = "orderType !=null and orderType!=''">
+		    and order_type = #{orderType} 
+		</if>
+		<if
+			test="(productId != null and productId !='') or (productName !=null and productName != '')">
+			and (product_id like concat('%',#{productId},'%') or
+			product_name like
+			concat('%',#{productName},'%')) 
+		</if>
+		<if test="null != productIds and productIds.size > 0">
+             and product_id in 
+             <foreach collection="productIds" item="productId" index="index" open="(" separator=","  close=")">
+             #{productId}
+             </foreach>
+        </if>
+	</select>
+	
+	<select id="findProductOrderCountByProductType" parameterType="java.util.Map" resultType="java.util.Map">
+	  select * from (
+select 
+         a.product_type_id "productTypeId",
+         a.product_type_name "productTypeName",
+         a.type_status "typeStatus",
+         b.product_status "productStatus",
+         b.product_id "productId",
+         b.product_name "productName",
+         b.product_introd "productIntrod",
+         b.detailed_introd "detailedIntrod",
+         b.create_date "createDate",
+         a.parent_id "parentId",
+         a.type_path "typePath" ,
+         b.is_show_instance "showInstance",
+         SUM(case when c.order_status = #{orderStatus} then 1 else 0 end)  "orderSuccessCtn" ,
+         a.sort_id "sortId" 
+         from p_product_type a left  join p_product b 
+         on a.product_type_id = b.product_type_id and a.tenant_id = b.tenant_id 
+         left join p_product_order c on b.tenant_id =c.tenant_id and b.product_id = c.product_id 
+         where 1=1 
+         <if test ="tenantId != null and tenantId != ''">
+         and a.tenant_id = #{tenantId}
+         </if>  
+         group by a.product_type_id,a.product_type_name,b.product_id,b.product_name 
+) a order by a.sortId asc 
+	</select>
+	
+	<update id="modifyCasePro" parameterType="java.util.Map">
+	update p_product 
+	<if test = "caseAttr != null and caseAttr !=''">
+	set example_attr = #{caseAttr,jdbcType=VARCHAR}  
+	</if>
+	<if test= "nodeAttr != null and nodeAttr !=''">
+	set node_attr = #{nodeAttr,jdbcType=VARCHAR} 
+	</if>
+	<if test ="relyOnAttr != null and relyOnAttr !=''">
+	set rely_on_attr = #{relyOnAttr,jdbcType=VARCHAR} 
+	</if>
+	where product_id = #{productId}
+	and tenant_id = #{tenantId} 
+	</update>
+	<select id="findAllByCase" parameterType="java.util.Map"
+		resultType="com.sdp.serviceAccess.entity.PProduct">
+		select 
+		product_id "productId",
+		product_name "productName",
+		product_type_id "productTypeId",
+		product_vesion "productVersion",
+		product_status "productStatus",
+		product_introd "productIntrod",
+		detailed_introd "detailedIntrod",
+		is_show_instance "showInstance",
+		product_attr "productAttr",
+		example_attr "exampleAttr",
+		node_attr "nodeAttr",
+		rely_on_attr "relyOnAttr",
+		api_addr "apiAddr",
+		order_type "orderType",
+		sort_id
+		"sortId",
+		create_date "createDate",
+		create_by "createBy",
+		tenant_id 
+		"tenantId" 
+		from p_product 
+		where 1=1 
+		and product_id in 
+		(select c.product_id from p_product_case c where 1=1
+		<if test="tenantId != null and tenantId != ''">
+			and c.tenant_id=#{tenantId}
+		</if>
+		<if test="loginId !=null and loginId !=''">
+			and c.create_by=#{loginId} 
+		</if>
+		)
+		order by sort_id  
+	</select>
+</mapper>

@@ -1,0 +1,232 @@
+div.service-container{
+    background: #fff;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    height: auto;
+    min-height: 100%;
+    box-shadow: 0px 2px 8px 0px 
+		rgba(130, 130, 130, 0.16);
+}
+.service-container{
+    padding: 15px 26px;
+}
+.icon-hover:hover{
+    cursor: pointer;
+    color: #1890ff;
+}
+.page-info-header{
+    color: #1890ff;
+    font-size: 16px;
+    border-bottom: 1px solid #e8e8e8;
+    margin-bottom: 20px;
+}
+.blue-font{
+    color: #1890ff;
+}
+.red-font{
+    color: #ff4d4f;
+}
+
+/*bootstrapTable样式修改*/
+.fixed-table-body{
+    height:auto;
+}
+
+/****************/
+
+.pruduct-edit, .product-delete{
+    cursor: pointer;
+    display: inline-block;
+    width: 15px;
+    height: 16px;
+    vertical-align: middle;
+    float: right;
+}
+.pruduct-edit{
+    background: url("../../../img/serviceType/edit.png") no-repeat;
+    margin-right: 16px;
+}
+.product-delete{
+    background: url("../../../img/serviceType/delete.png") no-repeat;
+}
+.pruduct-edit:hover{
+    background: url("../../../img/serviceType/edit-red.png") no-repeat;
+}
+.product-delete:hover{
+    background: url("../../../img/serviceType/delete-red.png") no-repeat;
+}
+.beconsole-combin-input{
+    position: absolute;
+    right: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: none;
+}
+.beconsole-combine-line{
+    height: 23px;
+    position: absolute;
+    border-left: 1px solid #e0e0e0;
+    left: 110px;
+    z-index: 2;
+    top: 6px;
+}
+.inner-ahref{
+    /* color: #35aae7; */
+    font-size: 14px;
+}
+.inner-ahref:hover{
+    text-decoration: none;
+}
+.beconsole-input-group{
+    width: 270px;
+    height: 35px;
+    border: 1px solid #d9d9d9;
+    box-sizing: border-box;
+    border-radius: 35px;
+    position: relative;
+}
+.beconsole-input-group:hover{
+    /* border-color: #cc3300; */
+}
+.beconsole-input-group:hover .glyphicon-search{
+    /* color: #cc3300; */
+}
+.beconsole-input-group .beconsole-biner-button{
+    width: 103px;
+    border: none;
+    height: 35px;
+    border-top-left-radius: 35px;
+    border-bottom-left-radius: 35px;
+    padding: 0;
+    position: relative;
+    padding-right: 18px;
+    overflow: hidden;
+    /* color: #666666; */
+}
+.beconsole-input-group .beconsole-biner-button:hover:active, .beconsole-input-group .beconsole-biner-button:focus:active{
+    /* color: #666666; */
+    outline: none;
+}
+.btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default, .open > .dropdown-toggle.btn-default:hover{
+    /* color: #666666; */
+}
+.beconsole-input-group .beconsole-biner-button .inner-text{
+    display: inline-block;
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    overflow: hidden;
+}
+.beconsole-input-group .beconsole-biner-button .caret{
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    /* color: #d3d3d3; */
+}
+.beconsole-input-group .beconsole-biner-input{
+    width: 166px;
+    border: none;
+    box-shadow: none;
+    height: 35px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.beconsole-input-group .beconsole-group-line{
+    position: absolute;
+    height: 23px;
+    border-left: 1px solid #e0e0e0;
+    z-index: 22;
+    top: 6px;
+}
+.beconsole-input-group .glyphicon-search{
+    position: absolute;
+    right: 10px;
+    top: 11px;
+    width: 16px;
+    height: 16px;
+    /* color: #8b8b8b; */
+    z-index: 50;
+    cursor: pointer;
+}
+.input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child), .input-group .form-control:not(:first-child):not(:last-child){
+    border-radius: 0 35px 35px 0;
+}
+
+
+.beconsole-switch {
+    position: relative;
+    display: inline-block;
+    width: 32px;
+    height: 20px;
+    margin-bottom: 0;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  
+  .beconsole-switch input {display:none;}
+  
+  .beconsole-switch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* background-color: #ccc; */
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .beconsole-switch .slider:before {
+    position: absolute;
+    content: "";
+    height: 16.5px;
+    width: 16.5px;
+    left: 2px;
+    bottom: 2px;
+    /* background-color: white; */
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .beconsole-switch-open .slider {
+    /* background-color: #33cc99; */
+  }
+  
+  .beconsole-switch-open .slider {
+    /* box-shadow: 0 0 1px #33cc99; */
+  }
+  
+  .beconsole-switch-open .slider:before {
+    -webkit-transform: translateX(12px);
+    -ms-transform: translateX(12px);
+    transform: translateX(12px);
+  }
+  .beconsole-switch-disabled .slider{
+      cursor: not-allowed;
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 10px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+  .dropdown-menu{
+      min-width: 110px;
+  }
+
+  .bootstrap-table .pull-right .dropdown-menu{
+    right: 8px;
+    left: auto;
+    min-width: 94px;
+  }
+  .bconsole-left-arrow{
+    font-size: 20px;
+    height: 25px;
+    line-height: 23px;
+    color: #868686;
+  }

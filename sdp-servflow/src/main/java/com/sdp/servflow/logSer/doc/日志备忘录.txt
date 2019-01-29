@@ -1,0 +1,149 @@
+CREATE TABLE `log_1` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '日志记录的主键',
+  `logType` int(2) DEFAULT NULL COMMENT '日志类型 0 代表服务，1代表 流程版本',
+  `pubapiId` varchar(32) DEFAULT '' COMMENT '注册服务id',
+  `orderid` varchar(32) DEFAULT '' COMMENT '订阅id',
+  `requestMsg` longtext COMMENT '请求报文',
+  `responseMsg` longtext COMMENT '响应报文',
+  `startTime` timestamp(3) NULL DEFAULT NULL COMMENT '开始时间',
+  `endTime` timestamp(3) NULL DEFAULT NULL COMMENT '结束时间',
+  `requestId` varchar(32) DEFAULT '' COMMENT '一次交互使用的id（调用一次接口分配一个requestID）',
+  `useTime` int(11) DEFAULT NULL COMMENT '消耗时间（毫秒）',
+  `dayTime` int(8) NOT NULL COMMENT '天数',
+  `code` varchar(10) DEFAULT NULL COMMENT '成功失败详细编码',
+  `instanceId` int(10) DEFAULT NULL COMMENT '实例全局id',
+  `tenant_id` varchar(16) DEFAULT '' COMMENT '租户id',
+  PRIMARY KEY (`id`,`dayTime`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+/*!50100 PARTITION BY RANGE (dayTime)
+(PARTITION p20171109 VALUES LESS THAN (20171110) ENGINE = InnoDB) */;
+
+CREATE TABLE `log_dictionary` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '日志记录的主键',
+  `dayDateTime` int(8) NOT NULL,
+  `dayTotalCount` int(10) DEFAULT NULL,
+  `tableName` varchar(16) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `dic_dayDateTime` (`dayDateTime`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `order_info_statistics` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '统计表主键',
+  `orderid` varchar(32) DEFAULT NULL COMMENT '订阅id',
+  `sendCount` int(11) DEFAULT NULL COMMENT '发送总量',
+  `code` varchar(10) DEFAULT NULL COMMENT '成功错误编码',
+  `sendDate` int(8) DEFAULT NULL COMMENT '日期(yyyyMMdd)',
+  `tenant_id` varchar(16) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `order_total_statistics` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '统计表主键',
+  `orderid` varchar(32) DEFAULT NULL COMMENT '订阅id',
+  `order_name` varchar(32) DEFAULT NULL COMMENT '名称',
+  `sendCount` int(11) DEFAULT NULL COMMENT '发送总量',
+  `successCount` int(11) DEFAULT NULL COMMENT '成功发送总量',
+  `failCount` int(11) DEFAULT NULL COMMENT '失败发送总量',
+  `sendDate` int(8) DEFAULT NULL COMMENT '日期(yyyyMMdd)',
+  `ser_id` varchar(32) DEFAULT NULL COMMENT '服务id',
+  `ser_version` varchar(32) DEFAULT NULL COMMENT '版本id',
+  `tenant_id` varchar(16) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `log_ser_id_version_statistics` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '统计表主键',
+  `ser_id` varchar(32) DEFAULT NULL COMMENT '服务id',
+  `ser_version` varchar(32) DEFAULT NULL COMMENT '版本id',
+  `ser_name` varchar(50) DEFAULT NULL COMMENT '服务名称',
+  `sendCount` int(11) DEFAULT NULL COMMENT '发送总量',
+  `successCount` int(11) DEFAULT NULL COMMENT '成功发送总量',
+  `failCount` int(11) DEFAULT NULL COMMENT '失败发送总量',
+  `sendDate` int(8) DEFAULT NULL COMMENT '日期(yyyyMMdd)',
+  `sourceType` varchar(2) DEFAULT NULL COMMENT '日志来源(0 同步，1 异步，2cas)',
+  `tenant_id` varchar(16) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `method_lock` (
+  `instanceId` int(10) NOT NULL COMMENT '实例全局id(具有唯一性和一次性)',
+  `methodName` varchar(32) NOT NULL DEFAULT '' COMMENT '锁定的方法名',
+  `methodDesc` varchar(64) NOT NULL DEFAULT '方法描述信息',
+  `updateTime` int(8) NOT NULL COMMENT '保存时间 格式 yyyymmdd',
+  UNIQUE KEY `methodName_updateTime` (`methodName`,`updateTime`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='锁定中的方法';
+
+CREATE TABLE `ser_ip_limit` (
+  `ip_id` varchar(32) DEFAULT NULL COMMENT 'id',
+  `app_id` varchar(32) DEFAULT NULL COMMENT '订阅服务的确定标识',
+  `ip_addr` varchar(32) DEFAULT NULL COMMENT 'ip地址（all 不限制）',
+  `name_type` varchar(32) DEFAULT NULL COMMENT '名单类型（0 白名单 1 黑名单）',
+  `creatime` datetime DEFAULT NULL COMMENT '创建时间',
+  `tenant_id` varchar(16) DEFAULT NULL COMMENT '租户id'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+
+
+
+MySQL实现序列（Sequence）效果
+
+1. 新建序列表
+ 
+[sql] view plain copy
+drop table if exists sequence;     
+create table sequence (         
+seq_name        VARCHAR(50) NOT NULL, -- 序列名称         
+current_val     INT         NOT NULL, -- 当前值         
+increment_val   INT         NOT NULL    DEFAULT 1, -- 步长(跨度)         
+PRIMARY KEY (seq_name)   );   
+ 
+2. 新增一个序列
+[sql] view plain copy
+INSERT INTO sequence VALUES ('seq_instance_resgister', '0', '1');  
+
+3. 创建 函数 用于获取序列当前值(v_seq_name 参数值 代表序列名称)
+[sql] view plain copy
+create function currval(v_seq_name VARCHAR(50))     
+returns integer    
+begin        
+    declare value integer;         
+    set value = 0;         
+    select current_val into value  from sequence where seq_name = v_seq_name;   
+   return value;   
+end;  
+
+4. 查询当前值
+[sql] view plain copy
+select currval('seq_instance_resgister');  
+
+5. 创建 函数 用于获取序列下一个值(v_seq_name 参数值 代表序列名称)
+[sql] view plain copy
+create function nextval (v_seq_name VARCHAR(50))  
+    returns integer  
+begin  
+    update sequence set current_val = current_val + increment_val  where seq_name = v_seq_name;  
+    return currval(v_seq_name);  
+end;  
+
+6. 查询下一个值
+[sql] view plain copy
+select nextval('seq_instance_resgister');  
+
+
+MySQL This function has none of DETERMINISTIC, NO SQL...错误1418 的原因分析及解决方法 (转)
+解决方法：
+
+解决办法也有两种， 第一种是在创建子程序(存储过程、函数、触发器)时，声明为DETERMINISTIC或NO SQL与READS SQL DATA中的一个， 例如: CREATE DEFINER = CURRENT_USER PROCEDURE `NewProc`()     DETERMINISTIC BEGIN #Routine body goes here... END;;
+
+第二种是信任子程序的创建者，禁止创建、修改子程序时对SUPER权限的要求，设置log_bin_trust_routine_creators全局系统变量为1。
+
+设置方法有三种:(一般使用第二种就可以)
+
+1.在客户端上执行SET GLOBAL log_bin_trust_function_creators = 1;
+
+2.MySQL启动时，加上--log-bin-trust-function-creators选贤，参数设置为1
+
+3.在MySQL配置文件my.ini或my.cnf中的[mysqld]段上加log-bin-trust-function-creators=1

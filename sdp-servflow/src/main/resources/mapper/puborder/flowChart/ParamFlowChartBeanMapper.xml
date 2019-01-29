@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.frame.web.mapper.puborder.flowChart.ParamFlowChartBeanMapper">
+	<resultMap type="com.sdp.servflow.pubandorder.flowchart.model.ParamFlowChartBean" id="BaseResultMap">
+		<id column="relationid" jdbcType="VARCHAR" property="relationid" />
+		<result column="prepubid" jdbcType="VARCHAR" property="prepubid" />
+		<result column="pubid" jdbcType="VARCHAR" property="pubid" />
+		<result column="flowChartId" jdbcType="VARCHAR" property="flowChartId" />
+		<result column="pre_paramid" jdbcType="VARCHAR" property="pre_paramid" />
+		<result column="pre_paramname" jdbcType="VARCHAR" property="pre_paramname" />
+		<result column="next_paramid" jdbcType="VARCHAR" property="next_paramid" />
+		<result column="next_paramname" jdbcType="VARCHAR" property="next_paramname" />
+		<result column="login_id" jdbcType="VARCHAR" property="login_id" />
+		<result column="tenant_id" jdbcType="VARCHAR" property="tenant_id" />
+		<result column="type" jdbcType="VARCHAR" property="type" />
+		<result column="regex" jdbcType="VARCHAR" property="regex" />
+		<result column="constantparam" jdbcType="VARCHAR" property="constantparam" />
+		<result column="node_id" jdbcType="VARCHAR" property="node_id" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		relationid, prepubid, pubid, flowChartId, pre_paramid, pre_paramname,next_paramid,next_paramname,login_id,tenant_id,type,regex,constantparam,node_id
+	</sql>
+
+	<insert id="insert" parameterType="com.sdp.servflow.pubandorder.flowchart.model.ParamFlowChartBean">
+        insert into LAYOUT_PARAM
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="relationid != null">
+                relationid,
+            </if>
+            <if test="prepubid != null">
+                prepubid,
+            </if>
+            <if test="pubid != null">
+                pubid,
+            </if>
+            <if test="flowChartId != null">
+                flowChartId,
+            </if>
+            <if test="pre_paramid != null">
+                pre_paramid,
+            </if>
+            <if test="pre_paramname != null">
+                pre_paramname,
+            </if>
+            <if test="next_paramid != null">
+                next_paramid,
+            </if>
+            <if test="next_paramname != null">
+                next_paramname,
+            </if>
+            <if test="login_id != null">
+                login_id,
+            </if>
+            <if test="tenant_id != null">
+                tenant_id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="regex != null">
+                regex,
+            </if>
+            <if test="constantparam != null">
+                constantparam,
+            </if>
+            <if test="node_id != null">
+                node_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="relationid != null">
+                #{relationid,jdbcType=VARCHAR},
+            </if>
+            <if test="prepubid != null">
+                #{prepubid,jdbcType=VARCHAR},
+            </if>
+            <if test="pubid != null">
+                #{pubid,jdbcType=VARCHAR},
+            </if>
+            <if test="flowChartId != null">
+                #{flowChartId,jdbcType=VARCHAR},
+            </if>
+            <if test="pre_paramid != null">
+                #{pre_paramid,jdbcType=VARCHAR},
+            </if>
+            <if test="pre_paramname != null">
+                #{pre_paramname,jdbcType=VARCHAR},
+            </if>
+            <if test="next_paramid != null">
+                #{next_paramid,jdbcType=VARCHAR},
+            </if>
+            <if test="next_paramname != null">
+                #{next_paramname,jdbcType=VARCHAR},
+            </if>
+            <if test="login_id != null">
+                #{login_id,jdbcType=VARCHAR},
+            </if>
+            <if test="tenant_id != null">
+                #{tenant_id,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="regex != null">
+                #{regex,jdbcType=VARCHAR},
+            </if>
+            <if test="constantparam != null">
+                #{constantparam,jdbcType=VARCHAR},
+            </if>
+            <if test="node_id != null">
+                #{node_id,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    
+    <delete id="deleteByCondition" parameterType="map">
+        delete from
+        LAYOUT_PARAM where 
+        <trim suffixOverrides="and">
+            <if test="pubid != null">
+                pubid = #{pubid,jdbcType=VARCHAR} and 
+            </if>
+            <if test="flowChartId != null">
+                flowChartId = #{flowChartId,jdbcType=VARCHAR} and 
+            </if>
+            <if test="login_id != null">
+                login_id = #{login_id,jdbcType=VARCHAR} and 
+            </if>
+            <if test="tenant_id != null">
+                tenant_id = #{tenant_id,jdbcType=VARCHAR} and 
+            </if>
+        </trim>
+    </delete>
+    
+    <select id="getAllByCondition" parameterType="map" resultType="com.sdp.servflow.pubandorder.flowchart.model.ParamFlowChartBean">
+        select
+        <include refid="Base_Column_List" />
+        from LAYOUT_PARAM where 1=1
+        <if test="relationid != null">
+            and relationid = #{relationid,jdbcType=VARCHAR}
+        </if>
+        <if test="prepubid != null">
+            and prepubid = #{prepubid,jdbcType=VARCHAR}
+        </if>
+        <if test="pubid != null">
+            and pubid = #{pubid,jdbcType=VARCHAR}
+        </if>
+        <if test="flowChartId != null">
+            and flowChartId = #{flowChartId,jdbcType=VARCHAR}
+        </if>
+        <if test="pre_paramid != null">
+            and pre_paramid = #{pre_paramid,jdbcType=VARCHAR}
+        </if>
+        <if test="pre_paramname != null">
+            and pre_paramname = #{pre_paramname,jdbcType=VARCHAR}
+        </if>
+        <if test="next_paramid != null">
+            and next_paramid = #{next_paramid,jdbcType=VARCHAR}
+        </if>
+        <if test="next_paramname != null">
+            and next_paramname = #{next_paramname,jdbcType=VARCHAR}
+        </if>
+        <if test="regex != null">
+            and regex = #{regex,jdbcType=VARCHAR}
+        </if>
+        <if test="constantparam != null">
+            and constantparam = #{constantparam,jdbcType=VARCHAR}
+        </if>
+        <if test="node_id != null">
+            and node_id = #{node_id,jdbcType=VARCHAR}
+        </if>
+        <if test="login_id != null">
+            and login_id = #{login_id,jdbcType=VARCHAR}
+        </if>
+        <if test="tenant_id != null">
+            and tenant_id = #{tenant_id,jdbcType=VARCHAR}
+        </if>
+        <if test="type != null">
+            and type = #{type,jdbcType=VARCHAR}
+        </if>
+    </select>
+    
+    <update id="updateByPrimaryKey" parameterType="com.sdp.servflow.pubandorder.flowchart.model.ParamFlowChartBean">
+        update LAYOUT_PARAM
+        <set>
+            <if test="prepubid != null">
+                prepubid= #{prepubid,jdbcType=VARCHAR},
+            </if>
+            <if test="pubid != null">
+                pubid= #{pubid,jdbcType=VARCHAR},
+            </if>
+            <if test="flowChartId != null">
+                flowChartId = #{flowChartId,jdbcType=VARCHAR},
+            </if>
+            <if test="pre_paramid != null">
+                pre_paramid = #{pre_paramid,jdbcType=VARCHAR},
+            </if>
+            <if test="pre_paramname != null">
+                pre_paramname = #{pre_paramname,jdbcType=VARCHAR},
+            </if>
+            <if test="next_paramid != null">
+                next_paramid = #{next_paramid,jdbcType=VARCHAR},
+            </if>
+            <if test="next_paramname != null">
+                next_paramname = #{next_paramname,jdbcType=VARCHAR},
+            </if>
+            <if test="regex != null">
+                regex = #{regex,jdbcType=VARCHAR},
+            </if>
+            <if test="constantparam != null">
+                constantparam = #{constantparam,jdbcType=VARCHAR},
+            </if>
+            <if test="node_id != null">
+                node_id = #{node_id,jdbcType=VARCHAR},
+            </if>
+            <if test="login_id != null">
+                login_id = #{login_id,jdbcType=VARCHAR},
+            </if>
+            <if test="tenant_id != null">
+                tenant_id = #{tenant_id,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where relationid = #{relationid,jdbcType=VARCHAR}
+    </update>
+    
+    <select id="paramIsCount" parameterType="String" resultType="String">
+        select COUNT(*) from layout_pub 
+        where flowChartId = #{flowChartId,jdbcType=VARCHAR}
+    </select>
+    <select id="findCondition" parameterType="java.util.Map" resultType="com.sdp.servflow.pubandorder.flowchart.model.ParamFlowChartBean">
+	    SELECT
+		 <include refid="Base_Column_List" />
+		FROM
+			layout_param
+		WHERE
+			1 = 1
+		AND pubid = #{pubid,jdbcType=VARCHAR}
+		AND flowChartId = #{flowChartId,jdbcType=VARCHAR}
+		AND type = #{type,jdbcType=VARCHAR}
+	</select>
+</mapper>

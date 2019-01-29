@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.servflow.pubandorder.serve.mapper.LayoutMapper">
+	<select id="getLayoutOrder" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		 SELECT
+			pubid "pubSerid",
+			sort "layoutPubSerOrd",
+			flowChartId "pubapiId",
+			tenant_id "tenant_id"
+		FROM
+			layout_pub where
+		 	tenant_id =#{tenant_id}
+			and sort = #{layoutPubSerOrd} 
+			and flowChartId = #{pubapiId}  
+	</select> 
+	<select id="getLayout" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		 select * from layoutserver where 
+		 	tenant_id =#{tenant_id}
+			and layoutSerId = #{pubapiId} 
+		<!-- 	<if test="pubSerid!=null and pubSerid!=''">
+			and pubSerid = #{pubSerid} 
+			</if>   -->
+			<if test="types!=null and types!=''">
+			 and sourceType in(${types})
+			</if>  
+		<!-- 	<if test="prePubId!=null and prePubId!=''">
+			 and prepubid = #{prePubId}
+			</if>   -->
+			<if test="node_id!=null and node_id!=''">
+			 and node_id = #{node_id}
+			</if>  
+	</select> 
+	<select id="getLayoutSort" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		 SELECT
+			node_id "node_id",
+			pubid "pubSerid",
+			sort "layoutPubSerOrd",
+			prenode "prePubId",
+			flowChartId "pubapiId",
+			tenant_id "tenant_id",
+			nextnode  "nextnode" ,
+			layout_pub.condition "condition",
+			layout_pub.typeId "typeId"
+		FROM
+			layout_pub where
+		 	tenant_id =#{tenant_id}
+			and flowChartId = #{pubapiId}  
+			<if test="typeId!=null and typeId!=''">
+			 and typeId = #{typeId}
+			</if>  
+			<if test="pubid!=null and pubid!=''">
+			 and pubid = #{pubid}
+			</if>  
+			<if test="node_id!=null and node_id!=''">
+			 and node_id = #{node_id}
+			</if>  
+		<!-- 	<if test="prePubId!=null and prePubId!=''">
+			 and prenode   like '%${prePubId}%'
+			</if>   -->
+	</select> 
+</mapper>

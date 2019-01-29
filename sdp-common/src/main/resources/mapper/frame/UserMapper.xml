@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.base.user.UserMapper">
+  <resultMap id="BaseResultMap" type="com.sdp.frame.web.entity.user.User">
+    <id column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="LOGIN_ID" jdbcType="VARCHAR" property="loginId" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="EMALL" jdbcType="VARCHAR" property="emall" />
+    <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
+    <result column="TELEPHONE" jdbcType="VARCHAR" property="telephone" />
+    <result column="STATE" jdbcType="VARCHAR" property="state" />
+    <result column="PWD_STATE" jdbcType="VARCHAR" property="pwdState" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="REG_DATE" jdbcType="TIMESTAMP" property="regDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="CREATER_ID" jdbcType="VARCHAR" property="createrId" />
+    <result column="ORG_ID" jdbcType="VARCHAR" property="orgId" />
+    <result column="DATA_AUTH" jdbcType="VARCHAR" property="dataAuth" />
+    <result column="LOCK_DATE" jdbcType="TIMESTAMP" property="lockDate" />
+    <result column="LOCK_LOGIN_TIMES" jdbcType="DECIMAL" property="lockLoginTimes" />
+    <result column="PWD_VALID_STATE" jdbcType="DECIMAL" property="pwdValidState" />
+    <result column="TENANT_ADMIN" jdbcType="DECIMAL" property="tenantAdmin" />
+    <result column="PWD_UPDATE_DATE" jdbcType="TIMESTAMP" property="pwdUpdateDate" />
+    <result column="LOGIN_DATE" jdbcType="TIMESTAMP" property="lastLoginDate" />
+    <result column="TENANT_ID" jdbcType="VARCHAR" property="tenantId" />
+    <collection property="orgnization" ofType="com.sdp.frame.web.entity.orgnization.Orgnization">
+         <result column="ORGANIZATION_ID" jdbcType="VARCHAR" property="orgId"/>
+         <result column="ORG_NAME" jdbcType="VARCHAR" property="orgName"/>
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List">
+    PURE_USER.USER_ID, PURE_USER.LOGIN_ID, PURE_USER.PASSWORD, PURE_USER.USER_NAME, PURE_USER.SEX, 
+    PURE_USER.EMALL, PURE_USER.MOBILE, PURE_USER.TELEPHONE, PURE_USER.STATE, PURE_USER.PWD_STATE, 
+    PURE_USER.MEMO, PURE_USER.REG_DATE, PURE_USER.UPDATE_DATE, PURE_USER.CREATER_ID, PURE_USER.ORG_ID, 
+    PURE_USER.DATA_AUTH, PURE_USER.LOCK_DATE, PURE_USER.LOCK_LOGIN_TIMES, 
+    PURE_USER.PWD_VALID_STATE, PURE_USER.TENANT_ADMIN, PURE_USER.PWD_UPDATE_DATE, PURE_USER.TENANT_ID
+  </sql>
+  <select id="selectAll" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM PURE_USER
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+       SELECT T.*,PURE_ORG.ORG_ID "ORGANIZATION_ID",PURE_ORG.ORG_NAME FROM (
+    SELECT DISTINCT
+    <include refid="Base_Column_List" />,LOGIN_DATE
+    FROM PURE_USER LEFT JOIN 
+    (SELECT USER_ID, LOGIN_IP, MAX(LOGIN_DATE) LOGIN_DATE
+               FROM PURE_USER_LOGIN_LOG t
+              WHERE t.USER_ID = (SELECT PURE_USER.USER_ID
+                                   FROM PURE_USER
+                                  where PURE_USER.USER_ID = #{userId,jdbcType=VARCHAR})
+              GROUP BY USER_ID, LOGIN_IP) t
+    ON (PURE_USER.USER_ID = t.USER_ID)
+    where PURE_USER.USER_ID =#{userId,jdbcType=VARCHAR}
+    ORDER BY LOGIN_DATE DESC) T 
+		LEFT JOIN PURE_USER_ORG_REF ON (
+    		T.USER_ID = PURE_USER_ORG_REF.USER_ID
+		)
+		LEFT JOIN PURE_ORG ON (
+    		PURE_USER_ORG_REF.ORG_ID = PURE_ORG.ORG_ID
+		)
+  </select>
+  <select id="selectByLoginId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT DISTINCT
+    <include refid="Base_Column_List" />,LOGIN_DATE
+    FROM PURE_USER LEFT JOIN 
+    (SELECT USER_ID, LOGIN_IP, MAX(LOGIN_DATE) LOGIN_DATE
+               FROM PURE_USER_LOGIN_LOG t
+              WHERE t.USER_ID =
+                    (SELECT PURE_USER.USER_ID
+                       FROM PURE_USER
+                      where PURE_USER.LOGIN_ID = #{loginId,jdbcType=VARCHAR})
+              GROUP BY USER_ID, LOGIN_IP) t ON (PURE_USER.USER_ID =
+                                               t.USER_ID)
+    where PURE_USER.LOGIN_ID =#{loginId,jdbcType=VARCHAR} 
+    ORDER BY LOGIN_DATE DESC
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete FROM PURE_USER
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteUserOrgRef" parameterType="java.lang.String">
+    delete FROM PURE_USER_ORG_REF
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteUserRoleRef" parameterType="java.lang.String">
+    delete FROM PURE_USER_ROLE
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteUserAuthRef" parameterType="java.lang.String">
+    delete FROM PURE_USER_AUTH
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sdp.frame.web.entity.user.User">
+    insert into PURE_USER (USER_ID, LOGIN_ID, PASSWORD, 
+      USER_NAME, SEX, EMALL, 
+      MOBILE, TELEPHONE, STATE, 
+      PWD_STATE, MEMO, REG_DATE, 
+      UPDATE_DATE, CREATER_ID, ORG_ID, 
+      DATA_AUTH, LOCK_DATE, LOCK_LOGIN_TIMES, 
+      PWD_VALID_STATE, TENANT_ADMIN, PWD_UPDATE_DATE, 
+      TENANT_ID)
+    values (#{userId,jdbcType=VARCHAR}, #{loginId,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{emall,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{pwdState,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{regDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{createrId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, 
+      #{dataAuth,jdbcType=VARCHAR}, #{lockDate,jdbcType=TIMESTAMP}, #{lockLoginTimes,jdbcType=DECIMAL}, 
+      #{pwdValidState,jdbcType=DECIMAL}, #{tenantAdmin,jdbcType=DECIMAL}, #{pwdUpdateDate,jdbcType=TIMESTAMP}, 
+      #{tenantId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sdp.frame.web.entity.user.User">
+    insert into PURE_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="loginId != null">
+        LOGIN_ID,
+      </if>
+      <if test="password != null">
+        PASSWORD,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="emall != null">
+        EMALL,
+      </if>
+      <if test="mobile != null">
+        MOBILE,
+      </if>
+      <if test="telephone != null">
+        TELEPHONE,
+      </if>
+      <if test="state != null">
+        STATE,
+      </if>
+      <if test="pwdState != null">
+        PWD_STATE,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="regDate != null">
+        REG_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+      <if test="createrId != null">
+        CREATER_ID,
+      </if>
+      <if test="orgId != null">
+        ORG_ID,
+      </if>
+      <if test="dataAuth != null">
+        DATA_AUTH,
+      </if>
+      <if test="lockDate != null">
+        LOCK_DATE,
+      </if>
+      <if test="lockLoginTimes != null">
+        LOCK_LOGIN_TIMES,
+      </if>
+      <if test="pwdValidState != null">
+        PWD_VALID_STATE,
+      </if>
+      <if test="tenantAdmin != null">
+        TENANT_ADMIN,
+      </if>
+      <if test="pwdUpdateDate != null">
+        PWD_UPDATE_DATE,
+      </if>
+      <if test="tenantId != null">
+        TENANT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="loginId != null">
+        #{loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="emall != null">
+        #{emall,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="pwdState != null">
+        #{pwdState,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="regDate != null">
+        #{regDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createrId != null">
+        #{createrId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataAuth != null">
+        #{dataAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="lockDate != null">
+        #{lockDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lockLoginTimes != null">
+        #{lockLoginTimes,jdbcType=DECIMAL},
+      </if>
+      <if test="pwdValidState != null">
+        #{pwdValidState,jdbcType=DECIMAL},
+      </if>
+      <if test="tenantAdmin != null">
+        #{tenantAdmin,jdbcType=DECIMAL},
+      </if>
+      <if test="pwdUpdateDate != null">
+        #{pwdUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sdp.frame.web.entity.user.User">
+    update PURE_USER
+    <set>
+      <if test="loginId != null">
+        LOGIN_ID = #{loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="emall != null">
+        EMALL = #{emall,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="pwdState != null">
+        PWD_STATE = #{pwdState,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createrId != null">
+        CREATER_ID = #{createrId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null">
+        ORG_ID = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataAuth != null">
+        DATA_AUTH = #{dataAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="lockDate != null">
+        LOCK_DATE = #{lockDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lockLoginTimes != null and lockLoginTimes != -1">
+        LOCK_LOGIN_TIMES = (LOCK_LOGIN_TIMES+1),
+      </if>
+      <if test="pwdValidState != null">
+        PWD_VALID_STATE = #{pwdValidState,jdbcType=DECIMAL},
+      </if>
+      <if test="tenantAdmin != null">
+        TENANT_ADMIN = #{tenantAdmin,jdbcType=DECIMAL},
+      </if>
+      <if test="pwdUpdateDate != null">
+        PWD_UPDATE_DATE = #{pwdUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tenantId != null">
+        TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sdp.frame.web.entity.user.User">
+    update PURE_USER
+    set LOGIN_ID = #{loginId,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      EMALL = #{emall,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=VARCHAR},
+      PWD_STATE = #{pwdState,jdbcType=VARCHAR},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      REG_DATE = #{regDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      CREATER_ID = #{createrId,jdbcType=VARCHAR},
+      ORG_ID = #{orgId,jdbcType=VARCHAR},
+      DATA_AUTH = #{dataAuth,jdbcType=VARCHAR},
+      LOCK_DATE = #{lockDate,jdbcType=TIMESTAMP},
+      LOCK_LOGIN_TIMES = #{lockLoginTimes,jdbcType=DECIMAL},
+      PWD_VALID_STATE = #{pwdValidState,jdbcType=DECIMAL},
+      TENANT_ADMIN = #{tenantAdmin,jdbcType=DECIMAL},
+      PWD_UPDATE_DATE = #{pwdUpdateDate,jdbcType=TIMESTAMP},
+      TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 查询用户列表根据条件 -->
+  <select id="selectUserByCondition" parameterType="map" resultMap="BaseResultMap">
+       SELECT DISTINCT PURE_USER.USER_ID, PURE_USER.LOGIN_ID, PURE_USER.USER_NAME, PURE_USER.SEX, 
+    		  PURE_USER.EMALL, PURE_USER.MOBILE, PURE_USER.TELEPHONE, PURE_USER.STATE, PURE_USER.PWD_STATE, 
+    		  PURE_USER.MEMO, PURE_USER.REG_DATE, PURE_USER.UPDATE_DATE, PURE_USER.CREATER_ID, PURE_USER.ORG_ID, 
+    		  PURE_USER.DATA_AUTH, PURE_USER.LOCK_DATE, PURE_USER.LOCK_LOGIN_TIMES, 
+    		  PURE_USER.PWD_VALID_STATE, PURE_USER.TENANT_ADMIN, PURE_USER.PWD_UPDATE_DATE, PURE_USER.TENANT_ID
+              FROM PURE_USER LEFT JOIN PURE_USER_ORG_REF ON (PURE_USER.USER_ID = PURE_USER_ORG_REF.USER_ID)
+              WHERE 1=1 
+              <if test="loginId != null and loginId !=''">
+                  AND PURE_USER.LOGIN_ID like '%${loginId}%'
+              </if>
+              <if test="userName != null and userName !=''">
+                  AND PURE_USER.USER_NAME like '%${userName}%'
+              </if>
+              <if test="orgIds != null and orgIds !=''">
+                  AND PURE_USER_ORG_REF.ORG_ID IN (${orgIds})
+              </if>
+              ORDER BY PURE_USER.REG_DATE DESC
+  </select>
+  
+  <!-- 插入用户与组织的关系 -->
+  <insert id="insertUserOrgRef" parameterType="map">
+      INSERT INTO PURE_USER_ORG_REF (ORG_ID,USER_ID) VALUES (#{orgId},#{userId})
+  </insert>
+  
+  <!-- 插入用户与角色关系 -->
+  <insert id="insertUserRoleRef" parameterType="map">
+      INSERT INTO PURE_USER_ROLE (ROLE_ID,USER_ID) VALUES(#{roleId},#{userId})
+  </insert>
+  
+  <!-- 查询账号是否存在 -->
+  <select id="selectCountByLoginId" parameterType="String" resultType="int">
+        SELECT COUNT(1) FROM PURE_USER WHERE LOGIN_ID = #{loginId}
+  </select>
+  
+  <!-- 用户登录日志 -->
+  <insert id="insertLoginLog" parameterType="com.sdp.frame.web.entity.log.UserLoginLog">
+      INSERT INTO PURE_USER_LOGIN_LOG (USER_ID,LOGIN_DATE,LOGIN_IP) 
+      VALUES (#{userId,jdbcType=VARCHAR},#{LoginDate,jdbcType=TIMESTAMP},#{loginIp,jdbcType=VARCHAR})
+  </insert>
+  <!-- 查询用户拥有的角色 -->
+  <select id="selectRoleByUser" parameterType="String" resultType="map">
+      SELECT ROLE_ID "roleId", USER_ID "userId" FROM PURE_USER_ROLE WHERE USER_ID = #{userId}
+  </select>
+  <!-- 查询组织机构下所有用户 -->
+  <select id="selectUserByOrgId" parameterType="java.lang.String" resultMap="BaseResultMap">
+      SELECT T.*
+      FROM PURE_USER T,PURE_USER_ORG_REF T1 WHERE 
+      T.USER_ID = T1.USER_ID
+      AND T1.ORG_ID = #{orgId}
+  </select>
+</mapper>

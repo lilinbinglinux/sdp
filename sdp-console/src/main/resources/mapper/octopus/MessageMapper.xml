@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.cop.octopus.dao.MessageDAO">
+	<resultMap id="BaseResultMap"
+		type="com.sdp.cop.octopus.entity.Message">
+		<id column="ID" jdbcType="BIGINT" property="id" />
+		<result column="MESS_SENDER_ID" jdbcType="VARCHAR"
+			property="messSenderId" />
+		<result column="MESS_RECEIVER_ID" jdbcType="VARCHAR"
+			property="messReceiverId" />
+		<result column="MESS_TITLE" jdbcType="VARCHAR"
+			property="messTitle" />
+		<result column="MESS_TYPE" jdbcType="VARCHAR"
+			property="messType" />
+		<result column="MESS_SEND_TIME" jdbcType="TIMESTAMP"
+			property="messSendTime" />
+		<result column="MESS_READ_TIME" jdbcType="TIMESTAMP"
+			property="messReadTime" />
+		<result column="MESS_FLAG" jdbcType="VARCHAR"
+			property="messFlag" />
+		<result column="MESS_CONTENT" jdbcType="LONGVARCHAR"
+			property="messContent" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, MESS_SENDER_ID, MESS_RECEIVER_ID, MESS_TITLE,
+		MESS_TYPE,
+		MESS_SEND_TIME, MESS_READ_TIME,
+		MESS_FLAG,
+		MESS_CONTENT
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from mess_info
+		where ID = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		mess_info
+		where ID = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" keyColumn="ID" keyProperty="id"
+		parameterType="com.sdp.cop.octopus.entity.Message"
+		useGeneratedKeys="true">
+		insert into mess_info (MESS_SENDER_ID,
+		MESS_RECEIVER_ID, MESS_TITLE,
+		MESS_TYPE, MESS_SEND_TIME,
+		MESS_READ_TIME,
+		MESS_FLAG, MESS_CONTENT
+		)
+		values
+		(#{messSenderId,jdbcType=VARCHAR}, #{messReceiverId,jdbcType=VARCHAR},
+		#{messTitle,jdbcType=VARCHAR},
+		#{messType,jdbcType=VARCHAR},
+		#{messSendTime,jdbcType=TIMESTAMP},
+		#{messReadTime,jdbcType=TIMESTAMP},
+		#{messFlag,jdbcType=VARCHAR},
+		#{messContent,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" keyColumn="ID" keyProperty="id"
+		parameterType="com.sdp.cop.octopus.entity.Message"
+		useGeneratedKeys="true">
+		insert into mess_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="messSenderId != null">
+				MESS_SENDER_ID,
+			</if>
+			<if test="messReceiverId != null">
+				MESS_RECEIVER_ID,
+			</if>
+			<if test="messTitle != null">
+				MESS_TITLE,
+			</if>
+			<if test="messType != null">
+				MESS_TYPE,
+			</if>
+			<if test="messSendTime != null">
+				MESS_SEND_TIME,
+			</if>
+			<if test="messReadTime != null">
+				MESS_READ_TIME,
+			</if>
+			<if test="messFlag != null">
+				MESS_FLAG,
+			</if>
+			<if test="messContent != null">
+				MESS_CONTENT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="messSenderId != null">
+				#{messSenderId,jdbcType=VARCHAR},
+			</if>
+			<if test="messReceiverId != null">
+				#{messReceiverId,jdbcType=VARCHAR},
+			</if>
+			<if test="messTitle != null">
+				#{messTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="messType != null">
+				#{messType,jdbcType=VARCHAR},
+			</if>
+			<if test="messSendTime != null">
+				#{messSendTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="messReadTime != null">
+				#{messReadTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="messFlag != null">
+				#{messFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="messContent != null">
+				#{messContent,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.sdp.cop.octopus.entity.Message">
+		update mess_info
+		<set>
+			<if test="messSenderId != null">
+				MESS_SENDER_ID = #{messSenderId,jdbcType=VARCHAR},
+			</if>
+			<if test="messReceiverId != null">
+				MESS_RECEIVER_ID = #{messReceiverId,jdbcType=VARCHAR},
+			</if>
+			<if test="messTitle != null">
+				MESS_TITLE = #{messTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="messType != null">
+				MESS_TYPE = #{messType,jdbcType=VARCHAR},
+			</if>
+			<if test="messSendTime != null">
+				MESS_SEND_TIME = #{messSendTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="messReadTime != null">
+				MESS_READ_TIME = #{messReadTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="messFlag != null">
+				MESS_FLAG = #{messFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="messContent != null">
+				MESS_CONTENT = #{messContent,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.sdp.cop.octopus.entity.Message">
+		update mess_info
+		set MESS_SENDER_ID =
+		#{messSenderId,jdbcType=VARCHAR},
+		MESS_RECEIVER_ID =
+		#{messReceiverId,jdbcType=VARCHAR},
+		MESS_TITLE =
+		#{messTitle,jdbcType=VARCHAR},
+		MESS_TYPE =
+		#{messType,jdbcType=VARCHAR},
+		MESS_SEND_TIME =
+		#{messSendTime,jdbcType=TIMESTAMP},
+		MESS_READ_TIME =
+		#{messReadTime,jdbcType=TIMESTAMP},
+		MESS_FLAG =
+		#{messFlag,jdbcType=VARCHAR},
+		MESS_CONTENT =
+		#{messContent,jdbcType=LONGVARCHAR}
+		where ID = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateMessFlag" parameterType="java.util.Map">
+		update mess_info
+		set
+		MESS_FLAG = #{messFlag,jdbcType=VARCHAR}
+		where ID =
+		#{id,jdbcType=BIGINT}
+	</update>
+	<select id="selectByField" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from mess_info
+		where 1=1
+		<if test="messSenderId != null">
+			AND MESS_SENDER_ID = #{messSenderId,jdbcType=VARCHAR}
+		</if>
+		<if test="messReceiverId != null">
+			AND MESS_RECEIVER_ID like
+			#{messReceiverId,jdbcType=VARCHAR}
+		</if>
+		<if test="messTitle != null">
+			AND MESS_TITLE like #{messTitle,jdbcType=VARCHAR}
+		</if>
+		<if test="messType != null">
+			AND MESS_TYPE like #{messType,jdbcType=VARCHAR}
+		</if>
+		<if test="messStartSendTime != null">
+			AND MESS_SEND_TIME <![CDATA[ > ]]>
+			#{messStartSendTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="messEndSendTime != null">
+			AND MESS_SEND_TIME <![CDATA[ < ]]>
+			#{messEndSendTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="messFlag != null">
+			AND MESS_FLAG like #{messFlag,jdbcType=VARCHAR}
+		</if>
+		<if test="messContent != null">
+			AND MESS_CONTENT like #{messContent,jdbcType=VARCHAR}
+		</if>
+		order by MESS_SEND_TIME desc
+	</select>
+
+	<select id="selectCnt" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select
+		count(*)
+		from mess_info
+		where 1=1
+		<if test="messSenderId != null">
+			AND MESS_SENDER_ID = #{messSenderId,jdbcType=VARCHAR}
+		</if>
+		<if test="messReceiverId != null">
+			AND MESS_RECEIVER_ID like
+			#{messReceiverId,jdbcType=VARCHAR}
+		</if>
+		<if test="messTitle != null">
+			AND MESS_TITLE like #{messTitle,jdbcType=VARCHAR}
+		</if>
+		<if test="messType != null">
+			AND MESS_TYPE like #{messType,jdbcType=VARCHAR}
+		</if>
+		<if test="messStartSendTime != null">
+			AND MESS_SEND_TIME <![CDATA[ > ]]>
+			#{messStartSendTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="messEndSendTime != null">
+			AND MESS_SEND_TIME <![CDATA[ < ]]>
+			#{messEndSendTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="messFlag != null">
+			AND MESS_FLAG like #{messFlag,jdbcType=VARCHAR}
+		</if>
+		<if test="messContent != null">
+			AND MESS_CONTENT like #{messContent,jdbcType=VARCHAR}
+		</if>
+	</select>
+	
+</mapper>

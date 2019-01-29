@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.frame.web.mapper.puborder.ReqparamBean">
+	<resultMap type="com.sdp.servflow.pubandorder.pub.model.ReqparamBean" id="BaseResultMap">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="ecode" jdbcType="VARCHAR" property="ecode" />
+		<result column="reqdesc" jdbcType="VARCHAR" property="reqdesc" />
+		<result column="parampos" jdbcType="VARCHAR" property="parampos" />
+		<result column="reqtype" jdbcType="VARCHAR" property="reqtype" />
+		<result column="isempty" jdbcType="VARCHAR" property="isempty" />
+		<result column="pubid" jdbcType="VARCHAR" property="pubid" />
+		<result column="parentId" jdbcType="VARCHAR" property="parentId" />
+		<result column="parampath" jdbcType="VARCHAR" property="parampath" />
+		<result column="path" jdbcType="VARCHAR" property="path" />
+		<result column="type" jdbcType="VARCHAR" property="type" />
+		<result column="tenant_id" jdbcType="VARCHAR" property="tenant_id" />
+		<result column="sort" jdbcType="VARCHAR" property="sort" />
+		<result column="lastUpdateTime" jdbcType="VARCHAR" property="lastUpdateTime" />
+		<result column="maxlength" jdbcType="VARCHAR" property="maxlength" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, ecode, reqdesc, parampos, reqtype, isempty, parentId,parampath,path,pubid, type, tenant_id, sort, lastUpdateTime,maxlength
+	</sql>
+
+	<select id="selectAll" parameterType="map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from PUB_REQPARAM where 1=1
+		<if test="pubid != null and pub != ' '">
+            and pubid = #{pubid,jdbcType=VARCHAR}
+        </if>
+        <if test="type != null">
+            and type = #{type,jdbcType=VARCHAR}
+        </if>
+        <if test="ecode != null">
+            and ecode = #{ecode,jdbcType=VARCHAR}
+        </if>
+        <if test="reqdesc != null">
+            and reqdesc = #{reqdesc,jdbcType=VARCHAR}
+        </if>
+        <if test="parampos != null">
+            and parampos = #{parampos,jdbcType=VARCHAR}
+        </if>
+        <if test="reqtype != null">
+            and reqtype = #{reqtype,jdbcType=VARCHAR}
+        </if>
+        <if test="isempty != null">
+            and isempty = #{isempty,jdbcType=VARCHAR}
+        </if>
+        <if test="parentId != null">
+            and parentId = #{parentId,jdbcType=VARCHAR}
+        </if>
+        <if test="parampath != null">
+            and parampath = #{parampath,jdbcType=VARCHAR}
+        </if>
+         <if test="path != null">
+            and path = #{path,jdbcType=VARCHAR}
+        </if>
+        <if test="tenant_id != null">
+            and tenant_id = #{tenant_id,jdbcType=VARCHAR}
+        </if>
+        <if test="maxlength != null">
+            and maxlength = #{maxlength,jdbcType=VARCHAR}
+        </if>
+	</select>
+	
+	<select id="getByPrimaryKey" parameterType="java.lang.String" resultType="com.sdp.servflow.pubandorder.pub.model.ReqparamBean">
+		select
+		<include refid="Base_Column_List" />
+		from PUB_REQPARAM where id = #{id,jdbcType=VARCHAR}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		PUB_REQPARAM
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	
+	
+	<delete id="deleteByCondition" parameterType="java.lang.String">
+        delete from
+        PUB_REQPARAM
+        where 
+        <trim suffixOverrides="and">
+            <if test="id != null">
+                id = #{id,jdbcType=VARCHAR} and 
+            </if>
+            <if test="pubid != null">
+                pubid = #{pubid,jdbcType=VARCHAR} and 
+            </if>
+            <if test="parentId != null">
+                parentId = #{parentId,jdbcType=VARCHAR} and 
+            </if>
+            <if test="type != null">
+                type =  #{type,jdbcType=VARCHAR} and 
+            </if>
+            <if test="tenant_id != null">
+                tenant_id = #{tenant_id,jdbcType=VARCHAR} and 
+            </if>
+        </trim>
+    </delete>
+	
+	<insert id="insert" parameterType="com.sdp.servflow.pubandorder.pub.model.ReqparamBean">
+		insert into PUB_REQPARAM
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="ecode != null">
+				ecode,
+			</if>
+			<if test="reqdesc != null">
+				reqdesc,
+			</if>
+			<if test="parampos != null">
+				parampos,
+			</if>
+			<if test="reqtype != null">
+				reqtype,
+			</if>
+			<if test="isempty != null">
+				isempty,
+			</if>
+			<if test="pubid != null">
+                pubid,
+            </if>
+			<if test="parentId != null">
+				parentId,
+			</if>
+			<if test="parampath != null">
+                parampath,
+            </if>
+            <if test="path != null">
+                path,
+            </if>
+            <if test="ecodepath != null">
+                ecodepath,
+            </if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="tenant_id != null">
+                tenant_id,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="lastUpdateTime != null">
+                lastUpdateTime,
+            </if>
+            <if test="maxlength != null">
+                maxlength,
+            </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="ecode != null">
+				#{ecode,jdbcType=VARCHAR},
+			</if>
+			<if test="reqdesc != null">
+				#{reqdesc,jdbcType=VARCHAR},
+			</if>
+			<if test="parampos != null">
+				#{parampos,jdbcType=VARCHAR},
+			</if>
+			<if test="reqtype != null">
+				#{reqtype,jdbcType=VARCHAR},
+			</if>
+			<if test="isempty != null">
+				#{isempty,jdbcType=VARCHAR},
+			</if>
+			<if test="pubid != null">
+				#{pubid,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null">
+                #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="parampath != null">
+                #{parampath,jdbcType=VARCHAR},
+            </if>
+             <if test="path != null">
+                #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="ecodepath != null">
+                #{ecodepath,jdbcType=VARCHAR},
+            </if>
+			<if test="type != null">
+				#{type,jdbcType=VARCHAR},
+			</if>
+			<if test="tenant_id != null">
+                #{tenant_id,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateTime != null">
+                #{lastUpdateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="maxlength != null">
+                #{maxlength,jdbcType=VARCHAR},
+            </if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.sdp.servflow.pubandorder.pub.model.ReqparamBean">
+		update PUB_REQPARAM
+		<set>
+			<if test="ecode != null">
+				ecode= #{ecode,jdbcType=VARCHAR},
+			</if>
+			<if test="reqdesc != null">
+				reqdesc = #{reqdesc,jdbcType=VARCHAR},
+			</if>
+			<if test="parampos != null">
+				parampos = #{parampos,jdbcType=VARCHAR},
+			</if>
+			<if test="reqtype != null">
+				reqtype = #{reqtype,jdbcType=VARCHAR},
+			</if>
+			<if test="parampath != null">
+                parampath = #{parampath,jdbcType=VARCHAR},
+            </if>
+            <if test="path != null">
+                path = #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="ecodepath != null">
+                ecodepath = #{ecodepath,jdbcType=VARCHAR},
+            </if>
+			<if test="isempty != null">
+				isempty = #{isempty,jdbcType=VARCHAR},
+			</if>
+			<if test="sort != null">
+                sort = #{sort,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateTime != null">
+                lastUpdateTime = #{lastUpdateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="maxlength != null">
+                maxlength = #{maxlength,jdbcType=VARCHAR},
+            </if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="getAllByCondition" parameterType="map" resultType="com.sdp.servflow.pubandorder.pub.model.ReqparamBean">
+        select
+        <include refid="Base_Column_List" />
+        from PUB_REQPARAM where 1=1
+        <if test="pubid != null">
+            and pubid = #{pubid,jdbcType=VARCHAR}
+        </if>
+        <if test="type != null">
+            and type = #{type,jdbcType=VARCHAR}
+        </if>
+        <if test="ecode != null">
+            and ecode = #{ecode,jdbcType=VARCHAR}
+        </if>
+        <if test="reqdesc != null">
+            and reqdesc = #{reqdesc,jdbcType=VARCHAR}
+        </if>
+        <if test="parampos != null">
+            and parampos = #{parampos,jdbcType=VARCHAR}
+        </if>
+        <if test="reqtype != null">
+            and reqtype = #{reqtype,jdbcType=VARCHAR}
+        </if>
+        <if test="isempty != null">
+            and isempty = #{isempty,jdbcType=VARCHAR}
+        </if>
+        <if test="parentId != null">
+            and parentId = #{parentId,jdbcType=VARCHAR}
+        </if>
+        <if test="parampath != null">
+            and parampath = #{parampath,jdbcType=VARCHAR}
+        </if>
+        <if test="path != null">
+            and path = #{path,jdbcType=VARCHAR}
+        </if>
+        <if test="tenant_id != null">
+            and tenant_id = #{tenant_id,jdbcType=VARCHAR}
+        </if>
+        <if test="sort != null">
+            and sort = #{tenant_id,jdbcType=VARCHAR}
+        </if>
+        <if test="maxlength != null">
+            and maxlength = #{tenant_id,jdbcType=VARCHAR}
+        </if>
+        order by sort ASC
+    </select>
+    
+    <select id="getCountReqParam" parameterType="String" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM PUB_REQPARAM WHERE type = 0
+		AND pubid = #{pubid,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="upsort" parameterType="map" resultType="com.sdp.servflow.pubandorder.pub.model.ReqparamBean">
+        select * from PUB_REQPARAM 
+		where sort &lt; #{sort,jdbcType=VARCHAR}
+		and pubid = #{pubid,jdbcType=VARCHAR}
+		and parentId = #{parentId,jdbcType=VARCHAR}
+		order by sort DESC LIMIT 1 
+    </select>
+    
+    <select id="downSort" parameterType="map" resultType="com.sdp.servflow.pubandorder.pub.model.ReqparamBean">
+        select * from PUB_REQPARAM 
+        where sort &gt; #{sort,jdbcType=VARCHAR}
+        and pubid = #{pubid,jdbcType=VARCHAR}
+        order by sort ASC LIMIT 1 
+    </select>
+
+</mapper>

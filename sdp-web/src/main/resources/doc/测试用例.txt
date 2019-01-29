@@ -1,0 +1,20 @@
+﻿http://10.124.192.45/xIntegration/apisEmploy/getUser?phoneNumber=13051000283
+
+{"phoneNumber":"13051000283","custName":"张三","serviceType":"23G","cityId":"760","payMode":"预付费"}
+
+
+
+http://10.124.192.45/xIntegration/apisEmploy/order23G
+
+请求参数
+{
+   "phone":"20171010",
+   "productId":"ASR0007"
+}
+
+输出参数
+
+{
+    "code": "00000",
+    "result": "23G承诺低消办理成功"
+}

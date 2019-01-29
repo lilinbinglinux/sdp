@@ -1,0 +1,368 @@
+.dataSource-left-nav{
+    width: 250px;
+    border-right: 1px solid #ddd;
+    z-index: 3;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 40px;
+    background-color: #fff;
+    box-shadow: 5px 0 5px #ddd;
+}
+.dataSource-right-content{
+    height: 100%;
+    /*margin-left: 250px;*/
+    overflow: auto;
+    /*background-color: #eee;*/
+    /*padding: 15px;*/
+    box-sizing: border-box;
+}
+.dataSource-name-container{
+    padding: 15px;
+    background-color: #fff;
+}
+.list-icon{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+}
+/*.dataSource-name{*/
+    /*height: 40px;*/
+    /*line-height: 40px;*/
+    /*font-size: 18px;*/
+/*}*/
+.dataSource-detail{
+    padding: 15px 15px 0;
+    display: none;
+}
+.dataSource-list{
+    margin-top: 15px;
+}
+.list-column{
+    width: 100%;
+    height: 40px;
+    padding: 5px 10px;
+    background-color: #fff;
+    margin-top: 15px;
+    box-sizing: border-box;
+}
+.column-name{
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+    width: 18%;
+    float: left;
+    text-align: center;
+    overflow: hidden;
+}
+.column-tool{
+    height: 30px;
+    line-height: 30px;
+    display: none;
+    width: 10%;
+    float: left;
+    text-align: center;
+}
+.dataSource-item{
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #fff;
+    -webkit-box-shadow: 0px 0px 10px #ccc;
+    -moz-box-shadow: 0px 0px 10px #ccc;
+    box-shadow: 0px 0px 10px #ccc;
+}
+.column-tool .tool-eye,.column-tool .tool-delete{
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.column-tool .tool-eye{
+    margin-right: 10px;
+}
+.dataSource-show-btn{
+    float: right;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    width: 50px;
+    text-align: center;
+    display: inline-block;
+    margin-top: 10px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #333;
+    border-radius: 5px;
+}
+.dataSource-new-btn{
+    display: inline-block;
+    font-size: 12px;
+    width: 70px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    float: right;
+    margin-top: 10px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+.dataSource-down{
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+.dataSource-down-rote180{
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.manage-tools{
+    height: 50px;
+    line-height: 50px;
+}
+.manage-add-btn{
+    font-size: 12px;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    background-color: #333;
+    color: #fff;
+    width: 100px;
+    text-align: center;
+    float: right;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.nav-stepOne li{
+    padding: 5px 15px;
+    -webkit-transition: all 0.15s ease;
+    -o-transition: all 0.15s ease;
+    transition: all 0.15s ease;
+    cursor: pointer;
+}
+.nav-stepOne li:hover{
+    background-color: #333;
+    color: #fff;
+}
+.nav-stepOne li i{
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    width: 30px;
+    text-align: center;
+}
+.nav-stepOne li .stepOne-name{
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    width: 150px;
+}
+.dataSource-left-nav-stepOne{
+    width: 200px;
+    position: absolute;
+    left: 0;
+    top: 40px;
+    bottom: 0;
+    background-color: #fff;
+    border-left: 1px solid #ddd;
+    transform: translateX(-50px);
+    z-index: 2;
+    transition: all 0.2s;
+    padding-top: 60px;
+    overflow: auto;
+    box-shadow: 5px 0 5px #ddd;
+}
+.dataSource-left-nav-stepTwo{
+    width: 250px;
+    position: absolute;
+    left: 0;
+    top: 40px;
+    bottom: 0;
+    background-color: #fff;
+    border-left: 1px solid #ddd;
+    transform: translateX(-50px);
+    z-index: 1;
+    transition: all 0.2s;
+    padding-top: 60px;
+    overflow: auto;
+}
+.dataSource-left-nav-stepOne ul li {
+
+}
+.dataSource-left-nav-stepOne > .nav-stepTwo > li > div > ul > li{
+
+}
+.dataSource-left-nav-stepOne > .nav-stepTwo > li >  div > ul > li .databese-name {
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    width: 100%;
+    cursor: pointer;
+    box-sizing: border-box;
+    position: relative;
+    padding-left: 15px;
+}
+.dataSource-left-nav-stepOne > .nav-stepTwo > li >  div > ul > li .databese-name:hover {
+    background-color: #333;
+    color: #fff;
+}
+.dataSource-left-nav-stepOne .nav-stepTwo > li{
+    display: none;
+}
+.show{
+    display: block!important;
+}
+.stepOne-li-hover{
+    background-color: #333;
+    color: #fff;
+}
+.translateX250{
+    transform: translateX(250px);
+}
+.stepTwo-database > div > span
+,.stepTwo-module > div > span{
+    width: 32px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 5px;
+    float: right;
+    cursor: pointer;
+}
+.databese-name a{
+    color: #333;
+    text-decoration: none;
+    height: 50px;
+    line-height: 50px;
+    margin-right: unset;
+    display: inline-block;
+    width: 100%;
+    background-color: #fff;
+    padding-left: 15px;
+    box-sizing: border-box;
+}
+.databese-name i{
+    position: absolute;
+    right: 15px;
+    width: 30px;
+    height: 40px;
+    line-height: 40px;
+    top: 5px;
+    text-align: center;
+}
+.my-loop{
+    font-size: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -20px;
+    margin-top: -20px;
+}
+.no-data{
+    display: inline-block;
+    font-size: 20px;
+    width: 62px;
+    height: 28px;
+    text-align: center;
+    line-height: 28px;
+    margin-left: -31px;
+    margin-top: -14px;
+    color: #ddd;
+}
+.tree > li > div > input{
+    width: 200px;
+    height: 30px;
+    border: 2px solid #333d53;
+    padding: 5px;
+    border-radius: 5px;
+}
+.dataBase-iframe{
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+.database-child li{
+    height: 50px;
+    line-height: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 13px;
+    position: relative;
+    cursor: pointer;
+}
+.database-child li:hover{
+    background-color: #ddd;
+}
+.dataSource-url{
+    color: #bbb;
+    display: block;
+    overflow: hidden;
+    height: 20px;
+    line-height: 20px;
+}
+.database-child .dataSource-child{
+
+}
+.database-child{
+    display: none;
+    background-color: #f0f8ff;
+}
+.stepTwo-module i{
+    -webkit-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+.tree-opened > .databese-name > i{
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.tree-opened > .databese-name{
+    background-color: #333;
+    color: #fff;
+}
+.translateX450{
+    transform: translateX(450px);
+}
+.boom-boom{
+    position: absolute;
+    right: 5px;
+    font-size: 13px;
+    display: none!important;
+    top: 0;
+}
+.database-child > li:hover .boom-boom{
+    display: inline-block!important;
+}
+.li-active{
+    background-color: #ddd;
+}
+.new-dataType-btn{
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    width: 100%;
+    text-align: center;
+    background-color: #8a8a8a;
+    color: #fff;
+}
+.new-dataType-btn:hover{
+    background-color: #333;
+    color: #fff;
+}

@@ -1,0 +1,203 @@
+.accordion {
+    width: 100%;
+    background: #FFF;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.accordion .link {
+    cursor: pointer;
+    display: block;
+    color: #4D4D4D;
+    font-size: 14px;
+    font-weight: 700;
+    border-bottom: 1px solid #CCC;
+    position: relative;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.accordion li:last-child .link {
+    border-bottom: 0;
+}
+
+.accordion li i {
+    font-size: 18px;
+    color: #595959;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    display: inline-block;
+    width: 40px;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+}
+
+.accordion li i.fa-chevron-down {
+    right: 12px;
+    left: auto;
+    font-size: 16px;
+}
+
+.accordion li.open .link {
+    color: #4D4D4D;
+}
+
+.accordion li.open i {
+    color: #4D4D4D;
+}
+.accordion li.open i.fa-chevron-down {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.accordion li.default .submenu {display: block;}
+/**
+ * Submenu
+ -----------------------------*/
+.submenu {
+    display: none;
+    background: #fff;
+    font-size: 14px;
+}
+
+.submenu li {
+
+}
+
+.submenu a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    -webkit-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    padding: 0 60px;
+    height: 40px;
+}
+.submenu a .sub-icon{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    float: left;
+}
+.submenu a .sub-name{
+    height: 40px;
+    line-height: 40px;
+    float: left;
+}
+.sub-delete{
+    display: none;
+    font-size: 10px;
+    width: 26px;
+    height: 15px;
+    background-color: #fff;
+    text-align: center;
+    line-height: 16px;
+    border: 1px solid;
+    border-radius: 5px;
+    margin-top: 11px;
+    margin-left: 10px;
+    color: #333;
+}
+
+.submenu a:hover {
+    background: #333;
+    color: #FFF;
+}
+.submenu a:hover .sub-delete{
+    display: inline-block;
+}
+.box-delete{
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: -webkit-linear-gradient(top, rgba(150, 214, 252,1), rgba(150, 214, 252,0.6),rgba(150, 214, 252,1)); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(top, rgba(150, 214, 252,1), rgba(150, 214, 252,0.6),rgba(150, 214, 252,1)); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(top, rgba(150, 214, 252,1), rgba(150, 214, 252,0.6),rgba(150, 214, 252,1)); /* Firefox 3.6 - 15 */
+    background: linear-gradient(top, rgba(150, 214, 252,1), rgba(150, 214, 252,0.6),rgba(150, 214, 252,1)); /* 标准的语法（必须放在最后） */
+    color: #fff;
+    font-size: 20px;
+    border-radius: 40px;
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    cursor: pointer;
+    display: none;
+}
+.box-delete:hover{
+    color: #333;
+}
+.power-class-box:hover .box-delete{
+    display: inline-block;
+}
+.power-loading{
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*bottom: 0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*background-color: rgba(255, 255, 255, 0.5);*/
+    /*z-index: 999;*/
+}
+#loading{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 999;
+}
+.resize-line{
+    width: 100%;
+    height: 5px;
+    background-color: #333;
+    position: absolute;
+    bottom: 0;
+    cursor: n-resize;
+}
+.other-type{
+    border: 3px solid #cc2b2b;
+}
+.other-type .class-box-title{
+    background-color: #cc2b2b;
+}
+.other-type .box-delete{
+    background-color: #cc2b2b;
+}
+.mine-row:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+.power-circle{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #cc2b2b;
+    top: 0;
+    left: 0;
+}
+.hide-background{
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: rgba(238, 238, 238, 0.5);
+}
+.seLine{
+    display: inline-block;
+    width: 100%;
+    height: 18px;
+    border-bottom: 2px solid #333;
+}

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.serviceAccess.mapper.POrderWaysMapper">
+	
+  <sql id="Base_Column_List">
+  	  pways_id "pwaysId",
+  	  pways_name "pwaysName",
+  	  pways_code "pwaysCode",
+  	  pways_type "pwaysType",
+  	  pways_config "pwaysConfig",
+  	  pways_remark "pwaysRemark",
+  	  tenant_id "tenantId",
+  	  create_date "createDate",
+  	  create_by "createBy",
+  	  update_date "updateDate",
+  	  update_by "updateBy"
+   </sql>
+	
+	
+	<select id="findAll" parameterType="com.sdp.serviceAccess.entity.POrderWays" 
+		 resultType="com.sdp.serviceAccess.entity.POrderWays">
+		 select 
+		 <include refid="Base_Column_List" /> 
+		 from p_product_orderways where 1=1
+		 <if test="tenantId !=null and tenantId !=''">
+			and tenant_id=#{tenantId} 
+		 </if>
+		 <if test="pwaysType !=null and pwaysType !=''">
+			and pways_type=#{pwaysType} and pways_type != 'approve' 
+		 </if>
+	</select>
+	
+	<select id="findById" parameterType="com.sdp.serviceAccess.entity.POrderWays" 
+		 resultType="com.sdp.serviceAccess.entity.POrderWays">
+		 select 
+		 <include refid="Base_Column_List" /> 
+		 from p_product_orderways where 1=1 
+		 <if test="tenantId !=null and tenantId !=''">
+			and tenant_id=#{tenantId} 
+		 </if>
+		 <if test="pwaysId!=null and pwaysId!=''">
+			and pways_id= #{pwaysId} 
+		 </if>
+	</select>
+	
+	<select id="findAllByCondition" parameterType="com.sdp.serviceAccess.entity.POrderWays" 
+		 resultType="com.sdp.serviceAccess.entity.POrderWays">>
+		select 
+		 <include refid="Base_Column_List" /> 
+		 from p_product_orderways where 1=1 
+		 <if test="tenantId !=null and tenantId !=''">
+			and tenant_id=#{tenantId} 
+		 </if>
+		 <if test="pwaysId!=null and pwaysId!=''">
+			and pways_id= #{pwaysId} 
+		 </if>
+		 <if test="pwaysName !=null and pwaysName''">
+			and pways_name= #{pwaysName} 
+		 </if>
+		 <if test="pwaysCode !=null and pwaysCode !=''">
+			and pways_code= #{pwaysCode} 
+		 </if>
+		 <if test="pwaysType !=null and pwaysType !=''">
+			and pways_type= #{pwaysType} 
+		 </if>
+		 <if test="pwaysConfig !=null and pwaysConfig !=''">
+			and pways_config= #{pwaysConfig} 
+		 </if>
+		 <if test="pwaysRemark !=null and pwaysRemark !=''">
+			and pways_remark= #{pwaysRemark} 
+		 </if>
+	</select>
+	
+</mapper>

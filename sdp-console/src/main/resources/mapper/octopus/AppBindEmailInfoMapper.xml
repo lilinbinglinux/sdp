@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="com.sdp.cop.octopus.dao.AppBindEmailDao"> 
+	<resultMap id="BaseResultMap"
+		type="com.sdp.cop.octopus.entity.AppBindEmailInfo">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="app" property="app" jdbcType="VARCHAR" />
+		<result column="email_addr" property="emailAddr"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id id, 
+		app app, 
+		email_addr emailAddr
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from app_emailaddr_relation
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	
+	<select id="selectByPrimaryAppy" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from app_emailaddr_relation
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		app_emailaddr_relation
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert"
+		parameterType="com.sdp.cop.octopus.entity.AppBindEmailInfo">
+		insert into app_emailaddr_relation (id, app, email_addr
+		)
+		values (#{id,jdbcType=BIGINT}, #{app,jdbcType=VARCHAR},
+		#{emailAddr,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.sdp.cop.octopus.entity.AppBindEmailInfo">
+		insert into app_emailaddr_relation
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="app != null">
+				app,
+			</if>
+			<if test="emailAddr != null">
+				email_addr,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="app != null">
+				#{app,jdbcType=VARCHAR},
+			</if>
+			<if test="emailAddr != null">
+				#{emailAddr,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.sdp.cop.octopus.entity.AppBindEmailInfo">
+		update app_emailaddr_relation
+		<set>
+			<if test="app != null">
+				app = #{app,jdbcType=VARCHAR},
+			</if>
+			<if test="emailAddr != null">
+				email_addr = #{emailAddr,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.sdp.cop.octopus.entity.AppBindEmailInfo">
+		update app_emailaddr_relation
+		set app =
+		#{app,jdbcType=VARCHAR},
+		email_addr = #{emailAddr,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<select id="selectByApp" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from app_emailaddr_relation
+		where app = #{app,jdbcType=VARCHAR}
+	</select>
+	<update id="updateByApp" parameterType="java.util.HashMap">
+		update app_emailaddr_relation u
+		 set u.email_addr= #{emailAddr,jdbcType=VARCHAR}
+		 where u.app= #{app,jdbcType=VARCHAR}
+	</update>
+</mapper>

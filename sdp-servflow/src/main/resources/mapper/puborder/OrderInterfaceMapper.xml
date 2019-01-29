@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.servflow.pubandorder.serve.mapper.OrderInterfaceMapper">
+    <resultMap id="OrderInterfaceResultMap" type="com.sdp.servflow.pubandorder.orderapistore.model.OrderInterfaceBean">
+        <id column="orderid" jdbcType="VARCHAR" property="orderId"/>
+        <result column="order_name" jdbcType="VARCHAR" property="orderName"/>
+        <result column="orderSerName" jdbcType="VARCHAR" property="orderSerName"/>
+        <result column="ordercode" jdbcType="VARCHAR" property="orderCode"/>
+        <result column="protocal" jdbcType="VARCHAR" property="protocal"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="reqformat" jdbcType="VARCHAR" property="reqformat"/>
+        <result column="respformat" jdbcType="VARCHAR" property="respformat"/>
+        <result column="application_id" jdbcType="VARCHAR" property="applicationId"/>
+        <result column="orderdesc" jdbcType="VARCHAR" property="orderDesc"/>
+        <result column="createdate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="ser_id" jdbcType="VARCHAR" property="serId"/>
+        <result column="ser_version" jdbcType="VARCHAR" property="serVersion"/>
+        <result column="limit_ip" jdbcType="VARCHAR" property="limitIp"/>
+        <result column="appId" jdbcType="VARCHAR" property="appId"/>
+        <result column="acc_freq" jdbcType="INTEGER" property="accFreq"/>
+        <result column="acc_freq_type" jdbcType="VARCHAR" property="accFreqType"/>
+        <result column="login_id" jdbcType="VARCHAR" property="loginId"/>
+        <result column="app_resume" jdbcType="VARCHAR" property="appResume"/>
+        <result column="rep_flag" jdbcType="VARCHAR" property="repFlag"/>
+        <result column="rep_user_id" jdbcType="VARCHAR" property="repUserId"/>
+        <result column="checkstatus" jdbcType="VARCHAR" property="checkStatus"/>
+        <result column="tenant_id" jdbcType="VARCHAR" property="tenantId"/>
+        <result column="countTime" jdbcType="VARCHAR" property="countTime"/>
+        <association property="serviceMain" javaType="com.sdp.servflow.pubandorder.servicebasic.model.ServiceMainBean">
+            <id column="ser_id" jdbcType="VARCHAR" property="serId"/>
+            <result column="ser_name" jdbcType="VARCHAR" property="serName"/>
+            <result column="ser_type" jdbcType="VARCHAR" property="serType"/>
+            <result column="synch_flag" jdbcType="VARCHAR" property="synchFlag"/>
+            <result column="versionId" jdbcType="VARCHAR" property="serVersion"/>
+            <result column="loginId" jdbcType="VARCHAR" property="loginId"/>
+            <result column="ser_code" jdbcType="VARCHAR" property="serCode"/>
+            <result column="ser_resume" jdbcType="VARCHAR" property="serResume"/>
+            <result column="createDateString" jdbcType="VARCHAR" property="createDateString"/>
+        </association>
+        <association property="serviceVersionBean"
+                     javaType="com.sdp.servflow.pubandorder.servicebasic.model.ServiceVersionBean">
+            <id column="ser_ver_id" jdbcType="VARCHAR" property="serVerId"/>
+            <result column="ser_version_B" jdbcType="VARCHAR" property="serVersion"/>
+            <result column="ser_agreement" jdbcType="VARCHAR" property="serAgreement"/>
+            <result column="ser_request" jdbcType="VARCHAR" property="serRequest"/>
+            <result column="ser_response" jdbcType="VARCHAR" property="serResponse"/>
+            <result column="ser_restype" jdbcType="VARCHAR" property="serRestType"/>
+            <result column="ser_point" jdbcType="VARCHAR" property="serPoint"/>
+            <result column="input_resume" jdbcType="VARCHAR" property="inputResume"/>
+            <result column="out_resume" jdbcType="VARCHAR" property="outResume"/>
+        </association>
+        <association property="serviceType" javaType="com.sdp.servflow.pubandorder.serapitype.model.ServiceTypeBean">
+            <id column="ser_type_id" jdbcType="VARCHAR" property="serTypeId"/>
+            <result column="ser_type_name" jdbcType="VARCHAR" property="serTypeName"/>
+        </association>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        orderid,
+        order_name,
+        ordercode,
+        protocal
+        url,
+        reqformat,
+        respformat,
+        application_id,
+        orderdesc,
+        createdate,
+        ser_id,
+        ser_version,
+        limit_ip,
+        appId,
+        acc_freq,
+        acc_freq_type,
+        login_id,
+        app_resume,
+        rep_flag,
+        rep_user_id,
+        checkstatus,
+        tenant_id
+    </sql>
+
+    <select id="selectContextPage" parameterType="java.lang.String" resultMap="OrderInterfaceResultMap">
+        SELECT
+            A.ser_name,
+            A.ser_type,
+            A.login_id AS loginId,
+            A.ser_version AS versionId,
+            A.synch_flag,
+            A.ser_code,
+            A.ser_resume,
+            date_format(A.creatime,'%Y-%m-%d %H:%i') As createDateString,
+            B.ser_ver_id,
+            B.ser_agreement,
+            B.ser_restype,
+            B.ser_request,
+            B.ser_response,
+            B.ser_point,
+            B.input_resume,
+            B.out_resume,
+            COUNT(C.orderid) countTime,
+            D.ser_type_name
+        FROM ser_main A
+        LEFT JOIN ser_version B
+        on A.ser_id = B.ser_id
+        and A.ser_version = B.ser_version
+        LEFT JOIN order_interface C
+        on A.ser_id = C.ser_id
+        LEFT JOIN ser_type D
+        on A.ser_type = D.ser_type_id
+        WHERE A.ser_id = #{serId,jdbcType=VARCHAR}
+        GROUP BY B.ser_ver_id
+    </select>
+    <!-- 
+             根据pubApiId获取信息
+            任壮  2017年12月4日16:39:17
+     -->
+    <select id="getOrderInterfaces" parameterType="com.sdp.servflow.pubandorder.orderServer.model.PublishBo" resultType="com.sdp.servflow.pubandorder.orderapistore.model.OrderInterfaceBean">
+       SELECT
+		    orderid AS orderId,
+		    ser_id AS serId,
+		    order_name  AS orderName,
+		    ser_version AS serVersion,
+		    app_resume AS appResume,
+		    #{tenantId} AS tenantId,
+		    checkstatus AS checkStatus
+		FROM
+		    order_interface
+		WHERE
+	       	tenant_id = #{tenantId}
+		       <if test="appId != null and appId !=''" >
+		            AND   appId =  #{appId}
+		      </if>
+		      <if test="serId != null and serId !=''" >
+                 and  ser_id =  #{serId}    
+              </if>
+		     
+    </select>
+    <select id="selectByOrderId" parameterType="java.lang.String" resultType="com.sdp.servflow.pubandorder.orderapistore.model.OrderInterfaceBean">
+        select app_resume AS appResume from order_interface where orderid = #{orderId}
+    </select>
+    <select id="selectInterfaceOrder" parameterType="map" resultType="com.sdp.servflow.pubandorder.orderapistore.model.OrderInterfaceBean">
+        SELECT
+            A.orderid AS orderId,
+            A.login_id As loginId,
+            A.tenant_id As tenantId,
+            A.url As url,
+            A.appId As appId,
+            date_format(A.createdate,'%Y-%m-%d %H:%i') As createDateString,
+            A.checkstatus As checkStatus,
+            CASE
+            WHEN A.order_name IS NULL THEN
+            B.ser_name
+            ELSE
+            A.order_name
+            END as orderName
+        from order_interface A,ser_main B
+        WHERE A.tenant_id = #{tenant_id} and A.ser_id = B.ser_id
+        <if test="name != null and name != ''">
+            and CASE
+                WHEN A.order_name IS NULL THEN
+                B.ser_name
+                ELSE
+                A.order_name
+                END LIKE '%${name}%'
+        </if>
+        <if test="appId != null and appId != ''">
+            and A.appId LIKE '%${appId}%'
+        </if>
+        <if test="checkStatus != null and checkStatus != ''">
+            and A.checkstatus =  #{checkStatus,jdbcType=VARCHAR}
+        </if>
+        order by A.createdate desc
+    </select>
+    <select id="selectMine" parameterType="map" resultType="com.sdp.servflow.pubandorder.orderapistore.model.OrderInterfaceBean">
+        SELECT
+            A.orderid AS orderId,
+            A.ordercode As orderCode,
+            A.respformat As respformat,
+            A.app_resume As appResume,
+            A.appId As appId,
+            date_format(A.createdate,'%Y-%m-%d %H:%i') As createDateString,
+            A.checkstatus As checkStatus,
+            A.ser_id     As serId,
+            A.url As url,
+            A.ser_version As serVersion,
+            A.tenant_id As tenantId,
+            A.application_id As applicationId,
+            A.login_id As loginId,
+            CASE
+            WHEN A.order_name IS NULL THEN
+            B.ser_name
+            ELSE
+            A.order_name
+            END as orderName,
+            B.ser_name as orderSerName
+        FROM
+        order_interface A, ser_main B
+        WHERE A.tenant_id = #{tenant_id} and A.login_id = #{login_id}
+        and A.ser_id = B.ser_id
+        <if test="name != null and name != ''">
+            and CASE
+                WHEN A.order_name IS NULL THEN
+                B.ser_name
+                ELSE
+                A.order_name
+                END LIKE '%${name}%'
+        </if>
+        <if test="appId != null and appId != ''">
+            and A.appId LIKE '%${appId}%'
+        </if>
+        <if test="applicationId != null and applicationId != ''">
+            and A.application_id = #{applicationId,jdbcType=VARCHAR}
+        </if>
+        order by A.createdate desc
+    </select>
+
+    <insert id="insert" parameterType="com.sdp.servflow.pubandorder.orderapistore.model.OrderInterfaceBean">
+        INSERT INTO order_interface
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">
+                orderid,
+            </if>
+            <if test="orderName != null">
+                order_name,
+            </if>
+            <if test="orderCode != null">
+                ordercode,
+            </if>
+            <if test="protocal != null">
+                protocal,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="reqformat != null">
+                reqformat,
+            </if>
+            <if test="respformat != null">
+                respformat,
+            </if>
+            <if test="applicationId != null">
+                application_id,
+            </if>
+            <if test="orderDesc != null">
+                orderdesc,
+            </if>
+            <if test="createDate != null">
+                createdate,
+            </if>
+            <if test="serId != null">
+                ser_id,
+            </if>
+            <if test="serVersion != null">
+                ser_version,
+            </if>
+            <if test="limitIp != null">
+                limit_ip,
+            </if>
+            <if test="appId != null">
+                appId,
+            </if>
+            <if test="accFreq != null">
+                acc_freq,
+            </if>
+            <if test="accFreqType != null">
+                acc_freq_type,
+            </if>
+            <if test="loginId != null">
+                login_id,
+            </if>
+            <if test="appResume != null">
+                app_resume,
+            </if>
+            <if test="repFlag != null">
+                rep_flag,
+            </if>
+            <if test="repUserId != null">
+                rep_user_id,
+            </if>
+            <if test="checkStatus != null">
+                checkstatus,
+            </if>
+            <if test="tenantId != null">
+                tenant_id,
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">
+                #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderName != null">
+                #{orderName,jdbcType=VARCHAR},
+            </if>
+            <if test="orderCode != null">
+                #{orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="protocal != null">
+                #{protocal,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="reqformat != null">
+                #{reqformat,jdbcType=VARCHAR},
+            </if>
+            <if test="respformat != null">
+                #{respformat,jdbcType=VARCHAR},
+            </if>
+            <if test="applicationId != null">
+                #{applicationId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderDesc != null">
+                #{orderDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="serId != null">
+                #{serId,jdbcType=VARCHAR},
+            </if>
+            <if test="serVersion != null">
+                #{serVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="limitIp != null">
+                #{limitIp,jdbcType=VARCHAR},
+            </if>
+            <if test="appId != null">
+                #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="accFreq != null">
+                #{accFreq,jdbcType=INTEGER},
+            </if>
+            <if test="accFreqType != null">
+                #{accFreqType,jdbcType=VARCHAR},
+            </if>
+            <if test="loginId != null">
+                #{loginId,jdbcType=VARCHAR},
+            </if>
+            <if test="appResume != null">
+                #{appResume,jdbcType=VARCHAR},
+            </if>
+            <if test="repFlag != null">
+                #{repFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="repUserId != null">
+                #{repUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="checkStatus != null">
+                #{checkStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantId != null">
+                #{tenantId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.sdp.servflow.pubandorder.orderapistore.model.OrderInterfaceBean">
+        update order_interface
+        <set>
+            <if test="orderName != null">
+                order_name = #{orderName,jdbcType=VARCHAR},
+            </if>
+            <if test="orderCode != null">
+                ordercode = #{orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="protocal != null">
+                protocal = #{protocal,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="reqformat != null">
+                reqformat= #{reqformat,jdbcType=VARCHAR},
+            </if>
+            <if test="respformat != null">
+                respformat= #{respformat,jdbcType=VARCHAR},
+            </if>
+            <if test="applicationId != null">
+                application_id= #{applicationId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderDesc != null">
+                orderdesc= #{orderDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="serId != null">
+                ser_id = #{serId,jdbcType=VARCHAR},
+            </if>
+            <if test="serVersion != null">
+                ser_version = #{serVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="limitIp != null">
+                limit_ip = #{limitIp,jdbcType=VARCHAR},
+            </if>
+            <if test="appId != null">
+                appId = #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="accFreq != null">
+                acc_freq = #{accFreq,jdbcType=VARCHAR},
+            </if>
+            <if test="accFreqType != null">
+                acc_freq_type = #{accFreqType,jdbcType=VARCHAR},
+            </if>
+            <if test="loginId != null">
+                login_id = #{loginId,jdbcType=VARCHAR},
+            </if>
+            <if test="appResume != null">
+                app_resume = #{appResume,jdbcType=VARCHAR},
+            </if>
+            <if test="repFlag != null">
+                rep_flag = #{repFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="repUserId != null">
+                rep_user_id = #{repUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="checkStatus != null">
+                checkstatus = #{checkStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantId != null">
+                tenant_id = #{tenantId,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where orderid = #{orderId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="getAllByCondition" parameterType="map" resultType="com.sdp.servflow.pubandorder.orderapistore.model.OrderInterfaceBean">
+        select
+            orderid as orderId,
+            order_name as orderName,
+            ordercode as orderCode,
+            protocal as protocal,
+            url as url,
+            reqformat as reqFormat,
+            respformat as respFormat,
+            application_id as applicationId,
+            orderdesc as orderDesc,
+            createdate as creatDate,
+            ser_id as serId,
+            ser_version as serVersion,
+            limit_ip as limitIp,
+            appId as appId,
+            acc_freq as accFreq,
+            acc_freq_type as accFreqType,
+            login_id as loginId,
+            app_resume as appResume,
+            rep_flag as repFlag,
+            rep_user_id as repUserId,
+            checkstatus as checkStatus,
+            tenant_id as tenantId
+        from order_interface where 1=1
+        <if test="orderId != null">
+            and orderid = #{orderId,jdbcType=VARCHAR}
+        </if>
+        <if test="orderCode != null">
+            and ordercode = #{orderCode,jdbcType=VARCHAR}
+        </if>
+        <if test="protocal != null">
+            and protocal = #{protocal,jdbcType=VARCHAR}
+        </if>
+        <if test="orderName != null">
+            and order_name = #{orderName,jdbcType=VARCHAR}
+        </if>
+        <if test="url != null">
+            and url = #{url,jdbcType=VARCHAR}
+        </if>
+        <if test="reqformat != null">
+            and reqformat = #{reqformat,jdbcType=VARCHAR}
+        </if>
+        <if test="respformat != null">
+            and respformat = #{respformat,jdbcType=VARCHAR}
+        </if>
+        <if test="applicationId != null">
+            and application_id = #{applicationId,jdbcType=VARCHAR}
+        </if>
+        <if test="orderDesc != null">
+            and orderdesc = #{orderDesc,jdbcType=VARCHAR}
+        </if>
+        <if test="createDate != null">
+            and createdate = #{createDate,jdbcType=VARCHAR}
+        </if>
+        <if test="serId != null">
+            and ser_id = #{serId,jdbcType=VARCHAR}
+        </if>
+        <if test="serVersion != null">
+            and ser_version = #{serVersion,jdbcType=VARCHAR}
+        </if>
+        <if test="limitIp != null">
+            and limit_ip = #{limitIp,jdbcType=VARCHAR}
+        </if>
+        <if test="appId != null">
+            and appId = #{appId,jdbcType=VARCHAR}
+        </if>
+        <if test="loginId != null">
+            and login_id = #{loginId,jdbcType=VARCHAR}
+        </if>
+        <if test="appResume != null">
+            and app_resume = #{appResume,jdbcType=VARCHAR}
+        </if>
+        <if test="repFlag != null">
+            and rep_flag = #{repFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="repUserId != null">
+            and rep_user_id = #{repUserId,jdbcType=VARCHAR}
+        </if>
+        <if test="checkStatus != null">
+            and checkstatus = #{checkStatus,jdbcType=VARCHAR}
+        </if>
+        <if test="tenantId != null">
+            and tenant_id = #{tenantId,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="selectGetSerNameByPrimaryKey" parameterType="java.lang.String" resultType="com.sdp.servflow.pubandorder.orderapistore.model.OrderInterfaceBean">
+        select
+        a.orderid as orderId,
+        a.order_name as orderName,
+        a.ordercode as orderCode,
+        a.protocal as protocal,
+        a.url as url,
+        a.reqformat as reqFormat,
+        a.respformat as respFormat,
+        a.application_id as applicationId,
+        a.orderdesc as orderDesc,
+        a.createdate as creatDate,
+        date_format(a.createdate,'%Y-%m-%d %H:%i') as createDateString,
+        a.ser_id as serId,
+        a.ser_version as serVersion,
+        a.limit_ip as limitIp,
+        a.appId as appId,
+        a.acc_freq as accFreq,
+        a.acc_freq_type as accFreqType,
+        a.login_id as loginId,
+        a.app_resume as appResume,
+        a.rep_flag as repFlag,
+        a.rep_user_id as repUserId,
+        a.checkstatus as checkStatus,
+        a.tenant_id as tenantId,
+        b.ser_name as orderSerName
+        from order_interface a LEFT JOIN ser_main b
+        on a.ser_id = b.ser_id
+        where a.orderid = #{orderId,jdbcType = VARCHAR}
+    </select>
+
+    <update id="updateByPrimaryKey" parameterType="com.sdp.servflow.pubandorder.order.model.InterfaceOrderBean">
+        update order_interface
+        <set>
+            <if test="checkStatus!= null and checkStatus!=''">
+                checkstatus = #{checkStatus, jdbcType=VARCHAR},
+            </if>
+        </set>
+        where orderid = #{orderId,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="map">
+        delete from order_interface
+        where orderid = #{orderId,jdbcType=VARCHAR} and tenant_id = #{tenantId, jdbcType=VARCHAR}
+    </delete>
+</mapper>

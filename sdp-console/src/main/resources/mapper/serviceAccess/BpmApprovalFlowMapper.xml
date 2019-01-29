@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.serviceAccess.mapper.BpmApprovalFlowMapper">
+	
+  <sql id="Base_Column_List">
+  	  flow_id     "flowId",
+  	  order_id    "orderId",
+  	  is_agreement   "isAgreement",
+  	  remark       "remark",
+  	  tenant_id    "tenantId",
+  	  create_date  "createDate",
+  	  create_by    "createBy",
+  	  update_date  "updateDate",
+  	  update_by    "updateBy"
+   </sql>
+	
+	
+	<select id="findAll" parameterType="com.sdp.serviceAccess.entity.BpmApprovalFlow" 
+		 resultType="com.sdp.serviceAccess.entity.BpmApprovalFlow">
+		 select 
+		 <include refid="Base_Column_List" /> 
+		 from p_bpm_approvalflow where 1=1
+		 <if test="tenantId !=null and tenantId !=''">
+			and tenant_id=#{tenantId} 
+		 </if>
+		 <if test="createBy !=null and createBy !=''">
+			and create_by=#{createBy} 
+		 </if>
+	</select>
+	
+	<select id="findById" parameterType="com.sdp.serviceAccess.entity.BpmApprovalFlow" 
+		 resultType="com.sdp.serviceAccess.entity.BpmApprovalFlow">
+		 select 
+		 <include refid="Base_Column_List" /> 
+		 from p_bpm_approvalflow where 1=1 
+		 <if test="tenantId !=null and tenantId !=''">
+			and tenant_id=#{tenantId} 
+		 </if>
+		 <if test="flowId !=null and flowId''">
+			and flow_id= #{flowId} 
+		 </if>
+	</select>
+	
+	<select id="findByPriId" parameterType="java.lang.String" 
+		 resultType="com.sdp.serviceAccess.entity.BpmApprovalFlow">
+		 select 
+		 <include refid="Base_Column_List" /> 
+		 from p_bpm_approvalflow where 1=1 
+		 <if test="tenantId !=null and tenantId !=''">
+			and tenant_id=#{tenantId} 
+		 </if>
+		 <if test="flowId !=null and flowId''">
+			and flow_id= #{flowId}  
+		 </if>
+	</select>
+	
+	<select id="findAllByCondition" parameterType="com.sdp.serviceAccess.entity.BpmApprovalFlow" 
+		 resultType="com.sdp.serviceAccess.entity.BpmApprovalFlow">
+		select 
+		 <include refid="Base_Column_List" /> 
+		 from p_bpm_approvalflow where 1=1 
+		 <if test="flowId !=null and flowId !=''">
+			and flow_id=#{flowId} 
+		 </if>
+		 <if test="orderId!=null and orderId!=''">
+			and order_id= #{orderId} 
+		 </if>
+		 <if test="isAgreement !=null and isAgreement !=''">
+			and is_agreement= #{isAgreement} 
+		 </if>
+		 <if test="remark !=null and remark !=''">
+			and remark= #{remark} 
+		 </if>
+		 <if test="tenantId !=null and tenantId !=''">
+			and tenant_id= #{tenantId} 
+		 </if>
+		 <if test="createDate !=null and createDate !=''">
+			and create_date= #{createDate} 
+		 </if>
+		 <if test="createBy !=null and createBy !=''">
+			and create_by= #{createBy} 
+		 </if>
+		 <if test="updateDate !=null and updateDate !=''">
+			and update_date= #{updateDate} 
+		 </if>
+		 <if test="updateBy !=null and updateBy !=''">
+			and update_by= #{update_by} 
+		 </if>
+	</select>
+	
+	
+	<insert id="saveSingle" parameterType="com.sdp.serviceAccess.entity.BpmApprovalFlow" >
+		 <selectKey keyProperty="flowId" resultType="string" order="BEFORE">    
+             select  replace(uuid(),'-','')   from dual  
+    		</selectKey> 
+		insert into p_bpm_approvalflow (
+		flow_id,     
+		order_id ,   
+		is_agreement,
+		remark   ,   
+		tenant_id   ,
+		create_date ,
+		create_by   ,
+		update_date ,
+		update_by   )
+	  	values(
+	  	#{flowId,jdbcType=VARCHAR},
+	  	#{orderId,jdbcType=VARCHAR},
+	  	#{isAgreement,jdbcType=INTEGER},
+	  	#{remark,jdbcType=VARCHAR},
+	  	#{tenantId,jdbcType=VARCHAR},
+	  	#{createDate,jdbcType=TIMESTAMP},
+	  	#{createBy,jdbcType=VARCHAR},
+	  	#{updateDate,jdbcType=TIMESTAMP},
+	  	#{updateBy,jdbcType=VARCHAR}
+	  	)
+	</insert>
+	
+	<update id="update" parameterType="com.sdp.serviceAccess.entity.BpmApprovalFlow" >
+		update p_bpm_approvalflow 
+		set 
+		flow_id=#{flowId,jdbcType=VARCHAR},           
+	  	order_id=#{orderId,jdbcType=VARCHAR},         
+	  	is_agreement=#{isAgreement,jdbcType=INTEGER},         
+	  	remark=#{remark,jdbcType=VARCHAR},       
+	  	pendtaskId=#{pendtaskId,jdbcType=DATE},            
+	  	tenant_id=#{tenantId,jdbcType=VARCHAR},          
+	  	create_date=#{createDate,jdbcType=TIMESTAMP},           
+	  	create_by=#{createBy,jdbcType=VARCHAR},          
+	  	update_date=#{updateDate,jdbcType=TIMESTAMP},           
+	  	update_by=#{updateBy,jdbcType=VARCHAR}           
+		where tenant_id = #{tenantId} 
+		and 
+		flow_id = #{flowId}
+	</update>
+	
+	<delete id="delete" parameterType="com.sdp.serviceAccess.entity.BpmApprovalFlow" >
+		delete from p_bpm_approvalflow  
+		where 1=1 
+		and tenant_id = #{tenantId}
+		and order_id = #{orderId}
+	</delete>
+
+</mapper>

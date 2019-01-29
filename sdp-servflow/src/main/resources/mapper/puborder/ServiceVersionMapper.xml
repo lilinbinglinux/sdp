@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.frame.web.mapper.puborder.ServiceVersionMapper">
+    <resultMap id="BaseResultMap" type="com.sdp.servflow.pubandorder.servicebasic.model.ServiceVersionBean">
+        <id column="ser_ver_id" jdbcType="VARCHAR" property="serVerId"/>
+        <result column="ser_version" jdbcType="VARCHAR" property="serVersion"/>
+        <result column="ser_id" jdbcType="VARCHAR" property="serId"/>
+        <result column="ser_agreement" jdbcType="VARCHAR" property="serAgreement"/>
+        <result column="ser_request" jdbcType="VARCHAR" property="serRequest"/>
+        <result column="ser_response" jdbcType="VARCHAR" property="serResponse"/>
+        <result column="ser_restype" jdbcType="VARCHAR" property="serRestType"/>
+        <result column="ser_point" jdbcType="VARCHAR" property="serPoint"/>
+        <result column="input_resume" jdbcType="VARCHAR" property="inputResume"/>
+        <result column="out_resume" jdbcType="VARCHAR" property="outResume"/>
+        <result column="ser_flow" jdbcType="VARCHAR" property="serFlow"/>
+        <result column="creatime" jdbcType="TIMESTAMP" property="creatTime"/>
+        <result column="delflag" jdbcType="VARCHAR" property="delFlag"/>
+        <result column="stopflag" jdbcType="VARCHAR" property="stopFlag"/>
+        <result column="tenant_id" jdbcType="VARCHAR" property="tenantId"/>
+        <result column="login_id" jdbcType="VARCHAR" property="loginId"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ser_ver_id, ser_version, ser_id, ser_agreement, ser_request, ser_response, ser_restype,
+        ser_point, input_resume, out_resume, ser_flow, creatime, delflag, stopflag, tenant_id, login_id
+    </sql>
+    
+    <select id="getByPrimaryKey" parameterType="String" resultType="com.sdp.servflow.pubandorder.servicebasic.model.ServiceVersionBean">
+        select 
+        ser_ver_id serVerId,
+        ser_version serVersion,
+        ser_id serId,
+        ser_agreement serAgreement,
+        ser_request serRequest,
+        ser_response serResponse,
+        ser_restype serRestType,
+        ser_point serPoint,
+        input_resume inputResume,
+        out_resume outResume,
+        ser_flow serFlow,
+        creatime creatTime,
+        delflag delFlag,
+        stopflag stopFlag,
+        tenant_id tenantId,
+        login_id loginId 
+        from ser_version where ser_ver_id = #{serVerId,jdbcType=VARCHAR}
+    </select>
+    
+     <select id="getMaxVersionByCondition" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ser_version where 1=1
+        <if test="serVerId != null ">
+           and ser_ver_id = #{serVerId,jdbcType=VARCHAR}
+        </if>
+        <if test="serVersion != null">
+            and ser_version = #{serVersion,jdbcType=VARCHAR}
+        </if>
+        <if test="serId != null">
+            and ser_id = #{serId,jdbcType=VARCHAR}
+        </if>
+        <if test="serAgreement != null">
+            and ser_agreement = #{serAgreement,jdbcType=VARCHAR}
+        </if>
+        <if test="serRequest != null ">
+            and ser_request = #{serRequest,jdbcType=VARCHAR}
+        </if>
+        <if test="serResponse != null">
+            and ser_response = #{serResponse,jdbcType=VARCHAR}
+        </if>
+        <if test="serRestType != null">
+            and ser_restype = #{serRestType,jdbcType=VARCHAR}
+        </if>
+        <if test="serPoint != null">
+            and ser_point = #{serPoint,jdbcType=VARCHAR}
+        </if>
+        <if test="inputResume != null">
+            and input_resume = #{inputResume,jdbcType=VARCHAR}
+        </if>
+        <if test="outResume != null">
+            and out_resume = #{outResume,jdbcType=VARCHAR}
+        </if>
+        <if test="serFlow != null">
+            and ser_flow = #{serFlow,jdbcType=VARCHAR}
+        </if>
+        <if test="creatTime != null">
+            and creatime = #{creatTime,jdbcType=VARCHAR}
+        </if>
+        <if test="delFlag != null">
+            and delflag = #{delFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="stopFlag != null">
+            and stopflag = #{stopFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="tenantId != null">
+            and tenant_id = #{tenantId,jdbcType=VARCHAR}
+        </if>
+        <if test="loginId != null">
+            and login_id = #{loginId,jdbcType=VARCHAR}
+        </if>
+        order by ser_version DESC
+    </select>
+
+    <select id="getAllByCondition" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ser_version where 1=1
+        <if test="serVerId != null ">
+           and ser_ver_id = #{serVerId,jdbcType=VARCHAR}
+        </if>
+        <if test="serVersion != null">
+            and ser_version = #{serVersion,jdbcType=VARCHAR}
+        </if>
+        <if test="serId != null">
+            and ser_id = #{serId,jdbcType=VARCHAR}
+        </if>
+        <if test="serAgreement != null">
+            and ser_agreement = #{serAgreement,jdbcType=VARCHAR}
+        </if>
+        <if test="serRequest != null ">
+            and ser_request = #{serRequest,jdbcType=VARCHAR}
+        </if>
+        <if test="serResponse != null">
+            and ser_response = #{serResponse,jdbcType=VARCHAR}
+        </if>
+        <if test="serRestType != null">
+            and ser_restype = #{serRestType,jdbcType=VARCHAR}
+        </if>
+        <if test="serPoint != null">
+            and ser_point = #{serPoint,jdbcType=VARCHAR}
+        </if>
+        <if test="inputResume != null">
+            and input_resume = #{inputResume,jdbcType=VARCHAR}
+        </if>
+        <if test="outResume != null">
+            and out_resume = #{outResume,jdbcType=VARCHAR}
+        </if>
+        <if test="serFlow != null">
+            and ser_flow = #{serFlow,jdbcType=VARCHAR}
+        </if>
+        <if test="creatTime != null">
+            and creatime = #{creatTime,jdbcType=VARCHAR}
+        </if>
+        <if test="delFlag != null">
+            and delflag = #{delFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="stopFlag != null">
+            and stopflag = #{stopFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="tenantId != null">
+            and tenant_id = #{tenantId,jdbcType=VARCHAR}
+        </if>
+        <if test="loginId != null">
+            and login_id = #{loginId,jdbcType=VARCHAR}
+        </if>
+        order by ser_version DESC
+    </select>
+    
+    <insert id="insert" parameterType="com.sdp.servflow.pubandorder.servicebasic.model.ServiceVersionBean">
+        insert into ser_version
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="serVerId != null">
+                ser_ver_id,
+            </if>
+            <if test="serVersion != null">
+                ser_version,
+            </if>
+            <if test="serId != null">
+                ser_id,
+            </if>
+            <if test="serAgreement != null">
+                ser_agreement,
+            </if>
+           <if test="serRequest != null">
+                ser_request,
+            </if>
+            <if test="serResponse != null">
+                ser_response,
+            </if>
+            <if test="serRestType != null">
+                ser_restype,
+            </if> 
+            <if test="serPoint != null">
+                ser_point,
+            </if>
+            <if test="inputResume != null">
+                input_resume,
+            </if>
+            <if test="outResume != null">
+                out_resume,
+            </if>
+            <if test="delFlag != null">
+                delflag,
+            </if>
+            <if test="stopFlag != null">
+                stopflag,
+            </if>
+            <if test="tenantId != null">
+                tenant_id,
+            </if>
+            <if test="loginId != null">
+                login_id,
+            </if>
+            <if test="serFlow != null">
+                ser_flow,
+            </if>
+            <if test="creatTime != null">
+                creatime,
+            </if>
+            
+        </trim>
+        <trim prefix="value(" suffix=")" suffixOverrides=",">
+            <if test="serVerId != null">
+                #{serVerId,jdbcType=VARCHAR},
+            </if>
+            <if test="serVersion != null">
+                #{serVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="serId != null">
+                #{serId,jdbcType=VARCHAR},
+            </if>
+           <if test="serAgreement != null">
+                #{serAgreement,jdbcType=VARCHAR},
+            </if>
+             <if test="serRequest != null">
+                #{serRequest,jdbcType=VARCHAR},
+            </if>
+            <if test="serResponse != null">
+                #{serResponse,jdbcType=VARCHAR},
+            </if>
+            <if test="serRestType != null">
+                #{serRestType,jdbcType=VARCHAR},
+            </if>
+            <if test="serPoint != null">
+                #{serPoint,jdbcType=VARCHAR},
+            </if> 
+            <if test="inputResume != null">
+                #{inputResume,jdbcType=VARCHAR},
+            </if>
+            <if test="outResume != null">
+                #{outResume,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="stopFlag != null">
+                #{stopFlag,jdbcType=VARCHAR},
+            </if>
+           <if test="tenantId != null">
+                #{tenantId,jdbcType=VARCHAR},
+            </if>
+            <if test="loginId != null">
+                #{loginId,jdbcType=VARCHAR},
+            </if>
+            <if test="serFlow != null">
+                #{serFlow,jdbcType=VARCHAR},
+            </if>
+            <if test="creatTime != null">
+                #{creatTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    
+    <update id="updateByPrimaryKey" parameterType="com.sdp.servflow.pubandorder.servicebasic.model.ServiceVersionBean">
+        update ser_version
+        <set>
+            <if test="serVersion != null">
+                ser_version=#{serVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="serId != null">
+                ser_id=#{serId,jdbcType=VARCHAR},
+            </if>
+           <if test="serAgreement != null">
+               ser_agreement= #{serAgreement,jdbcType=VARCHAR},
+            </if>
+             <if test="serRequest != null">
+                ser_request=#{serRequest,jdbcType=VARCHAR},
+            </if>
+            <if test="serResponse != null">
+                ser_response=#{serResponse,jdbcType=VARCHAR},
+            </if>
+            <if test="serRestType != null">
+                ser_restype=#{serRestType,jdbcType=VARCHAR},
+            </if>
+            <if test="serPoint != null">
+                ser_point=#{serPoint,jdbcType=VARCHAR},
+            </if> 
+            <if test="inputResume != null">
+                input_resume=#{inputResume,jdbcType=VARCHAR},
+            </if>
+            <if test="outResume != null">
+                out_resume=#{outResume,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                delflag=#{delFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="stopFlag != null">
+                stopflag=#{stopFlag,jdbcType=VARCHAR},
+            </if>
+           <if test="tenantId != null">
+                tenant_id=#{tenantId,jdbcType=VARCHAR},
+            </if>
+            <if test="loginId != null">
+               login_id= #{loginId,jdbcType=VARCHAR},
+            </if>
+            <if test="serFlow != null">
+               ser_flow= #{serFlow,jdbcType=VARCHAR},
+            </if>
+            <if test="creatTime != null">
+                creatime=#{creatTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ser_ver_id = #{serVerId,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from ser_version
+        where ser_ver_id = #{serVerId,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteBySerId" parameterType="com.sdp.servflow.pubandorder.servicebasic.model.ServiceVersionBean">
+        <if test="serId != null">
+            delete from ser_version
+            where ser_id=#{serId,jdbcType=TIMESTAMP}
+            <if test="serVersion != null">
+                and ser_version=#{serVersion,jdbcType=TIMESTAMP}
+            </if>
+        </if>
+    </delete>
+
+</mapper>

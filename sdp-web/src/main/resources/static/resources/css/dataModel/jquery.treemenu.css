@@ -1,0 +1,111 @@
+/* For treemenu.js */
+ul,li{ padding:0;margin:0;list-style:none}
+.treemenu li { list-style: none; }
+
+.treemenu .toggler {
+    cursor: pointer;
+    padding: 0;
+}
+
+.treemenu .toggler:before {
+    display: inline-block;
+    margin-right: 2pt;
+}
+
+/*li.tree-empty > .toggler { color: #aaa; }*/
+/*li.tree-empty > .toggler:before { content: "\2212"; }*/
+/*li.tree-closed > .toggler:before { content: "+"; }*/
+/*li.tree-opened > .toggler:before { content: "\2212"; }*/
+
+.toggler {
+    -webkit-transition: all 0.15s ease;
+    -o-transition: all 0.15s ease;
+    transition: all 0.15s ease;
+}
+li.tree-empty > .toggler{
+    display: none;
+}
+li.tree-closed > .toggler {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+li.tree-opened > .toggler {
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+/*.dataSource-left-nav-stepOne{*/
+    /*width: 300px;*/
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*top: 40px;*/
+    /*bottom: 0;*/
+    /*background-color: #fff;*/
+    /*border-left: 1px solid #ddd;*/
+    /*transform: translateX(0px);*/
+    /*z-index: 1;*/
+    /*transition: all 0.2s;*/
+    /*padding-top: 40px;*/
+/*}*/
+.tree { color: #333;}
+.tree li,
+.tree li > a,
+.tree li > span {
+    padding: 4pt;
+    border-radius: 4px;
+}
+.tree li a {
+    color: #333;
+    text-decoration: none;
+    line-height: 20pt;
+    border-radius: 4px;
+    margin-right: 5px;
+    display: inline-block;
+    padding: 3px;
+}
+
+.tree li a:hover {
+    background-color: #333;
+    color: #fff;
+}
+.active {
+    background-color: #34495E;
+    color: #fff!important;
+}
+.active a {
+    color: #fff;
+}
+.tree li i{
+    margin-right: 5px;
+    cursor: pointer;
+}
+.tree li>div{
+    display: inline-block;
+}
+.tree li>div:hover a{
+    background-color: #333;
+    color: #fff;
+}
+
+.tree li>div:hover > i {
+    display: inline-block;
+}
+
+.tree li>div>i{
+    display: none;
+}
+.tree li .fa-plus:hover{
+    color: #09ff00;
+}
+.tree li .fa-minus:hover{
+    color: #ff040f;
+}
+.tree li .fa-pencil:hover{
+    color: #0916ff;
+}
+.tree li ul{
+    padding-left: 10px;
+}

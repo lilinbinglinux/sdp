@@ -1,0 +1,51 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+.summer-tab{
+
+}
+.summer-tab .summer-tabs:after{
+    content: ".";
+    display: block;
+    visibility: hidden;
+    clear: both;
+    height: 0;
+}
+.summer-tabs{
+    border-bottom: 2px solid #dfe4ed;
+    position: relative;
+    margin-bottom: 15px;
+    width: 100%;
+}
+.summer-tabs .tab-item{
+    box-sizing: border-box;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    list-style: none;
+    padding: 0 20px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 14px;
+    float: left;
+}
+.summer-tabs .tab-item:nth-child(1){
+    padding-left: 0;
+}
+.summer-tabs .summer-line{
+    height: 2px;
+    position: absolute;
+    background-color: #409EFF;
+    bottom: -2px;
+    left: 0;
+    -webkit-transition: -webkit-transform .3s cubic-bezier(.645,.045,.355,1);
+    transition: -webkit-transform .3s cubic-bezier(.645,.045,.355,1);
+    transition: transform .3s cubic-bezier(.645,.045,.355,1),-webkit-transform .3s cubic-bezier(.645,.045,.355,1);
+}
+.summer-tabs .active{
+    color: #409EFF;
+}
+.summer-tabs .hover{
+    color: #409EFF;
+}

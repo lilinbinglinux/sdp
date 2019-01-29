@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.servflow.logSer.log.mapper.LogBaseMapper">
+  	
+  	<resultMap id="logDictionaryBean" type="com.sdp.servflow.logSer.log.model.LogDictionaryBean">
+    	<result column="id" jdbcType="INTEGER" property="id" />
+    	<result column="dayDateTime" jdbcType="INTEGER" property="dayDateTime" />
+    	<result column="dayTotalCount" jdbcType="INTEGER" property="dayTotalCount" />
+    	<result column="tableName" jdbcType="VARCHAR" property="tableName" />
+  	</resultMap>
+  	
+  	<select id="getInstanceGUID" resultType="int">
+		select nextval('seq_instance_resgister')
+  	</select>
+  	
+  	<select id="selectMaxDayData" resultMap="logDictionaryBean">
+		select dayDateTime,tableName from log_dictionary
+		where dayDateTime=(select max(dayDateTime) from log_dictionary)
+  	</select>
+  	
+  	<insert id="insertDictionaryData" parameterType="com.sdp.servflow.logSer.log.model.LogDictionaryBean">
+  		insert into log_dictionary (dayDateTime,tableName)
+  		values (#{dayDateTime},#{tableName})
+  	</insert>
+  	
+  	<insert id="registerMethodLock" parameterType="com.sdp.servflow.logSer.log.model.MethodLock">
+  		insert into method_lock (instanceId,methodName,methodDesc,updateTime)
+  		values (#{instanceId},#{methodName},#{methodDesc},#{updateTime})
+  	</insert>
+  	
+  	<select id="selectSumCapacotyMatchedTable" resultType="int">
+		select SUM(dayTotalCount) from log_dictionary
+		where tableName=
+		(select tableName from log_dictionary WHERE dayDateTime=
+		(select MAX(dayDateTime) from log_dictionary))
+  	</select>
+  	
+  	<select id="selectCountSumYesterDay" resultType="int">
+  		select count(1) from ${tableName}
+		where dayTime=${yesterday}
+  	</select>
+  	
+  	<update id="updateLogDictionaryForYesCount">
+		update log_dictionary set 
+		dayTotalCount = #{dayTotalCount}
+		where dayDateTime = #{dayDateTime}
+  	</update>
+  	
+  	<update id="createNewLogTableAndAddPartition">
+  		CREATE TABLE ${newTableName} (
+		  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '日志记录的主键',
+		  `logType` int(2) DEFAULT NULL COMMENT '日志类型 0 代表服务，1代表 流程版本',
+		  `pubapiId` varchar(32) DEFAULT '' COMMENT '注册服务id',
+		  `orderid` varchar(32) DEFAULT '' COMMENT '订阅id',
+		  `requestMsg` longtext COMMENT '请求报文',
+		  `responseMsg` longtext COMMENT '响应报文',
+		  `startTime` timestamp(3) NULL DEFAULT NULL COMMENT '开始时间',
+		  `endTime` timestamp(3) NULL DEFAULT NULL COMMENT '结束时间',
+		  `requestId` varchar(32) DEFAULT '' COMMENT '一次交互使用的id（调用一次接口分配一个requestID）',
+		  `useTime` int(11) DEFAULT NULL COMMENT '消耗时间（毫秒）',
+		  `dayTime` int(8) NOT NULL COMMENT '天数',
+		  `code` varchar(10) DEFAULT NULL COMMENT '成功失败详细编码',
+		  `instanceId` int(10) DEFAULT NULL COMMENT '实例全局id',
+		  `tenant_id` varchar(16) DEFAULT '' COMMENT '租户id',
+		  PRIMARY KEY (`id`,`dayTime`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8
+		/*!50100 PARTITION BY RANGE (dayTime)
+		(PARTITION p${today} VALUES LESS THAN (${tomorrow}) ENGINE = InnoDB) */
+  	</update> 
+  	
+  	<update id="addNewPartition">
+  		ALTER TABLE ${tableName} ADD PARTITION (PARTITION p${today} VALUES LESS THAN (${tomorrow}))
+  	</update>
+  	
+  	<select id="selectTodayPartition" resultType="java.lang.String">
+  		select partition_name
+		from information_schema.partitions  
+		where table_schema = schema()  
+		and table_name=#{tableName}
+		and partition_name = #{partitionName}
+  	</select>
+  	
+  	<select id="selectLastTwoRecordByLogDicTable" resultMap="logDictionaryBean">
+		select * from log_dictionary
+		ORDER BY dayDateTime desc
+		LIMIT 1,1
+  	</select>
+  	
+  	<select id="selectDictionaryData" resultMap="logDictionaryBean">
+  		select * from log_dictionary
+  		where dayDateTime=#{dayDateTime}
+  		and tableName=#{tableName}
+  	</select>
+  	
+</mapper>

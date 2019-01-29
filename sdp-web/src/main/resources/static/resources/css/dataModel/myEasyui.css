@@ -1,0 +1,45 @@
+.my-easyui-form-item{
+    font-size: 14px;
+    margin-bottom: 15px;
+    clear: both;
+}
+.my-easyui-input-block{
+    margin-left: 110px;
+    min-height: 36px;
+}
+.textbox{
+    position: relative;
+    border: 1px solid #e6e6e6;
+    background-color: #fff;
+    vertical-align: middle;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    width: 100%!important;
+}
+.textbox .textbox-text{
+    font-size: 14px;
+    border: 0;
+    margin: 0;
+    padding: 0 4px;
+    white-space: normal;
+    vertical-align: top;
+    outline-style: none;
+    resize: none;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    height: 38px;
+    line-height: 1.3;
+    line-break: 38px\9;
+    width: 100%;
+    padding-left: 10px;
+}
+.tree-folder-open, .tree-folder, .tree-file{
+    display: none;
+}

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdp.frame.web.mapper.log.ResourceLogMapper" >
+  <resultMap id="BaseResultMap" type="com.sdp.frame.web.entity.log.ResourceLog" >
+    <id column="LOG_ID" property="logId" jdbcType="VARCHAR" />
+    <result column="RESOURCES_ID" property="resourcesId" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="LOG_DATE" property="logDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    LOG_ID, RESOURCES_ID, USER_ID, LOG_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from PURE_RESOURCES_LOG
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from PURE_RESOURCES_LOG
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sdp.frame.web.entity.log.ResourceLog" >
+    insert into PURE_RESOURCES_LOG (LOG_ID, RESOURCES_ID, USER_ID, 
+      LOG_DATE)
+    values (#{logId,jdbcType=VARCHAR}, #{resourcesId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{logDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sdp.frame.web.entity.log.ResourceLog" >
+    insert into PURE_RESOURCES_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        LOG_ID,
+      </if>
+      <if test="resourcesId != null" >
+        RESOURCES_ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="logDate != null" >
+        LOG_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        #{logId,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcesId != null" >
+        #{resourcesId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="logDate != null" >
+        #{logDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sdp.frame.web.entity.log.ResourceLog" >
+    update PURE_RESOURCES_LOG
+    <set >
+      <if test="resourcesId != null" >
+        RESOURCES_ID = #{resourcesId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="logDate != null" >
+        LOG_DATE = #{logDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sdp.frame.web.entity.log.ResourceLog" >
+    update PURE_RESOURCES_LOG
+    set RESOURCES_ID = #{resourcesId,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      LOG_DATE = #{logDate,jdbcType=TIMESTAMP}
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </update>
+</mapper>

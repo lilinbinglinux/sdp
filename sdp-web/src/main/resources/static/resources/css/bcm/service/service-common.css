@@ -1,0 +1,202 @@
+html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dl, dt, dd, ol, form, input, textarea, th, td, select {
+    margin: 0;
+    padding: 0;
+}
+*{box-sizing: border-box;}
+html, body {
+    min-height: 100%;
+    font-family: MicrosoftYaHei;
+}
+h1, h2, h3, h4, h5, h6{font-weight:normal;}
+ul,ol,li {
+    list-style: none;
+}
+img {
+    border: none;
+    vertical-align: middle;
+}
+a,a:hover,a:focus,a:active,a:visited{
+    text-decoration: none;
+}
+input {
+    outline: none;
+    border: none;
+}
+.clearfix {
+    zoom: 1;
+}
+.clearfix:after {
+    content: ".";
+    width: 0;
+    height: 0;
+    visibility: hidden;
+    display: block;
+    clear: both;
+    overflow:hidden;
+}
+/*单行文本溢出*/
+.ellipsis{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+/*多行文本溢出*/
+.mult_line_ellipsis{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+/* *********************************** */
+.bconsole-form-control{
+    border-radius: 18px;
+    /* width: 200px!important; */
+    height: 35px;
+    position: relative;
+    /* background: url("../../img/serviceType/sousuo-dark.png") no-repeat;
+    background-position-x: 173px;
+    background-position-y: 9px; */
+}
+.bconsole-width-200{
+    width: 200px!important;
+}
+.bconsole-width-110{
+    width: 110px!important;
+}
+.bconsole-width-170{
+    width: 170px!important;
+}
+.bconsole-width-280{
+    width: 280px!important;
+}
+.bconsole-form-group .glyphicon{
+    position: absolute;
+    right: 10px;
+    top: 11px;
+    width: 16px;
+    height: 16px;
+}
+.bconsole-form-control{
+    box-shadow: none!important;
+}
+.beconsole-form-select{
+    position: absolute;
+    left: 0;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: 0;
+}
+.bconsole-form-control:hover{
+    /* border-color: #cc3300; */
+    /* background: url("../../img/serviceType/sousuo-red.png") no-repeat;
+    background-position-x: 173px;
+    background-position-y: 9px; */
+}
+.bconsole-form-control:hover + .glyphicon{
+    /* color: #cc3300; */
+}
+.bconsole-form-control:focus + .glyphicon{
+    /* color: #cc3300; */
+}
+.bconsole-form-control:focus{
+    /* border-color: #cc3300; */
+    /* background: url("../../img/serviceType/sousuo-red.png") no-repeat;
+    background-position-x: 173px;
+    background-position-y: 9px; */
+    /* box-shadow: none; */
+}
+.bconsole-form-group:hover .glyphicon{
+    /* color: #cc3300; */
+}
+.bconsole-form-group{
+    position: relative;
+}
+.bconsole-form-group img{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.bconsole-fr{
+    float: right;
+}
+
+
+
+
+/*服务*/
+.service-create-container{
+    padding: 30px;
+}
+
+
+/*提出到theme.css中*/
+.title-circle{
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    border: solid 1px #adadad;
+    padding: 5px 0;
+    color: #adadad;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 50%;
+    margin-left: 16px;
+    cursor: pointer;
+}
+
+/*保存、启动、取消btn*/
+button.big-btn{
+    width: 160px;
+	height: 50px;
+	border-radius: 25px;
+}
+button.save-hollow-btn{
+    margin-left: 15px;
+}
+
+.page-info-header{
+    font-size: 14px;
+    font-weight: bold;
+    height: 30px;
+    border-bottom: 1px solid #d9d9d9;
+    margin-bottom: 20px;
+    color: #333333;
+}
+.page-info-header>span{
+    font-weight: bold;
+    font-size: 14px;
+    margin-right: 9px;
+}
+
+/* S点击表单获取焦点 placeholder消失 */
+input:focus::-webkit-input-placeholder { /* WebKit browsers */
+    color: transparent;
+}
+input:focus:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: transparent;
+}
+input:focus::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: transparent;
+}
+input:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: transparent;
+}
+
+textarea:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+textarea:focus:-moz-placeholder {
+    color: transparent;
+}
+textarea:focus::-moz-placeholder {
+    color: transparent;
+}
+textarea:focus:-ms-input-placeholder {
+    color: transparent;
+}
+/* E点击表单获取焦点 placeholder消失 */
+

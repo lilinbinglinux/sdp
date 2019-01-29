@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>sendLog</title>
+    <head th:include="frame/common :: header"></head>
+    
+    
+    <script type="text/javascript" th:src="@{/js/octopus/log/sendLog.js}" ></script>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/octopus/sendLog.css}" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/octopus/sendLogMore.css}" />
+    <script type="text/javascript"  th:src="@{/plugins/My97DatePicker/WdatePicker.js}"></script>
+    <script type="text/javascript" >
+	  //日历开始时间选择框
+	    var wpStart={
+	         readOnly:true,
+	         maxDate:'#F{$dp.$D(\'endTime\')||\'%y-%M-%d\'}'
+	         
+	    }
+	    
+	    //日历结束时间选择框
+	    var wpEnd={
+	         readOnly:true,
+	         maxDate:'%y-%M-%d',
+	         minDate:'#F{$dp.$D(\'startTime\')}',
+	         startDate:'#F{$dp.$D(\'startTime\',{d:+1})}'
+	    }
+    </script>
+     <style>
+     .table>thead>tr>th{  
+             text-align:center;  
+         }  
+      .table>tbody>tr>td{  
+          text-align:center;  
+      }  
+     </style>
+</head>
+<body>
+    <div class="view_contianer">
+        <div class="view_tab">
+            <div class="view_body">
+                <div class="view_search">
+                    <span>appName</span><input type="text" id="appName" name="appName" value="" />
+                      <span style="margin-left: 20px">发送时间</span><input type="text" id="startTime" class="Wdate" name="startTime" th:value="${startTime}" style="width:140px;height:26px;" th:onClick="'WdatePicker(wpStart)'"/>  
+                            <span>to</span><input readonly="readonly" type="text" id="endTime" class="Wdate" name="endTime"    th:value="${endTime}" style="width:140px;height:26px;" th:onClick="'WdatePicker(wpEnd)'" />
+                    <span style="margin-left: 20px">发送类型</span>
+                        <select name="sendType" id="sendType">
+                            <option value="" selected="selected">全部</option>
+                            <option value="email">邮件</option>
+                            <option value="shortMessage">短信</option>
+                        </select>
+                    <input type="button" id="searchBtn" style="margin-left: 10px; margin-top: -4px;" class="btn btn-danger" value="查询"/>
+                    <input type="button" id="resetBtn" style="margin-left: 15px; margin-top: -4px;" class="btn btn-danger" value="清空"/>
+    
+                </div>
+                <div class="box">
+                    <div class="box-body table-responsive">
+                    	<table id="tabletr" class="table"  cellspacing="0" style="position: fixed; width:100%;display: none; z-index: 1; top: 136px;">
+                          <thead style="width: 100%;">
+                            <tr style="text-align: center;">
+                                <th id="th1">序号</th>
+                                <th id="th2">appName</th>
+                                <th id="th3">发送方</th>
+                                <th id="th4">接收方</th>
+                                <th id="th5">内容</th>
+                                <th id="th6">类型</th>
+                                <th id="th7">发送时间</th>
+                                <th id="th8">错误日志</th>
+                           </tr>
+                          </thead>
+                    	</table> 
+                        <table id="operateLog_table" class="table table-bordered ">
+                            <thead>
+                                <tr style="text-align: center">
+                                    <th width="10%">序号</th>
+                                    <th width="10%">appName</th>
+                                    <th width="16%">发送方</th>
+                                    <th width="10%">接收方</th>
+                                    <th width="20%">内容</th>
+                                    <th width="14%">类型</th>
+                                    <th width="14%">发送时间</th>
+                                    <th width="14%">错误日志</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>
+            北京东方国信科技股份有限公司<br /> <small>© Copyright 2017. by BONC.</small>
+        </p>
+    </footer>
+<script type="text/javascript" th:src="@{/js/octopus/log/sendlog_fixHeader.js}"></script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.frame.web.mapper.resources.ResourcesMapper">
+<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+  <resultMap id="BaseResultMap" type="com.sdp.frame.web.entity.resources.Resources">
+    <id column="RESOURCES_ID" jdbcType="VARCHAR" property="resourcesId" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="APP_SYSTEM_ID" jdbcType="VARCHAR" property="appSystemId" />
+    <result column="RESOURCES_TYPE_ID" jdbcType="VARCHAR" property="resourcesTypeId" />
+    <result column="RESOURCES_NAME" jdbcType="VARCHAR" property="resourcesName" />
+    <result column="URL" jdbcType="VARCHAR" property="url" />
+    <result column="EXT1" jdbcType="VARCHAR" property="ext1" />
+    <result column="EXT2" jdbcType="VARCHAR" property="ext2" />
+    <result column="EXT3" jdbcType="VARCHAR" property="ext3" />
+    <result column="EXT4" jdbcType="VARCHAR" property="ext4" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="ORD" jdbcType="DECIMAL" property="ord" />
+    <result column="PATH" jdbcType="VARCHAR" property="path" />
+    <result column="CREATE_ID" jdbcType="VARCHAR" property="createId" />
+    <result column="ONLY_READ" jdbcType="DECIMAL" property="onlyRead" />
+    <result column="FROM_SIGN" jdbcType="VARCHAR" property="fromSign" />
+    <result column="MODIFY_FIELDS" jdbcType="VARCHAR" property="modifyFields" />
+    <result column="TENANT_ID" jdbcType="VARCHAR" property="tenantId" />
+    <result column="RESOURCES_NAME" jdbcType="VARCHAR" property="text" />
+    <result column="IS_AUTH" jdbcType="VARCHAR" property="isAuth" />
+    <result column="RESOURCES_TYPE_NAME" jdbcType="VARCHAR" property="resourcesTypeName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    RESOURCES_ID, PARENT_ID, APP_SYSTEM_ID, RESOURCES_TYPE_ID, RESOURCES_NAME, URL, EXT1, 
+    EXT2, EXT3, EXT4, MEMO, ORD, PATH, CREATE_ID, ONLY_READ, FROM_SIGN, MODIFY_FIELDS, 
+    TENANT_ID
+  </sql>
+  
+  <select id="selectPage" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+  	select 
+  	r.RESOURCES_ID resourcesId,
+  	r.PARENT_ID parentId,
+  	r.APP_SYSTEM_ID appSystemId,
+  	r.RESOURCES_TYPE_ID resourcesTypeId,
+  	r.RESOURCES_NAME resourcesName,
+  	r.URL url,
+  	r.EXT1 ext1,
+  	r.EXT2 ext2,
+  	r.EXT3 ext3,
+  	r.EXT4 ext4,
+  	r.MEMO memo,
+  	r.ORD ord,
+  	r.PATH path,
+  	r.CREATE_ID createId,
+  	r.ONLY_READ onlyRead,
+  	r.FROM_SIGN fromSign,
+  	r.MODIFY_FIELDS modifyFields,
+  	r.TENANT_ID tenantId,
+  	t.RESOURCES_TYPE_NAME resourcesTypeName 
+  	from PURE_RESOURCES r left join PURE_RESOURCES_TYPE t on r.RESOURCES_TYPE_ID = t.RESOURCES_TYPE_ID 
+  	where 1=1 
+  		<if test="resourcesId != null">
+            and r.RESOURCES_ID = #{resourcesId,jdbcType=VARCHAR}
+        </if>
+        <if test="parentId != null">
+            and r.PARENT_ID = #{parentId,jdbcType=VARCHAR}
+        </if>
+        <if test="appSystemId != null">
+            and r.APP_SYSTEM_ID = #{appSystemId,jdbcType=VARCHAR}
+        </if>
+        <if test="resourcesTypeId != null">
+            and r.RESOURCES_TYPE_ID =#{resourcesTypeId,jdbcType=VARCHAR}
+        </if>
+        <if test="resourcesName != null">
+            and r.RESOURCES_NAME = #{resourcesName,jdbcType=VARCHAR}
+        </if>
+        <if test="url != null">
+            and r.URL = #{url,jdbcType=VARCHAR}
+        </if>
+        <if test="ext1 != null">
+            and r.EXT1 = #{EXT1,jdbcType=VARCHAR}
+        </if>
+        <if test="ext2 != null">
+            and r.EXT2 = #{ext2,jdbcType=VARCHAR}
+        </if>
+        <if test="ext3 != null">
+            and r.EXT3 = #{ext3,jdbcType=VARCHAR}
+        </if>
+        <if test="ext4 != null">
+            and r.EXT4 = #{ext4,jdbcType=VARCHAR}
+        </if>
+        <if test="memo != null">
+            and r.MEMO = #{memo,jdbcType=VARCHAR}
+        </if>
+        <if test="ord != null">
+            and r.ORD = #{ord,jdbcType=DECIMAL}
+        </if>
+        <if test="path != null">
+            and r.PATH = #{path,jdbcType=VARCHAR}
+        </if>
+        <if test="createId != null">
+            and r.CREATE_ID = #{createId,jdbcType=VARCHAR}
+        </if>
+        <if test="onlyRead != null">
+            and r.ONLY_READ = #{onlyRead,jdbcType=VARCHAR}
+        </if>
+        <if test="fromSign != null">
+            and r.FROM_SIGN = #{fromSign,jdbcType=VARCHAR}
+        </if>
+        <if test="modifyFields != null">
+            and r.MODIFY_FIELDS = #{modifyFields,jdbcType=VARCHAR}
+        </if>
+        <if test="tenantId != null">
+            and r.TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+        </if>
+  </select>
+  
+  <select id="selectResourcesList" resultMap="BaseResultMap">
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM PURE_RESOURCES
+    ORDER BY ORD
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PURE_RESOURCES
+    ORDER BY RESOURCES_ID
+  </select>
+  <select id="selectAllResourceList" parameterType="java.lang.String" resultMap="BaseResultMap">   
+         SELECT
+			T.*, CASE
+			WHEN T.USER_ID IS NULL THEN
+				- 1
+			ELSE
+				1
+			END IS_AUTH
+			FROM (
+					SELECT
+						DISTINCT T1.*, T4.USER_ID
+					FROM
+						PURE_RESOURCES T1
+					LEFT JOIN (
+						SELECT
+							T2.RESOURCES_ID,
+							T3.USER_ID
+						FROM
+							PURE_USER_ROLE T3,
+							PURE_ROLE_AUTH T2
+						WHERE
+							T3.ROLE_ID = T2.ROLE_ID
+							AND T3.USER_ID =  #{userId,jdbcType=VARCHAR}
+					) T4 ON T1.RESOURCES_ID = T4.RESOURCES_ID
+			WHERE
+			T1.RESOURCES_TYPE_ID = '1'
+		) T
+  </select>
+  <select id="selectAllButtonResourceList" parameterType="java.lang.String" resultMap="BaseResultMap">   
+         SELECT
+			T.*, CASE
+			WHEN T.USER_ID IS NULL THEN
+				- 1
+			ELSE
+				1
+			END IS_AUTH
+			FROM (
+					SELECT
+						DISTINCT T1.*, T4.USER_ID
+					FROM
+						PURE_RESOURCES T1
+					LEFT JOIN (
+						SELECT
+							T2.RESOURCES_ID,
+							T3.USER_ID
+						FROM
+							PURE_USER_ROLE T3,
+							PURE_ROLE_AUTH T2
+						WHERE
+							T3.ROLE_ID = T2.ROLE_ID
+							AND T3.USER_ID =  #{userId,jdbcType=VARCHAR}
+					) T4 ON T1.RESOURCES_ID = T4.RESOURCES_ID
+			WHERE
+			T1.RESOURCES_TYPE_ID = '3'
+		) T
+  </select>
+  <select id="selectChildrenResource" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PURE_RESOURCES T
+    ORDER BY RESOURCES_ID
+  </select>
+  <select id="selectUserResource" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT DISTINCT T1.*
+  	from PURE_RESOURCES T1, PURE_ROLE_AUTH T2
+ 	where T1.RESOURCES_ID = T2.RESOURCES_ID
+ 	and T1.RESOURCES_TYPE_ID != '3'
+   	and T2.ROLE_ID IN (SELECT T.ROLE_ID from PURE_USER_ROLE T where T.USER_ID=#{userId,jdbcType=VARCHAR}) ORDER BY T1.ORD
+  </select>
+  <select id="selectUserNoAuthResource" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT T1.*
+  	from PURE_ROLE T, PURE_RESOURCES T1, PURE_ROLE_AUTH T2
+ 	where T.ROLE_ID = T2.ROLE_ID
+   	and T1.RESOURCES_ID = T2.RESOURCES_ID
+   	and T.ROLE_ID NOT IN (SELECT T.ROLE_ID from PURE_USER_ROLE T where T.USER_ID=#{userId,jdbcType=VARCHAR})
+  </select>
+  <select id="selectUserRoleResource" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT T1.*
+  	from PURE_RESOURCES T1, PURE_ROLE_AUTH T2
+ 	where T1.RESOURCES_ID = T2.RESOURCES_ID
+   	and T2.ROLE_ID IN (SELECT T.ROLE_ID from PURE_USER_ROLE T where T.USER_ID=#{userId,jdbcType=VARCHAR})
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PURE_RESOURCES
+    where RESOURCES_ID = #{resourcesId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from PURE_RESOURCES
+    where RESOURCES_ID = #{resourcesId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteRoleResourceRef" parameterType="java.lang.String">
+      DELETE FROM PURE_ROLE_AUTH WHERE RESOURCES_ID = #{resourcesId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteUserResourceRef" parameterType="java.lang.String">
+      DELETE FROM PURE_USER_AUTH WHERE RESOURCES_ID = #{resourcesId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sdp.frame.web.entity.resources.Resources">
+    insert into PURE_RESOURCES (RESOURCES_ID, PARENT_ID, APP_SYSTEM_ID, 
+      RESOURCES_TYPE_ID, RESOURCES_NAME, URL, 
+      EXT1, EXT2, EXT3, EXT4, 
+      MEMO, ORD, PATH, CREATE_ID, 
+      ONLY_READ, FROM_SIGN, MODIFY_FIELDS, 
+      TENANT_ID)
+    values (#{resourcesId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{appSystemId,jdbcType=VARCHAR}, 
+      #{resourcesTypeId,jdbcType=VARCHAR}, #{resourcesName,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR}, #{ext4,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR}, #{ord,jdbcType=DECIMAL}, #{path,jdbcType=VARCHAR}, #{createId,jdbcType=VARCHAR}, 
+      #{onlyRead,jdbcType=DECIMAL}, #{fromSign,jdbcType=VARCHAR}, #{modifyFields,jdbcType=VARCHAR}, 
+      #{tenantId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sdp.frame.web.entity.resources.Resources">
+    insert into PURE_RESOURCES
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="resourcesId != null">
+        RESOURCES_ID,
+      </if>
+      <if test="parentId != null">
+        PARENT_ID,
+      </if>
+      <if test="appSystemId != null">
+        APP_SYSTEM_ID,
+      </if>
+      <if test="resourcesTypeId != null">
+        RESOURCES_TYPE_ID,
+      </if>
+      <if test="resourcesName != null">
+        RESOURCES_NAME,
+      </if>
+      <if test="url != null">
+        URL,
+      </if>
+      <if test="ext1 != null">
+        EXT1,
+      </if>
+      <if test="ext2 != null">
+        EXT2,
+      </if>
+      <if test="ext3 != null">
+        EXT3,
+      </if>
+      <if test="ext4 != null">
+        EXT4,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="ord != null">
+        ORD,
+      </if>
+      <if test="path != null">
+        PATH,
+      </if>
+      <if test="createId != null">
+        CREATE_ID,
+      </if>
+      <if test="onlyRead != null">
+        ONLY_READ,
+      </if>
+      <if test="fromSign != null">
+        FROM_SIGN,
+      </if>
+      <if test="modifyFields != null">
+        MODIFY_FIELDS,
+      </if>
+      <if test="tenantId != null">
+        TENANT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="resourcesId != null">
+        #{resourcesId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="appSystemId != null">
+        #{appSystemId,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcesTypeId != null">
+        #{resourcesTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcesName != null">
+        #{resourcesName,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null">
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null">
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null">
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="ext4 != null">
+        #{ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="ord != null">
+        #{ord,jdbcType=DECIMAL},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="onlyRead != null">
+        #{onlyRead,jdbcType=DECIMAL},
+      </if>
+      <if test="fromSign != null">
+        #{fromSign,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyFields != null">
+        #{modifyFields,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sdp.frame.web.entity.resources.Resources">
+    update PURE_RESOURCES
+    <set>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="appSystemId != null">
+        APP_SYSTEM_ID = #{appSystemId,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcesTypeId != null">
+        RESOURCES_TYPE_ID = #{resourcesTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcesName != null">
+        RESOURCES_NAME = #{resourcesName,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        URL = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null">
+        EXT1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null">
+        EXT2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null">
+        EXT3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="ext4 != null">
+        EXT4 = #{ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="ord != null">
+        ORD = #{ord,jdbcType=DECIMAL},
+      </if>
+      <if test="path != null">
+        PATH = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        CREATE_ID = #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="onlyRead != null">
+        ONLY_READ = #{onlyRead,jdbcType=DECIMAL},
+      </if>
+      <if test="fromSign != null">
+        FROM_SIGN = #{fromSign,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyFields != null">
+        MODIFY_FIELDS = #{modifyFields,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null">
+        TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RESOURCES_ID = #{resourcesId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sdp.frame.web.entity.resources.Resources">
+    update PURE_RESOURCES
+    set PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      APP_SYSTEM_ID = #{appSystemId,jdbcType=VARCHAR},
+      RESOURCES_TYPE_ID = #{resourcesTypeId,jdbcType=VARCHAR},
+      RESOURCES_NAME = #{resourcesName,jdbcType=VARCHAR},
+      URL = #{url,jdbcType=VARCHAR},
+      EXT1 = #{ext1,jdbcType=VARCHAR},
+      EXT2 = #{ext2,jdbcType=VARCHAR},
+      EXT3 = #{ext3,jdbcType=VARCHAR},
+      EXT4 = #{ext4,jdbcType=VARCHAR},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      ORD = #{ord,jdbcType=DECIMAL},
+      PATH = #{path,jdbcType=VARCHAR},
+      CREATE_ID = #{createId,jdbcType=VARCHAR},
+      ONLY_READ = #{onlyRead,jdbcType=DECIMAL},
+      FROM_SIGN = #{fromSign,jdbcType=VARCHAR},
+      MODIFY_FIELDS = #{modifyFields,jdbcType=VARCHAR},
+      TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+    where RESOURCES_ID = #{resourcesId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectChildResource" parameterType="String" resultType="int">
+      SELECT COUNT(1) FROM PURE_RESOURCES WHERE PARENT_ID = #{resourceId}
+  </select>
+</mapper>

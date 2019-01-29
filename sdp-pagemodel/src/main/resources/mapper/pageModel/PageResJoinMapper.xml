@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.xbconsole.pageModel.PageResJoinMapper">
+  <resultMap id="BaseResultMap" type="com.sdp.pageModel.entity.PageResJoin">
+    <id column="res_join_id" jdbcType="VARCHAR" property="resJoinId" />
+    <result column="page_module_id" jdbcType="VARCHAR" property="pageModuleId" />
+    <result column="res_id" jdbcType="VARCHAR" property="resId" />
+    <result column="sort_id" jdbcType="INTEGER" property="sortId" />
+  </resultMap>
+  
+  
+   <sql id="Base_Column_List">
+       res_join_id, page_module_id, res_id, sort_id
+   </sql>
+  
+  <delete id="deleteByPageModuleId" parameterType="java.lang.String">
+    delete from page_res_join
+    where page_module_id = #{pageModuleId,jdbcType=VARCHAR}
+  </delete>
+  
+  <select id="findByCondition" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from page_res_join where 1=1
+		<if test="resJoinId != null and resJoinId != ''">
+            and res_join_id = #{resJoinId,jdbcType=VARCHAR}
+        </if>
+        <if test="pageModuleId != null">
+            and page_module_id = #{pageModuleId,jdbcType=VARCHAR}
+        </if>
+        <if test="resId != null">
+            and res_id = #{resId,jdbcType=VARCHAR}
+        </if>
+        <if test="sortId != null">
+            and sort_id = #{sortId,jdbcType=INTEGER}
+        </if>
+	</select>
+  
+  <insert id="insert" parameterType="com.sdp.pageModel.entity.PageResJoin">
+    <selectKey keyProperty="resJoinId" resultType="string" order="BEFORE">    
+             select  replace(uuid(),'-','')   from dual  
+    </selectKey>
+      insert into page_res_join (res_join_id, page_module_id, res_id,
+      sort_id)
+      values (
+      #{resJoinId ,jdbcType=VARCHAR},
+      #{pageModuleId,jdbcType=VARCHAR},
+      #{resId,jdbcType=VARCHAR},
+      #{sortId,jdbcType=INTEGER}
+      )
+  </insert>
+  
+  
+</mapper>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.frame.web.mapper.puborder.ServiceApiTypeMapper">
+    <resultMap type="com.sdp.servflow.pubandorder.serapitype.model.ServiceApiTypeBean" id="BaseResultMap">
+        <id column="apitypeid" jdbcType="VARCHAR" property="apiTypeId" />
+        <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+        <result column="parentid" jdbcType="VARCHAR" property="parentId" />
+        <result column="shareflag" jdbcType="VARCHAR" property="shareFlag" />
+        <result column="creat_user" jdbcType="VARCHAR" property="creatUser" />
+        <result column="creatime" jdbcType="TIMESTAMP" property="creatTime" />
+        <result column="delflag" jdbcType="VARCHAR" property="delFlag" />
+        <result column="stopflag" jdbcType="VARCHAR" property="stopFlag" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        apitypeid, type_name, parentid, shareflag, creat_user, creatime, delflag, stopflag
+    </sql>
+
+    <select id="getAllByCondition" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from ser_apitype where 1=1
+        <if test="apiTypeId != null">
+            and apitypeid = #{apiTypeId,jdbcType=VARCHAR}
+        </if>
+        <if test="typeName != null">
+            and type_name = #{typeName,jdbcType=VARCHAR}
+        </if>
+        <if test="parentId != null">
+            and parentid = #{parentId,jdbcType=VARCHAR}
+        </if>
+        <if test="shareFlag != null">
+            and shareflag = #{shareFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="creatUser != null">
+            and creat_user = #{creatUser,jdbcType=VARCHAR}
+        </if>
+        <if test="creatTime != null">
+            and creatime = #{creatTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="delFlag != null">
+            and delflag = #{delFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="stopFlag != null">
+            and stopflag = #{stopFlag,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <insert id="insert" parameterType="com.sdp.servflow.pubandorder.serapitype.model.ServiceApiTypeBean">
+        insert into ser_apitype
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="apiTypeId != null">
+                apitypeid,
+            </if>
+            <if test="typeName != null">
+                type_name,
+            </if>
+            <if test="parentId != null">
+                parentid,
+            </if>
+            <if test="shareFlag != null">
+                shareflag,
+            </if>
+            <if test="creatUser != null">
+                creat_user,
+            </if>
+            <if test="creatTime != null">
+                creatime,
+            </if>
+            <if test="delFlag != null">
+                delflag,
+            </if>
+            <if test="stopFlag != null">
+                stopflag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="apiTypeId != null">
+                #{apiTypeId,jdbcType=VARCHAR},
+            </if>
+            <if test="typeName != null">
+                #{typeName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="shareFlag != null">
+                #{shareFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="creatUser != null">
+                #{creatUser,jdbcType=VARCHAR},
+            </if>
+            <if test="creatTime != null">
+                #{creatTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="stopFlag != null">
+                #{stopFlag,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.sdp.servflow.pubandorder.serapitype.model.ServiceApiTypeBean">
+        update ser_apitype
+        <set>
+            <if test="typeName != null">
+                type_name = #{typeName, jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                parentid = #{parentId, jdbcType=VARCHAR},
+            </if>
+            <if test="shareFlag != null">
+                shareflag = #{shareFlag, jdbcType=VARCHAR},
+            </if>
+            <if test="creatUser != null">
+                creat_user = #{creatUser, jdbcType=VARCHAR},
+            </if>
+            <if test="creatTime != null">
+                creatime = #{creatTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null">
+                delflag = #{delFlag, jdbcType=VARCHAR},
+            </if>
+            <if test="stopFlag != null">
+                stopflag = #{stopFlag, jdbcType=VARCHAR},
+            </if>
+        </set>
+        where apitypeid = #{apiTypeId,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from ser_apitype
+        where apitypeid = #{apiTypeId,jdbcType=VARCHAR}
+    </delete>
+</mapper>

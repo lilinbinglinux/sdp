@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.frame.web.mapper.puborder.flowChart.PubFlowChartBeanMapper">
+	<resultMap type="com.sdp.servflow.pubandorder.flowchart.model.PubFlowChartBean" id="BaseResultMap">
+	   <id column="node_id" jdbcType="VARCHAR" property="node_id" />
+		<result column="pubid" jdbcType="VARCHAR" property="pubid" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="sort" jdbcType="NUMERIC" property="sort" />
+		<result column="nextnode" jdbcType="NUMERIC" property="nextnode" />
+		<result column="prenode" jdbcType="NUMERIC" property="prenode" />
+		<result column="flowChartId" jdbcType="VARCHAR" property="flowChartId" />
+		<result column="tenant_id" jdbcType="VARCHAR" property="tenant_id" />
+		<result column="condition" jdbcType="VARCHAR" property="condition" />
+		<result column="typeId" jdbcType="VARCHAR" property="typeId" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		node_id,pubid, name, sort, flowChartId,tenant_id,nextnode,`condition`,prenode,typeId
+	</sql>
+
+	<insert id="insert" parameterType="com.sdp.servflow.pubandorder.flowchart.model.PubFlowChartBean">
+        insert into LAYOUT_PUB
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+         <if test="node_id != null">
+                node_id,
+            </if>
+            <if test="pubid != null">
+                pubid,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="prenode != null">
+                prenode,
+            </if>
+            <if test="nextnode != null">
+                nextnode,
+            </if>
+            <if test="flowChartId != null">
+                flowChartId,
+            </if>
+            <if test="tenant_id != null">
+                tenant_id,
+            </if>
+            <if test="condition != null">
+                `condition`,
+            </if>
+            <if test="typeId != null">
+                typeId,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="node_id != null">
+                #{node_id,jdbcType=VARCHAR},
+            </if>
+            <if test="pubid != null">
+                #{pubid,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=NUMERIC},
+            </if>
+            <if test="prenode != null">
+                #{prenode,jdbcType=NUMERIC},
+            </if>
+            <if test="nextnode != null">
+                #{nextnode,jdbcType=NUMERIC},
+            </if>
+            <if test="flowChartId != null">
+                #{flowChartId,jdbcType=VARCHAR},
+            </if>
+            <if test="tenant_id != null">
+                #{tenant_id,jdbcType=VARCHAR},
+            </if>
+            <if test="condition != null">
+                #{condition,jdbcType=VARCHAR},
+            </if>
+            <if test="typeId != null">
+                #{typeId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        delete from LAYOUT_PUB 
+        where 
+        <trim suffixOverrides="and">
+            <if test="flowChartId != null">
+                flowChartId = #{flowChartId,jdbcType=VARCHAR} and 
+            </if>
+            <if test="pubid != null">
+                pubid = #{pubid,jdbcType=VARCHAR} and 
+            </if>
+            <if test="tenant_id != null">
+                tenant_id = #{tenant_id,jdbcType=VARCHAR} and
+            </if>
+        </trim>
+    </delete>
+    
+    <select id="select" parameterType="String" resultType="com.sdp.servflow.pubandorder.flowchart.model.PubFlowChartBean">
+        select 
+        <include refid="Base_Column_List" />
+        from LAYOUT_PUB
+        where flowChartId = #{flowChartId,jdbcType=VARCHAR}
+    </select>
+    <select id="selectBypubId" parameterType="java.util.Map" resultType="com.sdp.servflow.pubandorder.flowchart.model.PubFlowChartBean">
+    	select
+    	 <include refid="Base_Column_List" />
+        from LAYOUT_PUB
+        where flowChartId = #{flowChartId,jdbcType=VARCHAR} and pubid = #{pubid,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="getAllByCondition" parameterType="map" resultType="com.sdp.servflow.pubandorder.flowchart.model.PubFlowChartBean">
+        select
+        <include refid="Base_Column_List" />
+        from LAYOUT_PUB where 1=1
+        <if test="node_id != null">
+            and node_id = #{node_id,jdbcType=VARCHAR}
+        </if>
+        <if test="pubid != null">
+            and pubid = #{pubid,jdbcType=VARCHAR}
+        </if>
+        <if test="name != null">
+            and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="sort != null">
+            and sort = #{sort,jdbcType=VARCHAR}
+        </if>
+        <if test="flowChartId != null">
+            and flowChartId = #{flowChartId,jdbcType=VARCHAR}
+        </if>
+        <if test="tenant_id != null">
+            and tenant_id = #{tenant_id,jdbcType=VARCHAR}
+        </if>
+        <if test="nextnode != null">
+            and nextnode = #{nextnode,jdbcType=VARCHAR}
+        </if>
+        <if test="prenode != null">
+            and prenode = #{prenode,jdbcType=VARCHAR}
+        </if>
+        <if test="condition != null">
+            and condition = #{condition,jdbcType=VARCHAR}
+        </if>
+        <if test="typeId != null">
+            and typeId = #{typeId,jdbcType=VARCHAR}
+        </if>
+    </select>
+</mapper>

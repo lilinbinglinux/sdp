@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.bcm.ProProjectMapper">
+    <resultMap id="BaseResultMap" type="com.sdp.bcm.entity.ProProject">
+        <id column="project_id" jdbcType="VARCHAR" property="projectId" />
+        <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+        <result column="project_code" jdbcType="VARCHAR" property="projectCode" />
+        <result column="project_resume" jdbcType="VARCHAR" property="projectResume" />
+        <result column="host_addr" jdbcType="VARCHAR" property="hostAddr" />
+        <result column="project_level" jdbcType="INTEGER" property="projectLevel" />
+        <result column="sort_id" jdbcType="INTEGER" property="sortId" />
+        <result column="state_flag" jdbcType="VARCHAR" property="stateFlag" />
+        <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+        <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+        <result column="profile" jdbcType="VARCHAR" property="profile" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        project_id, project_name, project_code, project_resume, host_addr, project_level, sort_id, state_flag, del_flag,
+        create_time, create_user, tenant_id, profile
+    </sql>
+
+    <resultMap id="UserResultMap" type="com.sdp.bcm.entity.ProUser">
+        <id column="project_id" jdbcType="VARCHAR" property="projectId"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId" />
+        <result column="project_role_id" jdbcType="VARCHAR" property="projectRoleId" />
+        <result column="close_flag" jdbcType="VARCHAR" property="closeFlag" />
+        <result column="sort_id" jdbcType="INTEGER" property="sortId" />
+        <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+    </resultMap>
+
+    <sql id="User_Column_List">
+        project_id, user_id, project_role_id, close_flag, sort_id, tenant_id
+    </sql>
+
+    <select id="selectProUser" parameterType="java.util.HashMap" resultMap="UserResultMap">
+        select
+        <include refid="User_Column_List" />
+        from pro_user
+        where project_id = #{projectId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getUserRole" parameterType="java.util.HashMap" resultMap="UserResultMap">
+        select
+        <include refid="User_Column_List" />
+        from pro_user
+        where project_id =#{projectId,jdbcType=VARCHAR} and user_id =#{userId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectOneProject" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from pro_project
+        where project_id = #{projectId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="checkProjectCode" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from pro_project
+        where project_code = #{projectCode, jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectProByCondition" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        select pp.project_id, pp.project_name, pp.project_code, pp.project_resume, pp.host_addr, pp.project_level,
+        pp.sort_id, pp.state_flag, pp.del_flag, pp.create_time, pp.create_user, pp.tenant_id, pp.profile
+        from pro_project pp
+        left join pro_user pu on(pp.project_id = pu.project_id and pp.tenant_id = pu.tenant_id and pp.del_flag = "0")
+        where pu.user_id = #{userId,jdbcType=VARCHAR}
+        and (
+        pp.project_name like '%${searchKey}%' or pp.project_code like '%${searchKey}%'
+        )
+    </select>
+
+
+    <select id="selectActiveProByCondition" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        select pp.project_id, pp.project_name, pp.project_code, pp.project_resume, pp.host_addr, pp.project_level,
+        pp.sort_id, pp.state_flag, pp.del_flag, pp.create_time, pp.create_user, pp.tenant_id, pp.profile
+        from pro_project pp
+        left join pro_user pu on(pp.project_id = pu.project_id and pp.tenant_id = pu.tenant_id and pp.del_flag = "0")
+        where pu.user_id = #{userId,jdbcType=VARCHAR} and (pp.state_flag = "1" or pp.state_flag = "2")
+        and (
+        pp.project_name like '%${searchKey}%' or pp.project_code like '%${searchKey}%'
+        )
+    </select>
+
+    <select id="selectPage" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        select pp.project_id, pp.project_name, pp.project_code, pp.project_resume, pp.host_addr, pp.project_level,
+          pp.sort_id, pp.state_flag, pp.del_flag, pp.create_time, pp.create_user, pp.tenant_id, pp.profile
+        from pro_project pp
+        left join pro_user pu on(pp.project_id = pu.project_id and pp.tenant_id = pu.tenant_id and pp.del_flag = "0")
+        where pu.user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectActivePage" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        select pp.project_id, pp.project_name, pp.project_code, pp.project_resume, pp.host_addr, pp.project_level,
+          pp.sort_id, pp.state_flag, pp.del_flag, pp.create_time, pp.create_user, pp.tenant_id, pp.profile
+        from pro_project pp
+        left join pro_user pu on(pp.project_id = pu.project_id and pp.tenant_id = pu.tenant_id and pp.del_flag = "0")
+        where pu.user_id = #{userId,jdbcType=VARCHAR} and (pp.state_flag = "1" or pp.state_flag = "2")
+    </select>
+
+    <insert id="insertUser" parameterType="com.sdp.bcm.entity.ProUser">
+        insert into pro_user (project_id, user_id, project_role_id, close_flag, sort_id, tenant_id)
+        values (
+        #{projectId,jdbcType=VARCHAR},
+        #{userId,jdbcType=VARCHAR},
+        #{projectRoleId,jdbcType=VARCHAR},
+        #{closeFlag,jdbcType=VARCHAR},
+        #{sortId,jdbcType=INTEGER},
+        #{tenantId,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insert" parameterType="com.sdp.bcm.entity.ProProject">
+        insert into pro_project (project_id, project_name, project_code,
+        project_resume, host_addr, project_level,
+        sort_id, state_flag, del_flag,
+        create_time, create_user, tenant_id, profile)
+        values (
+        #{projectId,jdbcType=VARCHAR},
+        #{projectName,jdbcType=VARCHAR},
+        #{projectCode,jdbcType=VARCHAR},
+        #{projectResume,jdbcType=VARCHAR},
+        #{hostAddr,jdbcType=VARCHAR},
+        #{projectLevel,jdbcType=INTEGER},
+        #{sortId,jdbcType=INTEGER},
+        #{stateFlag,jdbcType=VARCHAR},
+        #{delFlag,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP},
+        #{createUser,jdbcType=VARCHAR},
+        #{tenantId,jdbcType=VARCHAR},
+        #{profile,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="update" parameterType="com.sdp.bcm.entity.ProProject">
+        update pro_project
+        <set>
+            <if test="projectId != null">
+                project_id=#{projectId,jdbcType=VARCHAR},
+            </if>
+            <if test="projectName != null">
+                project_name=#{projectName,jdbcType=VARCHAR},
+            </if>
+            <if test="projectCode != null">
+                project_code= #{projectCode,jdbcType=VARCHAR},
+            </if>
+            <if test="projectResume != null">
+                project_resume=#{projectResume,jdbcType=VARCHAR},
+            </if>
+            <if test="hostAddr != null">
+                host_addr=#{hostAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="projectLevel != null">
+                project_level=#{projectLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="sortId != null">
+                sort_id=#{sortId,jdbcType=INTEGER},
+            </if>
+            <if test="stateFlag != null">
+                state_flag=#{stateFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                del_flag=#{delFlag,jdbcType=VARCHAR},
+            </if>
+            <!--<if test="createTime != null">-->
+            <!--create_time=#{createTime,jdbcType=TIMESTAMP},-->
+            <!--</if>-->
+            <!--<if test="createUser != null">-->
+            <!--create_user=#{createUser,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="tenantId != null">-->
+            <!--tenant_id=#{tenantId,jdbcType=VARCHAR}-->
+            <!--</if>-->
+        </set>
+        where project_id = #{projectId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateDelFlag" parameterType="com.sdp.bcm.entity.ProProject">
+        update pro_project
+        <set>
+            <if test="delFlag != null">
+                del_flag=#{delFlag,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where project_id = #{projectId,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from pro_project
+        where project_id = #{projectId,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteUser" parameterType="java.lang.String">
+        delete from pro_user
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </delete>
+
+</mapper>
+
+
+

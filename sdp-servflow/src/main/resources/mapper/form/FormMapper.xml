@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.frame.web.mapper.form.FormMapper">
+	<resultMap type="com.sdp.servflow.form.entity.Form" id="BaseResultMap">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="tablename" jdbcType="VARCHAR" property="tablename" />
+		<result column="tablecnname" jdbcType="VARCHAR" property="tablecnname" />
+		<result column="state" jdbcType="VARCHAR" property="state" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="text" jdbcType="VARCHAR" property="text" />
+		<result column="organcode" jdbcType="VARCHAR" property="organcode" />
+		<result column="delflag" jdbcType="VARCHAR" property="delflag" />
+		<result column="subtime" jdbcType="TIMESTAMP" property="subtime" />
+		<result column="templatescript" jdbcType="VARCHAR" property="templatescript" />
+		<result column="version" jdbcType="VARCHAR" property="version" />
+		<result column="createid" jdbcType="VARCHAR" property="createid" />
+		<result column="udtemplatecode" jdbcType="VARCHAR" property="udtemplatecode" />
+		<result column="appflag" jdbcType="VARCHAR" property="appflag" />
+		<result column="fieldtitle" jdbcType="VARCHAR" property="fieldtitle" />
+		<result column="exampletitle" jdbcType="VARCHAR" property="exampletitle" />
+	</resultMap>
+	<sql id="Base_Column_List">
+	id,tablename,tablecnname,state,remark,text,organcode,delflag,
+	subtime,templatescript,version,createid,udtemplatecode,appflag,
+	fieldtitle,exampletitle
+	</sql>
+	<select id="selectAll" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ud_template WHERE 1=1
+    <if test="tablecnname!=null and tablecnname != ''">
+         AND tablecnname  = #{tablecnname,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ud_template
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+    
+  <insert id="insertSelective" parameterType="com.sdp.servflow.form.entity.Form">
+    insert into ud_template
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tablename != null">
+        tablename,
+      </if>
+      <if test="tablecnname != null">
+        tablecnname,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="udtemplatecode != null">
+        udtemplatecode,
+      </if>
+      subtime,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>		
+      <if test="tablename != null">
+        #{tablename,jdbcType=VARCHAR},
+      </if>
+      <if test="tablecnname != null">
+        #{tablecnname,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+        <if test="udtemplatecode != null">
+        #{udtemplatecode,jdbcType=VARCHAR},
+      </if>
+        now(),
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.sdp.servflow.form.entity.Form">
+		update ud_template
+		<set>
+			<if test="tablecnname != null">
+				tablecnname=#{tablecnname,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark=#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="exampletitle != null">
+				exampletitle=#{exampletitle,jdbcType=VARCHAR},
+			</if>
+			subtime=now(),
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ud_template
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+</mapper>

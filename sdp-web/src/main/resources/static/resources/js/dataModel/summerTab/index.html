@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/summerTab.css">
+    <style>
+        body{
+            background-color: #eee;
+        }
+        .example-container{
+            width: 600px;
+            height: 500px;
+            background-color: #fff;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+<body>
+    <button id="test">打开指定tab</button>
+    <div class="example-container">
+        <div class="summer-tab" id="tab1">
+            <div class="summer-tabs">
+                <div class="tab-item ">标签1</div>
+                <div class="tab-item active">标签22</div>
+                <div class="tab-item" id="ling">标签333</div>
+                <div class="tab-item">标签4444</div>
+                <div class="summer-line"></div>
+            </div>
+            <div class="summer-tab-content">
+                <div class="tab-content">内容1</div>
+                <div class="tab-content">内容2</div>
+                <div class="tab-content">内容3</div>
+                <div class="tab-content">内容4</div>
+            </div>
+        </div>
+        <div class="summer-tab" id="tab2">
+            <div class="summer-tabs">
+                <div class="tab-item ">标签1</div>
+                <div class="tab-item">标签22</div>
+                <div class="tab-item active" >标签333</div>
+                <div class="tab-item" id="lings">标签4444</div>
+                <div class="summer-line"></div>
+            </div>
+            <div class="summer-tab-content">
+                <div class="tab-content">内容1</div>
+                <div class="tab-content">内容2</div>
+                <div class="tab-content">内容3</div>
+                <div class="tab-content">内容4</div>
+            </div>
+        </div>
+    </div>
+
+<script src="js/jquery-1.9.1.js"></script>
+<script src="js/summerTab.js"></script>
+<script>
+    var tab1 = $("#tab1").tab();
+    var tab2 = $("#tab2").tab();
+    $("#test").click(function (e) {
+        tab1.open($("#ling"));
+        tab2.open($("#lings"));
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+body .myLayerOpnSkin .layui-layer-title{
+    background: #96d6fc;
+    color: #333;
+    border: none;
+}
+/*body .myLayerOpnSkin .layui-layer-setwin{*/
+    /*position: absolute;*/
+    /*right: 0;*/
+    /*top: 0;*/
+    /*font-size: 0;*/
+    /*line-height: initial;*/
+    /*width: 30px;*/
+    /*height: 30px;*/
+/*}*/
+/*body .myLayerOpnSkin .layui-layer-setwin:hover{*/
+    /*background-color: #ffb372;*/
+/*}*/
+/*body .myLayerOpnSkin .layui-layer-setwin a {*/
+    /*margin-left: 8px;*/
+    /*margin-top: 8px;*/
+/*}*/
+/*body .myLayerOpnSkin .layui-layer-page .layui-layer-content{*/
+
+/*}*/
+.layui-table td{
+    padding: 0;
+}
+ .layui-table th{
+    padding: 5px;
+}
+.layui-table thead tr{
+    background-color: #333;
+    color: #fff;
+}
+.layui-table th{
+    border: none;
+}
+.layui-table thead tr th .layui-form-item .layui-form-checkbox[lay-skin=primary]{
+    margin-top: 0;
+}
+.layui-form-selectup dl{
+    top: 42px;
+    bottom: unset;
+}
+.layui-select-disabled .layui-disabled{
+    background-color: #eee;
+}
+.my-input[readonly]{
+    background-color: #eee;
+}

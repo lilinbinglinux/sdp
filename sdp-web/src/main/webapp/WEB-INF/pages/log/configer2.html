@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<meta charset="UTF-8" />
+<title>Title</title>
+<head th:include="frame/common :: header"></head>
+<link type="text/css" rel="stylesheet"
+	th:href="@{/css/octopus/config.css}" />
+<link type="text/css" rel="stylesheet"
+	th:href="@{/css/sweetalert/sweetalert.css}" />
+
+<script type="text/javascript"
+	th:src="@{/js/sweetalert/sweetalert.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/octopus/log/config2.js}"></script>
+</head>
+<body>
+	<div class="config_top_loader">配置管理</div>
+	<div class="config_left_menu">
+		<div class="left_menu_one ">
+			<a class="menu_one_a" th:href="@{/rest/api/config/basic/prop}">配置管理</a>
+		</div>
+		<div class="left_menu_one one_avtive">
+			<a class="menu_one_a">企业微信管理</a>
+		</div>
+	</div>
+	<div class="config_global">
+		<div class="config_container">
+			<div class="config_content_a">
+				<div class="config_content_top">
+					<div class="content_top_read"></div>
+				</div>
+				<div class="config_top_menu">
+					<div class="menu_add">
+						<a class="menu_add_a" data-toggle="modal"
+							data-target="#config_Modal">新增</a>
+					</div>
+				</div>
+				<div class="config_content_list">
+					<table id="configure2_table" class="table table-bordered ">
+						<thead>
+							<tr style="text-align: center">
+								<th width="10%">序号</th>
+								<th width="10%">appName</th>
+								<th width="46%">部门</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 新增 -->
+	<div class="modal fade" id="config_Modal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="">
+		    
+		<div class="modal-dialog">
+			        
+			<div class="modal-content">
+				<div class="modal-header">
+					                
+					<button id="headBtn" type="button" class="close"
+						data-dismiss="modal" aria-hidden="true">&times;</button>
+					                
+					<h4 id="myModalLabel"></h4>
+				</div>
+				<div class="modal-body">
+					<div>
+						<form class="form-horizontal" role="form" id="addForm" method="post"
+							enctype="multipart/form-data">
+
+							<div class="form-group">
+								<label class="col-sm-4 control-label" for="codeName">app：</label>
+								<div class="col-sm-5" style="margin-top: 0px;">
+									<input type="text" class="form-control" name="app" id="app" />
+								</div>
+								                
+							</div>
+							<div>
+								<label class="col-sm-4 control-label">选择部门：</label>
+								<th:block th:each="department:${departmentlist.department}">
+									<label class="checkbox-inline ml10"> 
+	                                    <input type="checkbox" th:name="departments" th:id="${department.id}" th:value="${department.id+'='+department.name}" /><th:block th:text="${department.name}"></th:block>
+	                                </label>
+								</th:block>
+							</div>
+						</form>
+					</div>
+					            
+				</div>
+				<div class="modal-footer">
+					<div id="root">
+						<button id="saveBtn" type="button" class="btn btn-primary"
+							onclick="addSubmit()">保存</button>
+						<button id="closeBtn" type="button" class="btn btn-default"
+							data-dismiss="modal">关闭</button>
+					</div>
+				</div>
+			</div>
+			    
+		</div>
+	</div>
+	<!-- 更新 -->
+	<div class="modal fade" id="config_update_Modal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="">
+		    
+		<div class="modal-dialog">
+			        
+			<div class="modal-content">
+				<div class="modal-header">
+					                
+					<button id="headBtn" type="button" class="close"
+						data-dismiss="modal" aria-hidden="true">&times;</button>
+					                
+					<h4 id="myModalLabel"></h4>
+				</div>
+				<div class="modal-body">
+                    <!--编辑表单-->
+                    <div>
+                        <form class="form-horizontal" role="form" id="editForm" method="post"
+                            enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="codeName">app：</label>
+                                <div class="col-sm-5" style="margin-top: 0px;">
+                                    <input type="text" class="form-control"  name="app" id="app" readonly="readonly" />
+                                </div>
+                                                
+                            </div>
+                            <div>
+                                <label class="col-sm-4 control-label">选择部门：</label>
+                                <th:block th:each="department:${departmentlist.department}">
+                                    <label class="checkbox-inline ml10"> 
+                                        <input type="checkbox"  class="checked_departments" th:name="departments" th:id="${department.name}" th:value="${department.id+'='+department.name}" /><th:block th:text="${department.name}"></th:block>
+                                    </label>
+                                </th:block>
+                            </div>
+                        </form>
+                    </div>
+				</div>
+				<div class="modal-footer">
+					<div id="root">
+						<button id="saveBtn" type="button" class="btn btn-primary"
+							onclick="editSubmit()">保存</button>
+						<button id="closeBtn" type="button" class="btn btn-default"
+							data-dismiss="modal">关闭</button>
+					</div>
+				</div>
+			</div>
+			    
+		</div>
+	</div>
+	<!-- 删除 -->
+	<div class="modal fade" id="config_delete_Modal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="">
+		    
+		<div class="modal-dialog">
+			        
+			<div class="modal-content">
+				<div class="modal-header">
+					                
+					<button id="headBtn" type="button" class="close"
+						data-dismiss="modal" aria-hidden="true">&times;</button>
+					                
+					<h4 id="myModalLabel"></h4>
+				</div>
+				<div class="modal-body">
+					<div>确认删除么！！！</div>
+				</div>
+				<div class="modal-footer">
+					<div id="root">
+						<button id="saveBtn" type="button" class="btn btn-primary"
+							onclick="deleteSubmit()">确认</button>
+						<button id="closeBtn" type="button" class="btn btn-default"
+							data-dismiss="modal">关闭</button>
+					</div>
+				</div>
+			</div>
+			    
+		</div>
+	</div>
+</body>
+</html>

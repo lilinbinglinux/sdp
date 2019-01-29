@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>sendLog</title>
+    <head th:include="frame/common :: header"></head>
+    
+    
+    <script type="text/javascript" th:src="@{/js/octopus/log/BounceEamilLog.js}" ></script>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/octopus/sendLog.css}" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/octopus/sendLogMore.css}" />
+    <script type="text/javascript"  th:src="@{/plugins/My97DatePicker/WdatePicker.js}"></script>
+    <script type="text/javascript" >
+      //日历开始时间选择框
+        var wpStart={
+             readOnly:true,
+             maxDate:'#F{$dp.$D(\'endTime\')||\'%y-%M-%d\'}'
+             
+        }
+        
+        //日历结束时间选择框
+        var wpEnd={
+             readOnly:true,
+             maxDate:'%y-%M-%d',
+             minDate:'#F{$dp.$D(\'startTime\')}',
+             startDate:'#F{$dp.$D(\'startTime\',{d:+1})}'
+        }
+    </script>
+     <style>
+     .table>thead>tr>th{  
+             text-align:center;  
+         }  
+      .table>tbody>tr>td{  
+          text-align:center;  
+      }  
+     </style>
+</head>
+<body>
+    <div class="view_contianer">
+        <div class="view_tab">
+            <div class="view_body">
+                <div class="view_search">
+                      <span style="margin-left: 20px">发送时间</span><input type="text" id="startTime" class="Wdate" name="startTime" th:value="${startTime}" style="width:140px;height:26px;" th:onClick="'WdatePicker(wpStart)'"/>  
+                            <span>to</span><input readonly="readonly" type="text" id="endTime" class="Wdate" name="endTime"    th:value="${endTime}" style="width:140px;height:26px;" th:onClick="'WdatePicker(wpEnd)'" />
+                    <span style="margin-left: 20px">原邮件主题</span>
+                     <input  type="text" id="oriEmaSubject"  name="oriEmaSubject"   style="width:140px;height:26px;"  />
+                     <span style="margin-left: 20px">原邮件收件人</span>
+                     <input  type="text" id="oriEmaTo"  name="oriEmaTo"   style="width:140px;height:26px;"  />
+                    <input type="button" id="searchBtn" style="margin-left: 10px; margin-top: -4px;" class="btn btn-danger" value="查询"/>
+                    <input type="button" id="resetBtn" style="margin-left: 15px; margin-top: -4px;" class="btn btn-danger" value="清空"/>
+    
+                </div>
+                <div class="box">
+                    <div class="box-body table-responsive">
+                        <table id="operateLog_table" class="table table-bordered ">
+                            <thead>
+                                <tr style="text-align: center">
+                                    <th >序号</th>
+                                    <th >退信主题</th>
+                                    <th >原邮件主题</th>
+                                    <th >原邮件收件人</th>
+                                    <th >原邮件发送时间</th>
+                                    <th >退信原因</th>
+                                    <th >建议解决方案</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>
+            北京东方国信科技股份有限公司<br /> <small>© Copyright 2017. by BONC.</small>
+        </p>
+    </footer>
+</body>
+</html>

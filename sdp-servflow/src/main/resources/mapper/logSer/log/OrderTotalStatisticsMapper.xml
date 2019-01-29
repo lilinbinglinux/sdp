@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.servflow.logSer.log.mapper.OrderTotalStatisticsMapper">
+
+  	<resultMap id="orderTotalStatistics" type="com.sdp.servflow.logSer.log.model.OrderTotalStatistics">
+    	<result column="id" jdbcType="INTEGER" property="id" />
+    	<result column="orderid" jdbcType="VARCHAR" property="orderid" />
+    	<result column="order_name" jdbcType="VARCHAR" property="order_name" />
+    	<result column="sendCount" jdbcType="INTEGER" property="sendCount" />
+    	<result column="successCount" jdbcType="INTEGER" property="successCount" />
+    	<result column="failCount" jdbcType="INTEGER" property="failCount" />
+    	<result column="sendDate" jdbcType="INTEGER" property="sendDate" />
+    	<result column="tenant_id" jdbcType="VARCHAR" property="tenant_id" />
+  	</resultMap>
+  	
+  	<select id="selectOrderTotalSendCount" resultMap="orderTotalStatistics">
+	  select 
+	  t.successCount as successCount,
+	  t.failCount as failCount
+	  from 
+		(
+			select IFNULL(successCount,0) as successCount,IFNULL(failCount,0) as failCount from 
+			(
+				(SELECT sum(sendCount) as successCount from order_info_statistics 
+					where orderid=#{orderid} and sendDate=#{sendDate} 
+					and tenant_id=#{tenant_id}
+					and code= '00000'
+				) as successCount,
+				(SELECT sum(sendCount) as failCount from order_info_statistics 
+					where orderid=#{orderid} and sendDate=#{sendDate} 
+					and tenant_id=#{tenant_id}
+					and code != '00000'
+				) as failCount
+			)	
+		) t
+  	</select>
+  	
+  	<select id="findOrderTotalSta" resultMap="orderTotalStatistics">
+	  	select * from order_total_statistics
+		where sendDate=#{sendDate}
+		and orderid=#{orderid}
+		and tenant_id=#{tenant_id}
+  	</select>
+  	
+  	<update id="orderTotalStaUpdate">
+  		update order_total_statistics 
+  		set sendCount = #{sendCount},
+  		successCount = #{successCount},
+  		failCount = #{failCount}
+  		where orderid =#{orderid}
+  		and sendDate=#{sendDate} 
+		and tenant_id=#{tenant_id}
+  	</update>
+  	
+  	<insert id="orderTotalStaSave" parameterType="com.sdp.servflow.logSer.log.model.OrderTotalStatistics">
+  		insert into order_total_statistics (orderid,order_name,sendCount,successCount,failCount,sendDate,
+  		ser_id,ser_version,tenant_id)
+  		values (#{orderid},#{order_name},#{sendCount},#{successCount},#{failCount},#{sendDate},
+  		#{ser_id},#{ser_version},#{tenant_id})
+  	</insert>
+  	
+  	<select id="selectCountFromOrderTotalSta" resultType="int">
+		select 
+		count(1) 
+		from order_total_statistics C
+		where 1=1
+		<if test="tenant_id != null and tenant_id != '' and login_id != null and login_id != ''">
+				and tenant_id=#{tenant_id}
+				and login_id=#{login_id}
+		</if>
+		<if test="name != null and name != ''">
+			AND C.order_name LIKE '%${name}%'
+		</if>
+		<if test="sendDate != null and sendDate !=''" >
+			AND   C.sendDate =  #{sendDate}
+		</if>
+		<if test="ser_id != null and ser_id != ''">
+			and ser_id = #{ser_id}
+		</if>
+		<if test="ser_version != null and ser_version != ''">
+			and ser_version = #{ser_version}
+		</if>
+  	</select>
+  	
+  	<select id="selectDataFromOrderTotalSta" parameterType="map" resultMap="orderTotalStatistics">
+  		select
+			C.*
+			from order_total_statistics C
+		where 1=1
+		<if test="tenant_id != null and tenant_id != '' and login_id != null and login_id != ''">
+			and tenant_id=#{tenant_id}
+			and login_id=#{login_id}
+		</if>
+		<if test="name != null and name != ''">
+			and C.order_name LIKE '%${name}%'
+		</if>
+		<if test="ser_id != null and ser_id != ''">
+			and ser_id = #{ser_id}
+		</if>
+		<if test="ser_version != null and ser_version != ''">
+			and ser_version = #{ser_version}
+		</if>
+		<if test="sendDate != null and sendDate !=''" >
+			AND   C.sendDate =  #{sendDate}
+		</if>
+		ORDER BY sendDate desc,id desc
+		LIMIT ${startNum},${num}
+  	</select>
+  	
+</mapper>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.xbconsole.pageModel.PageModuleMapper">
+  <resultMap id="BaseResultMap" type="com.sdp.pageModel.entity.PageModule">
+    <id column="module_id" jdbcType="VARCHAR" property="moduleId" />
+    <result column="module_type_id" jdbcType="VARCHAR" property="moduleTypeId" />
+    <result column="module_name" jdbcType="VARCHAR" property="moduleName" />
+    <result column="module_text" jdbcType="VARCHAR" property="moduleText" />
+    <result column="module_style" jdbcType="VARCHAR" property="moduleStyle" />
+    <result column="module_js" jdbcType="VARCHAR" property="moduleJs" />
+     <result column="module_tip" jdbcType="VARCHAR" property="moduleTip" />
+    <result column="pub_flag" jdbcType="INTEGER" property="pubFlag" />
+    <result column="sort_id" jdbcType="INTEGER" property="sortId" />
+    <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />    
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+  </resultMap>
+  
+   <sql id="Base_Column_List">
+       module_id, module_type_id, module_name, module_text, module_style, module_js,module_tip,pub_flag, sort_id, 
+       tenant_id,create_date, create_by, update_date,update_by
+   </sql>
+   
+  <select id="selectPage" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    select 
+    	<include refid="Base_Column_List" />
+    from page_module where 1=1 
+		<if test="moduleName != null">
+	    	and module_name LIKE '%${moduleName}%'
+		</if>
+		<if test="moduleTypeId != null">
+	    	 and module_type_id = #{moduleTypeId,jdbcType=VARCHAR}
+		</if>
+		<if test="tenantId != null">
+	    	and tenant_id = #{tenantId,jdbcType=VARCHAR}
+		</if>
+        order by sort_id ASC
+  </select>
+
+  <select id="findByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    	<include refid="Base_Column_List" />
+    from page_module where 
+    module_id = #{moduleId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="findByCondition" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from page_module where 1=1
+		<if test="moduleId != null and moduleId != ''">
+            and module_id = #{moduleId,jdbcType=VARCHAR}
+        </if>
+        <if test="moduleTypeId != null">
+            and module_type_id = #{moduleTypeId,jdbcType=VARCHAR}
+        </if>
+        <if test="moduleName != null and moduleName != ''">
+            and module_name LIKE '%${moduleName}%'
+        </if>
+        <if test="moduleText != null">
+            and module_text = #{moduleText,jdbcType=VARCHAR}
+        </if>
+        <if test="moduleStyle != null">
+            and module_style = #{moduleStyle,jdbcType=VARCHAR}
+        </if>
+        <if test="moduleJs != null">
+            and module_js = #{moduleJs,jdbcType=VARCHAR}
+        </if>
+        <if test="pubFlag != null">
+            and pub_flag = #{pubFlag,jdbcType=INTEGER}
+        </if>
+        <if test="sortId != null">
+            and sort_id = #{sortId,jdbcType=INTEGER}
+        </if>
+        <if test="tenantId != null">
+            and tenant_id = #{tenantId,jdbcType=VARCHAR}
+        </if>
+        <if test="createDate != null">
+            and create_date = #{createDate,jdbcType=TIMESTAMP}
+        </if>
+         <if test="createBy != null">
+            and create_by = #{createBy,jdbcType=VARCHAR}
+        </if>
+         <if test="updateDate != null and parentId != ''">
+            and update_date = #{updateDate,jdbcType=TIMESTAMP}
+        </if>
+         <if test="updateBy != null">
+            and update_by = #{updateBy,jdbcType=VARCHAR}
+        </if>
+        order by sort_id ASC
+	</select>
+  
+  <insert id="insert" parameterType="com.sdp.pageModel.entity.PageModule">
+    <selectKey keyProperty="moduleId" resultType="string" order="BEFORE">    
+             select  replace(uuid(),'-','')   from dual  
+    </selectKey> 
+    insert into page_module (module_id, module_type_id, module_name, 
+      module_text, module_style, module_js,module_tip,
+      pub_flag, sort_id, 
+      tenant_id,create_date, create_by, update_date, 
+      update_by)
+    values (
+    	#{moduleId,jdbcType=VARCHAR}, 
+    	#{moduleTypeId,jdbcType=VARCHAR}, 
+    	#{moduleName,jdbcType=VARCHAR},
+        #{moduleText,jdbcType=VARCHAR},
+        #{moduleStyle,jdbcType=VARCHAR},
+        #{moduleJs,jdbcType=VARCHAR}, 
+        #{moduleTip,jdbcType=VARCHAR}, 
+        #{pubFlag,jdbcType=INTEGER}, 
+        #{sortId,jdbcType=INTEGER}, 
+        #{tenantId,jdbcType=VARCHAR}, 
+        #{createDate,jdbcType=TIMESTAMP}, 
+        #{createBy,jdbcType=VARCHAR}, 
+        #{updateDate,jdbcType=TIMESTAMP}, 
+        #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  
+  <update id="update" parameterType="com.sdp.pageModel.entity.PageModule">
+        update page_module
+        <set>
+            <if test="moduleId != null">
+                 module_id=#{moduleId,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleTypeId != null">
+                module_type_id=#{moduleTypeId,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleName != null">
+               module_name= #{moduleName,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleText != null">
+                module_text=#{moduleText,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleStyle != null">
+                module_style=#{moduleStyle,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleJs != null">
+                module_js=#{moduleJs,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleTip != null">
+                module_tip=#{moduleTip,jdbcType=VARCHAR},
+            </if>
+            <if test="pubFlag != null">
+                pub_flag=#{pubFlag,jdbcType=INTEGER},
+            </if>
+            <if test="sortId != null">
+                sort_id=#{sortId,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                create_date=#{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by=#{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                update_date=#{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null ">
+                update_by=#{updateBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where module_id = #{moduleId,jdbcType=VARCHAR}
+    </update>
+  
+  <delete id="delete" parameterType="java.lang.String">
+    delete from page_module
+    where module_id = #{moduleId,jdbcType=VARCHAR}
+  </delete>
+  
+</mapper>

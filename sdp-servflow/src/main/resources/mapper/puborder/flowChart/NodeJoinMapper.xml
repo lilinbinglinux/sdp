@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdp.servflow.pubandorder.flowchart.mapper.NodeJoinMapper">
+	<insert id="addJoin" parameterType="com.sdp.servflow.pubandorder.flowchart.model.ProcessNodeJoin">
+		insert into LAYOUT_NODE_JOIN(
+		join_id,
+		start_node_id,
+		end_node_id,
+		join_type,
+		join_direction,
+		creatime,
+		flowChartId,
+		path,
+		tenant_id
+		)
+		values(
+		#{joinId,jdbcType=VARCHAR},
+		#{startNodeId,jdbcType=VARCHAR},
+		#{endNodeId,jdbcType=VARCHAR},
+		#{joinType,jdbcType=VARCHAR},
+		#{joinDirection,jdbcType=VARCHAR},
+		#{creatime,jdbcType=VARCHAR},
+		#{flowChartId,jdbcType=VARCHAR},
+		#{path,jdbcType=VARCHAR},
+		#{tenantId,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<delete id="deleteAll" parameterType="java.util.Map">
+		delete from LAYOUT_NODE_JOIN
+		where flowChartId = #{flowChartId,jdbcType=VARCHAR}
+		and tenant_id=#{tenant_id,jdbcType=VARCHAR} 
+	</delete>
+	
+	<select id="findAllByFlowId" parameterType="java.util.Map" 
+	resultType="com.sdp.servflow.pubandorder.flowchart.model.ProcessNodeJoin">
+		select 
+			start_node_id "startNodeId",
+			end_node_id "endNodeId",
+			join_type   "joinType",
+			join_direction "joinDirection",
+			creatime "creatime",
+			tenant_id "tenantId",
+			path      "path",
+			join_id   "joinId"
+  		from LAYOUT_NODE_JOIN
+		where flowChartId=#{flowChartId,jdbcType=VARCHAR} and tenant_id=#{tenantId,jdbcType=VARCHAR}
+	</select>
+	
+</mapper>
+	

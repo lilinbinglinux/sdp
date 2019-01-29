@@ -1,0 +1,10 @@
+﻿[
+    { "text": "apple",  "type":"company",  "id":1,  "pid":0},
+    { "text": "banana", "type":"company",  "id":2,  "pid":0},
+    { "text": "pear",   "type":"company",  "id":3,  "pid":0},
+    { "text": "grape",  "type":"company",  "id":4,  "pid":0},
+    { "text": "节点1",    "id": 5,  "pid":1, "type" : "employee"}, 
+    { "text": "节点2",    "id": 6,  "pid":2, "type" : "employee"},
+    { "text": "节点3",    "id": 7,  "pid":1, "type" : "employee"},
+    { "text": "节点4",    "id": 8,  "pid":7, "type" : "employee"}
+]

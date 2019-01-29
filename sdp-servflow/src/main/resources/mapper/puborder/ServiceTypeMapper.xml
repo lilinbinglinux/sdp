@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.frame.web.mapper.puborder.ServiceTypeMapper">
+    <resultMap type="com.sdp.servflow.pubandorder.serapitype.model.ServiceTypeBean" id="BaseResultMap">
+        <id column="ser_type_id" jdbcType="VARCHAR" property="serTypeId" />
+        <result column="ser_type_name" jdbcType="VARCHAR" property="serTypeName" />
+        <result column="parentid" jdbcType="VARCHAR" property="parentId" />
+        <result column="id_path" jdbcType="VARCHAR" property="idPath" />
+        <result column="name_path" jdbcType="VARCHAR" property="namePath" />
+        <result column="creat_user" jdbcType="VARCHAR" property="creatUser" />
+        <result column="creatime" jdbcType="TIMESTAMP" property="creatTime" />
+        <result column="createDateString" jdbcType="VARCHAR" property="createDateString" />
+        <result column="delflag" jdbcType="VARCHAR" property="delFlag" />
+        <result column="stopflag" jdbcType="VARCHAR" property="stopFlag" />
+        <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ser_type_id, ser_type_name, parentid, id_path, name_path, creat_user, creatime, delflag, stopflag, tenant_id
+    </sql>
+
+    <select id="getAllByCondition" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from ser_type where 1=1
+        <if test="serTypeId != null">
+            and ser_type_id = #{serTypeId,jdbcType=VARCHAR}
+        </if>
+        <if test="serTypeName != null">
+            and ser_type_name = #{serTypeName,jdbcType=VARCHAR}
+        </if>
+        <if test="parentId != null">
+            and parentid LIKE '%${parentId}%'
+        </if>
+        <if test="creatUser != null">
+            and creat_user = #{creatUser,jdbcType=VARCHAR}
+        </if>
+        <if test="creatTime != null">
+            and creatime = #{creatTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="delFlag != null">
+            and delflag = #{delFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="stopFlag != null">
+            and stopflag = #{stopFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="tenantId != null">
+            and tenant_id = #{tenantId,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="selectPage" parameterType="com.sdp.servflow.pubandorder.serapitype.model.ServiceTypeBean"
+            resultType="com.sdp.servflow.pubandorder.serapitype.model.ServiceTypeBean">
+        select
+        ser_type_id as serTypeId,
+        ser_type_name as serTypeName,
+        parentid as parentId,
+        id_path as idPath,
+        name_path as namePath,
+        creat_user as creatUser,
+        creatime as creatTime,
+        date_format(creatime, '%Y-%m-%d %h:%i') as createDateString,
+        delflag as delFlag,
+        stopflag as stopFlag,
+        tenant_id as tenantId,
+        SUBSTRING_INDEX(name_path, '/', 2) as parentName
+        from ser_type where 1=1
+        <if test="serTypeId == null">
+            <if test="serTypeId != null">
+                and ser_type_id = #{serTypeId,jdbcType=VARCHAR}
+            </if>
+            <if test="serTypeName != null">
+                and ser_type_name = #{serTypeName,jdbcType=VARCHAR}
+            </if>
+            <if test="parentId != null">
+                <if test="parentId == 'null'">
+                    and parentid is null
+                </if>
+                <if test="parentId != 'null'">
+                    and parentid = #{parentId,jdbcType=VARCHAR}
+                </if>
+            </if>
+            <if test="parentId == null">
+                and parentid is null
+            </if>
+            <if test="creatUser != null">
+                and creat_user = #{creatUser,jdbcType=VARCHAR}
+            </if>
+            <if test="creatTime != null">
+                and creatime = #{creatTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="delFlag != null">
+                and delflag = #{delFlag,jdbcType=VARCHAR}
+            </if>
+            <if test="stopFlag != null">
+                and stopflag = #{stopFlag,jdbcType=VARCHAR}
+            </if>
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId,jdbcType=VARCHAR}
+            </if>
+        </if>
+        <if test="serTypeId != null">
+            <if test="serTypeId != null">
+                and ser_type_id = #{serTypeId,jdbcType=VARCHAR}
+            </if>
+            <if test="serTypeName != null">
+                and ser_type_name = #{serTypeName,jdbcType=VARCHAR}
+            </if>
+            <if test="parentId != null">
+                and parentid = #{parentId,jdbcType=VARCHAR}
+            </if>
+            <if test="creatUser != null">
+                and creat_user = #{creatUser,jdbcType=VARCHAR}
+            </if>
+            <if test="creatTime != null">
+                and creatime = #{creatTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="delFlag != null">
+                and delflag = #{delFlag,jdbcType=VARCHAR}
+            </if>
+            <if test="stopFlag != null">
+                and stopflag = #{stopFlag,jdbcType=VARCHAR}
+            </if>
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId,jdbcType=VARCHAR}
+            </if>
+        </if>
+    </select>
+	
+	<select id="getAllEqalsByCondition" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from ser_type where 1=1
+        <if test="serTypeId != null">
+            and ser_type_id = #{serTypeId,jdbcType=VARCHAR}
+        </if>
+        <if test="serTypeName != null">
+            and ser_type_name = #{serTypeName,jdbcType=VARCHAR}
+        </if>
+        <if test="parentId != null">
+            and parentid = #{parentId,jdbcType=VARCHAR}
+        </if>
+        <if test="creatUser != null">
+            and creat_user = #{creatUser,jdbcType=VARCHAR}
+        </if>
+        <if test="creatTime != null">
+            and creatime = #{creatTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="delFlag != null">
+            and delflag = #{delFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="stopFlag != null">
+            and stopflag = #{stopFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="tenantId != null">
+            and tenant_id = #{tenantId,jdbcType=VARCHAR}
+        </if>
+    </select>
+	
+
+    <insert id="insert" parameterType="com.sdp.servflow.pubandorder.serapitype.model.ServiceApiTypeBean">
+        insert into ser_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="serTypeId != null">
+                ser_type_id,
+            </if>
+            <if test="serTypeName != null">
+                ser_type_name,
+            </if>
+            <if test="parentId != null">
+                parentid,
+            </if>
+            <if test="idPath != null">
+                id_path,
+            </if>
+            <if test="namePath != null">
+                name_path,
+            </if>
+            <if test="creatUser != null">
+                creat_user,
+            </if>
+            <if test="creatTime != null">
+                creatime,
+            </if>
+            <if test="delFlag != null">
+                delflag,
+            </if>
+            <if test="stopFlag != null">
+                stopflag,
+            </if>
+            <if test="tenantId != null">
+                tenant_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="serTypeId != null">
+                #{serTypeId,jdbcType=VARCHAR},
+            </if>
+            <if test="serTypeName != null">
+                #{serTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="idPath != null">
+                #{idPath,jdbcType=VARCHAR},
+            </if>
+            <if test="namePath != null">
+                #{namePath,jdbcType=VARCHAR},
+            </if>
+            <if test="creatUser != null">
+                #{creatUser,jdbcType=VARCHAR},
+            </if>
+            <if test="creatTime != null">
+                #{creatTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="stopFlag != null">
+                #{stopFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantId != null">
+                #{tenantId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.sdp.servflow.pubandorder.serapitype.model.ServiceApiTypeBean">
+        update ser_type
+        <set>
+            <if test="serTypeName != null">
+                ser_type_name = #{serTypeName, jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                parentid = #{parentId, jdbcType=VARCHAR},
+            </if>
+            <if test="idPath != null">
+                id_path = #{idPath, jdbcType=VARCHAR},
+            </if>
+            <if test="namePath != null">
+                name_path = #{namePath, jdbcType=VARCHAR},
+            </if>
+            <if test="creatUser != null">
+                creat_user = #{creatUser, jdbcType=VARCHAR},
+            </if>
+            <if test="creatTime != null">
+                creatime = #{creatTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null">
+                delflag = #{delFlag, jdbcType=VARCHAR},
+            </if>
+            <if test="stopFlag != null">
+                stopflag = #{stopFlag, jdbcType=VARCHAR},
+            </if>
+            <if test="tenantId != null">
+                tenant_id = #{tenantId, jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ser_type_id = #{serTypeId,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from ser_type
+        where ser_type_id = #{serTypeId,jdbcType=VARCHAR}
+    </delete>
+    
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    		select 
+    		ser_type_id serTypeId, 
+    		ser_type_name serTypeName, 
+    		parentid parentId, 
+    		id_path idPath, 
+    		name_path namePath, 
+    		creat_user creatUser, 
+    		creatime creatTime, 
+    		delflag delFlag, 
+    		stopflag stopFlag, 
+    		tenant_id tenantId 
+    		from ser_type 
+    		where 
+    		ser_type_id = #{serTypeId,jdbcType=VARCHAR}
+    </select>
+</mapper>

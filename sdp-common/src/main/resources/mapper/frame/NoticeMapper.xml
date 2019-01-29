@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdp.frame.web.mapper.notice.NoticeMapper" >
+  <resultMap id="BaseResultMap" type="com.sdp.frame.web.entity.notice.Notice" >
+    <id column="NOTICE_ID" property="noticeId" jdbcType="VARCHAR" />
+    <result column="NOTICE_TITLE" property="noticeTitle" jdbcType="VARCHAR" />
+    <result column="NOTICE_TYPE" property="noticeType" jdbcType="VARCHAR" />
+    <result column="NOTICE_CONTENT" property="noticeContent" jdbcType="LONGVARCHAR" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
+    <result column="FROM_SIGN" property="fromSign" jdbcType="VARCHAR" />
+    <result column="PUBDATE" property="pubdate" jdbcType="TIMESTAMP" />
+    <result column="PUB_USER_ID" property="pubUserId" jdbcType="VARCHAR" />
+    <result column="REC_ORG_ID" property="recOrgId" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="pubPerson" jdbcType="VARCHAR" />
+  </resultMap>
+  <!-- <resultMap id="ResultMapWithBLOBs" type="com.sdp.frame.web.entity.notice.Notice" extends="BaseResultMap" >
+    <result column="NOTICE_CONTENT" property="noticeContent" jdbcType="CLOB" javaType = "java.lang.String"  typeHandler ="com.sdp.frame.util.OracleClobTypeHandler"/>
+  </resultMap> -->
+  <sql id="Base_Column_List" >
+    NOTICE_ID, NOTICE_TITLE, NOTICE_TYPE, NOTICE_CONTENT, STATE, FROM_SIGN, PUBDATE, 
+    PUB_USER_ID,REC_ORG_ID
+  </sql>
+  
+  <!-- 已收到公告 -->
+  <select id="pageNoticeRec" resultType="map" parameterType="map" >
+    select 
+    A.NOTICE_ID as "noticeId", A.NOTICE_TITLE as "noticeTitle", A.NOTICE_TYPE as "noticeType", 
+    A.FROM_SIGN as "fromSign", A.PUBDATE as "pubdate", A.PUB_USER_ID as "userId",
+	B.IS_READ as "isRead",C.USER_NAME as "pubPerson"
+	from PURE_NOTICE A,PURE_NOTICE_USER_REF B,PURE_USER C
+	where A.NOTICE_ID = B.NOTICE_ID
+	AND A.PUB_USER_ID = C.USER_ID
+	AND B.USER_ID = #{userId}
+	order by A.PUBDATE DESC
+  </select>
+  
+  <!-- 已发送公告 -->
+  <select id="pageNoticeSend" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select 
+    NOTICE_ID, NOTICE_TITLE, NOTICE_TYPE, STATE, FROM_SIGN, PUBDATE, 
+    PUB_USER_ID
+    from PURE_NOTICE
+    where 1=1
+    AND STATE != '-2'
+    AND PUB_USER_ID = #{userId,jdbcType=VARCHAR}
+    <if test="noticeType != null">
+    AND NOTICE_TYPE = #{noticeType,jdbcType=VARCHAR}
+    </if>
+    order by PUBDATE DESC
+  </select>
+  
+  <select id="pageQuery" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select 
+    NOTICE_ID, NOTICE_TITLE, NOTICE_TYPE, STATE, FROM_SIGN, PUBDATE, 
+    PUB_USER_ID
+    from PURE_NOTICE
+    where 1=1
+    <if test="noticeType != null">
+    AND NOTICE_TYPE = #{noticeType,jdbcType=VARCHAR}
+    </if>
+    <if test="state != null">
+    AND STATE = #{state,jdbcType=VARCHAR}
+    </if>
+    <if test="fromSign != null">
+    AND FROM_SIGN = #{fromSign,jdbcType=VARCHAR}
+    </if>
+    <if test="pubUserId != null">
+    AND PUB_USER_ID = #{userId,jdbcType=VARCHAR}
+    </if>
+    order by PUBDATE DESC
+  </select>
+  
+  <select id="selectUnreadNotice" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select 
+    T.*
+    from PURE_NOTICE T,PURE_NOTICE_USER_REF R
+    where T.NOTICE_ID = R.NOTICE_ID
+    AND R.IS_READ = '-1'
+    <if test="userId != null">
+    AND R.USER_ID = #{userId,jdbcType=VARCHAR}
+    </if>
+  </select>
+  
+  <!-- 查询公告详细内容 -->
+ <!--  <select id="selectByNoticeId" resultType="map" parameterType="java.lang.String" >
+    select 
+    A.NOTICE_ID as "noticeId", A.NOTICE_TITLE as "noticeTitle", A.NOTICE_TYPE as "noticeType", 
+    A.FROM_SIGN as "fromSign", A.PUBDATE as "pubdate", A.PUB_USER_ID as "userId",A.NOTICE_CONTENT as "noticeContent",
+	C.USER_NAME as "pubPerson"
+	from PURE_NOTICE A,PURE_USER C
+	where A.PUB_USER_ID = C.USER_ID
+    and NOTICE_ID = #{noticeId,jdbcType=VARCHAR}
+  </select> -->
+  
+  <!-- 查询公告详细内容 -->
+  <select id="selectByNoticeId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select A.*,
+	C.USER_NAME
+	from PURE_NOTICE A,PURE_USER C
+	where A.PUB_USER_ID = C.USER_ID
+    and NOTICE_ID = #{noticeId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from PURE_NOTICE
+    where NOTICE_ID = #{noticeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from PURE_NOTICE
+    where NOTICE_ID = #{noticeId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteRecNotice" parameterType="java.util.HashMap" >
+    delete from PURE_NOTICE_USER_REF
+    where 1=1
+    <if test="userId != null">
+    AND USER_ID = #{userId,jdbcType=VARCHAR}
+    </if>
+    <if test="noticeId != null">
+    AND NOTICE_ID = #{noticeId,jdbcType=VARCHAR}
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sdp.frame.web.entity.notice.Notice" >
+    insert into PURE_NOTICE (NOTICE_ID, NOTICE_TITLE, NOTICE_TYPE, 
+      NOTICE_CONTENT, STATE, FROM_SIGN, 
+      PUBDATE, PUB_USER_ID)
+    values (#{noticeId,jdbcType=VARCHAR}, #{noticeTitle,jdbcType=VARCHAR}, #{noticeType,jdbcType=VARCHAR}, 
+      #{noticeContent,jdbcType=LONGVARCHAR}, #{state,jdbcType=VARCHAR}, #{fromSign,jdbcType=VARCHAR}, 
+      #{pubdate,jdbcType=TIMESTAMP}, #{pubUserId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertPublishNotice" parameterType="java.util.HashMap" >
+  	insert into PURE_NOTICE_USER_REF
+  	<trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="noticeId != null" >
+      	NOTICE_ID,
+      </if>
+      <if test="userId != null" >
+      	USER_ID,
+      </if>
+      <if test="isRead != null" >
+      	IS_READ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="noticeId != null" >
+        #{noticeId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="isRead != null" >
+        #{isRead,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertSelective" parameterType="com.sdp.frame.web.entity.notice.Notice" >
+    insert into PURE_NOTICE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="noticeId != null" >
+        NOTICE_ID,
+      </if>
+      <if test="noticeTitle != null" >
+        NOTICE_TITLE,
+      </if>
+      <if test="noticeType != null" >
+        NOTICE_TYPE,
+      </if>
+      <if test="noticeContent != null" >
+        NOTICE_CONTENT,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="fromSign != null" >
+        FROM_SIGN,
+      </if>
+      <if test="pubdate != null" >
+        PUBDATE,
+      </if>
+      <if test="pubUserId != null" >
+        PUB_USER_ID,
+      </if>
+      <if test="recOrgId != null" >
+        REC_ORG_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="noticeId != null" >
+        #{noticeId,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeTitle != null" >
+        #{noticeTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeType != null" >
+        #{noticeType,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeContent != null" >
+        #{noticeContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="fromSign != null" >
+        #{fromSign,jdbcType=VARCHAR},
+      </if>
+      <if test="pubdate != null" >
+        #{pubdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pubUserId != null" >
+        #{pubUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="recOrgId != null" >
+        #{recOrgId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sdp.frame.web.entity.notice.Notice" >
+    update PURE_NOTICE
+    <set >
+      <if test="noticeTitle != null" >
+        NOTICE_TITLE = #{noticeTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeType != null" >
+        NOTICE_TYPE = #{noticeType,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeContent != null" >
+        NOTICE_CONTENT = #{noticeContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="fromSign != null" >
+        FROM_SIGN = #{fromSign,jdbcType=VARCHAR},
+      </if>
+      <if test="pubdate != null" >
+        PUBDATE = #{pubdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pubUserId != null" >
+        PUB_USER_ID = #{pubUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="recOrgId != null" >
+        REC_ORG_ID = #{recOrgId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where NOTICE_ID = #{noticeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sdp.frame.web.entity.notice.Notice" >
+    update PURE_NOTICE
+    set NOTICE_TITLE = #{noticeTitle,jdbcType=VARCHAR},
+      NOTICE_TYPE = #{noticeType,jdbcType=VARCHAR},
+      NOTICE_CONTENT = #{noticeContent,jdbcType=LONGVARCHAR},
+      STATE = #{state,jdbcType=VARCHAR},
+      FROM_SIGN = #{fromSign,jdbcType=VARCHAR},
+      PUBDATE = #{pubdate,jdbcType=TIMESTAMP},
+      PUB_USER_ID = #{pubUserId,jdbcType=VARCHAR}
+    where NOTICE_ID = #{noticeId,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 全部标记为已读 -->
+  <update id="markRead" parameterType="map">
+  	update PURE_NOTICE_USER_REF
+  	set IS_READ = '1'
+  	where USER_ID = #{userId}
+  	<if test="noticeId != null">
+  		AND NOTICE_ID =  #{noticeId}
+  	</if>
+  </update>
+  
+</mapper>

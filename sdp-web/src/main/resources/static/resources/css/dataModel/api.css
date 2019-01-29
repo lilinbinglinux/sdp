@@ -1,0 +1,136 @@
+.api-container{
+    border-left: 1px solid #ddd;
+    box-sizing: border-box;
+    padding: 15px;
+}
+.api-item .api-name{
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+    border-left: 10px solid #333;
+    font-size: 20px;
+    padding-left: 10px;
+    border-bottom: 1px solid #333;
+    box-sizing: border-box;
+    position: relative;
+}
+.api-content{
+    padding: 15px;
+}
+.api-col{
+
+}
+.seeTableBtn{
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    top: 50px;
+    right: 30px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 50px;
+    z-index: 101;
+    cursor: pointer;
+    font-size: 13px;
+}
+.table-list{
+
+}
+.IUFrame{
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+.show-example{
+    display: inline-block;
+    font-size: 13px;
+    height: 30px;
+    line-height: 30px;
+    width: 60px;
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    position: absolute;
+    top: 5px;
+    left: 140px;
+    cursor: pointer;
+}
+.back-list{
+    display: inline-block;
+    font-size: 13px;
+    height: 30px;
+    line-height: 30px;
+    width: 60px;
+    text-align: center;
+    background-color: #ddd;
+    color: #333;
+    border-radius: 5px;
+    position: absolute;
+    top: 5px;
+    right: 0;
+    cursor: pointer;
+}
+.newApiBtn{
+    display: inline-block;
+    width: 70px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.clearButton{
+    text-decoration: none;
+    font: bold 14px 'Trebuchet MS',Arial, Helvetica;
+    display: inline-block;
+    text-align: center;
+    color: #fff;
+    border: 1px solid #9c9c9c;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+    box-shadow: 0 0 0.05em rgba(0,0,0,0.4);
+    -moz-box-shadow: 0 0 .05em rgba(0,0,0,0.4);
+    -webkit-box-shadow: 0 0 0.05em rgba(0,0,0,0.4);
+}
+
+.bigButton{
+    background: #428739;
+    background: -webkit-gradient(linear, left top, left bottom, from(#c8dd95), to(#428739) );
+    background: -moz-linear-gradient(-90deg, #c8dd95, #428739);
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#c8dd95', EndColorStr='#428739');
+}
+.clearButton:hover{
+    background: #c8dd95;
+    background: -webkit-gradient(linear, left top, left bottom, from(#428739), to(#c8dd95) );
+    background: -moz-linear-gradient(-90deg, #428739, #c8dd95);
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#428739', EndColorStr='#c8dd95');
+}
+.bigButton:hover{
+    background: #c8dd95;
+    background: -webkit-gradient(linear, left top, left bottom, from(#428739), to(#c8dd95) );
+    background: -moz-linear-gradient(-90deg, #428739, #c8dd95);
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#428739', EndColorStr='#c8dd95');
+    color: #fff;
+}
+.bigButton:active{
+    background: #428739;
+}
+.clearButton span{
+    border-top: 1px solid #fff;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    display: block;
+    background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, rgba(0, 0, 0, 0.05)), color-stop(.25, transparent), to(transparent)), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, rgba(0, 0, 0, 0.05)), color-stop(.25, transparent), to(transparent)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.75, transparent), color-stop(.75, rgba(0, 0, 0, 0.05))), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.75, transparent), color-stop(.75, rgba(0, 0, 0, 0.05)));
+    background-image: -moz-linear-gradient(45deg, rgba(0, 0, 0, 0.05) 25%, transparent 25%, transparent), -moz-linear-gradient(-45deg, rgba(0, 0, 0, 0.05) 25%, transparent 25%, transparent), -moz-linear-gradient(45deg, transparent 75%, rgba(0, 0, 0, 0.05) 75%), -moz-linear-gradient(-45deg, transparent 75%, rgba(0, 0, 0, 0.05) 75%);
+    -moz-background-size: 3px 3px;
+    -webkit-background-size: 3px 3px;
+    background-size: 3px 3px;
+    height: 28px;
+    line-height: 28px;
+    width: 100px;
+}

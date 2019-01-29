@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.servflow.logSer.log.mapper.LogSerTotalStatisticsMapper">
+    <resultMap id="serIdVersion" type="com.sdp.servflow.logSer.log.model.Ser_Id_Version_Statistics">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="orderid" jdbcType="VARCHAR" property="orderid" />
+        <result column="ser_id" jdbcType="VARCHAR" property="ser_id" />
+        <result column="ser_version" jdbcType="VARCHAR" property="ser_version" />
+        <result column="ser_name" jdbcType="VARCHAR" property="ser_name" />
+        <result column="sendCount" jdbcType="INTEGER" property="sendCount" />
+        <result column="successCount" jdbcType="INTEGER" property="successCount" />
+        <result column="failCount" jdbcType="INTEGER" property="failCount" />
+        <result column="sendDate" jdbcType="INTEGER" property="sendDate" />
+        <result column="sourceType" jdbcType="VARCHAR" property="sourceType" />
+        <result column="tenant_id" jdbcType="VARCHAR" property="tenant_id" />
+    </resultMap>
+    <select id="selectCountSer" resultType="java.lang.Integer">
+        select count(1) from log_ser_id_version_statistics
+        where 1 = 1
+        <if test="name != null and name != ''">
+            and ser_name LIKE '%${name}%'
+        </if>
+        <if test="sendDate != null and sendDate != ''">
+            and sendDate =  #{sendDate}
+        </if>
+    </select>
+    <select id="selectserVersion" resultMap="serIdVersion">
+        select * from log_ser_id_version_statistics
+        where 1 =1
+        <if test="name != null and name != ''">
+            and ser_name LIKE '%${name}%'
+        </if>
+        <if test="sendDate != null and sendDate != ''">
+            and sendDate =  #{sendDate}
+        </if>
+        ORDER BY sendDate desc,id desc
+        LIMIT ${startNum},${num}
+    </select>
+    
+    <select id="selectSyncSeridVerIdName" resultType="com.sdp.servflow.logSer.log.model.Ser_Id_Version_Statistics">
+		select 
+			s.ser_id 			"ser_id",
+			s.ser_version 		"ser_version",
+			s.ser_name 			"ser_name",
+			s.tenant_id  		"tenant_id"
+		from order_interface o
+		INNER JOIN ser_main s
+		on o.ser_id = s.ser_id
+		and o.ser_version = s.ser_version
+		where o.orderid = #{orderid}
+  	</select>
+  	
+  	<select id="selectAsynSeridName" resultType="com.sdp.servflow.logSer.log.model.Ser_Id_Version_Statistics">
+		select 
+			s.ser_id 		"ser_id",
+			s.ser_name 		"ser_name",
+			s.tenant_id  	"tenant_id"
+		from order_interface o
+		INNER JOIN ser_main s
+		on o.ser_id = s.ser_id
+		where o.orderid = #{orderid}
+  	</select>
+  	
+  	<select id="selectCASSeridName" resultType="com.sdp.servflow.logSer.log.model.Ser_Id_Version_Statistics">
+		select 
+			sp_loginid 		"ser_id",
+			sp_name 		"ser_name",
+			tenant_id  		"tenant_id"
+		from ser_sp_login
+		where sp_loginid = #{orderid}
+  	</select>
+  	
+  	<select id="selectSer_id_version_nameSendCount" resultType="com.sdp.servflow.logSer.log.model.Ser_Id_Version_Statistics">
+	  	select 
+			sum(sendCount) "sendCount",
+			sum(successCount) "successCount",
+			sum(failCount) "failCount"	
+		from order_total_statistics
+		where ser_id=#{ser_id}
+		<if test="ser_version != null and ser_version != ''">
+			AND ser_version = #{ser_version}
+		</if>
+		and tenant_id=#{tenant_id}
+		and sendDate=#{sendDate}
+	</select>
+	
+	<select id="selectSer_id_Version_Name" resultType="com.sdp.servflow.logSer.log.model.Ser_Id_Version_Statistics">
+	  	select 
+			ser_id 				"ser_id",
+			ser_version 		"ser_version",
+			ser_name 			"ser_name",
+			sendDate 			"sendDate"
+		from log_ser_id_version_statistics
+		where ser_id=#{ser_id}
+		<if test="ser_version != null and ser_version != ''">
+			AND ser_version = #{ser_version}
+		</if>
+		and sendDate=#{sendDate}
+		and tenant_id=#{tenant_id}
+	</select>
+	
+	<update id="ser_id_Version_NameUpdate">
+  		update log_ser_id_version_statistics 
+  		set sendCount = #{sendCount},
+  		successCount = #{successCount},
+  		failCount = #{failCount}
+  		where ser_id=#{ser_id}
+		<if test="ser_version != null and ser_version != ''">
+			AND ser_version = #{ser_version}
+		</if>
+		and sendDate=#{sendDate}
+		and tenant_id=#{tenant_id}
+  	</update>
+  	
+  	<insert id="ser_id_Version_NameSave" parameterType="com.sdp.servflow.logSer.log.model.Ser_Id_Version_Statistics">
+  		insert into log_ser_id_version_statistics (ser_id,ser_version,ser_name,sendCount,successCount,failCount,sendDate,
+  		sourceType,tenant_id)
+  		values (#{ser_id},#{ser_version},#{ser_name},#{sendCount},#{successCount},#{failCount},
+  		#{sendDate},#{sourceType},#{tenant_id})
+  	</insert>
+</mapper>

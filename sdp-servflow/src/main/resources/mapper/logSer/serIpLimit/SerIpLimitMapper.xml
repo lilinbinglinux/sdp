@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.servflow.logSer.serIpLimit.mapper.SerIpLimitMapper">
+	<resultMap id="serIpLimit" type="com.sdp.servflow.logSer.serIpLimit.model.SerIpLimit">
+    	<result column="ip_id" jdbcType="VARCHAR" property="ip_id" />
+    	<result column="order_id" jdbcType="VARCHAR" property="order_id" />
+    	<result column="app_id" jdbcType="VARCHAR" property="app_id" />
+    	<result column="ip_addr" jdbcType="VARCHAR" property="ip_addr" />
+    	<result column="name_type" jdbcType="VARCHAR" property="name_type" />
+    	<result column="creatime" jdbcType="DATE" property="creatime" />
+    	<result column="tenant_id" jdbcType="VARCHAR" property="tenant_id" />
+  	</resultMap>	
+  	
+  	<select id="selectLastModifiedTimeSerIpLimit" resultType="java.util.Date">
+		SELECT UPDATE_TIME FROM information_schema.tables
+		where TABLE_SCHEMA = #{schemaName}
+		and TABLE_NAME = 'ser_ip_limit'
+  	</select>
+  	
+  	<select id="selectAllSerIpLimit" resultMap="serIpLimit">
+		select tenant_id,order_id,ip_addr,name_type from ser_ip_limit
+  	</select>
+  	
+  	
+</mapper>

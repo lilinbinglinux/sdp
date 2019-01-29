@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.serviceAccess.mapper.POperMapper">
+	<select id="findByCondition" parameterType="com.sdp.serviceAccess.entity.POperInfo"
+		resultType="com.sdp.serviceAccess.entity.POperInfo">
+		select
+		oper_id "operId",
+		service_name "serviceName",
+		busi_info "busiInfo",
+		params_info
+		"paramsInfo",
+		result_info "resultInfo",
+		state "state",
+		create_date "createDate",
+		create_by "createBy",
+		tenant_id
+		"tenantId",
+		update_date "updateDate",
+		update_by "updateBy" 
+		from p_oper_info 
+		where 1=1
+		<if test="tenantId != null and tenantId != ''">
+			and tenant_id=#{tenantId}
+		</if>
+		<if test="oper_id != null and oper_id != ''">
+			and oper_id=#{operId}
+		</if>
+	</select>
+
+	<select id="findById" parameterType="com.sdp.serviceAccess.entity.POperInfo"
+		resultType="com.sdp.serviceAccess.entity.POperInfo">
+		select
+		oper_id "operId",
+		service_name "serviceName",
+		busi_info "busiInfo",
+		params_info
+		"paramsInfo",
+		result_info "resultInfo",
+		state "state",
+		create_date "createDate",
+		create_by "createBy",
+		tenant_id
+		"tenantId",
+		update_date "updateDate",
+		update_by "updateBy" 
+		from p_oper_info 
+		where 1=1
+		<if test="tenantId != null and tenantId != ''">
+			and tenant_id=#{tenantId}
+		</if>
+		<if test="operId != null and operId != ''">
+			and oper_id=#{operId}
+		</if>
+	</select>
+
+	<select id="findAll" parameterType="com.sdp.serviceAccess.entity.POperInfo"
+		resultType="com.sdp.serviceAccess.entity.POperInfo">
+		select
+		oper_id "operId",
+		service_name "serviceName",
+		busi_info "busiInfo",
+		params_info
+		"paramsInfo",
+		result_info "resultInfo",
+		state "state",
+		create_date "createDate",
+		create_by "createBy",
+		tenant_id
+		"tenantId",
+		update_date "updateDate",
+		update_by "updateBy" 
+		from p_oper_info 
+		where 1=1
+		and
+		tenant_id = #{tenantId}
+	</select>
+
+	<insert id="saveSingle" parameterType="com.sdp.serviceAccess.entity.POperInfo" useGeneratedKeys="true"
+    keyProperty="operId">
+		insert into p_oper_info 
+		(service_name,
+		busi_info,
+		params_info,
+		result_info,
+		state,
+		create_date,
+		create_by,
+		tenant_id,
+		update_date,
+		update_by)
+		values (
+		#{serviceName,jdbcType=VARCHAR},
+		#{busiInfo,jdbcType=VARCHAR},
+		#{paramsInfo,jdbcType=VARCHAR},
+		#{resultInfo,jdbcType=VARCHAR},
+		#{state,jdbcType=INTEGER},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{createBy,jdbcType=VARCHAR},
+		#{tenantId,jdbcType=VARCHAR},
+		#{updateDate,jdbcType=TIMESTAMP},
+		#{updateBy,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.sdp.serviceAccess.entity.POperInfo">
+		update p_oper_info set 
+		service_name =#{serviceName,jdbcType=VARCHAR},
+		busi_info =#{busiInfo,jdbcType=VARCHAR},
+		params_info=#{paramsInfo,jdbcType=VARCHAR},
+		result_info =#{resultInfo,jdbcType=VARCHAR},
+		state =#{state,jdbcType=INTEGER},
+		create_date =#{createDate,jdbcType=TIMESTAMP},
+		create_by =#{createBy,jdbcType=VARCHAR},
+		tenant_id =#{tenantId,jdbcType=VARCHAR},
+		update_date =#{updateDate,jdbcType=TIMESTAMP},
+		update_by =#{updateBy,jdbcType=VARCHAR} 
+		where 1=1 
+		and tenant_id = #{tenantId} and oper_id = #{operId} 
+	</update>
+	
+	<delete id="delete" parameterType="com.sdp.serviceAccess.entity.POperInfo">
+	delete from p_oper_info where tenant_id = #{tenantId} and oper_id = #{operId}
+	</delete>
+</mapper>

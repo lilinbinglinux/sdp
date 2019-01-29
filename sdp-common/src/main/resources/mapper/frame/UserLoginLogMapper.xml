@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdp.frame.web.mapper.log.UserLoginLogMapper" >
+  <resultMap id="BaseResultMap" type="com.sdp.frame.web.entity.log.UserLoginLog" >
+    <id column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="LOGIN_DATE" property="LoginDate" jdbcType="TIMESTAMP" />
+    <result column="LOGIN_IP" property="loginIp" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    USER_ID, LOGIN_DATE, LOGIN_IP
+  </sql>
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PURE_USER_LOGIN_LOG
+    where 1 = 1 ORDER BY LOGIN_DATE DESC
+  </select>
+ 
+  <delete id="deleteLoginMessage" parameterType="java.lang.Integer">
+    delete from pure_user_login_log 
+    where period_diff(date_format(now() , '%Y%m') , date_format(LOGIN_DATE, '%Y%m')) = #{data};
+  </delete>
+ 
+</mapper>

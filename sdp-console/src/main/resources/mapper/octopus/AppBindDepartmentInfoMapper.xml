@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdp.cop.octopus.dao.AppBindDepartmentDao">
+
+	<resultMap id="BaseResultMap"
+		type="com.sdp.cop.octopus.entity.AppBindDepartmentInfo">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="app" property="app" jdbcType="VARCHAR" />
+		<result column="department_id" property="departmentId"
+			jdbcType="INTEGER" />
+		<result column="department_name" property="departmentName"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id id,
+		app app,
+		department_id departmentId,
+		department_name departmentName
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from app_department_relation
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		app_department_relation
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert"
+		parameterType="com.sdp.cop.octopus.entity.AppBindDepartmentInfo">
+		insert into
+		app_department_relation (id, app,
+		department_id,
+		department_name)
+		values (#{id,jdbcType=BIGINT},
+		#{app,jdbcType=VARCHAR},
+		#{departmentId,jdbcType=INTEGER},
+		#{departmentName,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.sdp.cop.octopus.entity.AppBindDepartmentInfo">
+		insert into app_department_relation
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="app != null">
+				app,
+			</if>
+			<if test="departmentId != null">
+				department_id,
+			</if>
+			<if test="departmentName != null">
+				department_name,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="app != null">
+				#{app,jdbcType=VARCHAR},
+			</if>
+			<if test="departmentId != null">
+				#{departmentId,jdbcType=INTEGER},
+			</if>
+			<if test="departmentName != null">
+				#{departmentName,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.sdp.cop.octopus.entity.AppBindDepartmentInfo">
+		update app_department_relation
+		<set>
+			<if test="app != null">
+				app = #{app,jdbcType=VARCHAR},
+			</if>
+			<if test="departmentId != null">
+				department_id = #{departmentId,jdbcType=INTEGER},
+			</if>
+			<if test="departmentName != null">
+				department_name = #{departmentName,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.sdp.cop.octopus.entity.AppBindDepartmentInfo">
+		update app_department_relation
+		set app =
+		#{app,jdbcType=VARCHAR},
+		department_id =
+		#{departmentId,jdbcType=INTEGER},
+		department_name =
+		#{departmentName,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<select id="selectDepartmentIdByApp"
+		parameterType="java.lang.String" resultType="java.lang.Integer">
+		select a.department_id
+		from
+		app_department_relation a where a.app=#{app,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectByApp" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		FROM app_department_relation a where a.app=#{app,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectApps" resultType="java.lang.String">
+		select a.app FROM
+		app_department_relation a GROUP BY a.app
+	</select>
+	
+</mapper>

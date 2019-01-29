@@ -1,0 +1,590 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+body{
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+.container-power{
+    position: relative;
+    height: 100%;
+    padding-top: 40px;
+    box-sizing: border-box;
+}
+.power-container{
+    overflow: auto;
+    height: 100%;
+    position: relative;
+    margin-left: 250px;
+}
+.power-canvas-container{
+    /*width: 100%;*/
+    /*height: 100%;*/
+    background: linear-gradient(0deg,transparent 24px,#bab9b9 25px),
+    linear-gradient(270deg,transparent 24px,#bab9b9 25px);
+    background-size: 25px 25px;
+    position: relative;
+}
+.power-main{
+    position: relative;
+    height: 100%;
+    box-sizing: border-box;
+}
+.power-tool{
+    position: absolute;
+    z-index: 999;
+    height: 50px;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+}
+.power-tool-item{
+    cursor: pointer;
+    vertical-align: top;
+    padding: 0;
+    display: inline-block;
+    text-align: center;
+    font-size: 18px;
+    color: #999;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: none;
+    width: 40px;
+    border-radius: 5px;
+}
+.power-tool-item:hover{
+    background: #3c4042;
+    color: #f2f2f2;
+}
+.power-canvas{
+    display: inline-block;
+}
+.power-class-box{
+    position: absolute;
+    width: 250px;
+    min-height: 200px;
+    left: 30px;
+    top: 50px;
+    border-radius: 10px;
+    background-color: #fff;
+    cursor: default;
+    z-index: 1;
+    border: 3px solid #96d6fc;
+    box-shadow: 0 0 15px #9a9898;
+    box-sizing: content-box;
+}
+.power-class-box .class-box-title {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-weight: 600;
+    background: -webkit-linear-gradient(top, rgba(150, 214, 252,1), rgba(150, 214, 252,0.6),rgba(150, 214, 252,1)); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(top, rgba(150, 214, 252,1), rgba(150, 214, 252,0.6),rgba(150, 214, 252,1)); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(top, rgba(150, 214, 252,1), rgba(150, 214, 252,0.6),rgba(150, 214, 252,1)); /* Firefox 3.6 - 15 */
+    background: linear-gradient(top, rgba(150, 214, 252,1), rgba(150, 214, 252,0.6),rgba(150, 214, 252,1)); /* 标准的语法（必须放在最后） */
+    cursor: move;
+}
+.power-class-box:hover{
+    box-shadow: 0px 0px 15px #f50808;
+}
+.power-class-box.power-active{
+    box-shadow: 0px 0px 15px #f50808;
+}
+.tool-item-active{
+    background: #3c4042;
+    color: #f2f2f2;
+}
+.box_anchor{
+    position: absolute;
+    background: white;
+    border: 1px solid #333;
+    border-radius: 4px;
+    width: 6px;
+    height: 6px;
+}
+.box_anchor:hover{
+    cursor: crosshair;
+}
+.left-nav{
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 300px;
+    /*height: 50px;*/
+    background-color: #fff;
+    z-index: 99;
+    box-shadow: 3px 3px 5px #96d6fc;
+    -webkit-transform: translateX(-300px);
+    -moz-transform: translateX(-300px);
+    transform: translateX(-300px);
+    -webkit-transition: -webkit-transform 0.3s, width 0.3s;
+    -moz-transition: -moz-transform 0.3s, width 0.3s;
+    transition: transform 0.3s, width 0.3s;
+}
+.left-nav-show{
+    -webkit-transform: translateX(0px);
+    -moz-transform: translateX(0px);
+    transform: translateX(0px);
+}
+.new-line-container{
+    width: 100%;
+    height: 30px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.line-tool-add{
+    line-height: 30px;
+    font-size: 25px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.box-ul{
+
+}
+.box-ul li:after{
+    content: '.';
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.box-ul li{
+    border-bottom: 1px solid #ddd;
+}
+.box-ul li:hover{
+    background-color: #ddd;
+}
+.box-ul .box-li-item{
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    text-align: left;
+    float: left;
+    position: relative;
+    font-size: 12px;
+    overflow: hidden;
+}
+.box-item-circle{
+    width: 15px;
+    height: 6px;
+    border: 1px solid;
+    border-radius: 4px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    cursor: crosshair;
+    display: none;
+}
+.span-select{
+    display: inline-block;
+    height: 38px;
+    line-height: 38px;
+    width: 100%;
+    text-align: center;
+}
+.primary-key{
+    margin-right: 5px;
+    color: #B8860B;
+    height: 25px;
+    line-height: 25px;
+}
+.foreign-key{
+
+}
+.circle-inline{
+    background-color: #333;
+    display: block;
+}
+.box-ul li:hover .box-item-circle{
+    display: block;
+}
+.power-nav{
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    background-color: #333;
+    color: #fff;
+    margin: -80px 0 0;
+}
+.nav-img-con{
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    position: relative;
+    float: left;
+    margin-left: 15px;
+}
+.nav-login{
+    float: right;
+    margin-right: 15px;
+    height: 40px;
+    line-height: 40px;
+}
+.nav-login-item{
+    font-size: 16px;
+    cursor: pointer;
+}
+.nav-icon{
+    font-size: 25px;
+    display: inline-block;
+    line-height: 40px;
+}
+.power-menu-list{
+    height: 40px;
+    box-sizing: border-box;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin: -40px 0 0;
+}
+.menu-left{
+    display: inline-block;
+    width: 250px;
+    height: 40px;
+    position: absolute;
+    box-sizing: border-box;
+    padding-left: 15px;
+}
+.menu-right{
+    display: none;
+    min-width: 200px;
+    height: 40px;
+    position: absolute;
+    left: 250px;
+}
+.menu-item{
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+    width: 40px;
+    text-align: center;
+}
+.tool-move{
+    display: inline-block;
+    width: 15px;
+    height: 50px;
+    cursor: move;
+}
+.crow-line{
+    display: inline-block;
+    height: 24px;
+    border-left: 1px solid #ddd;
+    margin-top: 8px;
+}
+.power-left-nav{
+    width: 250px;
+    float: left;
+    height: 100%;
+    position: relative;
+    overflow: auto;
+}
+.line_box_container{
+
+}
+/*layUI*/
+.layui-form-item{
+    font-size: 14px;
+}
+.layui-table td, .layui-table th{
+    text-align: center;
+}
+.menu-save-btn{
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    width: 100px;
+    text-align: center;
+    border: 1px solid #333;
+    margin-top: 3px;
+    float: right;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.menu-save-btn:hover{
+    background-color: #f7f7f7;
+}
+.power-left-nav .stepTwo-module .databese-name{
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    width: 100%;
+    cursor: pointer;
+    box-sizing: border-box;
+    position: relative;
+    padding-left: 15px;
+}
+.power-left-nav .stepTwo-module .databese-name:hover{
+    background-color: #333;
+    color: #fff;
+}
+.stepTwo-module i{
+    -webkit-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+.databese-name i{
+    position: absolute;
+    right: 15px;
+    width: 30px;
+    height: 40px;
+    line-height: 40px;
+    top: 5px;
+    text-align: center;
+}
+.tree-opened > .databese-name > i{
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.tree-opened > .databese-name{
+    background-color: #333;
+    color: #fff;
+}
+.database-child{
+    display: none;
+    background-color: #f0f8ff;
+}
+.database-child > li{
+    line-height: 30px;
+    font-size: 13px;
+    position: relative;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-left: 10px solid #f0f8ff;
+}
+.database-child > li:hover{
+    border-left: 10px solid #e98d2f;
+    background-color: #efe5d2;
+}
+.database-child .li-expand{
+    border-left: 10px solid #e98d2f;
+    cursor: default;
+}
+.li-expand .dataSource-title{
+    background-color: #efe5d2;
+    cursor: pointer;
+}
+.dataSource-url{
+    color: #bbb;
+    display: block;
+    overflow: hidden;
+    height: 20px;
+    line-height: 20px;
+}
+.dataSource-name, .dataSource-url{
+    padding: 0 30px;
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+}
+.inner-dataTable{
+    background-color: #fff;
+}
+.inner-name, .inner-url{
+    display: block;
+    overflow: hidden;
+    height: 22px;
+    padding-left: 10px;
+    background-color: #efe5d2;
+    cursor: pointer;
+}
+.power-tableType-name{
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    position: absolute;
+    left: 50%;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+}
+.new-dataType{
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 12px;
+    box-sizing: border-box;
+    border: 1px solid #333;
+    margin-left: 12px;
+    margin-top: 12px;
+    cursor: pointer;
+}
+.folder-box{
+    height: 100px;
+    float: left;
+    margin: 0 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px 0 rgba(0,139,159,.5);
+    color: #00C1DE;
+    cursor: pointer;
+    overflow: hidden;
+}
+.folder-box:hover{
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+    color: #333;
+}
+.folder-ico{
+    display: block;
+    width: 150px;
+    height: 70px;
+    text-align: center;
+    line-height: 100px;
+    font-size: 90px;
+    border-radius: 8px;
+    transition: all 0.6s;
+}
+.folder-ico:hover{
+    transform: scale(1.1);
+}
+.ico-mysql{
+    background: url("../../img/dataModel/mysql.png") no-repeat center;
+    background-size: 163px 110px;
+}
+.ico-Oracle{
+    background: url("../../img/dataModel/oracle.png") no-repeat center;
+    background-size: 163px 110px;
+}
+.ico-DB2{
+    background: url("../../img/dataModel/db2.png") no-repeat center;
+    background-size: 163px 110px;
+}
+.ico-SqlServer{
+    background: url("../../img/dataModel/sqlServer.png") no-repeat center;
+    background-size: 166px 112px;
+}
+.ico-database{
+    background: url("../../img/dataModel/msqlData.png") no-repeat center;
+    background-size: 215px 110px;
+}
+
+.folder-ico img{
+    width: 145px;
+    height: 35px;
+}
+.folder-name{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+}
+.new-folder{
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    background-color: #333;
+    color: #fff;
+    width: 110px;
+    text-align: center;
+    font-size: 13px;
+    margin-top: 3px;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+}
+.folder-ico .fa-database{
+
+}
+.rMenu{
+    position: absolute;
+    min-width: 50px;
+    background-color: #00c1de;
+    font-size: 12px;
+    color: #333;
+    border-radius: 2px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: none;
+    display: none;
+}
+.rMenu li{
+    text-align: center;
+    box-sizing: border-box;
+    border-bottom: 1px solid #333;
+    cursor: pointer;
+    padding: 0 10px;
+}
+.rMenu li:hover{
+    background-color: #00b0ce;
+}
+ul, li {
+    list-style: none;
+    padding: 0;
+}
+.power-container::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+/*正常情况下滑块的样式*/
+.power-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,.05);
+    border-radius: 10px;
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1);
+}
+/*鼠标悬浮在该类指向的控件上时滑块的样式*/
+.power-container:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,.2);
+    border-radius: 10px;
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1);
+}
+/*鼠标悬浮在滑块上时滑块的样式*/
+.power-container::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0,0,0,.4);
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1);
+}
+/*正常时候的主干部分*/
+.power-container::-webkit-scrollbar-track {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0);
+    background-color: white;
+}
+/*鼠标悬浮在滚动条上的主干部分*/
+.power-container::-webkit-scrollbar-track:hover {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.4);
+    background-color: rgba(0,0,0,.01);
+}
+
+
+.power-left-nav::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+/*正常情况下滑块的样式*/
+.power-left-nav::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,.05);
+    border-radius: 10px;
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1);
+}
+/*鼠标悬浮在该类指向的控件上时滑块的样式*/
+.power-left-nav:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,.2);
+    border-radius: 10px;
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1);
+}
+/*鼠标悬浮在滑块上时滑块的样式*/
+.power-left-nav::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0,0,0,.4);
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1);
+}
+/*正常时候的主干部分*/
+.power-left-nav::-webkit-scrollbar-track {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0);
+    background-color: white;
+}
+/*鼠标悬浮在滚动条上的主干部分*/
+.power-left-nav::-webkit-scrollbar-track:hover {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.4);
+    background-color: rgba(0,0,0,.01);
+}

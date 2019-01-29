@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.frame.web.mapper.puborder.SerApplicationMapper">
+    <resultMap type="com.sdp.servflow.pubandorder.serapplication.model.SerApplicationBean" id="BaseResultMap">
+        <id column="application_id" jdbcType="VARCHAR" property="applicationId" />
+        <result column="application_name" jdbcType="VARCHAR" property="applicationName" />
+        <result column="creat_user" jdbcType="VARCHAR" property="creatUser" />
+        <result column="creatime" jdbcType="TIMESTAMP" property="creatTime" />
+        <result column="createDateString" jdbcType="VARCHAR" property="createDateString" />
+        <result column="delflag" jdbcType="VARCHAR" property="delFlag" />
+        <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        application_id, application_name, creat_user, creatime, delflag, tenant_id
+    </sql>
+
+    <select id="getAllByCondition" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from ser_application where 1=1
+        <if test="applicationId != null">
+            and application_id = #{applicationId,jdbcType=VARCHAR}
+        </if>
+        <if test="applicationName != null">
+            and application_name LIKE '%${applicationName}%'
+        </if>
+        <if test="creatUser != null">
+            and creat_user = #{creatUser,jdbcType=VARCHAR}
+        </if>
+        <if test="creatTime != null">
+            and creatime = #{creatTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="delFlag != null">
+            and delflag = #{delFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="tenantId != null">
+            and tenant_id = #{tenantId,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="selectPage" parameterType="map" resultMap="BaseResultMap">
+        select
+        application_id as applicationId,
+        application_name as applicationName,
+        creat_user as creatUser,
+        date_format(creatime,'%Y-%m-%d %H:%i') As createDateString,
+        delflag as delFlag,
+        tenant_id as tenantId
+        from ser_application where 1=1
+        <if test="applicationId != null">
+            and application_id = #{applicationId,jdbcType=VARCHAR}
+        </if>
+        <if test="applicationName != null">
+            and application_name LIKE '%${applicationName}%'
+        </if>
+        <if test="creatUser != null">
+            and creat_user = #{creatUser,jdbcType=VARCHAR}
+        </if>
+        <if test="creatTime != null">
+            and creatime = #{creatTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="delFlag != null">
+            and delflag = #{delFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="tenantId != null">
+            and tenant_id = #{tenantId,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <insert id="insert" parameterType="com.sdp.servflow.pubandorder.serapplication.model.SerApplicationBean">
+        insert into ser_application
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="applicationId != null">
+                application_id,
+            </if>
+            <if test="applicationName != null">
+                application_name,
+            </if>
+            <if test="creatUser != null">
+                creat_user,
+            </if>
+            <if test="creatTime != null">
+                creatime,
+            </if>
+            <if test="delFlag != null">
+                delflag,
+            </if>
+            <if test="tenantId != null">
+                tenant_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="applicationId != null">
+                #{applicationId,jdbcType=VARCHAR},
+            </if>
+            <if test="applicationName != null">
+                #{applicationName,jdbcType=VARCHAR},
+            </if>
+            <if test="creatUser != null">
+                #{creatUser,jdbcType=VARCHAR},
+            </if>
+            <if test="creatTime != null">
+                #{creatTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantId != null">
+                #{tenantId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.sdp.servflow.pubandorder.serapplication.model.SerApplicationBean">
+        update ser_application
+        <set>
+            <if test="applicationName != null">
+                application_name = #{applicationName, jdbcType=VARCHAR},
+            </if>
+            <if test="creatUser != null">
+                creat_user = #{creatUser, jdbcType=VARCHAR},
+            </if>
+            <if test="creatTime != null">
+                creatime = #{creatTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null">
+                delflag = #{delFlag, jdbcType=VARCHAR},
+            </if>
+            <if test="tenantId != null">
+                tenant_id = #{tenantId, jdbcType=VARCHAR},
+            </if>
+        </set>
+        where application_id = #{applicationId,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from ser_application
+        where application_id = #{applicationId,jdbcType=VARCHAR}
+    </delete>
+</mapper>

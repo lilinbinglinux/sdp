@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.code.mapper.PCodeInfoMapper">
+
+    <!--<resultMap type="com.sdp.serviceAccess.entity.CodeType" id="setType">-->
+    <!--<result property="typeId" column="type_id" jdbcType="INTEGER"/>-->
+    <!--<result property="typeName" column="type_name" jdbcType="VARCHAR"/>-->
+    <!--</resultMap>-->
+
+    <select id="getCodeSet" resultType="java.util.Map">
+		select
+		code_set_id,
+		code_set_name,
+		parent_id,
+		type_path,
+		type_status,
+		sort_id,
+		create_date,
+		create_by,
+		tenant_id,
+		del_flag
+		from p_code_set
+	</select>
+
+    <select id="getCodeSetByParentId" parameterType="java.lang.String" resultType="java.util.Map">
+		select
+		code_set_id,
+		code_set_name,
+		parent_id,
+		type_path,
+		type_status,
+		sort_id,
+		create_date,
+		create_by,
+		tenant_id,
+		del_flag
+		from p_code_set
+		where parent_id = #{parentId}
+		and del_flag = "0"
+	</select>
+
+    <select id="getCodeItemByParentId" parameterType="java.lang.String" resultType="java.util.Map">
+        select
+        code_item_id,
+		code_item_name,
+		code_item_code,
+		code_item_resume,
+		code_set_id,
+		parent_id,
+		type_path,
+		type_status,
+		sort_id,
+		create_date,
+		create_by,
+		tenant_id,
+		del_flag
+		from p_code_item
+		where parent_id = #{parentId}
+		and del_flag = "0"
+    </select>
+
+    <select id="getCodeItem" resultType="java.util.Map">
+		select
+		code_item_id,
+		code_item_name,
+		code_item_code,
+		code_item_resume,
+		code_set_id,
+		parent_id,
+		type_path,
+		type_status,
+		sort_id,
+		create_date,
+		create_by,
+		tenant_id,
+		del_flag
+		from p_code_item
+		where del_flag = "0"
+	</select>
+
+    <insert id="insertCodeSet" parameterType="com.sdp.code.entity.PCodeSet">
+		insert into p_code_set
+		(code_set_id,
+		code_set_name,
+		parent_id,
+		type_path,
+		type_status,
+		sort_id,
+		create_date,
+		create_by,
+		tenant_id,
+		del_flag)
+		values(
+		#{setId,jdbcType=VARCHAR},
+		#{setName,jdbcType=VARCHAR},
+		#{parentId,jdbcType=VARCHAR},
+		#{typePath,jdbcType=VARCHAR},
+		#{typeStatus,jdbcType=VARCHAR},
+		#{sortId,jdbcType=INTEGER},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{createBy,jdbcType=VARCHAR},
+		#{tenantId,jdbcType=VARCHAR},
+		#{delFlag,jdbcType=VARCHAR}
+		)
+	</insert>
+
+    <insert id="insertCodeItem" parameterType="com.sdp.code.entity.PCodeItem">
+		insert into p_code_item
+		(code_item_id,
+		code_item_name,
+		code_item_code,
+		code_item_resume,
+		code_set_id,
+		parent_id,
+		type_path,
+		type_status,
+		sort_id,
+		create_date,
+		create_by,
+		tenant_id,
+		del_flag)
+		values(
+		#{itemId,jdbcType=VARCHAR},
+		#{itemName,jdbcType=VARCHAR},
+		#{itemCode,jdbcType=VARCHAR},
+		#{itemResume,jdbcType=VARCHAR},
+		#{setId,jdbcType=VARCHAR},
+		#{parentId,jdbcType=VARCHAR},
+		#{typePath,jdbcType=VARCHAR},
+		#{typeStatus,jdbcType=VARCHAR},
+		#{sortId,jdbcType=INTEGER},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{createBy,jdbcType=VARCHAR},
+		#{tenantId,jdbcType=VARCHAR},
+		#{delFlag,jdbcType=VARCHAR}
+		)
+	</insert>
+
+    <select id="findItemById" parameterType="java.lang.String" resultType="com.sdp.code.entity.PCodeItem">
+		select
+		code_item_id "itemId",
+		code_item_name "itemName",
+		code_item_code "itemCode",
+		code_item_resume "itemResume",
+		code_set_id "setId",
+		parent_id "parentId",
+		type_path "typePath",
+		type_status "typeStatus",
+		sort_id "sortId",
+		create_date "createDate",
+		create_by "createBy",
+		tenant_id "tenantId",
+		del_flag "delFlag"
+		from p_code_item
+		where 1=1
+		and code_item_id = #{itemId}
+	</select>
+
+    <!--<select id="findSingleItem" parameterType="java.lang.String" resultType="com.sdp.code.entity.PCodeItem">-->
+    <!--select-->
+    <!--code_item_id "itemId",-->
+    <!--code_item_name "itemName",-->
+    <!--code_item_code "itemCode",-->
+    <!--code_item_resume "itemResume",-->
+    <!--code_set_id "setId",-->
+    <!--parent_id "parentId",-->
+    <!--type_path "typePath",-->
+    <!--type_status "typeStatus",-->
+    <!--sort_id "sortId",-->
+    <!--create_date "createDate",-->
+    <!--create_by "createBy",-->
+    <!--tenant_id "tenantId",-->
+    <!--del_flag "delFlag"-->
+    <!--from p_code_item-->
+    <!--where 1=1-->
+    <!--and code_item_id = #{itemId}-->
+    <!--and del_flag = "0"-->
+    <!--</select>-->
+
+    <update id="updateCodeSet" parameterType="com.sdp.code.entity.PCodeSet">
+		update p_code_set set
+		code_set_name = #{setName,jdbcType=VARCHAR},
+		type_status = #{typeStatus,jdbcType=VARCHAR},
+		sort_id = #{sortId,jdbcType=INTEGER}
+		where 1=1
+		and code_set_id = #{setId}
+	</update>
+
+    <update id="changeSetName" parameterType="com.sdp.code.entity.PCodeSet">
+        update p_code_set set
+        code_set_name = #{setName,jdbcType=VARCHAR}
+        where 1=1
+        and code_set_id =#{setId}
+    </update>
+
+    <update id="changeItemName" parameterType="com.sdp.code.entity.PCodeSet">
+        update p_code_item set
+        code_item_name = #{itemName,jdbcType=VARCHAR}
+        where 1=1
+        and code_item_id =#{itemId}
+    </update>
+
+    <update id="updateCodeItem" parameterType="com.sdp.code.entity.PCodeItem">
+		update p_code_item set
+		code_item_name = #{itemName,jdbcType=VARCHAR},
+		code_item_code = #{itemCode,jdbcType=VARCHAR},
+		code_item_resume = #{itemResume,jdbcType=VARCHAR},
+		type_status = #{typeStatus,jdbcType=VARCHAR},
+		sort_id = #{sortId,jdbcType=INTEGER}
+		where 1=1
+		and code_item_id = #{itemId}
+	</update>
+
+    <!--<delete id="deleteCodeItem" parameterType="com.sdp.code.entity.PCodeItem">-->
+    <!--delete from p_code_item where code_item_id = #{itemId}-->
+    <!--</delete>-->
+
+    <update id="deleteCodeItem" parameterType="com.sdp.code.entity.PCodeItem">
+		update p_code_item set
+		del_flag = #{delFlag,jdbcType=VARCHAR}
+		where 1=1
+		and code_item_id =#{itemId}
+	</update>
+
+    <update id="deleteCodeItemByTypePath" parameterType="com.sdp.code.entity.PCodeItem">
+		update p_code_item set
+		del_flag = #{delFlag,jdbcType=VARCHAR}
+		where 1=1
+		and type_path like '%${itemId}%'
+	</update>
+
+    <!--<delete id="deleteCodeSet" parameterType="com.sdp.code.entity.PCodeSet">-->
+    <!--delete from p_code_set where code_set_id = #{setId}-->
+    <!--</delete>-->
+
+    <update id="deleteCodeSet" parameterType="com.sdp.code.entity.PCodeSet">
+		update p_code_set set
+		del_flag = #{delFlag,jdbcType=VARCHAR}
+		where 1=1
+		and code_set_id = #{setId}
+	</update>
+
+    <!--<delete id="deleteCodeItemBySetId" parameterType="java.lang.String">-->
+    <!--delete from p_code_item where code_set_id = #{setId}-->
+    <!--</delete>-->
+
+    <update id="deleteCodeItemBySetId" parameterType="java.lang.String">
+		update p_code_item set
+		del_flag = #{1,jdbcType=VARCHAR}
+		where 1=1
+		and code_set_id = #{0}
+	</update>
+
+    <!--<select id="maxSort" resultType="java.lang.Integer">-->
+    <!--select max(sort_id) "maxSort" from p_code_set-->
+    <!--</select>-->
+
+</mapper>

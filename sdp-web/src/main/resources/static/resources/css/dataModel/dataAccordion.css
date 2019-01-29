@@ -1,0 +1,117 @@
+.accordion {
+    width: 100%;
+    background: #FFF;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.accordion .link {
+    cursor: pointer;
+    display: block;
+    color: #4D4D4D;
+    font-size: 14px;
+    font-weight: 700;
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.accordion li:last-child .link {
+    border-bottom: 0;
+}
+.link-manage-btn{
+
+}
+.accordion li i {
+    font-size: 18px;
+    color: #595959;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    display: inline-block;
+    width: 40px;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+}
+
+.accordion li i.fa-chevron-down {
+    right: 12px;
+    left: auto;
+    font-size: 16px;
+}
+
+.accordion li.open .link {
+    color: #4D4D4D;
+}
+
+.accordion li.open i {
+    color: #4D4D4D;
+}
+.accordion li.open i.fa-chevron-down {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.accordion li.default .submenu {display: block;}
+/**
+ * Submenu
+ -----------------------------*/
+.submenu {
+    display: none;
+    background: #fff;
+    font-size: 14px;
+}
+
+.submenu li {
+
+}
+
+.submenu a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    -webkit-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    padding: 0 60px;
+    height: 40px;
+}
+.submenu a .sub-icon{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    float: left;
+}
+.submenu a .sub-name{
+    height: 40px;
+    line-height: 40px;
+    float: left;
+}
+
+.sub-delete{
+    display: inline-block;
+    font-size: 10px;
+    width: 26px;
+    height: 15px;
+    background-color: #fff;
+    text-align: center;
+    line-height: 16px;
+    border: 1px solid;
+    border-radius: 5px;
+    margin-top: 11px;
+    margin-left: 10px;
+    color: #333;
+}
+
+.submenu a:hover {
+    background: #333;
+    color: #FFF;
+}

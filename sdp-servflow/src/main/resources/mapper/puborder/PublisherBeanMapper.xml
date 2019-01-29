@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.frame.web.mapper.puborder.PublisherBeanMapper">
+	<resultMap type="com.sdp.servflow.pubandorder.pub.model.PublisherBean" id="BaseResultMap">
+		<id column="pubid" jdbcType="VARCHAR" property="pubid" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="url" jdbcType="VARCHAR" property="url" />
+		<result column="pubport" jdbcType="VARCHAR" property="pubport" />
+		<result column="pubprotocal" jdbcType="VARCHAR" property="pubprotocal" />
+		<result column="method" jdbcType="VARCHAR" property="method" />
+		<result column="reqformat" jdbcType="VARCHAR" property="reqformat" />
+		<result column="respformat" jdbcType="VARCHAR" property="respformat" />
+		<result column="reqdatatype" jdbcType="VARCHAR" property="reqdatatype" />
+		<result column="returndatatype" jdbcType="VARCHAR" property="returndatatype" />
+		<result column="pubdesc" jdbcType="VARCHAR" property="pubdesc" />
+		<result column="createdate" jdbcType="TIMESTAMP" property="createdate" />
+		<result column="parentId" jdbcType="VARCHAR" property="parentId" />
+		<result column="typeId" jdbcType="VARCHAR" property="typeId" />
+		<result column="login_id" jdbcType="VARCHAR" property="login_id" />
+		<result column="tenant_id" jdbcType="VARCHAR" property="tenant_id" />
+		<result column="sampledata" jdbcType="VARCHAR" property="sampledata" />
+		<result column="checkstatus" jdbcType="VARCHAR" property="checkstatus" />
+		<result column="className" jdbcType="VARCHAR" property="className" />
+		<result column="methodInClass" jdbcType="VARCHAR" property="methodInClass" />
+		<result column="filePath" jdbcType="VARCHAR" property="filePath" />
+		<result column="stylecode" jdbcType="VARCHAR" property="stylecode" />
+		<result column="checkrun" jdbcType="VARCHAR" property="checkrun" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		pubid, name, url, pubport, pubprotocal, method,reqformat, respformat, reqdatatype, returndatatype, pubdesc, createdate, parentId, 
+		typeId, login_id, tenant_id, sampledata, checkstatus,className,methodInClass,filePath,stylecode
+	</sql>
+
+	<select id="selectAll" parameterType="map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from PUB_INTERFACERES where 1=1
+		<if test="pubid != null and pubid != ''">
+            and pubid = #{pubid,jdbcType=VARCHAR}
+        </if>
+        <if test="name != null and name != ''">
+            and name LIKE '%${name}%'
+        </if>
+        <if test="url != null">
+            and url = #{url,jdbcType=VARCHAR}
+        </if>
+        <if test="pubport != null">
+            and pubport = #{pubport,jdbcType=VARCHAR}
+        </if>
+        <if test="pubprotocal != null">
+            and pubprotocal = #{pubprotocal,jdbcType=VARCHAR}
+        </if>
+        <if test="method != null">
+            and method = #{method,jdbcType=VARCHAR}
+        </if>
+        <if test="reqformat != null">
+            and reqformat = #{reqformat,jdbcType=VARCHAR}
+        </if>
+        <if test="respformat != null">
+            and respformat = #{respformat,jdbcType=VARCHAR}
+        </if>
+        <if test="reqdatatype != null">
+            and reqdatatype = #{reqdatatype,jdbcType=VARCHAR}
+        </if>
+        <if test="returndatatype != null">
+            and returndatatype = #{returndatatype,jdbcType=VARCHAR}
+        </if>
+         <if test="pubdesc != null">
+            and pubdesc = #{pubdesc,jdbcType=VARCHAR}
+        </if>
+         <if test="parentId != null and parentId != ''">
+            and parentId = #{parentId,jdbcType=VARCHAR}
+        </if>
+         <if test="typeId != null">
+            and typeId = #{typeId,jdbcType=VARCHAR}
+        </if>
+        <if test="login_id != null">
+            and login_id = #{login_id,jdbcType=VARCHAR}
+        </if>
+        <if test="tenant_id != null">
+            and tenant_id = #{tenant_id,jdbcType=VARCHAR}
+        </if>
+        <if test="checkstatus != null">
+            and checkstatus = #{checkstatus,jdbcType=VARCHAR}
+        </if>
+        <if test="className != null">
+            and className = #{className,jdbcType=VARCHAR}
+        </if>
+        <if test="methodInClass != null">
+            and methodInClass = #{methodInClass,jdbcType=VARCHAR}
+        </if>
+        <if test="filePath != null">
+            and filePath = #{filePath,jdbcType=VARCHAR}
+        </if>
+        <if test="stylecode != null">
+            and stylecode = #{stylecode,jdbcType=VARCHAR}
+        </if>
+        order by createdate DESC
+	</select>
+	
+	
+	<select id="selectPage" parameterType="map" resultMap="BaseResultMap">
+        
+        SELECT
+        p.*,(case when a.pubid is null then '0' else '1' end) "checkrun"
+		FROM
+		    pub_interfaceres p
+		left JOIN (
+		    SELECT
+		        pubid,
+		        count(*) AS pubcount
+		    FROM
+		        apipush
+		    GROUP BY
+		        pubid
+		) a ON p.pubid = a.pubid
+        where 1=1 
+        <if test="pubid != null and pubid != ''">
+            and pubid = #{pubid,jdbcType=VARCHAR}
+        </if>
+        <if test="name != null and name != ''">
+            and name LIKE '%${name}%'
+        </if>
+         <if test="typeId != null">
+            and typeId = #{typeId,jdbcType=VARCHAR}
+        </if>
+          <if test="parentId != null and parentId != ''">
+            and parentId = #{parentId,jdbcType=VARCHAR}
+        </if>
+         <if test="checkstatus != null">
+            and checkstatus = #{checkstatus,jdbcType=VARCHAR}
+        </if>
+        <if test="login_id != null">
+            and login_id = #{login_id,jdbcType=VARCHAR}
+        </if>
+        <if test="tenant_id != null">
+            and tenant_id = #{tenant_id,jdbcType=VARCHAR}
+        </if>
+        <if test="stylecode != null">
+            and stylecode = #{stylecode,jdbcType=VARCHAR}
+        </if>
+        order by createdate DESC
+    </select>
+	
+	
+	<select id="getAllByCondition" parameterType="map" resultType="com.sdp.servflow.pubandorder.pub.model.PublisherBean">
+		select
+		<include refid="Base_Column_List" />
+		from PUB_INTERFACERES where 1=1 
+		
+		<if test="pubid != null">
+            and pubid = #{pubid,jdbcType=VARCHAR}
+        </if>
+        <if test="name != null and name != ''">
+            and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="url != null">
+            and url = #{url,jdbcType=VARCHAR}
+        </if>
+        <if test="pubport != null">
+            and pubport = #{pubport,jdbcType=VARCHAR}
+        </if>
+        <if test="pubprotocal != null">
+            and pubprotocal = #{pubprotocal,jdbcType=VARCHAR}
+        </if>
+        <if test="method != null">
+            and method = #{method,jdbcType=VARCHAR}
+        </if>
+        <if test="reqformat != null">
+            and reqformat = #{reqformat,jdbcType=VARCHAR}
+        </if>
+        <if test="respformat != null">
+            and respformat = #{respformat,jdbcType=VARCHAR}
+        </if>
+        <if test="reqdatatype != null">
+            and reqdatatype = #{reqdatatype,jdbcType=VARCHAR}
+        </if>
+        <if test="returndatatype != null">
+            and returndatatype = #{returndatatype,jdbcType=VARCHAR}
+        </if>
+         <if test="pubdesc != null">
+            and pubdesc = #{pubdesc,jdbcType=VARCHAR}
+        </if>
+         <if test="parentId != null">
+            and parentId = #{parentId,jdbcType=VARCHAR}
+        </if>
+         <if test="typeId != null">
+            and typeId = #{typeId,jdbcType=VARCHAR}
+        </if>
+        <if test="login_id != null">
+            and login_id = #{login_id,jdbcType=VARCHAR} 
+        </if>
+        <if test="tenant_id != null">
+            and tenant_id = #{tenant_id,jdbcType=VARCHAR}
+        </if>
+        <if test="className != null">
+            and className = #{className,jdbcType=VARCHAR}
+        </if>
+        <if test="methodInClass != null">
+            and methodInClass = #{methodInClass,jdbcType=VARCHAR}
+        </if>
+        <if test="filePath != null">
+            and filePath = #{filePath,jdbcType=VARCHAR}
+        </if>
+        <if test="checkstatus != null">
+            and checkstatus = 100
+        </if>
+        <if test="stylecode != null">
+            and stylecode = #{stylecode,jdbcType=VARCHAR}
+        </if>
+            
+	</select>
+	
+	<select id="getByPrimaryKey" parameterType="java.lang.String" resultType="com.sdp.servflow.pubandorder.pub.model.PublisherBean">
+		select
+		<include refid="Base_Column_List" />
+		from PUB_INTERFACERES where pubid=#{pubid,jdbcType=VARCHAR}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		PUB_INTERFACERES
+		where pubid = #{pubid,jdbcType=VARCHAR}
+	</delete>
+	
+	<delete id="deleteByCondition" parameterType="map">
+        delete from
+        PUB_INTERFACERES 
+        where 
+        <trim suffixOverrides="and">
+            <if test="pubid != null">
+                pubid =  #{pubid,jdbcType=VARCHAR} and 
+            </if>
+            <if test="login_id != null">
+                login_id = #{login_id,jdbcType=VARCHAR} and 
+            </if>
+            <if test="tenant_id != null">
+                tenant_id = #{tenant_id,jdbcType=VARCHAR} and
+            </if>
+        </trim>
+    </delete>
+
+	<insert id="insertInterface" parameterType="com.sdp.servflow.pubandorder.pub.model.PublisherBean">
+		insert into PUB_INTERFACERES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="pubid != null">
+				pubid,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="url != null">
+				url,
+			</if>
+			<if test="pubport != null">
+				pubport,
+			</if>
+			<if test="pubprotocal != null">
+				pubprotocal,
+			</if>
+			<if test="method != null">
+				method,
+			</if>
+			<if test="reqformat != null">
+                reqformat,
+            </if>
+			<if test="respformat != null">
+				respformat,
+			</if>
+			<if test="reqdatatype != null">
+                reqdatatype,
+            </if>
+			<if test="returndatatype != null">
+                returndatatype,
+            </if>
+			<if test="pubdesc != null">
+				pubdesc,
+			</if>
+			<if test="createdate != null">
+				createdate,
+			</if>
+			<if test="parentId != null">
+				parentId,
+			</if>
+			<if test="typeId != null">
+				typeId,
+			</if>
+			<if test="login_id != null">
+                login_id,
+            </if>
+			<if test="tenant_id != null">
+				tenant_id,
+			</if>
+			<if test="checkstatus != null">
+                checkstatus,
+            </if>
+            <if test="className != null">
+                className,
+            </if>
+            <if test="methodInClass != null">
+                methodInClass,
+            </if>
+            <if test="filePath != null">
+                filePath,
+            </if>
+            <if test="stylecode != null">
+                stylecode,
+            </if>
+            
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="pubid != null">
+				#{pubid,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="pubport != null">
+				#{pubport,jdbcType=VARCHAR},
+			</if>
+			<if test="pubprotocal != null">
+				#{pubprotocal,jdbcType=VARCHAR},
+			</if>
+			<if test="method != null">
+				#{method,jdbcType=VARCHAR},
+			</if>
+			<if test="reqformat != null">
+                #{reqformat,jdbcType=VARCHAR},
+            </if>
+			<if test="respformat != null">
+				#{respformat,jdbcType=VARCHAR},
+			</if>
+			<if test="reqdatatype != null">
+                #{reqdatatype,jdbcType=VARCHAR},
+            </if>
+            <if test="returndatatype != null">
+                #{returndatatype,jdbcType=VARCHAR},
+            </if>
+			<if test="pubdesc != null">
+				#{pubdesc,jdbcType=VARCHAR},
+			</if>
+			<if test="createdate != null">
+				#{createdate,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=VARCHAR},
+			</if>
+			<if test="typeId != null">
+                #{typeId,jdbcType=VARCHAR},
+            </if>
+			<if test="login_id != null">
+                #{login_id,jdbcType=VARCHAR},
+            </if>
+			<if test="tenant_id != null">
+				#{tenant_id,jdbcType=VARCHAR},
+			</if>
+			<if test="checkstatus != null">
+                #{checkstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="className != null">
+                #{className,jdbcType=VARCHAR},
+            </if>
+            <if test="methodInClass != null">
+                #{methodInClass,jdbcType=VARCHAR},
+            </if>
+            <if test="filePath != null">
+                #{filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="stylecode != null">
+                #{stylecode,jdbcType=VARCHAR},
+            </if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.sdp.servflow.pubandorder.pub.model.PublisherBean">
+		update PUB_INTERFACERES
+		<set>
+			<if test="name != null">
+				name= #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				url = #{url,jdbcType=VARCHAR},
+			</if>
+			<if test="pubport != null">
+				pubport = #{pubport,jdbcType=VARCHAR},
+			</if>
+			<if test="pubprotocal != null">
+				pubprotocal = #{pubprotocal,jdbcType=VARCHAR},
+			</if>
+			<if test="method != null">
+				method = #{method,jdbcType=VARCHAR},
+			</if>
+			<if test="reqformat != null">
+                reqformat = #{reqformat,jdbcType=VARCHAR},
+            </if>
+			<if test="respformat != null">
+				respformat = #{respformat,jdbcType=VARCHAR},
+			</if>
+			<if test="reqdatatype != null">
+                reqdatatype = #{reqdatatype,jdbcType=VARCHAR},
+            </if>
+            <if test="returndatatype != null">
+                returndatatype = #{returndatatype,jdbcType=VARCHAR},
+            </if>
+			<if test="pubdesc != null">
+				pubdesc = #{pubdesc,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null">
+				parentId = #{parentId,jdbcType=VARCHAR},
+			</if>
+			<if test="login_id != null">
+                login_id = #{login_id,jdbcType=VARCHAR},
+            </if>
+			<if test="typeId != null">
+				typeId = #{typeId,jdbcType=VARCHAR},
+			</if>
+			<if test="sampledata != null">
+                sampledata = #{sampledata,jdbcType=VARCHAR},
+            </if>
+            <if test="checkstatus != null">
+                checkstatus = #{checkstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="className != null">
+                className = #{className,jdbcType=VARCHAR},
+            </if>
+            <if test="methodInClass != null">
+                methodInClass = #{methodInClass,jdbcType=VARCHAR},
+            </if>
+            <if test="filePath != null">
+                filePath = #{filePath,jdbcType=VARCHAR} 
+            </if>
+            <if test="stylecode != null">
+                stylecode = #{stylecode,jdbcType=VARCHAR} 
+            </if>
+		</set>
+		 where pubid = #{pubid,jdbcType=VARCHAR}
+	</update>	
+	<delete id="deletePubParamByPubCondition" parameterType="java.lang.String">
+		delete from
+		pub_reqparam
+		where    pubid       = #{pubid} 
+			  and tenant_id = #{tenant_id}
+	</delete>
+</mapper>

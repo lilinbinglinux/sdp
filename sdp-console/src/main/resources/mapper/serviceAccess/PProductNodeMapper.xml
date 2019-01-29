@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.serviceAccess.mapper.PProductNodeMapper">
+	<insert id="save" parameterType="java.util.List">
+		insert into p_product_node
+		(node_id,
+		case_id,
+		case_arr,
+		case_status,
+		create_date,
+		create_by,
+		tenant_id) 
+		values 
+		<foreach collection="list" item="productNode" index="index"
+			separator=",">
+			(
+			#{productNode.nodeId,jdbcType=VARCHAR},
+			#{productNode.caseId,jdbcType=VARCHAR},
+			#{productNode.caseAttr,jdbcType=VARCHAR},
+			#{productNode.caseStatus,jdbcType=VARCHAR},
+			#{productNode.createDate,jdbcType=TIMESTAMP},
+			#{productNode.createBy,jdbcType=VARCHAR},
+			#{productNode.tenantId,jdbcType=VARCHAR}
+			)
+		</foreach>
+	</insert>
+
+	<select id="findByCondition" parameterType="com.sdp.serviceAccess.entity.PProductNode"
+		resultType="com.sdp.serviceAccess.entity.PProductNode">
+		select  
+		node_id "nodeId",
+		case_id "caseId",
+		case_arr "caseAttr",
+		case_status "caseStatus",
+		create_date "createDate",
+		create_by "createBy",
+		tenant_id "tenantId" 
+		from p_product_node 
+		where 1=1 
+		<if test="caseId != null and caseId != ''">
+		and case_id = #{caseId}
+		</if>
+		<if test="tenantId !=null and tenantId != ''">
+		and tenant_id = #{tenantId}
+		</if>
+		<if test="createBy !=null and createBy !=''">
+		    and create_by = #{createBy}
+		</if>
+	</select>
+	<update id="update" parameterType="com.sdp.serviceAccess.entity.PProductNode">
+	update p_product_node 
+	set 
+	case_status =#{caseStatus,jdbcType=VARCHAR} 
+	where tenant_id = #{tenantId} 
+	and node_id = #{nodeId}  
+	</update>
+	<delete id = "deleteByCondition" parameterType="com.sdp.serviceAccess.entity.PProductNode">
+	delete from p_product_node 
+	where 1=1 
+	<if test="tenantId != null and tenantId !=''">
+	and tenant_id = #{tenantId}
+	</if>
+	<if test="caseId != null and caseId !=''">
+	 and case_id = #{caseId} 
+	</if>
+	<if test="caseIds !=null ">
+	and case_id in 
+		<foreach collection="caseIds" item="productNode" index="index"
+			separator=",">
+      (#{productNode,jdbcType=VARCHAR})	
+		</foreach>
+	</if>
+    
+	</delete>
+</mapper>

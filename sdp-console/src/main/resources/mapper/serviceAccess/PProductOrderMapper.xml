@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.serviceAccess.mapper.PProductOrderMapper">
+	
+	<resultMap id="BaseResultMap" type="com.sdp.serviceAccess.entity.PProductOrder">
+	    <id column="order_id" jdbcType="VARCHAR" property="orderId" />
+	    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+	    <result column="package_id" jdbcType="VARCHAR" property="packageId" />
+	    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+	    <result column="apply_name" jdbcType="VARCHAR" property="applyName" />
+	    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+	    <result column="expire_time" jdbcType="TIMESTAMP" property="expireTime" />
+	    <result column="frequency" jdbcType="INTEGER" property="frequency" />
+	    <result column="order_attr" jdbcType="VARCHAR" property="orderAttr" />
+	    <result column="order_control_attr" jdbcType="VARCHAR" property="orderControlAttr" />
+	    <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
+	    <result column="price" jdbcType="VARCHAR" property="price" />
+	    <result column="bpm_model_no" jdbcType="VARCHAR" property="bpmModelNo" />
+	    <result column="bpm_model_config" jdbcType="VARCHAR" property="bpmModelConfig" />
+	    <result column="monitor_processurl" jdbcType="VARCHAR" property="monitorProcessUrl" />
+	    <result column="bpm_sign_date" jdbcType="TIMESTAMP" property="bpmSignDate" />
+	    <result column="pways_id" jdbcType="VARCHAR" property="pwaysId" />
+	    <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+	    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+	    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+	    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />    
+	    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+	    <association property="pOrderWays" javaType="com.sdp.serviceAccess.entity.POrderWays">
+	    		<id column="pways_id" jdbcType="VARCHAR" property="pwaysId" />
+	    		<result column="pways_name" jdbcType="VARCHAR" property="pwaysName" />
+	    		<result column="pways_code" jdbcType="VARCHAR" property="pwaysCode" />
+	    		<result column="pways_type" jdbcType="VARCHAR" property="pwaysType" />
+	    		<result column="pways_config" jdbcType="VARCHAR" property="pwaysConfig" />
+	    		<result column="pways_remark" jdbcType="VARCHAR" property="pwaysRemark" />
+	    </association>
+  </resultMap>
+	
+   <sql id="Base_Column_List">
+       order_id "orderId", 
+       product_id "productId", 
+       package_id "packageId", 
+       product_name "productName", 
+       apply_name "applyName",
+       start_time "startTime", 
+       expire_time "expireTime", 
+       frequency "frequency", 
+       order_attr "orderAttr", 
+       order_control_attr "orderControlAttr",
+       order_status "orderStatus",
+       price "price",
+       bpm_model_no "bpmModelNo",
+       bpm_model_config "bpmModelConfig",
+       monitor_processurl "monitorProcessUrl",
+       bpm_sign_date "bpmSignDate",
+       pways_id "pwaysId",
+       tenant_id "tenantId",
+       create_date "createDate", 
+       create_by "createBy", 
+       update_date "updateDate",
+       update_by "updateBy"
+   </sql>
+   
+   <select id="findAll" parameterType="com.sdp.serviceAccess.entity.PProductOrder" 
+		 resultType="com.sdp.serviceAccess.entity.PProductOrder">
+		  select 
+		 <include refid="Base_Column_List" /> 
+		 from p_product_order where 1=1
+		 <if test="tenantId !=null and tenantId !=''">
+			and tenant_id=#{tenantId} 
+		 </if>
+		 <if test="createBy !=null and createBy !=''">
+			and create_by=#{createBy} 
+		 </if>
+		 
+   </select>
+	
+	<select id="findById" parameterType="com.sdp.serviceAccess.entity.PProductOrder" 
+		 resultType="com.sdp.serviceAccess.entity.PProductOrder">
+		 select 
+		  <include refid="Base_Column_List" /> 
+		 from p_product_order where 1=1 
+		 <if test="tenantId !=null and tenantId !=''">
+			and tenant_id=#{tenantId} 
+		 </if>
+		 <if test="orderId!=null and orderId!=''">
+			and order_id= #{orderId} 
+		 </if>
+	</select>
+	
+	<select id="findByPriId" parameterType="java.lang.String" 
+		 resultType="com.sdp.serviceAccess.entity.PProductOrder">
+		 select 
+		  <include refid="Base_Column_List" /> 
+		 from p_product_order where 1=1 
+		 <if test="tenantId !=null and tenantId !=''">
+			and tenant_id=#{tenantId} 
+		 </if>
+		 <if test="orderId!=null and orderId!=''">
+			and order_id= #{orderId} 
+		 </if>
+	</select>
+	
+	<select id="findTotalCount" parameterType="com.sdp.serviceAccess.entity.PProductOrder" resultType="java.lang.Long" >
+		select count(*) from p_product_order where 1=1 
+		<if test="tenantId !=null and tenantId !=''">
+			and tenant_id=#{tenantId} 
+		 </if>
+		  <if test="createBy !=null and createBy !=''">
+			and create_by=#{createBy} 
+		 </if>
+		 <if test="orderId!=null and orderId!=''">
+			and order_id LIKE '%${orderId}%' 
+		 </if>
+		 <if test="productId !=null and productId!=''">
+			and product_id= #{productId} 
+		 </if>
+		 <if test="packageId !=null and packageId !=''">
+			and package_id= #{packageId} 
+		 </if>
+		 <if test="productName !=null and productName !=''">
+			and product_name LIKE '%${productName}%' 
+		 </if>
+		 <if test="startTime !=null">
+			and start_time= #{startTime} 
+		 </if>
+		 <if test="expireTime !=null">
+			and expire_time= #{expireTime} 
+		 </if>
+		 <if test="orderStatus !=null and orderStatus !=''">
+			and order_status= #{orderStatus} 
+		 </if>
+		 <if test="bpmModelNo !=null and bpmModelNo !=''">
+			and bpm_model_no= #{bpmModelNo} 
+		 </if>
+		 <if test="pwaysId !=null and pwaysId !=''">
+			and pways_id= #{pwaysId} 
+		 </if>
+		 <if test="queryStartTime !=null">
+			and create_date <![CDATA[ >= ]]>  #{queryStartTime}
+		 </if>
+		 <if test="queryEndTime !=null">
+			and create_date <![CDATA[ <= ]]>  #{queryEndTime}
+		 </if>
+	</select>
+	
+	<select id="findPageAllByCondition" parameterType="java.util.HashMap"  
+	resultMap="BaseResultMap">
+		select 
+		   * 
+		 from p_product_order porder 
+		 left join p_product_orderways pway on porder.pways_id = pway.pways_id 
+		 where 1=1 
+		 <if test="tenantId !=null and tenantId !=''">
+			and porder.tenant_id=#{tenantId} 
+		 </if>
+		  <if test="createBy !=null and createBy !=''">
+			and porder.create_by=#{createBy} 
+		 </if>
+		 <if test="orderId!=null and orderId!=''">
+			and porder.order_id LIKE '%${orderId}%' 
+		 </if>
+		 <if test="productId !=null and productId!=''">
+			and porder.product_id= #{productId} 
+		 </if>
+		 <if test="packageId !=null and packageId !=''">
+			and porder.package_id= #{packageId} 
+		 </if>
+		 <if test="productName !=null and productName !=''">
+			and porder.product_name LIKE '%${productName}%' 
+		 </if>
+		 <if test="startTime !=null">
+			and porder.start_time= #{startTime}
+		 </if>
+		 <if test="expireTime !=null">
+			and porder.expire_time= #{expireTime}
+		 </if>
+		 <if test="orderStatus !=null and orderStatus !=''">
+			and porder.order_status= #{orderStatus} 
+		 </if>
+		 <if test="bpmModelNo !=null and bpmModelNo !=''">
+			and porder.bpm_model_no= #{bpmModelNo} 
+		 </if>
+		 <if test="pwaysId !=null and pwaysId !=''">
+			and porder.pways_id= #{pwaysId} 
+		 </if>
+		  <if test="queryStartTime !=null">
+			and porder.create_date <![CDATA[ >= ]]>  #{queryStartTime}
+		 </if>
+		 <if test="queryEndTime !=null">
+			and porder.create_date <![CDATA[ <= ]]>  #{queryEndTime}
+		 </if>
+		 order by porder.create_date desc 
+		 limit ${startNum},${num}
+	</select>
+	
+	<select id="findAllByCondition" parameterType="com.sdp.serviceAccess.entity.PProductOrder" 
+		 resultType="com.sdp.serviceAccess.entity.PProductOrder">
+		select 
+		   <include refid="Base_Column_List" /> 
+		 from p_product_order where 1=1 
+		 <if test="tenantId !=null and tenantId !=''">
+			and tenant_id=#{tenantId} 
+		 </if>
+		  <if test="createBy !=null and createBy !=''">
+			and create_by=#{createBy} 
+		 </if>
+		 <if test="orderId!=null and orderId!=''">
+			and order_id= #{orderId} 
+		 </if>
+		 <if test="productId !=null and productId!=''">
+			and product_id= #{productId} 
+		 </if>
+		 <if test="packageId !=null and packageId !=''">
+			and package_id= #{packageId} 
+		 </if>
+		 <if test="productName !=null and productName !=''">
+			and product_name= #{productName} 
+		 </if>
+		 <if test="startTime !=null and startTime !=''">
+			and start_time= #{startTime} 
+		 </if>
+		 <if test="expireTime !=null and expireTime !=''">
+			and expire_time= #{expireTime} 
+		 </if>
+		 <if test="orderStatus !=null and orderStatus !=''">
+			and order_status= #{orderStatus} 
+		 </if>
+		 <if test="bpmModelNo !=null and bpmModelNo !=''">
+			and bpm_model_no= #{bpmModelNo} 
+		 </if>
+		 <if test="pwaysId !=null and pwaysId !=''">
+			and pways_id= #{pwaysId} 
+		 </if> 
+		 order by create_date desc 
+	</select>
+	
+	<select id="findAllByLikeCondition" parameterType="com.sdp.serviceAccess.entity.PProductOrder" 
+		 resultType="com.sdp.serviceAccess.entity.PProductOrder">
+		select 
+		  <include refid="Base_Column_List" /> 
+		 from p_product_order where 1=1 
+		 <if test="tenantId !=null and tenantId !=''">
+			and tenant_id=#{tenantId} 
+		 </if>
+		 <if test="createBy !=null and createBy !=''">
+			and create_by=#{createBy} 
+		 </if>
+		 <if test="orderId!=null and orderId!=''">
+			 and order_id LIKE '%${orderId}%'
+		 </if>
+		 <if test="productId !=null and productId!=''">
+			and product_id= #{productId} 
+		 </if>
+		 <if test="packageId !=null and packageId !=''">
+			and package_id= #{packageId} 
+		 </if>
+		 <if test="productName !=null and productName !=''">
+			or product_name like '%#{productName}%'
+		 </if>
+		 <if test="startTime !=null and startTime !=''">
+			and start_time= #{startTime} 
+		 </if>
+		 <if test="expireTime !=null and expireTime !=''">
+			and expire_time= #{expire_time} 
+		 </if>
+		 <if test="orderStatus !=null and orderStatus !=''">
+			and order_status= #{orderStatus} 
+		 </if>
+		 <if test="bpmModelNo !=null and bpmModelNo !=''">
+			and bpm_model_no= #{bpmModelNo} 
+		 </if>
+		 <if test="pwaysId !=null and pwaysId !=''">
+			and pways_id= #{pwaysId} 
+		 </if>
+	</select>
+	
+	<insert id="saveSingle" parameterType="com.sdp.serviceAccess.entity.PProductOrder" >
+		insert into p_product_order (
+		order_id,
+	  	product_id,
+	  	package_id,
+	  	product_name,
+	  	apply_name,
+	  	start_time,
+	  	expire_time,
+	  	frequency,
+	  	order_attr,
+	  	order_control_attr,
+	  	order_status,
+	  	price,
+	  	bpm_model_no,
+	  	bpm_model_config,
+        monitor_processurl,
+	  	bpm_sign_date,
+	  	pways_id,
+	  	tenant_id,
+	  	create_date,
+	  	create_by,
+	  	update_date,
+	  	update_by )
+	  	values(
+	  	#{orderId,jdbcType=VARCHAR},
+	  	#{productId,jdbcType=VARCHAR},
+	  	#{packageId,jdbcType=VARCHAR},
+	  	#{productName,jdbcType=VARCHAR},
+	  	#{applyName,jdbcType=VARCHAR},
+	  	#{startTime,jdbcType=TIMESTAMP},
+	  	#{expireTime,jdbcType=TIMESTAMP},
+	  	#{frequency,jdbcType=INTEGER},
+	  	#{orderAttr,jdbcType=VARCHAR},
+	  	#{orderControlAttr,jdbcType=VARCHAR},
+	  	#{orderStatus,jdbcType=INTEGER},
+	  	#{price,jdbcType=VARCHAR},
+	  	#{bpmModelNo,jdbcType=VARCHAR},
+	  	#{bpmModelConfig,jdbcType=VARCHAR},
+	  	#{monitorProcessUrl,jdbcType=VARCHAR},
+	  	#{bpmSignDate,jdbcType=TIMESTAMP},
+	  	#{pwaysId,jdbcType=VARCHAR},
+	  	#{tenantId,jdbcType=VARCHAR},
+	  	#{createDate,jdbcType=TIMESTAMP},
+	  	#{createBy,jdbcType=VARCHAR},
+	  	#{updateDate,jdbcType=TIMESTAMP},
+	  	#{updateBy,jdbcType=VARCHAR}
+	  	)
+	</insert>
+	
+	<update id="update" parameterType="com.sdp.serviceAccess.entity.PProductOrder" >
+		update p_product_order 
+		set 
+		order_id=#{orderId,jdbcType=VARCHAR},           
+	  	product_id=#{productId,jdbcType=VARCHAR},         
+	  	package_id=#{packageId,jdbcType=VARCHAR},         
+	  	product_name=#{productName,jdbcType=VARCHAR},       
+	  	apply_Name=#{applyName,jdbcType=VARCHAR},       
+	  	start_time=#{startTime,jdbcType=TIMESTAMP},            
+	  	expire_time=#{expireTime,jdbcType=TIMESTAMP},           
+	  	frequency=#{frequency,jdbcType=INTEGER},         
+	  	order_attr=#{orderAttr,jdbcType=VARCHAR},         
+	  	order_control_attr=#{orderControlAttr,jdbcType=VARCHAR},  
+	  	order_status=#{orderStatus,jdbcType=INTEGER},       
+	  	price=#{price,jdbcType=VARCHAR},             
+	  	bpm_model_no=#{bpmModelNo,jdbcType=VARCHAR},   
+	  	bpm_model_config=#{bpmModelConfig,jdbcType=VARCHAR},
+        monitor_processurl=#{monitorProcessUrl,jdbcType=VARCHAR},
+	  	bpm_sign_date=#{bpmSignDate,jdbcType=TIMESTAMP},          
+	  	pways_id=#{pwaysId,jdbcType=VARCHAR},           
+	  	tenant_id=#{tenantId,jdbcType=VARCHAR},          
+	  	create_date=#{createDate,jdbcType=TIMESTAMP},           
+	  	create_by=#{createBy,jdbcType=VARCHAR},          
+	  	update_date=#{updateDate,jdbcType=TIMESTAMP},           
+	  	update_by=#{updateBy,jdbcType=VARCHAR}           
+		where tenant_id = #{tenantId} 
+		and 
+		order_id = #{orderId}
+	</update>
+	
+	<delete id="delete" parameterType="com.sdp.serviceAccess.entity.PProductOrder" >
+		delete from p_product_order 
+		where 1=1 
+		and tenant_id = #{tenantId}
+		and order_id = #{orderId}
+	</delete>
+	
+	<select id="findFinishTaskOrder" parameterType="java.util.HashMap"  
+	resultMap="BaseResultMap">
+		select 
+		   porder.* 
+		 from p_product_order porder 
+		 inner join p_bpm_approvalflow pbpm on porder.order_id = pbpm.order_id 
+		 where 1=1 
+		 <if test="tenantId !=null and tenantId !=''">
+			and porder.tenant_id=#{tenantId} 
+		 </if>
+		  <if test="createBy !=null and createBy !=''">
+			and porder.create_by=#{createBy} 
+		 </if>
+		 <if test="orderId!=null and orderId!=''">
+			and porder.order_id LIKE '%${orderId}%' 
+		 </if>
+		 <if test="productId !=null and productId!=''">
+			and porder.product_id= #{productId} 
+		 </if>
+		 <if test="packageId !=null and packageId !=''">
+			and porder.package_id= #{packageId} 
+		 </if>
+		 <if test="productName !=null and productName !=''">
+			and porder.product_name= #{productName} 
+		 </if>
+		 <if test="startTime !=null">
+			and porder.start_time= #{startTime}
+		 </if>
+		 <if test="expireTime !=null">
+			and porder.expire_time= #{expireTime}
+		 </if>
+		 <if test="orderStatus !=null and orderStatus !=''">
+			and porder.order_status= #{orderStatus} 
+		 </if>
+		 <if test="bpmModelNo !=null and bpmModelNo !=''">
+			and porder.bpm_model_no= #{bpmModelNo} 
+		 </if>
+		 <if test="pwaysId !=null and pwaysId !=''">
+			and porder.pways_id= #{pwaysId} 
+		 </if>
+		 order by pbpm.create_date desc 
+		 limit ${startNum},${num}
+	</select>
+	
+	<select id="findFinishTaskTotalCount" parameterType="com.sdp.serviceAccess.entity.PProductOrder" resultType="java.lang.Long" >
+		select count(*) from p_product_order porder right join p_bpm_approvalflow pbpm 
+		on porder.order_id = pbpm.order_id 
+		where 1=1 
+		<if test="tenantId !=null and tenantId !=''">
+			and porder.tenant_id=#{tenantId} 
+		 </if>
+		 <if test="orderId!=null and orderId!=''">
+			and porder.order_id LIKE '%${orderId}%' 
+		 </if>
+		 <if test="productId !=null and productId!=''">
+			and porder.product_id= #{productId} 
+		 </if>
+		 <if test="packageId !=null and packageId !=''">
+			and porder.package_id= #{packageId} 
+		 </if>
+		 <if test="productName !=null and productName !=''">
+			and porder.product_name LIKE '%${productName}%'
+		 </if>
+		 <if test="startTime !=null">
+			and porder.start_time= #{startTime} 
+		 </if>
+		 <if test="expireTime !=null">
+			and porder.expire_time= #{expireTime} 
+		 </if>
+		 <if test="orderStatus !=null and orderStatus !=''">
+			and porder.order_status= #{orderStatus} 
+		 </if>
+		 <if test="bpmModelNo !=null and bpmModelNo !=''">
+			and porder.bpm_model_no= #{bpmModelNo} 
+		 </if>
+		 <if test="pwaysId !=null and pwaysId !=''">
+			and porder.pways_id= #{pwaysId} 
+		 </if>
+	</select>
+	
+	<select id="findTotalCountAuth" parameterType="java.util.Map" resultType="java.lang.Long" >
+		select count(*) from p_product_order o
+		<if test="providerId !=null">
+			join p_product p ON p.product_id = o.product_id
+		 </if>
+		where 1=1 
+		<if test="tenantId !=null and tenantId !=''">
+			and o.tenant_id=#{tenantId} 
+		 </if>
+		  <if test="loginId !=null and loginId !=''">
+			and o.create_by=#{loginId} 
+		 </if>
+		 <if test="orderId!=null and orderId!=''">
+			and o.order_id LIKE '%${orderId}%' 
+		 </if>
+		 <if test="productId !=null and productId!=''">
+			and o.product_id= #{productId} 
+		 </if>
+		 <if test="packageId !=null and packageId !=''">
+			and o.package_id= #{packageId} 
+		 </if>
+		 <if test="productName !=null and productName !=''">
+			and o.product_name LIKE '%${productName}%' 
+		 </if>
+		 <if test="startTime !=null">
+			and o.start_time= #{startTime} 
+		 </if>
+		 <if test="expireTime !=null">
+			and o.expire_time= #{expireTime} 
+		 </if>
+		 <if test="orderStatus !=null">
+		 	<if test="orderStatus ==100 ">
+		 	 and (o.order_status= '20' or o.order_status= '50' )
+		 	 </if>
+		 	<if test="orderStatus != 100 and orderStatus != 0">
+			  and o.order_status= #{orderStatus} 
+		 	 </if>
+		 </if>
+		 <if test="bpmModelNo !=null and bpmModelNo !=''">
+			and o.bpm_model_no= #{bpmModelNo} 
+		 </if>
+		 <if test="pwaysId !=null and pwaysId !=''">
+			and o.pways_id= #{pwaysId} 
+		 </if>
+		 <if test="queryStartTime !=null">
+			and o.create_date <![CDATA[ >= ]]>  #{queryStartTime}
+		 </if>
+		 <if test="queryEndTime !=null">
+			and o.create_date <![CDATA[ <= ]]>  #{queryEndTime}
+		 </if>
+		 <if test="providerId !=null and providerId !=''">
+			and p.create_by= #{providerId} 
+		 </if>
+	</select>
+	
+	<select id="findPageAllByConditionWithAuth" parameterType="java.util.HashMap"  
+	resultMap="BaseResultMap">
+		select 
+		   * 
+		 from p_product_order porder 
+		 <if test="providerId !=null">
+			join p_product p ON p.product_id = porder.product_id
+		 </if>
+		 left join p_product_orderways pway on porder.pways_id = pway.pways_id 
+		 where 1=1 
+		 <if test="tenantId !=null and tenantId !=''">
+			and porder.tenant_id=#{tenantId} 
+		 </if>
+		  <if test="createBy !=null and createBy !=''">
+			and porder.create_by=#{createBy} 
+		 </if>
+		 <if test="orderId!=null and orderId!=''">
+			and porder.order_id LIKE '%${orderId}%' 
+		 </if>
+		 <if test="productId !=null and productId!=''">
+			and porder.product_id= #{productId} 
+		 </if>
+		 <if test="packageId !=null and packageId !=''">
+			and porder.package_id= #{packageId} 
+		 </if>
+		 <if test="productName !=null and productName !=''">
+			and porder.product_name LIKE '%${productName}%' 
+		 </if>
+		 <if test="startTime !=null">
+			and porder.start_time= #{startTime}
+		 </if>
+		 <if test="expireTime !=null">
+			and porder.expire_time= #{expireTime}
+		 </if>
+		 <if test="orderStatus !=null">
+		 	<if test="orderStatus == 100 ">
+		 	 and (order_status= '20' or order_status= '50' )
+		 	 </if>
+		 	<if test="orderStatus != 100 and orderStatus != 0">
+			  and order_status= #{orderStatus} 
+		 	 </if>
+		 </if>
+		 <if test="bpmModelNo !=null and bpmModelNo !=''">
+			and porder.bpm_model_no= #{bpmModelNo} 
+		 </if>
+		 <if test="pwaysId !=null and pwaysId !=''">
+			and porder.pways_id= #{pwaysId} 
+		 </if>
+		  <if test="queryStartTime !=null">
+			and porder.create_date <![CDATA[ >= ]]>  #{queryStartTime}
+		 </if>
+		 <if test="queryEndTime !=null">
+			and porder.create_date <![CDATA[ <= ]]>  #{queryEndTime}
+		 </if>
+		 <if test="providerId !=null and providerId !=''">
+			and p.create_by= #{providerId} 
+		 </if>
+		 order by porder.create_date desc 
+		 limit ${startNum},${num}
+	</select>
+</mapper>

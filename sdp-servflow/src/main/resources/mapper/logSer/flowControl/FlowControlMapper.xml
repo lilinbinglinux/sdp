@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.servflow.logSer.flowControl.mapper.FlowControlMapper">
+	<resultMap id="flowControlBean" type="com.sdp.servflow.logSer.flowControl.model.FlowControlBean">
+    	<result column="id" jdbcType="VARCHAR" property="id" />
+    	<result column="pubId" jdbcType="VARCHAR" property="pubId" />
+    	<result column="intervalInMills" javaType="long" jdbcType="INTEGER" property="intervalInMills" />
+    	<result column="capacity" javaType="long" jdbcType="INTEGER" property="capacity" />
+    	<result column="createTime" jdbcType="DATE" property="createTime" />
+    	<result column="tenant_id" jdbcType="VARCHAR" property="tenant_id" />
+  	</resultMap>
+  	
+  	<resultMap id="counterBean" type="com.sdp.servflow.logSer.flowControl.model.CounterBean">
+    	<result column="orderid" jdbcType="VARCHAR" property="orderid" />
+    	<result column="acc_freq" jdbcType="INTEGER" property="acc_freq" />
+    	<result column="acc_freq_type" jdbcType="VARCHAR" property="acc_freq_type" />
+    	<result column="tenant_id" jdbcType="VARCHAR" property="tenant_id" />
+  	</resultMap>	
+  	
+  	<select id="selectLastModifiedTimeSerIpLimit" resultType="java.util.Date">
+		SELECT UPDATE_TIME FROM information_schema.tables
+		where TABLE_SCHEMA = #{schemaName}
+		and TABLE_NAME = 'order_interface'
+  	</select>
+  	
+  	<select id="selectInitDate" resultMap="counterBean">
+		select tenant_id,orderid,acc_freq,acc_freq_type from order_interface
+		where tenant_id is NOT NULL 
+		and orderid is NOT NULL 
+		and acc_freq is NOT NULL 
+		and acc_freq_type is NOT NULL
+  	</select>
+  	
+  	
+</mapper>

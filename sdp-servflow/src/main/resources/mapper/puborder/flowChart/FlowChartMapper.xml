@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdp.servflow.pubandorder.flowchart.mapper.FlowChartMapper">
+	<select id="selectAll" parameterType="com.sdp.servflow.pubandorder.flowchart.model.FlowChart" resultType="com.sdp.servflow.pubandorder.flowchart.model.FlowChart">
+		select 
+			flowChartId   "flowChartId",
+			flow_chart_name "flowChartName",
+			creatime      "creaTime",
+			user_id         "userId",
+			update_time     "updateTime",
+			tenant_id       "tenant_id"
+		from LAYOUT_FLOW_CHART
+		where tenant_id=#{tenant_id}
+	</select>
+	<select id="findByIdAndTenantId" parameterType="java.util.Map" resultType="com.sdp.servflow.pubandorder.flowchart.model.FlowChart">
+		select 
+		flowChartId   "flowChartId",
+		flow_chart_name "flowChartName",
+		creatime      "creaTime",
+		user_id         "userId",
+		update_time     "updateTime",
+		tenant_id       "tenant_id"
+		from LAYOUT_FLOW_CHART
+		where flowChartId=#{flowChartId,jdbcType=VARCHAR} and tenant_id=#{tenant_id,jdbcType=VARCHAR}
+	</select>
+	<insert id="addFlowChart" parameterType="com.sdp.servflow.pubandorder.flowchart.model.FlowChart">
+		insert into LAYOUT_FLOW_CHART(
+			flowChartId,
+			flow_chart_name,
+			creatime,
+			user_id,
+			update_time,
+			tenant_id
+			)
+			values (
+			#{flowChartId,jdbcType=VARCHAR},
+			#{flowChartName,jdbcType=VARCHAR},
+			#{creaTime,jdbcType=VARCHAR},
+			#{userId,jdbcType=VARCHAR},
+			#{updateTime,jdbcType=VARCHAR},
+			#{tenant_id,jdbcType=VARCHAR}
+			)
+	</insert>
+	<update id="updateFlowChart" parameterType="com.sdp.servflow.pubandorder.flowchart.model.FlowChart">
+		update LAYOUT_FLOW_CHART
+		set
+		update_time=#{updateTime,jdbcType=VARCHAR}
+		where
+		flowChartId=#{flowChartId,jdbcType=VARCHAR} and tenant_id = #{tenant_id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateName" parameterType="com.sdp.servflow.pubandorder.flowchart.model.FlowChart">
+		update LAYOUT_FLOW_CHART
+		set
+		flow_chart_name=#{flowChartName,jdbcType=VARCHAR}
+		where
+		flowChartId=#{flowChartId,jdbcType=VARCHAR} and tenant_id = #{tenant_id,jdbcType=VARCHAR}
+	</update>
+	<delete id="deleteFlowChart" parameterType="java.util.Map">
+		delete from LAYOUT_FLOW_CHART 
+		where
+		flowChartId=#{flowChartId,jdbcType=VARCHAR} and tenant_id = #{tenantId,jdbcType=VARCHAR}
+	</delete>
+</mapper>

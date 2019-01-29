@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.serviceAccess.mapper.PProductTypeMapper">
+	<select id="findAll" parameterType="com.sdp.serviceAccess.entity.PProductType"
+		resultType="com.sdp.serviceAccess.entity.PProductType">
+		select 
+		a.product_type_id "productTypeId",
+		a.product_type_name
+		"productTypeName",
+		a.parent_id
+		"parentId",
+		a.type_path "typePath",
+		a.type_status "typeStatus",
+		a.sort_id "sortId",
+		a.product_type_code
+		"productTypeCode",
+		a.create_date "createDate",
+		a.create_by "createBy",
+		a.tenant_id
+		"tenantId",
+		b.product_type_name "parentName" 
+		from 
+		p_product_type a left join p_product_type b 
+		on a.parent_id = 
+		b.product_type_id 
+		and a.tenant_id = b.tenant_id 
+		where 1=1 
+		<if test="tenantId !=null and tenantId !=''">
+			and a.tenant_id=#{tenantId} 
+		</if>
+		<if
+			test="(productTypeName !=null and productTypeName !='') or (productTypeCode !=null and productTypeCode !='')">
+			 and (a.product_type_name like concat('%',#{productTypeName},'%') or a.product_type_code like concat('%',#{productTypeCode},'%')) 
+		</if>
+		order by a.sort_id
+	</select>
+
+	<select id="findById" parameterType="com.sdp.serviceAccess.entity.PProductType"
+		resultType="com.sdp.serviceAccess.entity.PProductType">
+		select 
+		a.product_type_id "productTypeId",
+		a.product_type_name "productTypeName",
+		a.parent_id
+		"parentId",
+		a.type_path "typePath",
+		a.type_status "typeStatus",
+		a.sort_id "sortId",
+		a.product_type_code "productTypeCode",
+		a.create_date "createDate",
+		a.create_by "createBy",
+		a.tenant_id 
+		"tenantId",
+		b.product_type_name 
+		"parentName" 
+		from p_product_type a left join p_product_type b 
+		on
+		a.parent_id = b.product_type_id 
+		and a.tenant_id = b.tenant_id 
+		where 1=1 
+		<if test="tenantId !=null and tenantId !=''">
+			and a.tenant_id=#{tenantId} 
+		</if>
+		and a.product_type_id = #{productTypeId} 
+	</select>
+
+	<update id="update" parameterType="com.sdp.serviceAccess.entity.PProductType">
+		update p_product_type 
+		set 
+		product_type_name =#{productTypeName,jdbcType=VARCHAR},
+		product_type_code 
+		=#{productTypeCode,jdbcType=VARCHAR},
+		parent_id
+		=#{parentId,jdbcType=VARCHAR},
+		type_path =#{typePath,jdbcType=VARCHAR},
+		type_status =#{typeStatus,jdbcType=VARCHAR},
+		sort_id
+		=#{sortId,jdbcType=INTEGER},
+		create_date =#{createDate,jdbcType=TIMESTAMP},
+		create_by =#{createBy,jdbcType=VARCHAR},
+		tenant_id 
+		=#{tenantId,jdbcType=VARCHAR} 
+		where tenant_id = #{tenantId} 
+		and  
+		product_type_id = #{productTypeId} 
+	</update>
+
+	<insert id="saveSingle" parameterType="com.sdp.serviceAccess.entity.PProductType">
+		insert into p_product_type 
+		(product_type_id,
+		product_type_name,
+		parent_id,
+		type_path,
+		type_status,
+		sort_id,
+		product_type_code,
+		create_date,
+		create_by,
+		tenant_id)
+		values(
+		#{productTypeId,jdbcType=VARCHAR},
+		#{productTypeName,jdbcType=VARCHAR},
+		#{parentId,jdbcType=VARCHAR},
+		#{typePath,jdbcType=VARCHAR},
+		#{typeStatus,jdbcType=VARCHAR},
+		#{sortId,jdbcType=INTEGER},
+		#{productTypeCode,jdbcType=VARCHAR},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{createBy,jdbcType=VARCHAR},
+		#{tenantId,jdbcType=VARCHAR} 
+		)
+	</insert>
+
+	<delete id="delete" parameterType="com.sdp.serviceAccess.entity.PProductType">
+		delete from p_product_type 
+		where
+		product_type_id = 
+		#{productTypeId} 
+	</delete>
+
+	<select id="findAllByParentId" parameterType="com.sdp.serviceAccess.entity.PProductType"
+		resultType="com.sdp.serviceAccess.entity.PProductType">
+		select 
+		a.product_type_id "productTypeId",
+		a.product_type_name
+		"productTypeName",
+		a.parent_id 
+		"parentId",
+		a.type_path "typePath",
+		a.type_status "typeStatus",
+		a.sort_id "sortId",
+		a.product_type_code
+		"productTypeCode",
+		a.create_date "createDate",
+		a.create_by "createBy",
+		a.tenant_id 
+		"tenantId"
+		from p_product_type a  
+		where 1=1 
+		and a.parent_id = #{parentId} 
+		<if test="tenantId !=null and tenantId !=''">
+			and a.tenant_id=#{tenantId} 
+		</if>
+	</select>
+
+	<select id="findByTypeCode" parameterType="com.sdp.serviceAccess.entity.PProductType"
+		resultType="com.sdp.serviceAccess.entity.PProductType">
+		select 
+		a.product_type_id "productTypeId",
+		a.product_type_name 
+		"productTypeName",
+		a.parent_id 
+		"parentId",
+		a.type_path "typePath",
+		a.type_status "typeStatus",
+		a.sort_id "sortId",
+		a.product_type_code
+		"productTypeCode",
+		a.create_date "createDate",
+		a.create_by "createBy",
+		a.tenant_id 
+		"tenantId" 
+		from p_product_type a  
+		where 1=1  
+		<if test="productTypeCode !=null and productTypeCode !=''">
+			and 
+		a.product_type_code = #{productTypeCode}  
+		</if>  
+		<if test="productTypeName !=null and productTypeName !=''">
+			and 
+		a.product_type_name = #{productTypeName}  
+		</if>  
+		<if test="tenantId !=null and tenantId !=''">
+			and a.tenant_id=#{tenantId} 
+		</if>  
+	</select>
+	
+    <select id="findAllByPage" parameterType="java.util.Map"
+		resultType="com.sdp.serviceAccess.entity.PProductType">
+		select 
+		a.product_type_id "productTypeId",
+		a.product_type_name
+		"productTypeName",
+		a.parent_id
+		"parentId",
+		a.type_path "typePath",
+		a.type_status "typeStatus",
+		a.sort_id "sortId",
+		a.product_type_code
+		"productTypeCode",
+		a.create_date "createDate",
+		a.create_by "createBy",
+		a.tenant_id
+		"tenantId",
+		b.product_type_name "parentName" 
+		from 
+		p_product_type a left join p_product_type b 
+		on a.parent_id = 
+		b.product_type_id 
+		and a.tenant_id = b.tenant_id 
+		where 1=1  
+		<if test="tenantId !=null and tenantId != ''">
+			and a.tenant_id = #{tenantId}
+		</if> 
+		<if
+			test="(productTypeName !=null and productTypeName !='') or (productTypeCode !=null and productTypeCode !='')">
+			 and (a.product_type_name like concat('%',#{productTypeName},'%') or a.product_type_code like concat('%',#{productTypeCode},'%')) 
+		</if>
+		order by a.sort_id  
+		limit #{startNo} , #{size}
+	</select>	
+	
+	<select id="maxSort" resultType="java.lang.Integer">
+	select max(sort_id) "maxSort" from p_product_type  
+	</select>
+	
+	<select id ="count" parameterType="java.util.Map" resultType="java.lang.Integer">
+	select count(1) "ctn" 
+	from 
+		p_product_type a left join p_product_type b 
+		on a.parent_id = 
+		b.product_type_id 
+		and a.tenant_id = b.tenant_id 
+		where 1=1 
+		<if test="tenantId !=null and tenantId !=''">
+			and a.tenant_id=#{tenantId} 
+		</if> 
+		<if
+			test="(productTypeName !=null and productTypeName !='') or (productTypeCode !=null and productTypeCode !='')">
+			 and (a.product_type_name like concat('%',#{productTypeName},'%') or a.product_type_code like concat('%',#{productTypeCode},'%')) 
+		</if>
+	</select>
+
+</mapper>

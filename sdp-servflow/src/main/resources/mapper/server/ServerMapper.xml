@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.servflow.pubandorder.serve.mapper.ServerMapper">
+	<select id="getServerFlow" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		  version.ser_flow
+		FROM
+		  ser_version version
+		WHERE
+		version.stopflag = '0'
+		AND version.delflag = '0'
+		AND version.tenant_id = #{tenant_id}
+		AND version.ser_id = #{ser_id}
+		AND version.ser_version = #{ser_version}
+		LIMIT 1
+	</select>
+
+</mapper>

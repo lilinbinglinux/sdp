@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.servflow.logSer.log.mapper.LogRecordMapper">
+  	
+  	<resultMap id="logDictionaryBean" type="com.sdp.servflow.logSer.log.model.LogDictionaryBean">
+    	<result column="id" jdbcType="INTEGER" property="id" />
+    	<result column="dayDateTime" jdbcType="INTEGER" property="dayDateTime" />
+    	<result column="dayTotalCount" jdbcType="INTEGER" property="dayTotalCount" />
+    	<result column="tableName" jdbcType="VARCHAR" property="tableName" />
+  	</resultMap>
+  	
+  	<insert id="insertBatchLog">
+  		insert into ${tableName} (logType,pubapiId,orderid,requestMsg,responseMsg,startTime,
+  		endTime,requestId,useTime,dayTime,code,instanceId,tenant_id)
+  		values
+  		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.logType},
+			#{item.pubapiId},
+			#{item.orderid},
+			#{item.requestMsg},
+			#{item.responseMsg},
+			#{item.startTimeStr,jdbcType=TIMESTAMP},
+			#{item.endTimeStr,jdbcType=TIMESTAMP},
+			#{item.requestId},
+			#{item.useTime},
+			#{dayTime},
+			#{item.code},
+			#{GUID},
+			#{item.tenant_id}
+			)
+		</foreach>
+  	</insert>
+  	
+  	<select id="selectSendLog" resultType="com.sdp.servflow.logSer.log.model.LogBean">
+		select
+			id as id,
+			SUBSTR(date_format(startTime,'%Y-%m-%d %T.%f'),1,23) as startTimeStr,
+			SUBSTR(date_format(endTime,'%Y-%m-%d %T.%f'),1,23) as endTimeStr,
+			requestMsg as requestMsg,
+			responseMsg as responseMsg,
+			useTime as useTime,
+			requestId as requestId,
+			orderid as orderid,
+			tenant_id as tenant_id,
+			dayTime as dayTime
+		from ${tableName}
+		where orderid = #{orderid}
+		and logType = #{logType}
+		and tenant_id = #{tenant_id}
+		and dayTime = #{dayTime}
+		and code = #{code}
+		<if test="startTimeStr != null and startTimeStr != ''">
+			and startTime &gt;= #{startTimeStr}
+			and startTime &lt;= #{endTimeStr}
+		</if>
+		ORDER BY startTime DESC ,id
+		LIMIT ${startNum},${num}
+	</select>
+	
+	<select id="selectLogDetail" resultType="com.sdp.servflow.logSer.log.model.LogBean">
+		select
+			id as id,
+			SUBSTR(date_format(startTime,'%Y-%m-%d %T.%f'),1,23) as startTimeStr,
+			SUBSTR(date_format(endTime,'%Y-%m-%d %T.%f'),1,23) as endTimeStr,
+			requestMsg as requestMsg,
+			responseMsg as responseMsg,
+			useTime as useTime,
+			requestId as requestId,
+			orderid as orderid,
+			dayTime as dayTime,
+			tenant_id as tenant_id
+		from ${tableName}
+		where orderid = #{orderid}
+		and logType = #{logType}
+		and tenant_id = #{tenant_id}
+		and dayTime = #{dayTime}
+		and requestId = #{requestId}
+	</select>
+	
+	<select id="selectDictionaryData" resultMap="logDictionaryBean">
+  		select * from log_dictionary
+  		where dayDateTime=#{dayDateTime}
+  		and tableName=#{tableName}
+  	</select>
+  	
+  	<select id="getTableNameByData" resultType="java.lang.String">
+  		select tableName from log_dictionary 
+		where dayDateTime=#{dayTime}
+  	</select>
+</mapper>

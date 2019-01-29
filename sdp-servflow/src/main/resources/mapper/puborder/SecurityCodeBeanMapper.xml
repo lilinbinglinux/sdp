@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.servflow.pubandorder.security.mapper.SecurityCodeBeanMapper">
+	<resultMap type="com.sdp.servflow.pubandorder.security.model.SecurityCodeBean" id="BaseResultMap">
+		<id column="token_id" jdbcType="VARCHAR" property="token_id" />
+		<result column="login_id" jdbcType="VARCHAR" property="login_id" />
+		<result column="appId" jdbcType="VARCHAR" property="appId" />
+		<result column="tenant_id" jdbcType="VARCHAR" property="tenant_id" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		token_id, login_id, appId, tenant_id
+	</sql>
+
+	<select id="getAllByCondition" resultType="com.sdp.servflow.pubandorder.security.model.SecurityCodeBean" parameterType="map"> 
+		select
+		<include refid="Base_Column_List" />
+		from SECURITY_CODE where 1=1 
+		 <if test="token_id != null">
+            and token_id = #{token_id,jdbcType=VARCHAR}
+        </if>
+        <if test="login_id != null">
+            and login_id = #{login_id,jdbcType=VARCHAR}
+        </if>
+        <if test="appId != null">
+            and appId = #{appId,jdbcType=VARCHAR}
+        </if>
+        <if test="tenant_id != null">
+            and tenant_id = #{tenant_id,jdbcType=VARCHAR}
+        </if>
+	</select>
+	
+	<insert id="insert" parameterType="com.sdp.servflow.pubandorder.security.model.SecurityCodeBean">
+        insert into SECURITY_CODE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="token_id != null">
+                token_id,
+            </if>
+            <if test="login_id != null">
+                login_id,
+            </if>
+            <if test="appId != null">
+                appId,
+            </if>
+            <if test="tenant_id != null">
+                tenant_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="token_id != null">
+                #{token_id,jdbcType=VARCHAR},
+            </if>
+            <if test="login_id != null">
+                #{login_id,jdbcType=VARCHAR},
+            </if>
+            <if test="appId != null">
+                #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="tenant_id != null">
+                #{tenant_id,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+	
+</mapper>

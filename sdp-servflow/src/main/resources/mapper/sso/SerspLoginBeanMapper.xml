@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.frame.web.mapper.sso.SerspLoginBeanMapper">
+  <resultMap id="BaseResultMap" type="com.sdp.servflow.serlayout.sso.model.SerspLoginBean">
+    <id column="sp_loginid" jdbcType="VARCHAR" property="sploginid" />
+    <result column="sp_name" jdbcType="VARCHAR" property="spname" />
+    <result column="sp_type" jdbcType="VARCHAR" property="sptypeId" />
+    <result column="sp_code" jdbcType="VARCHAR" property="spcode" />
+    <result column="sp_path" jdbcType="VARCHAR" property="sppath" />
+    <result column="sp_resume" jdbcType="VARCHAR" property="spresume" />
+    <result column="sp_agreement" jdbcType="VARCHAR" property="spagreement" />
+    <result column="sp_restype" jdbcType="VARCHAR" property="sprestype" />
+    <result column="sp_flow" jdbcType="VARCHAR" property="spflow" />
+    <result column="creatime" jdbcType="TIMESTAMP" property="creatime" />
+    <result column="delflag" jdbcType="VARCHAR" property="delflag" />
+    <result column="stopflag" jdbcType="VARCHAR" property="stopflag" />
+    <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+    <result column="login_id" jdbcType="VARCHAR" property="loginId" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    sp_loginid,sp_name,sp_type,sp_code,sp_path,sp_resume,sp_agreement,sp_restype,sp_flow,creatime,delflag,stopflag,tenant_id,login_id
+  </sql>
+  
+  <select id="selectPage" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    SELECT 
+       sp.sp_loginid sploginid,
+       sp.sp_name spname,
+       t.ser_type_name sptype,
+       sp.sp_type sptypeId,
+       sp.sp_code spcode,
+       sp.sp_path sppath,
+       sp.sp_resume spresume,
+       sp.sp_agreement spagreement,
+       sp.sp_restype sprestype,
+       sp.sp_flow spflow,
+       sp.creatime creatime,
+       sp.delflag delflag,
+       sp.stopflag stopflag,
+       sp.tenant_id tenant_id,
+       sp.login_id login_id 
+    FROM ser_sp_login sp LEFT JOIN ser_type t ON 
+	sp.sp_type = t.ser_type_id
+    where 1=1 
+    		<if test="sploginid != null">
+            and sp.sp_loginid = #{sploginid,jdbcType=VARCHAR}
+        </if>
+        <if test="spname != null">
+            and sp.sp_name LIKE '%${spname}%'
+        </if>
+        <if test="sptype != null">
+            and t.ser_type_name LIKE '%${sptype}%'
+        </if>
+        <if test="spcode != null">
+            and sp.sp_code LIKE '%${spcode}%'
+        </if>
+        <if test="sppath != null">
+            and sp.sp_path = #{sppath,jdbcType=VARCHAR}
+        </if>
+        <if test="spresume != null">
+            and sp.sp_resume = #{spresume,jdbcType=VARCHAR}
+        </if>
+        <if test="spagreement != null">
+            and sp.sp_agreement = #{spagreement,jdbcType=VARCHAR}
+        </if>
+        <if test="sprestype != null">
+            and sp.sp_restype = #{sprestype,jdbcType=VARCHAR}
+        </if>
+        <if test="spflow != null">
+            and sp.sp_flow = #{spflow,jdbcType=VARCHAR}
+        </if>
+        <if test="creatime != null">
+            and sp.creatime = #{creatime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="delflag != null">
+            and sp.delflag = #{delflag,jdbcType=VARCHAR}
+        </if>
+        <if test="stopflag != null">
+            and sp.stopflag = #{stopflag,jdbcType=VARCHAR}
+        </if>
+        <if test="tenantId != null">
+            and sp.tenant_id = #{tenantId,jdbcType=VARCHAR}
+        </if>
+        <if test="loginId != null">
+            and sp.login_id = #{loginId,jdbcType=VARCHAR}
+        </if>
+  </select>
+  
+  <select id="getAllByPrimaryKey" parameterType="com.sdp.servflow.serlayout.sso.model.SerspLoginBean" resultType="com.sdp.servflow.serlayout.sso.model.SerspLoginBean">
+       select 
+       sp_loginid sploginid,
+       sp_name spname,
+       sp_type sptypeId,
+       sp_code spcode,
+       sp_path sppath,
+       sp_resume spresume,
+       sp_agreement spagreement,
+       sp_restype sprestype,
+       sp_flow spflow,
+       creatime creatime,
+       delflag delflag,
+       stopflag stopflag,
+       tenant_id tenant_id,
+       login_id login_id 
+        from ser_sp_login where sp_loginid = #{sp_loginid,jdbcType = VARCHAR}
+  </select>
+  
+  <select id="getAllByCondition" parameterType="map" resultType="com.sdp.servflow.serlayout.sso.model.SerspLoginBean">
+        select
+        <include refid="Base_Column_List" />
+        from ser_sp_login where 1=1
+        <if test="sploginid != null">
+            and sp_loginid = #{sploginid,jdbcType=VARCHAR}
+        </if>
+        <if test="spname != null">
+            and sp_name = #{spname,jdbcType=VARCHAR}
+        </if>
+        <if test="sptypeId != null">
+            and sp_type = #{sptypeId,jdbcType=VARCHAR}
+        </if>
+        <if test="spcode != null">
+            and sp_code = #{spcode,jdbcType=VARCHAR}
+        </if>
+        <if test="sppath != null">
+            and sp_path = #{sppath,jdbcType=VARCHAR}
+        </if>
+        <if test="spresume != null">
+            and sp_resume = #{spresume,jdbcType=VARCHAR}
+        </if>
+        <if test="spagreement != null">
+            and sp_agreement = #{spagreement,jdbcType=VARCHAR}
+        </if>
+        <if test="sprestype != null">
+            and sp_restype = #{sprestype,jdbcType=VARCHAR}
+        </if>
+        <if test="spflow != null">
+            and sp_flow = #{spflow,jdbcType=VARCHAR}
+        </if>
+        <if test="creatime != null">
+            and creatime = #{creatime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="delflag != null">
+            and delflag = #{delflag,jdbcType=VARCHAR}
+        </if>
+        <if test="stopflag != null">
+            and stopflag = #{stopflag,jdbcType=VARCHAR}
+        </if>
+        <if test="tenantId != null">
+            and tenant_id = #{tenantId,jdbcType=VARCHAR}
+        </if>
+        <if test="loginId != null">
+            and login_id = #{loginId,jdbcType=VARCHAR}
+        </if>
+        
+    </select>
+    
+    <insert id="insert" parameterType="com.sdp.servflow.serlayout.sso.model.SerspLoginBean">
+        insert into ser_sp_login(
+        		sp_loginid,
+        		sp_name,
+        		sp_type,
+        		sp_code,
+        		sp_path,
+        		sp_resume,
+        		sp_agreement,
+        		sp_restype,
+        		sp_flow,
+        		creatime,
+        		delflag,
+        		stopflag,
+        		tenant_id,
+        		login_id
+        ) values(
+        		#{sploginid,jdbcType=VARCHAR},
+        		#{spname,jdbcType=VARCHAR},
+        		#{sptypeId,jdbcType=VARCHAR},
+        		#{spcode,jdbcType=VARCHAR},
+        		#{sppath,jdbcType=VARCHAR},
+        		#{spresume,jdbcType=VARCHAR},
+        		#{spagreement,jdbcType=VARCHAR},
+        		#{sprestype,jdbcType=VARCHAR},
+        		#{spflow,jdbcType=VARCHAR},
+        		#{creatime,jdbcType=TIMESTAMP},
+        		#{delflag,jdbcType=VARCHAR},
+        		#{stopflag,jdbcType=VARCHAR},
+        		#{tenantId,jdbcType=VARCHAR},
+        		#{loginId,jdbcType=VARCHAR}
+        )
+    </insert>
+    
+    <update id="update" parameterType="com.sdp.servflow.serlayout.sso.model.SerspLoginBean">
+    update ser_sp_login
+    <set>
+      <if test="sploginid != null">
+        sp_loginid = #{sploginid,jdbcType=VARCHAR},
+      </if>
+      <if test="spname != null">
+        sp_name = #{spname,jdbcType=VARCHAR},
+      </if>
+      <if test="sptypeId != null">
+        sp_type = #{sptypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="spcode != null">
+        sp_code = #{spcode,jdbcType=VARCHAR},
+      </if>
+      <if test="sppath != null">
+        sp_path = #{sppath,jdbcType=VARCHAR},
+      </if>
+      <if test="spresume != null">
+        sp_resume = #{spresume,jdbcType=VARCHAR},
+      </if>
+      <if test="spagreement != null">
+        sp_agreement = #{spagreement,jdbcType=VARCHAR},
+      </if>
+      <if test="sprestype != null">
+        sp_restype = #{sprestype,jdbcType=VARCHAR},
+      </if>
+      <if test="spflow != null">
+        sp_flow = #{spflow,jdbcType=VARCHAR},
+      </if>
+      <if test="creatime != null">
+        creatime = #{creatime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delflag != null">
+        delflag = #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="stopflag != null">
+        stopflag = #{stopflag,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tenantId != null">
+        tenant_id = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="loginId != null">
+        login_id = #{loginId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sp_loginid = #{sploginid,jdbcType=VARCHAR}
+  </update>
+  
+  <delete id="delete" parameterType="java.lang.String">
+    delete FROM ser_sp_login
+    where sp_loginid = #{sploginid,jdbcType=VARCHAR}
+  </delete>
+    
+
+</mapper>

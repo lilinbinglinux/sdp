@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdp.cop.octopus.dao.BounceEmailRecordDao">
+	<resultMap id="BaseResultMap" type="com.sdp.cop.octopus.entity.BounceEmailLog">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="app" property="app" jdbcType="VARCHAR" />
+		<result column="bounce_subject" property="bounceSubject"
+			jdbcType="VARCHAR" />
+		<result column="ori_ema_date" property="oriEmaDate"
+			jdbcType="TIMESTAMP" />
+		<result column="ori_ema_subject" property="oriEmaSubject"
+			jdbcType="VARCHAR" />
+		<result column="ori_ema_to" property="oriEmaTo"
+			jdbcType="VARCHAR" />
+		<result column="bounce_ema_content" property="bounceEmaContent"
+			jdbcType="LONGVARCHAR" />
+		<result column="bounce_reason" property="bounceReason"
+			jdbcType="LONGVARCHAR" />
+		<result column="proposed_solution" property="proposedSolution"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id id, 
+		app app, 
+		bounce_subject bounceSubject, 
+		ori_ema_date oriEmaDate, 
+		ori_ema_subject oriEmaSubject, 
+		ori_ema_to oriEmaTo, 
+		bounce_ema_content bounceEmaContent, 
+		bounce_reason bounceReason, 
+		proposed_solution proposedSolution
+	</sql>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from bounce_record_info
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from bounce_record_info
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	
+	<insert id="insert" parameterType="com.sdp.cop.octopus.entity.BounceEmailLog">
+		insert into bounce_record_info (id, app, bounce_subject,
+		ori_ema_date, ori_ema_subject, ori_ema_to,
+		bounce_ema_content, bounce_reason,
+		proposed_solution)
+		values (#{id,jdbcType=BIGINT}, #{app,jdbcType=VARCHAR},
+		#{bounceSubject,jdbcType=VARCHAR},
+		#{oriEmaDate,jdbcType=TIMESTAMP}, #{oriEmaSubject,jdbcType=VARCHAR}, #{oriEmaTo,jdbcType=VARCHAR},
+		#{bounceEmaContent,jdbcType=LONGVARCHAR},
+		#{bounceReason,jdbcType=LONGVARCHAR},
+		#{proposedSolution,jdbcType=LONGVARCHAR})
+	</insert>
+	
+	<insert id="insertSelective"
+		parameterType="com.sdp.cop.octopus.entity.BounceEmailLog">
+		insert into bounce_record_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="app != null">
+				app,
+			</if>
+			<if test="bounceSubject != null">
+				bounce_subject,
+			</if>
+			<if test="oriEmaDate != null">
+				ori_ema_date,
+			</if>
+			<if test="oriEmaSubject != null">
+				ori_ema_subject,
+			</if>
+			<if test="oriEmaTo != null">
+				ori_ema_to,
+			</if>
+			<if test="bounceEmaContent != null">
+				bounce_ema_content,
+			</if>
+			<if test="bounceReason != null">
+				bounce_reason,
+			</if>
+			<if test="proposedSolution != null">
+				proposed_solution,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="app != null">
+				#{app,jdbcType=VARCHAR},
+			</if>
+			<if test="bounceSubject != null">
+				#{bounceSubject,jdbcType=VARCHAR},
+			</if>
+			<if test="oriEmaDate != null">
+				#{oriEmaDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="oriEmaSubject != null">
+				#{oriEmaSubject,jdbcType=VARCHAR},
+			</if>
+			<if test="oriEmaTo != null">
+				#{oriEmaTo,jdbcType=VARCHAR},
+			</if>
+			<if test="bounceEmaContent != null">
+				#{bounceEmaContent,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="bounceReason != null">
+				#{bounceReason,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="proposedSolution != null">
+				#{proposedSolution,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.sdp.cop.octopus.entity.BounceEmailLog">
+		update bounce_record_info
+		<set>
+			<if test="app != null">
+				app = #{app,jdbcType=VARCHAR},
+			</if>
+			<if test="bounceSubject != null">
+				bounce_subject = #{bounceSubject,jdbcType=VARCHAR},
+			</if>
+			<if test="oriEmaDate != null">
+				ori_ema_date = #{oriEmaDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="oriEmaSubject != null">
+				ori_ema_subject = #{oriEmaSubject,jdbcType=VARCHAR},
+			</if>
+			<if test="oriEmaTo != null">
+				ori_ema_to = #{oriEmaTo,jdbcType=VARCHAR},
+			</if>
+			<if test="bounceEmaContent != null">
+				bounce_ema_content = #{bounceEmaContent,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="bounceReason != null">
+				bounce_reason = #{bounceReason,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="proposedSolution != null">
+				proposed_solution = #{proposedSolution,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	
+	<update id="updateByPrimaryKey"
+		parameterType="com.sdp.cop.octopus.entity.BounceEmailLog">
+		update bounce_record_info
+		set app = #{app,jdbcType=VARCHAR},
+		bounce_subject = #{bounceSubject,jdbcType=VARCHAR},
+		ori_ema_date = #{oriEmaDate,jdbcType=TIMESTAMP},
+		ori_ema_subject = #{oriEmaSubject,jdbcType=VARCHAR},
+		ori_ema_to = #{oriEmaTo,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	
+	<select id="selectByAppAndOriEmaTo" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from bounce_record_info
+		where app = #{app,jdbcType=VARCHAR}
+		and ori_ema_to = #{oriEmaTo,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectByApp" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from bounce_record_info
+		where app = #{app,jdbcType=BIGINT}
+	</select>
+	 	
+	<select id="selectByField" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from bounce_record_info
+		where 1=1
+		<if test="oriEmaSubject != null">
+	    	AND ori_ema_subject like #{oriEmaSubject,jdbcType=VARCHAR}
+	    </if>
+		<if test="start != null">
+	    	AND ori_ema_date <![CDATA[ > ]]> #{start,jdbcType=TIMESTAMP}
+	    </if>
+		<if test="endTime != null">
+	    	AND ori_ema_date <![CDATA[ < ]]> #{endTime,jdbcType=TIMESTAMP}
+	    </if>
+		<if test="oriEmaTo != null">
+	    	AND ori_ema_to like #{oriEmaTo,jdbcType=VARCHAR}
+	    </if>
+	    order by ori_ema_date desc
+	</select>
+</mapper>

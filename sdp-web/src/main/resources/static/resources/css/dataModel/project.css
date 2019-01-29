@@ -1,0 +1,117 @@
+body{
+    /*height: 100%;*/
+    background-color: #f3f3f4;
+}
+.container-fluid{
+    padding: 20px;
+}
+.project-left-menu,.project-right-content{
+    padding: 15px 20px;
+    background-color: #fff;
+    border: 1px solid #e7eaec;
+}
+.project-right-content{
+    min-height: 500px;
+    position: relative;
+}
+.hr-line-dashed{
+    margin: 15px 0;
+    border-top: 1px dashed #e7eaec;
+    color: #fff;
+    background-color: #fff;
+    height: 1px;
+}
+.inner-word{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 95px;
+    height: 50px;
+}
+.IUFrame{
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.ztree li span.button.add {margin-left:2px; margin-right: -1px; background-position:-144px 0; vertical-align:top; *vertical-align:middle}
+.ztree li span.button.project_ico_open{margin-right:2px; background: url("../../img/dataModel/module.svg") no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle;background-size: 16px 16px;}
+.ztree li span.button.project_ico_close{margin-right:2px; background: url("../../img/dataModel/module.svg") no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle;background-size: 16px 16px;}
+.ztree li span.button.project_ico_docu{margin-right:2px; background: url("../../img/dataModel/module.svg") no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle;background-size: 16px 16px;}
+.ztree li span.button.table_ico_docu{margin-right:2px; background: url("../../img/dataModel/databaseTable.png") no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle;background-size: 16px 16px;}
+.ztree li span.button.module_ico_docu{margin-right:2px; background: url("../../img/dataModel/type.svg") no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle;background-size: 16px 16px;}
+.ztree li span.button.module_ico_open{margin-right:2px; background: url("../../img/dataModel/type.svg") no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle;background-size: 16px 16px;}
+.ztree li span.button.module_ico_close{margin-right:2px; background: url("../../img/dataModel/type.svg") no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle;background-size: 16px 16px;}
+.ztree li span.button.api_ico_docu{margin-right:2px; background: url("../../img/dataModel/api.svg") no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle;background-size: 16px 16px;}
+.ztree li span.button.api_ico_open{margin-right:2px; background: url("../../img/dataModel/api.svg") no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle;background-size: 16px 16px;}
+.ztree li span.button.api_ico_close{margin-right:2px; background: url("../../img/dataModel/api.svg") no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle;background-size: 16px 16px;}
+.ztree li span.button.service_ico_docu{margin-right:2px; background: url("../../img/dataModel/service.svg") no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle;background-size: 16px 16px;}
+.ztree li span.button.service_ico_open{margin-right:2px; background: url("../../img/dataModel/service.svg") no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle;background-size: 16px 16px;}
+.ztree li span.button.service_ico_close{margin-right:2px; background: url("../../img/dataModel/service.svg") no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle;background-size: 16px 16px;}
+.ztree li span.button.page_ico_docu{margin-right:2px; background: url("../../img/dataModel/page.svg") no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle;background-size: 16px 16px;}
+.ztree li span.button.page_ico_open{margin-right:2px; background: url("../../img/dataModel/page.svg") no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle;background-size: 16px 16px;}
+.ztree li span.button.page_ico_close{margin-right:2px; background: url("../../img/dataModel/page.svg") no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle;background-size: 16px 16px;}
+
+.ztree li span.button.root_open::before {
+    content: "\f078";
+    padding-top: 10px;
+    padding-left: 2px;
+    display: inline-block;
+}
+.ztree li span.button.root_close::before {
+    content: "\f054";
+    padding-top: 10px;
+    padding-left: 2px;
+    display: inline-block;
+}
+.ztree li span.button.root_open, .ztree li span.button.root_close, .ztree li span.button.roots_open, .ztree li span.button.roots_close,
+.ztree li span.button.center_open, .ztree li span.button.center_close, .ztree li span.button.bottom_open, .ztree li span.button.bottom_close{
+    background-image: none;
+}
+
+.ztree li span.button.roots_open::before {
+    content: "\f078";
+    padding-top: 10px;
+    padding-left: 2px;
+    display: inline-block;
+}
+.ztree li span.button.roots_close::before {
+    content: "\f054";
+    padding-top: 10px;
+    padding-left: 2px;
+    display: inline-block;
+}
+
+.ztree li span.button.center_open::before {
+    content: "\f078";
+    padding-top: 10px;
+    padding-left: 2px;
+    display: inline-block;
+}
+.ztree li span.button.center_close::before {
+    content: "\f054";
+    padding-top: 10px;
+    padding-left: 2px;
+    display: inline-block;
+}
+
+.ztree li span.button.bottom_open::before {
+    content: "\f078";
+    padding-top: 10px;
+    padding-left: 2px;
+    display: inline-block;
+}
+.ztree li span.button.bottom_close::before {
+    content: "\f054";
+    padding-top: 10px;
+    padding-left: 2px;
+    display: inline-block;
+}
+.ztree li span.button::before{
+    color: #333;
+    font-family: FontAwesome;
+    padding-top: 10px;
+}

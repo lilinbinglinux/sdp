@@ -1,0 +1,35 @@
+代码格式和排版用CheckStyle检查后提交
+
+1.实体类命名 xxxBean
+     抽象对象 xxxPo
+
+2.Service命名 xxxBeanService
+  基本方法定义：
+  1.分页获取所有selectAll
+  2.获取所有getAll
+         条件查询所有getAllByCondition(Map<> map)
+  3.插入insert
+  4.更新update
+  5.根据主键删除deleteByProId
+  6.根据主键查询getxxById
+  7.条件查询getxxByxx
+
+3.Controller命名 xxxBeanController
+  基本方法定义：
+  1.初始化，分页查询selectPage
+  2.添加insert
+  3.更新update
+  4.删除delete
+  5.条件查询 getxxByxx 如getProById
+    （请求尽量与方法名称保持一致）
+    
+4.jsp
+    1.命名 bean名称+操作.jsp
+    2.首页要统一注释，如
+    <% /**
+    --- 本页面分模块写服务注册树显示右侧面板详细信息 ---
+    */%>
+    3.js引入统一放入头部
+    4..标识id，如id="id-xxxx"
+     
+    

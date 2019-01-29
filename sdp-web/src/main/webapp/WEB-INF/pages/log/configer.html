@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <head th:include="frame/common :: header"></head>
+    <link type="text/css" rel="stylesheet"  th:href="@{/css/octopus/config.css}" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/sweetalert/sweetalert.css}" />
+
+    <script type="text/javascript" th:src="@{/js/sweetalert/sweetalert.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/octopus/log/config.js}"></script>
+</head>
+<body>
+<div class="config_top_loader">
+配置管理
+</div>
+<div class="config_left_menu">
+	<div class="left_menu_one one_avtive">
+		<a class="menu_one_a">配置管理</a>
+	</div>
+	<div class="left_menu_one">
+		<a class="menu_one_a" th:href="@{/rest/api/config/weixin/prop}">企业微信管理</a>
+	</div>
+</div>
+<div class="config_global">
+    <div class="config_container">
+        <div class="config_content_a">
+            <div class="config_content_top">
+                <div class="content_top_read">
+
+                </div>
+            </div>
+            <div class="config_top_menu">
+
+            </div>
+            <div class="config_content_list">
+            <form action="" id="ShortMessageForm">
+                <div class="config_content_fold cursor_pointer">
+                    <ul class="config_content_ul">
+                        <li class="config_content_name">
+                            ShortMessage Configuration
+                        </li>
+                        <li class="config_content_more">
+                            <a class="option_more">
+                                <img class="more_or_less"   th:src="@{/icon/more_unfold.png}" />
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="config_contents" style="display: none;">
+                        <div class="config_configers_title">
+
+                        </div>
+                        <div class="config_configers_list">
+                           <!--  <div class="config_configer_content">
+                                <div class="configer_name">
+                                    oauth.scope
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="shortMessageProp.scope" th:value="${shortMessageProp.scope}" readonly="readonly" />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" src="/icon/edit.png" />
+                                    </a>
+                                </div>
+                            </div> -->
+                            <div class="config_configer_content">
+                                <div class="configer_name">
+                                    oauth.grant_type
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="shortMessageProp.grantType" th:value="${shortMessageProp.grantType}" readonly="readonly" />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" th:src="@{/icon/edit.png}" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="config_configer_content">
+                                <div class="configer_name">
+                                    oauth.client_id
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="shortMessageProp.clientId" th:value="${shortMessageProp.clientId}" readonly="readonly" />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" th:src="@{/icon/edit.png}" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="config_configer_content">
+                                <div class="configer_name">
+                                    oauth.client_secret
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="shortMessageProp.clientSecret" th:value="${shortMessageProp.clientSecret}" readonly="readonly" />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" th:src="@{/icon/edit.png}" />
+                                    </a>
+                                </div>
+                            </div>
+                         <!--    <div class="config_configer_content">
+                                <div class="configer_name">
+                                    oauth.access_token
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="shortMessageProp.accessToken" th:value="${shortMessageProp.accessToken}"  readonly="readonly" />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" src="/icon/edit.png" />
+                                    </a>
+                                </div>
+                            </div> -->
+                            <div class="config_configer_content">
+                                <div class="configer_name">
+                                    oauth.authentication_server_url
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="shortMessageProp.authenticationServerUrl" th:value="${shortMessageProp.authenticationServerUrl}" readonly="readonly" />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" th:src="@{/icon/edit.png}" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="config_configer_content">
+                                <div class="configer_name">
+                                    oauth.portal_sms_url
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="shortMessageProp.portalSmsUrl" th:value="${shortMessageProp.portalSmsUrl}" readonly="readonly" />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" th:src="@{/icon/edit.png}" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="config_configer_content">
+                                <div class="configer_name">
+                                    oauth.sender_phone_number
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="shortMessageProp.senderPhoneNumber" th:value="${shortMessageProp.senderPhoneNumber}" readonly="readonly" />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" th:src="@{/icon/edit.png}" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="configer_options">
+                            <div class="configer_options_save">
+                                <a class="configer_options_save_a cursor_pointer" onclick="configer_save(this,'shortMessage')">保存</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form action="" id="EmailForm">
+                <div class="config_content_fold cursor_pointer">
+                    <ul class="config_content_ul">
+                        <li class="config_content_name">
+                            Email Configuration
+                        </li>
+                        <li class="config_content_more">
+                            <a class="option_more">
+                                <img class="more_or_less" th:src="@{/icon/more_unfold.png}" />
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="config_contents" style="display: none;">
+                        <div class="config_configers_title">
+
+                        </div>
+                        <div class="config_configers_list">
+                            <div class="config_configer_content">
+                                <div class="configer_name">
+                                    mailServerHost
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="mailConfigProp.mailServerHost" th:value="${mailConfigProp.mailServerHost}" readonly="readonly" />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" th:src="@{/icon/edit.png}" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="config_configer_content">
+                                <div class="configer_name">
+                                    mailServerIsSSL
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="mailConfigProp.mailServerIsSSL" th:value="${mailConfigProp.mailServerIsSSL}" readonly="readonly" />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" th:src="@{/icon/edit.png}" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="config_configer_content">
+                                <div class="configer_name">
+                                    mailServerPort
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="mailConfigProp.mailServerPort" th:value="${mailConfigProp.mailServerPort}" readonly="readonly"  />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" th:src="@{/icon/edit.png}" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="config_configer_content">
+                                <div class="configer_name">
+                                    mailServerUsername
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="mailConfigProp.mailServerUsername" th:value="${mailConfigProp.mailServerUsername}" readonly="readonly" />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" th:src="@{/icon/edit.png}" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="config_configer_content">
+                                <div class="configer_name">
+                                    mailServerPassword
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="mailConfigProp.mailServerPassword" th:value="${mailConfigProp.mailServerPassword}" readonly="readonly" />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" th:src="@{/icon/edit.png}" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="config_configer_content">
+                                <div class="configer_name">
+                                    mailServerAdmin
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="mailConfigProp.mailServerAdmin" th:value="${mailConfigProp.mailServerAdmin}" readonly="readonly" />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" th:src="@{/icon/edit.png}" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="configer_options">
+                            <div class="configer_options_save">
+                                <a class="configer_options_save_a cursor_pointer" onclick="configer_save(this,'email')">保存</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form action="" id="WeiChatForm">
+                <div class="config_content_fold cursor_pointer">
+                    <ul class="config_content_ul">
+                        <li class="config_content_name">
+                            WeiChat Configuration
+                        </li>
+                        <li class="config_content_more">
+                            <a class="option_more">
+                                <img class="more_or_less" th:src="@{/icon/more_unfold.png}" />
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="config_contents" style="display: none;">
+                        <div class="config_configers_title">
+
+                        </div>
+                        <div class="config_configers_list">
+                            <div class="config_configer_content">
+                                <div class="configer_name">
+                                    corpid
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="weiChatConfigProp.corpid" th:value="${weiChatConfigProp.corpid}" readonly="readonly" />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" th:src="@{/icon/edit.png}" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="config_configer_content">
+                                <div class="configer_name">
+                                   corpsecret_addresslist
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="weiChatConfigProp.corpsecretAddresslist" th:value="${weiChatConfigProp.corpsecretAddresslist}" readonly="readonly" />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" th:src="@{/icon/edit.png}" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="config_configer_content">
+                                <div class="configer_name">
+                                    corpsecret_copc
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="weiChatConfigProp.corpsecretCopc" th:value="${weiChatConfigProp.corpsecretCopc}" readonly="readonly" />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" th:src="@{/icon/edit.png}" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="config_configer_content">
+                                <div class="configer_name">
+                                    agentid_copc
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="weiChatConfigProp.agentidCopc" th:value="${weiChatConfigProp.agentidCopc}" readonly="readonly" />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" th:src="@{/icon/edit.png}" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="config_configer_content">
+                                <div class="configer_name">
+                                    access_token_url
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="weiChatConfigProp.accessTokenUrl" th:value="${weiChatConfigProp.accessTokenUrl}" readonly="readonly" />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" th:src="@{/icon/edit.png}" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="config_configer_content">
+                                <div class="configer_name">
+                                    departmentlist_url
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="weiChatConfigProp.departmentlistUrl" th:value="${weiChatConfigProp.departmentlistUrl}" readonly="readonly" />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" th:src="@{/icon/edit.png}" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="config_configer_content">
+                                <div class="configer_name">
+                                    message_send_url
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="weiChatConfigProp.messageSendUrl" th:value="${weiChatConfigProp.messageSendUrl}" readonly="readonly" />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" th:src="@{/icon/edit.png}" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="config_configer_content">
+                                <div class="configer_name">
+                                    user_simplelist_url
+                                </div>
+                                <div class="configer_content">
+                                    <input type="text" class="configer_content_input input_unfold" th:name="weiChatConfigProp.userSimplelistUrl" th:value="${weiChatConfigProp.userSimplelistUrl}" readonly="readonly" />
+                                </div>
+                                <div class="configer_option">
+                                    <a class="option_edit cursor_pointer">
+                                        <img class="icon_edit" th:src="@{/icon/edit.png}" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="configer_options">
+                            <div class="configer_options_save">
+                                <a class="configer_options_save_a cursor_pointer" onclick="configer_save(this,'weiChat')">保存</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/octopus/log/configEvent.js}"></script>
+</body>
+</html>

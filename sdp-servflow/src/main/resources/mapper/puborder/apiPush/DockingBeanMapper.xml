@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.frame.web.mapper.puborder.apiPush.DockingBeanMapper">
+    <resultMap type="com.sdp.servflow.pubandorder.apipush.model.DockingBean" id="BaseResultMap">
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="serid" jdbcType="VARCHAR" property="serId" />
+        <result column="orderid" jdbcType="VARCHAR" property="orderId" />
+        <result column="context" jdbcType="VARCHAR" property="context" />
+        <result column="version" jdbcType="VARCHAR" property="version" />
+        <result column="visibility" jdbcType="VARCHAR" property="visibility" />
+        <result column="provider" jdbcType="VARCHAR" property="provider" />
+        <result column="parameters" jdbcType="VARCHAR" property="parameters" />
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+        id, name, serid, orderid, context, version, visibility, provider, parameters
+    </sql>
+    
+    <select id="getAllByCondition" parameterType="map" resultType="com.sdp.servflow.pubandorder.apipush.model.DockingBean">
+        select
+        <include refid="Base_Column_List" />
+        from apipush where 1=1 
+        <if test="id != null">
+            and id = #{id,jdbcType=VARCHAR}
+        </if>
+        <if test="name != null">
+            and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="serId != null">
+            and serid = #{serId,jdbcType=VARCHAR}
+        </if>
+        <if test="orderId != null">
+            and orderid = #{orderId,jdbcType=VARCHAR}
+        </if>
+        <if test="context != null">
+            and context = #{context,jdbcType=VARCHAR}
+        </if>
+        <if test="version != null">
+            and version = #{version,jdbcType=VARCHAR}
+        </if>
+        <if test="visibility != null">
+            and visibility = #{visibility,jdbcType=VARCHAR}
+        </if>
+        <if test="provider != null">
+            and provider = #{provider,jdbcType=VARCHAR}
+        </if>
+        <if test="parameters != null">
+            and parameters = #{parameters,jdbcType=VARCHAR}
+        </if>
+    </select>
+    
+    <insert id="insert" parameterType="com.sdp.servflow.pubandorder.apipush.model.DockingBean">
+        insert into apipush
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="serId != null">
+                serid,
+            </if>
+            <if test="orderId != null">
+                orderid,
+            </if>
+            <if test="context != null">
+                context,
+            </if>
+            <if test="version != null">
+                version,
+            </if>
+            <if test="visibility != null">
+                visibility,
+            </if>
+            <if test="provider != null">
+                provider,
+            </if>
+            <if test="parameters != null">
+                parameters,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="serId != null">
+                #{serId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderId != null">
+                #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="context != null">
+                #{context,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=VARCHAR},
+            </if>
+            <if test="visibility != null">
+                #{visibility,jdbcType=VARCHAR},
+            </if>
+            <if test="provider != null">
+                #{provider,jdbcType=VARCHAR},
+            </if>
+            <if test="parameters != null">
+                #{parameters,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.sdp.servflow.pubandorder.apipush.model.DockingBean">
+        update apipush
+        <set>
+            <if test="name != null">
+                name = #{name, jdbcType=VARCHAR},
+            </if>
+            <if test="context != null">
+                context = #{context, jdbcType=VARCHAR},
+            </if>
+            <if test="version != null">
+                version = #{version, jdbcType=VARCHAR},
+            </if>
+            <if test="visibility != null">
+                visibility = #{visibility, jdbcType=VARCHAR},
+            </if>
+            <if test="provider != null">
+                provider = #{provider, jdbcType=VARCHAR},
+            </if>
+            <if test="parameters != null">
+                parameters = #{parameters, jdbcType=VARCHAR},
+            </if>
+        </set>
+        where 1=1
+	        <if test="orderId != null">
+                and orderid = #{orderId, jdbcType=VARCHAR},
+            </if>
+    </update>
+    
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from apipush 
+        where orderid = #{orderId,jdbcType=VARCHAR}
+    </delete>
+    
+</mapper>

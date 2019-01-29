@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdp.base.organization.mapper" >
+	<resultMap id="BaseResultMap" type="com.sdp.frame.web.entity.orgnization.Orgnization">
+    	<id column="ORG_ID" jdbcType="VARCHAR" property="orgId" />
+    	<result column="ORG_NAME" jdbcType="VARCHAR" property="orgName" />
+    	<result column="ORG_NAME" jdbcType="VARCHAR" property="text" />
+    	<result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    	<result column="ORD" jdbcType="DECIMAL" property="ord" />
+    	<result column="PATH" jdbcType="VARCHAR" property="path" />
+    	<result column="TENANT_ID" jdbcType="VARCHAR" property="tenantId" />
+  	</resultMap>
+	<sql id="Base_Column_Alias_List" >
+    	ORG_ID "orgId", ORG_NAME "orgName", PARENT_ID "parentId", ORD "ord", PATH "path", TENANT_ID "tenantId"
+  	</sql>
+  	
+  	<select id="selectPage" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    select 
+    	<include refid="Base_Column_Alias_List" />
+    from PURE_ORG where 1=1 
+		<if test="orgName != null">
+	    	and ORG_NAME = #{orgName,jdbcType=VARCHAR}
+		</if>
+		<if test="parentId != null">
+	    	and PARENT_ID = #{parentId,jdbcType=VARCHAR}
+		</if>
+  </select>
+  
+  	<!-- 查询所有的组织机构 -->
+	<select id="selectAll" resultType="map">
+		SELECT 
+		<include refid="Base_Column_Alias_List" />
+		FROM PURE_ORG
+		ORDER by ORD
+	</select>
+	
+	<!-- 查询所有的组织机构返回List<Orgnization> -->
+	<select id="selectAllOrg" resultMap="BaseResultMap">
+		SELECT 
+		<include refid="Base_Column_Alias_List" />
+		FROM PURE_ORG
+		ORDER by ORD
+	</select>
+	
+	<!-- 根据组织机构Id查询其所有一级孩子节点  -->
+	<select id="selectByOrgId" resultType="map" parameterType="map">
+		SELECT 
+		<include refid="Base_Column_Alias_List" />
+		FROM PURE_ORG
+		WHERE (PARENT_ID = #{orgId} OR ORG_ID = #{orgId})
+		<if test="tenantId != null" >
+        	and TENANT_ID = #{tenantId}
+      	</if>
+		ORDER by ORD
+	</select>
+	
+	<!-- 根据组织机构Id查询其所有孩子节点 -->
+	<select id="selectAllByOrgId" resultType="map" parameterType="map">
+		SELECT 
+		<include refid="Base_Column_Alias_List" />
+		FROM PURE_ORG
+       	WHERE instr(PATH,(
+       		SELECT PATH
+       		FROM PURE_ORG
+       		WHERE ORG_ID = #{orgId}
+       	))>0
+		<if test="tenantId != null" >
+        	and TENANT_ID = #{tenantId}
+      	</if>
+		ORDER by ORD
+	</select>
+	
+	<!-- 根据用户Id查询其所属的组织机构的所有一级子节点  -->
+	<select id="selectByUserId" resultType="map" parameterType="map">
+		SELECT 
+		<include refid="Base_Column_Alias_List" />
+		FROM PURE_ORG
+		WHERE (PARENT_ID in (
+             SELECT ORG_ID
+             FROM PURE_USER_ORG_REF
+             WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+       		) OR ORG_ID in (
+             SELECT ORG_ID
+             FROM PURE_USER_ORG_REF
+             WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+       		))
+		<if test="tenantId != null" >
+        	and TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+      	</if>
+		ORDER by ORD
+	</select>
+	
+	<!-- 根据用户Id查询其所属的组织机构的所有孩子节点 -->
+	<select id="selectAllByUserId" resultType="map" parameterType="map">
+		SELECT T.ORG_ID as "orgId", T.ORG_NAME as "orgName", T.PARENT_ID as "parentId", T.PATH as "path", T.TENANT_ID as "tenantId"
+       FROM PURE_ORG T, PURE_ORG T1
+       where instr(T.PATH,T1.PATH)>0
+             and T1.ORG_ID in(
+                   SELECT ORG_ID
+                   from PURE_USER_ORG_REF
+                   where USER_ID = #{userId}
+             )
+		<if test="tenantId!= null" >
+        	and T.TENANT_ID = #{tenantId}
+      	</if>
+		ORDER by T.ORD
+	</select>
+	
+	<!-- 根据组织机构Id删除其所有子节点 -->
+	<delete id="deleteOrgByOrgId" parameterType="string">
+			delete
+			from PURE_USER_ORG_REF
+			where ORG_ID = #{orgId}
+	</delete>
+	
+	<delete id="deleteUserOrgRef" parameterType="string">
+	        delete
+			from PURE_ORG
+			WHERE ORG_ID = #{orgId}
+	</delete>
+	
+	<select id="selectChildOrgTotal" parameterType="map" resultType="int">
+	        SELECT COUNT(1) FROM PURE_ORG WHERE PARENT_ID = #{orgId}
+	</select>
+	
+	<!-- 添加节点 -->
+	<insert id="addOrg" parameterType="map">
+		INSERT INTO PURE_ORG (
+		ORG_ID, ORG_NAME, PARENT_ID, ORD, PATH
+		<if test="tenantId != null" >
+        	,TENANT_ID
+      	</if>) 
+		VALUES (
+		#{orgId}, #{orgName}, #{parentId}, #{ord}, #{path} 
+		<if test="tenantId != null" >
+        	,#{tenantId}
+      	</if>)
+	</insert>
+	
+	<!-- 修改节点 -->
+	<update id="updateOrg" parameterType="map">
+		UPDATE PURE_ORG
+			SET 
+				ORG_NAME =  #{orgName},
+				PARENT_ID = #{parentId},
+				ORD = #{ord},
+				PATH = #{path}
+			<if test="tenantId != null" >
+        		,TENANT_ID = #{tenantId}
+			</if>
+			WHERE 
+				ORG_ID = #{orgId}
+	</update>
+</mapper>

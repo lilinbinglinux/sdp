@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.xbconsole.pageModel.PageResTypeMapper">
+  <resultMap id="BaseResultMap" type="com.sdp.pageModel.entity.PageResType">
+    <id column="res_type_id" jdbcType="VARCHAR" property="resTypeId" />
+    <result column="res_type_name" jdbcType="VARCHAR" property="resTypeName" />
+    <result column="res_parent_id" jdbcType="VARCHAR" property="resParentId" />
+    <result column="pub_flag" jdbcType="INTEGER" property="pubFlag" />
+    <result column="sort_id" jdbcType="INTEGER" property="sortId" />
+    <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />    
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+  </resultMap>
+  
+  
+   <sql id="Base_Column_List">
+       res_type_id, res_type_name, res_parent_id, pub_flag,sort_id,
+       tenant_id,create_date, create_by, update_date, update_date,update_by
+   </sql>
+   
+   <select id="selectPage" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    select 
+    	<include refid="Base_Column_List" />
+    from page_res_type where 1=1 
+		<if test="resTypeName != null">
+	    	and res_type_name LIKE '%${resTypeName}%' 
+		</if>
+		<if test="tenantId != null">
+	    	and tenant_id = #{tenantId,jdbcType=VARCHAR}
+		</if>
+  </select>
+   
+    <select id="findByCondition" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from page_res_type where 1=1
+		<if test="resTypeId != null and resTypeId != ''">
+            and res_type_id = #{resTypeId,jdbcType=VARCHAR}
+        </if>
+        <if test="resTypeName != null">
+            and res_type_name LIKE '%${resTypeName}%'
+        </if>
+        <if test="resParentId != null">
+            and res_parent_id = #{resParentId,jdbcType=VARCHAR}
+        </if>
+        <if test="pubFlag != null">
+            and pub_flag = #{pubFlag,jdbcType=INTEGER}
+        </if>
+        <if test="sortId != null">
+            and sort_id = #{sortId,jdbcType=INTEGER}
+        </if>
+        <if test="tenantId != null">
+            and tenant_id = #{tenantId,jdbcType=VARCHAR}
+        </if>
+        <if test="createDate != null">
+            and create_date = #{createDate,jdbcType=TIMESTAMP}
+        </if>
+         <if test="createBy != null">
+            and create_by = #{createBy,jdbcType=VARCHAR}
+        </if>
+         <if test="updateDate != null and parentId != ''">
+            and update_date = #{updateDate,jdbcType=TIMESTAMP}
+        </if>
+         <if test="updateBy != null">
+            and update_by = #{updateBy,jdbcType=VARCHAR}
+        </if>
+        order by sort_id ASC
+	</select>
+	
+	<select id="findByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    	<include refid="Base_Column_List" />
+    from page_res_type where 
+    res_type_id = #{resTypeId,jdbcType=VARCHAR}
+  </select>
+  
+   
+   <insert id="insert" parameterType="com.sdp.pageModel.entity.PageResType">
+    <selectKey keyProperty="resTypeId" resultType="string" order="BEFORE">    
+             select  replace(uuid(),'-','')   from dual  
+    </selectKey> 
+    insert into page_res_type (res_type_id, res_type_name, res_parent_id, pub_flag,
+      sort_id,
+      tenant_id,create_date, create_by, update_date, 
+      update_by)
+    values (
+    	#{resTypeId ,jdbcType=VARCHAR}, 
+    	#{resTypeName,jdbcType=VARCHAR}, 
+    	#{resParentId,jdbcType=VARCHAR}, 
+    	#{pubFlag,jdbcType=INTEGER}, 
+        #{sortId,jdbcType=INTEGER}, 
+        #{tenantId,jdbcType=VARCHAR}, 
+        #{createDate,jdbcType=TIMESTAMP}, 
+        #{createBy,jdbcType=VARCHAR}, 
+        #{updateDate,jdbcType=TIMESTAMP}, 
+        #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  
+  <delete id="deleteByPageModuleId" parameterType="java.lang.String">
+    delete from page_res_join
+    where page_module_id = #{pageModuleId,jdbcType=VARCHAR}
+  </delete>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from page_res_type
+        where res_type_id = #{resTypeId,jdbcType=VARCHAR}
+    </delete>
+  
+  <update id="update" parameterType="com.sdp.pageModel.entity.PageResType">
+        update page_res_type
+        <set>
+            <if test="resTypeName != null">
+               res_type_name= #{resTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="resParentId != null">
+                res_parent_id=#{resParentId,jdbcType=VARCHAR},
+            </if>
+            <if test="pubFlag != null">
+                pub_flag=#{pubFlag,jdbcType=INTEGER},
+            </if>
+            <if test="sortId != null">
+                sort_id=#{sortId,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                create_date=#{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by=#{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                update_date=#{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null ">
+                update_by=#{updateBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where res_type_id = #{resTypeId,jdbcType=VARCHAR}
+    </update>
+  
+ 
+
+  
+  
+  
+  
+  
+</mapper>

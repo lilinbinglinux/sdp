@@ -1,0 +1,44 @@
+.pagination > li.jumpto{
+    width: 70px;
+    height: 25px;
+    display: inline-block;
+    margin-left: 10px;
+}
+.jumpto button{
+    width: 30px;
+    height: 25px;
+    font-size: 14px;
+    padding: 0;
+    border-radius: 0;
+    /* background-color: #fff;
+    color: #333333;
+    border-color: #d9d9d9; */
+}
+.jumpto button:hover, 
+.jumpto button:active,
+.jumpto button:focus,
+.jumpto button:active:hover, 
+.jumpto button:focus:hover{
+    /* background-color: #fff;
+    color: #333333;
+    border-color: #da3610; */
+    outline: none;
+}
+.jumpto input {
+    float: left;
+    height: 25px;
+    width: 40px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 0;
+    box-shadow: none;
+    border-right: none;
+}
+.jumpto input:focus{
+    /* border-color: #da3610; */
+    outline: 0;
+    box-shadow: none;
+}
+.jumpto input:focus + button{
+    border-left-color: #da3610;
+}

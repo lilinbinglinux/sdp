@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.frame.web.mapper.puborder.ServiceMainMapper">
+    <resultMap id="BaseResultMap" type="com.sdp.servflow.pubandorder.servicebasic.model.ServiceMainBean">
+        <id column="ser_id" jdbcType="VARCHAR" property="serId" />
+        <result column="ser_name" jdbcType="VARCHAR" property="serName" />
+        <result column="ser_type" jdbcType="VARCHAR" property="serType" />
+        <result column="ser_code" jdbcType="VARCHAR" property="serCode" />
+        <result column="ser_version" jdbcType="VARCHAR" property="serVersion" />
+        <result column="ser_path" jdbcType="VARCHAR" property="serPath" />
+        <result column="ser_resume" jdbcType="VARCHAR" property="serResume" />
+        <result column="creatime" jdbcType="TIMESTAMP" property="creatTime" />
+        <result column="createDateString" jdbcType="VARCHAR" property="createDateString" />
+        <result column="synch_flag" jdbcType="VARCHAR" property="synchFlag" />
+        <result column="delflag" jdbcType="VARCHAR" property="delFlag" />
+        <result column="stopflag" jdbcType="VARCHAR" property="stopFlag" />
+        <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+        <result column="login_id" jdbcType="VARCHAR" property="loginId" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ser_id, ser_name, ser_type, ser_code, ser_version, ser_path, ser_resume, creatime, synch_flag,
+        delflag, stopflag, tenant_id, login_id
+    </sql>
+    
+    <select id="getByPrimaryKey" parameterType="String" resultType="com.sdp.servflow.pubandorder.servicebasic.model.ServiceMainBean">
+        select
+        ser_id serId,
+        ser_name serName,
+        ser_type serType,
+        ser_code serCode,
+        ser_version serVersion,
+        ser_path serPath,
+        ser_resume serResume,
+        creatime creatTime,
+        synch_flag synchFlag,
+        delflag delFlag,
+        stopflag stopFlag,
+        tenant_id tenantId,
+        login_id loginId 
+        from ser_main where ser_id = #{serId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getAllByCondition" parameterType="map" resultMap="BaseResultMap">
+        select ser_id, ser_name, ser_type, ser_code, ser_version, ser_path, ser_resume,
+        date_format(creatime,'%Y-%m-%d %H:%i') As createDateString,
+        synch_flag,
+        delflag, stopflag, tenant_id, login_id
+        from ser_main where 1=1
+        <if test="serId != null">
+            and ser_id = #{serId,jdbcType=VARCHAR}
+        </if>
+        <if test="serName != null">
+            and ser_name LIKE '%${serName}%'
+        </if>
+        <if test="serType != null">
+            and ser_type = #{serType,jdbcType=VARCHAR}
+        </if>
+        <if test="serCode != null">
+            and ser_code = #{serCode,jdbcType=VARCHAR}
+        </if>
+        <if test="serVersion != null">
+            and ser_version = #{serVersion,jdbcType=VARCHAR}
+        </if>
+        <if test="serPath != null">
+            and ser_path = #{serPath,jdbcType=VARCHAR}
+        </if>
+        <if test="serResume != null">
+            and ser_resume = #{serResume,jdbcType=VARCHAR}
+        </if>
+        <if test="creatTime != null">
+            and creatime = #{creatTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="synchFlag != null">
+            and synch_flag = #{synchFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="delFlag != null">
+            and delflag = #{delFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="stopFlag != null">
+            and stopflag = #{stopFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="tenantId != null">
+            and tenant_id = #{tenantId,jdbcType=VARCHAR}
+        </if>
+        <if test="loginId != null">
+            and login_id = #{loginId,jdbcType=VARCHAR}
+        </if>
+        order by creatime DESC
+    </select>
+
+    <select  id="getAllAndSerTypeName" parameterType="map" resultType="com.sdp.servflow.pubandorder.servicebasic.model.ServiceMainBean">
+        SELECT
+        A.ser_id AS serId,
+        A.ser_name AS serName,
+        A.ser_type AS serType,
+        A.ser_code AS serCode,
+        A.ser_version AS serVersion,
+        A.ser_path AS serPath,
+        A.ser_resume AS serResume,
+        date_format(
+        A.creatime,
+        '%Y-%m-%d %H:%i'
+        ) AS createDateString,
+        A.synch_flag AS synchFlag,
+        A.delflag AS delFlag,
+        A.stopflag AS stopFlag,
+        A.tenant_id AS tenantId,
+        A.login_id AS loginId,
+        B.ser_type_name AS serTypeName,
+        C.ser_agreement AS serAgreement,
+        CASE C.ser_agreement
+        WHEN 'http' THEN
+        CONCAT(
+        #{baseHttpUrl},
+        '?',
+        'tenantId=',
+        A.tenant_id,
+        '&amp;serId=',
+        A.ser_id
+        )
+        WHEN 'webService' THEN
+        CONCAT(
+        #{baseWebServiceUrl},
+        '?',
+        'tenantId=',
+        A.tenant_id,
+        '&amp;serId=',
+        A.ser_id
+        )
+        ELSE
+        ''
+        END AS url
+        FROM
+        ser_main A
+        LEFT JOIN ser_type B ON B.ser_type_id = A.ser_type
+        LEFT JOIN ser_version C ON A.ser_id = C.ser_id
+        AND A.ser_version = C.ser_version
+        WHERE
+        1 = 1
+        <if test="serId != null">
+            and A.ser_id = #{serId,jdbcType=VARCHAR}
+        </if>
+        <if test="serName != null">
+            and A.ser_name LIKE '%${serName}%'
+        </if>
+        <if test="serType != null">
+            and A.ser_type = #{serType,jdbcType=VARCHAR}
+        </if>
+        <if test="serCode != null">
+            and A.ser_code = #{serCode,jdbcType=VARCHAR}
+        </if>
+        <if test="serVersion != null">
+            and A.ser_version = #{serVersion,jdbcType=VARCHAR}
+        </if>
+        <if test="serPath != null">
+            and A.ser_path = #{serPath,jdbcType=VARCHAR}
+        </if>
+        <if test="serResume != null">
+            and A.ser_resume = #{serResume,jdbcType=VARCHAR}
+        </if>
+        <if test="creatTime != null">
+            and A.creatime = #{creatTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="synchFlag != null">
+            and A.synch_flag = #{synchFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="delFlag != null">
+            and A.delflag = #{delFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="stopFlag != null">
+            and A.stopflag = #{stopFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="tenantId != null">
+            and A.tenant_id = #{tenantId,jdbcType=VARCHAR}
+        </if>
+        <if test="loginId != null">
+            and A.login_id = #{loginId,jdbcType=VARCHAR}
+        </if>
+        order by A.creatime DESC
+    </select>
+
+    <select id="selectPage" parameterType="map" resultType="com.sdp.servflow.pubandorder.servicebasic.model.ServiceMainBean">
+        select
+        <include refid="Base_Column_List" />
+        from ser_main
+        where 1 = 1
+        <if test="loginId != null">
+            and login_id = #{loginId,jdbcType=VARCHAR}
+        </if>
+        <if test="delFlag != null">
+            and delflag = #{delFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="synchFlag != null">
+            and synch_flag = #{synchFlag,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <insert id="insert" parameterType="com.sdp.servflow.pubandorder.servicebasic.model.ServiceMainBean">
+        insert into ser_main
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="serId != null">
+                ser_id,
+            </if>
+            <if test="serName != null">
+                ser_name,
+            </if>
+            <if test="serType != null">
+                ser_type,
+            </if>
+            <if test="serCode != null">
+                ser_code,
+            </if>
+            <if test="serVersion != null">
+                ser_version,
+            </if>
+            <if test="serPath != null">
+                ser_path,
+            </if>
+            <if test="serResume != null">
+                ser_resume,
+            </if>
+            <if test="creatTime != null">
+                creatime,
+            </if>
+            <if test="synchFlag != null">
+                synch_flag,
+            </if>
+            <if test="delFlag != null">
+                delflag,
+            </if>
+            <if test="stopFlag != null">
+                stopflag,
+            </if>
+            <if test="tenantId != null">
+                tenant_id,
+            </if>
+            <if test="loginId != null">
+                login_id,
+            </if>
+        </trim>
+        <trim prefix="value(" suffix=")" suffixOverrides=",">
+            <if test="serId != null">
+                #{serId,jdbcType=VARCHAR},
+            </if>
+            <if test="serName != null">
+                 #{serName,jdbcType=VARCHAR},
+            </if>
+            <if test="serType != null">
+                #{serType,jdbcType=VARCHAR},
+            </if>
+            <if test="serCode != null">
+                #{serCode,jdbcType=VARCHAR},
+            </if>
+            <if test="serVersion != null">
+                #{serVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="serPath != null">
+                #{serPath,jdbcType=VARCHAR},
+            </if>
+            <if test="serResume != null">
+                #{serResume,jdbcType=VARCHAR},
+            </if>
+            <if test="creatTime != null">
+                #{creatTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="synchFlag != null">
+                #{synchFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="stopFlag != null">
+                #{stopFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantId != null ">
+                #{tenantId,jdbcType=VARCHAR},
+            </if>
+            <if test="loginId != null ">
+                #{loginId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.sdp.servflow.pubandorder.servicebasic.model.ServiceMainBean">
+        update ser_main
+        <set>
+            <if test="serName != null">
+                 ser_name=#{serName,jdbcType=VARCHAR},
+            </if>
+            <if test="serType != null">
+                ser_type=#{serType,jdbcType=VARCHAR},
+            </if>
+            <if test="serCode != null">
+               ser_code= #{serCode,jdbcType=VARCHAR},
+            </if>
+            <if test="serVersion != null">
+                ser_version=#{serVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="serPath != null">
+                ser_path=#{serPath,jdbcType=VARCHAR},
+            </if>
+            <if test="serResume != null">
+                ser_resume=#{serResume,jdbcType=VARCHAR},
+            </if>
+            <if test="creatTime != null">
+                creatime=#{creatTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="synchFlag != null">
+                synch_flag=#{synchFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                delflag=#{delFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="stopFlag != null">
+                stopflag=#{stopFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantId != null ">
+                tenant_id=#{tenantId,jdbcType=VARCHAR},
+            </if>
+            <if test="loginId != null ">
+                login_id=#{loginId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ser_id = #{serId,jdbcType=VARCHAR}
+    </update>
+
+    <delete  id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from ser_main
+        where ser_id = #{serId,jdbcType=VARCHAR}
+    </delete>
+
+</mapper>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.frame.web.mapper.puborder.MineOrderBeanMapper">
+    <resultMap type="com.sdp.servflow.pubandorder.order.model.OrderParamBean" id="BaseResultMap">
+        <id column="order_paramId" jdbcType="VARCHAR" property="orderparamId" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="paramdesc" jdbcType="VARCHAR" property="paramdesc" />
+        <result column="paramtype" jdbcType="VARCHAR" property="paramtype" />
+        <result column="isempty" jdbcType="VARCHAR" property="isempty" />
+        <result column="type" jdbcType="VARCHAR" property="type" />
+        <result column="parentId" jdbcType="VARCHAR" property="parentId" />
+        <result column="pub_paramId" jdbcType="VARCHAR" property="pubparamId" />
+        <result column="orderid" jdbcType="TIMESTAMP" property="orderid" />
+        <result column="tenant_id" jdbcType="TIMESTAMP" property="tenant_id" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        order_paramId, name, paramdesc, paramtype, isempty, type, parentId, pub_paramId, orderid, tenant_id
+    </sql>
+    
+    <insert id="insert" parameterType="com.sdp.servflow.pubandorder.order.model.OrderParamBean">
+        insert into order_param
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+	        <if test="orderparamId != null">
+                order_paramId,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="paramdesc != null">
+                paramdesc,
+            </if>
+            <if test="paramtype != null">
+                paramtype,
+            </if>
+            <if test="isempty != null">
+                isempty,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="parentId != null">
+                parentId,
+            </if>
+            <if test="pubparamId != null">
+                pub_paramId,
+            </if>
+            <if test="orderid != null">
+                orderid,
+            </if>
+            <if test="tenant_id != null">
+                tenant_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderparamId != null">
+                #{orderparamId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="paramdesc != null">
+                #{paramdesc,jdbcType=VARCHAR},
+            </if>
+            <if test="paramtype != null">
+                #{paramtype,jdbcType=VARCHAR},
+            </if>
+            <if test="isempty != null">
+                #{isempty,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="pubparamId != null">
+                #{pubparamId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderid != null">
+                #{orderid,jdbcType=VARCHAR},
+            </if>
+            <if test="tenant_id != null">
+                #{tenant_id,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectParam" parameterType="map" resultType="com.sdp.servflow.pubandorder.order.model.OrderParamBean">
+		SELECT A.* , B.name ordername , C.ecode
+		FROM order_param A , order_interface B , pub_reqparam C
+		WHERE A.pub_paramId = C.id
+		AND A.orderid = B.orderid
+        AND B.orderid = #{orderid,jdbcType=VARCHAR}
+    </select>
+    
+    
+    
+    
+</mapper>

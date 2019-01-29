@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.servflow.logSer.log.mapper.OrderInfoStatisticsMapper">
+  	
+  	<resultMap id="orderInfoStatistics" type="com.sdp.servflow.logSer.log.model.OrderInfoStatistics">
+    	<result column="id" jdbcType="INTEGER" property="id" />
+    	<result column="orderid" jdbcType="VARCHAR" property="orderid" />
+    	<result column="sendCount" jdbcType="INTEGER" property="sendCount" />
+    	<result column="code" jdbcType="VARCHAR" property="code" />
+    	<result column="sendDate" jdbcType="INTEGER" property="sendDate" />
+    	<result column="instanceId" jdbcType="INTEGER" property="instanceId" />
+    	<result column="tenant_id" jdbcType="VARCHAR" property="tenant_id" />
+  	</resultMap>
+  	
+  	<select id="findOrderInfo" resultMap="orderInfoStatistics">
+	  	select * from order_info_statistics
+		where sendDate=#{sendDate}
+		and orderid=#{orderid}
+		and code=#{code}
+		and tenant_id=#{tenant_id}
+  	</select>
+  	
+  	<insert id="orderInfoStatisticsSave" parameterType="com.sdp.servflow.logSer.log.model.PubStatistics">
+  		insert into order_info_statistics (orderid,code,sendCount,sendDate,tenant_id)
+  		values (#{orderid},#{code},#{sendCount},#{sendDate},#{tenant_id})
+  	</insert>
+  	
+  	<update id="orderInfoStatisticsUpdate">
+  	    update order_info_statistics set 
+	  	    sendCount = #{sendCount}
+  	    where sendDate=#{sendDate}
+  	    and orderid=#{orderid}
+		and code=#{code}
+		and tenant_id=#{tenant_id}
+  	</update>
+  	
+  	<select id="selectOrderInfoSendCount" resultType="java.lang.Integer">
+	  	select count(1) from ${tableName}
+		where dayTime=${sendDate}
+		and logType=1
+		and tenant_id=#{ls.tenant_id}
+		and orderid=#{ls.orderid}
+		and code=#{ls.code}
+  	</select>
+  	
+  	<select id="selectFailMsg" resultType="com.sdp.servflow.logSer.log.model.OrderInfoStatistics">
+		select *
+		FROM
+		order_info_statistics
+		WHERE 1=1
+		<if test="orderid != null and orderid !=''" >
+			AND   orderid =  #{orderid}
+		</if>
+		<if test="tenant_id != null and tenant_id !=''" >
+			AND   tenant_id =  #{tenant_id}
+		</if>
+		<if test="sendDate != null and sendDate !=''" >
+			AND   sendDate =  #{sendDate}
+		</if>
+	</select>
+</mapper>

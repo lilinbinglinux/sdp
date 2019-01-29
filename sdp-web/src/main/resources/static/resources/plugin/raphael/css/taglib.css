@@ -1,0 +1,246 @@
+
+body, html {
+    background: #f0f0f0;
+    color: #000;
+    font: 400 13px arial, Microsoft Yahei !important;
+    margin: 0;
+    overflow: hidden;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+}
+
+ol, ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.designer_header {
+    position: absolute;
+    width: auto;
+    left: 230px;
+    top: 10px;
+    z-index: 999;
+    background: white;
+    padding: 9px 15px;
+    box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.14);
+    border-radius: 3px;
+    border: solid 1px #ededed;
+}
+
+.diagram_title {
+    position: relative;
+    top: -22px;
+    right: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0 10px;
+    float: right;
+
+}
+
+.toolbar .toolimg {
+    width: 18px;
+    height: 18px;
+    margin: 2px 0px;
+    text-align: center;
+}
+
+.toolbar .tooltips {
+    text-align: center;
+    margin-top: 10px;
+    display: none;
+    position: relative;
+    background-color: #fff;
+
+}
+
+.toolbar .tooltips > div {
+    height: 30px;
+    min-width: 80px;
+    width: auto;
+    font-size: 12px;
+    padding: 0;
+    text-shadow: none;
+    z-index: 1000;
+    border: medium none;
+    border-radius: 0;
+    box-shadow: 0 0 3px rgba(86, 96, 117, .3)
+}
+
+.toolbar > div {
+    float: left;
+    width:auto;
+    height: 40px;
+    line-height: 22px;
+    padding: 10px 15px;
+    cursor: pointer;
+    list-style-type: none;
+}
+
+.toolbar .selecttool label {
+    margin-right: 5%;
+}
+
+.toolbar .selecttool select {
+    width: 70%;
+    display: inline-block;
+}
+
+/*designer_body*/
+.designer_body {
+    width: 100%;
+    position: relative;
+}
+
+.shape_panel {
+    position: absolute;
+    width: 186px;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    left: 0;
+}
+
+.dock_button {
+    width: 100%;
+    float: left;
+    padding: 8px 4px;
+    text-align: center;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    cursor: move;
+}
+
+.dock_button img {
+    height: 26px;
+}
+
+.shape_panel {
+    background: #dfe4eb;
+}
+
+.shape_panel .shape_header {
+    background: #d0d5db;
+    height: 80px;
+    width: 186px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.shape_panel .shape_header .title {
+    width: 186px;
+    height: 80px;
+    font-family: MicrosoftYaHei;
+    font-size: 22px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 80px;
+    padding-left: 20px;
+}
+
+.shape_list {
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    padding-top: 80px;
+    overflow: auto;
+
+}
+
+.shape_list .shapes {
+    padding: 10px 10px 10px 20px;
+    border: solid 1px #dddddd;
+    border-top: 0px;
+}
+
+.shape_list > div {
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.shape_list img {
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+}
+
+.shape_list .tooltips {
+    font-size: 12px;
+    display: inline-block;
+    text-decoration: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    padding: 0 2px 0 5px;
+    height: 16px;
+    line-height: 18px;
+
+}
+
+/*第二层，设置距离左边的位置*/
+.designer_viewport {
+    position: relative;
+    margin-left: 186px;
+    background: url(../img/canvas_container.jpg) repeat;
+}
+
+/*第三层，设置右边滚动条*/
+.designer_layout {
+    overflow: scroll;
+    z-index: 0;
+    position: relative;
+
+}
+
+/*第四层，设置画布的位置*/
+#canvas_container {
+    width: 1250px;
+    /* padding: 30px;*/
+    cursor: default;
+}
+
+/*第五层，设置画布直接的父节点*/
+#designer_canvas {
+    /* padding:20px;*/
+    position: relative;
+    overflow: visible;
+    box-shadow: 3px 3px 6px #888;
+    z-index: 0;
+    background-color: #fff;
+    /*    width:1350px;
+        height:1500px;*/
+}
+
+.options_menu .noico li {
+    padding: 0 20px;
+}
+
+.options_menu li {
+    width: 180px;
+    position: relative;
+    color: #333;
+    text-shadow: none;
+    padding: 0 30px;
+}
+
+.options_menu li div {
+    position: absolute;
+    top: 3px;
+    left: 5px;
+}
+
+#node_menu {
+    width: auto;
+    height: 20px;
+    padding: 20px;
+    background: #FFF;
+    border-radius: 2px;
+    font-size: 14px;
+    line-height: 18px;
+    border: 1px solid rgb(180, 180, 180);
+}

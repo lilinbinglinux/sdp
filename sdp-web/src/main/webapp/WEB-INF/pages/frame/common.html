@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap/bootstrapValidator.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/dataTables/dataTables.bootstrap.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/dataTables/fixedHeader.dataTables.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/plugins/layer/skin/layer.css}"/>
+	
+	<script type="text/javascript" th:src="@{/js/jquery/jquery.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap/bootstrapValidator.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/layer/layer.js}"></script>
+    
+    <!-- 获取contentpath -->
+    <script th:inline="javascript"> var ctx = [[@{/}]]; </script>
+    	 
+    <!--import datatables  -->
+    <script type="text/javascript" th:src="@{/js/plugins/jquery.dataTables.js}"></script>	 
+    <script type="text/javascript" th:src="@{/js/plugins/dataTables.bootstrap.js}"></script>
+    <script type="text/javascript" th:src="@{/js/plugins/dataTables.fixedHeader.min.js}"></script>
+</head>
+</html>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.xbconsole.pageModel.PageModuleTypeMapper">
+  <resultMap id="BaseResultMap" type="com.sdp.pageModel.entity.PageModuleType">
+    <id column="module_type_id" jdbcType="VARCHAR" property="moduleTypeId" />
+    <result column="module_type_name" jdbcType="VARCHAR" property="moduleTypeName" />
+    <result column="module_parent_id" jdbcType="VARCHAR" property="moduleParentId" />
+    <result column="pub_flag" jdbcType="INTEGER" property="pubFlag" />
+    <result column="sort_id" jdbcType="INTEGER" property="sortId" />
+    <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />    
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+  </resultMap>
+  
+   <sql id="Base_Column_List">
+       module_type_id, module_type_name, module_parent_id, pub_flag, sort_id, 
+       tenant_id,create_date, create_by, update_date,update_by
+   </sql>
+   
+  <select id="selectPage" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    select 
+    	<include refid="Base_Column_List" />
+    from page_model where 1=1 
+		<if test="pageName != null">
+	    	and page_name = #{pageName,jdbcType=VARCHAR} 
+		</if>
+		<if test="tenantId != null">
+	    	and tenant_id = #{tenantId,jdbcType=VARCHAR}
+		</if>
+  </select>
+  
+  <select id="findByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    	<include refid="Base_Column_List" />
+    from page_module_type where 
+    module_type_id = #{moduleTypeId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="findByCondition" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from page_module_type where 1=1
+		<if test="moduleTypeId != null and moduleTypeId != ''">
+            and module_type_id = #{moduleTypeId,jdbcType=VARCHAR}
+        </if>
+        <if test="moduleTypeName != null and moduleTypeName != ''">
+            and module_type_name LIKE '%${moduleTypeName}%'
+        </if>
+        <if test="moduleParentId != null and moduleParentId != ''">
+            and module_parent_id = #{moduleParentId,jdbcType=VARCHAR}
+        </if>
+        <if test="pubFlag != null">
+            and pub_flag = #{pubFlag,jdbcType=INTEGER}
+        </if>
+        <if test="sortId != null">
+            and sort_id = #{sortId,jdbcType=INTEGER}
+        </if>
+        <if test="tenantId != null">
+            and tenant_id = #{tenantId,jdbcType=VARCHAR}
+        </if>
+        <if test="createDate != null">
+            and create_date = #{createDate,jdbcType=TIMESTAMP}
+        </if>
+         <if test="createBy != null">
+            and create_by = #{createBy,jdbcType=VARCHAR}
+        </if>
+         <if test="updateDate != null and parentId != ''">
+            and update_date = #{updateDate,jdbcType=TIMESTAMP}
+        </if>
+         <if test="updateBy != null">
+            and update_by = #{updateBy,jdbcType=VARCHAR}
+        </if>
+        order by sort_id ASC
+	</select>
+  
+  <insert id="insert" parameterType="com.sdp.pageModel.entity.PageModuleType">
+    <selectKey keyProperty="moduleTypeId" resultType="string" order="BEFORE">    
+             select  replace(uuid(),'-','')   from dual  
+    </selectKey> 
+    insert into page_module_type (module_type_id, module_type_name, module_parent_id, 
+      pub_flag, sort_id,
+      tenant_id, 
+      create_date, create_by, update_date, 
+      update_by)
+    values (
+    	#{moduleTypeId,jdbcType=VARCHAR}, 
+    	#{moduleTypeName,jdbcType=VARCHAR}, 
+    	#{moduleParentId,jdbcType=VARCHAR}, 
+        #{pubFlag,jdbcType=INTEGER}, 
+        #{sortId,jdbcType=INTEGER}, 
+        #{tenantId,jdbcType=VARCHAR}, 
+        #{createDate,jdbcType=TIMESTAMP}, 
+        #{createBy,jdbcType=VARCHAR}, 
+        #{updateDate,jdbcType=TIMESTAMP}, 
+        #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  
+  <update id="update" parameterType="com.sdp.pageModel.entity.PageModuleType">
+        update page_module_type
+        <set>
+            <if test="moduleTypeName != null">
+                module_type_name=#{moduleTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleParentId != null">
+               module_parent_id= #{moduleParentId,jdbcType=VARCHAR},
+            </if>
+            <if test="pubFlag != null">
+                pub_flag=#{pubFlag,jdbcType=INTEGER},
+            </if>
+            <if test="sortId != null">
+                sort_id=#{sortId,jdbcType=INTEGER},
+            </if>
+             <if test="tenantId != null">
+                tenant_id=#{tenantId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date=#{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by=#{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                update_date=#{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null ">
+                update_by=#{updateBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where module_type_id = #{moduleTypeId,jdbcType=VARCHAR}
+    </update>
+  
+  <delete id="delete" parameterType="java.lang.String">
+    delete from page_module_type
+    where module_type_id = #{moduleTypeId,jdbcType=VARCHAR}
+  </delete>
+  
+   <select id="findIsParentByCondition" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+		SELECT distinct(p1.module_type_id),p1.*, 
+		(CASE WHEN p2.module_type_id IS NULL THEN '0' ELSE '1' END ) isParentId FROM 
+	page_module_type p1 
+LEFT JOIN page_module_type p2 ON p1.module_type_id = p2.module_parent_id where 1=1 
+		<if test="moduleTypeId != null and moduleTypeId != ''">
+            and p1.module_type_id = #{moduleTypeId,jdbcType=VARCHAR}
+        </if>
+        <if test="moduleTypeName != null and moduleTypeName != ''">
+            and p1.module_type_name LIKE '%${moduleTypeName}%'
+        </if>
+        <if test="moduleParentId != null and moduleParentId != ''">
+            and p1.module_parent_id = #{moduleParentId,jdbcType=VARCHAR}
+        </if>
+        <if test="pubFlag != null">
+            and p1.pub_flag = #{pubFlag,jdbcType=INTEGER}
+        </if>
+        <if test="sortId != null">
+            and p1.sort_id = #{sortId,jdbcType=INTEGER}
+        </if>
+        <if test="tenantId != null">
+            and p1.tenant_id = #{tenantId,jdbcType=VARCHAR}
+        </if>
+        <if test="createDate != null">
+            and p1.create_date = #{createDate,jdbcType=TIMESTAMP}
+        </if>
+         <if test="createBy != null">
+            and p1.create_by = #{createBy,jdbcType=VARCHAR}
+        </if>
+         <if test="updateDate != null and parentId != ''">
+            and p1.update_date = #{updateDate,jdbcType=TIMESTAMP}
+        </if>
+         <if test="updateBy != null">
+            and p1.update_by = #{updateBy,jdbcType=VARCHAR}
+        </if>
+        order by p1.create_date ASC
+	</select>
+  
+</mapper>

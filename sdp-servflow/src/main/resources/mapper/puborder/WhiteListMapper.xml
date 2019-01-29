@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.servflow.pubandorder.mapper.WhiteListMapper">
+    <resultMap id="BaseResultMap" type="com.sdp.servflow.pubandorder.whitelist.model.WhiteListBean">
+        <id column="ip_id" jdbcType="VARCHAR" property="ipID" />
+        <result column="app_id" jdbcType="VARCHAR" property="appId" />
+        <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+        <result column="ip_addr" jdbcType="VARCHAR" property="ipAddr" />
+        <result column="name_type" jdbcType="VARCHAR" property="nameType" />
+        <result column="creatime" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.sdp.servflow.pubandorder.whitelist.model.WhiteListBean">
+        insert into ser_ip_limit
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ipID != null">
+                ip_id,
+            </if>
+            <if test="appId != null">
+                app_id,
+            </if>
+            <if test="orderId != null">
+                order_id,
+            </if>
+            <if test="ipAddr != null">
+                ip_addr,
+            </if>
+            <if test="nameType != null">
+                name_type,
+            </if>
+            <if test="createTime != null">
+                creatime,
+            </if>
+            <if test="tenantId != null">
+                tenant_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ipID != null">
+                #{ipID,jdbcType=VARCHAR},
+            </if>
+            <if test="appId != null">
+                #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderId != null">
+                #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="ipAddr != null">
+                #{ipAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="nameType != null">
+                #{nameType,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantId != null">
+                #{tenantId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from ser_ip_limit
+        where order_id = #{orderId,jdbcType=VARCHAR}
+    </delete>
+
+    <select id="getAllByCondition" parameterType="map" resultType="com.sdp.servflow.pubandorder.whitelist.model.WhiteListBean">
+        select
+        ip_id as ipID,
+        app_id as appId,
+        order_id as orderId,
+        ip_addr as ipAddr,
+        name_type as nameType,
+        creatime as createTime,
+        tenant_id as tenantId
+        from ser_ip_limit
+        where 1 = 1
+        <if test="ipID != null">
+            and ip_id = #{ipID,jdbcType=VARCHAR}
+        </if>
+        <if test="appId != null">
+            and app_id = #{appId,jdbcType=VARCHAR}
+        </if>
+        <if test="orderId != null">
+            and order_id = #{orderId,jdbcType=VARCHAR}
+        </if>
+        <if test="ipAddr != null">
+            and ip_addr = #{ipAddr,jdbcType=VARCHAR}
+        </if>
+        <if test="nameType != null">
+            and name_type = #{nameType,jdbcType=VARCHAR}
+        </if>
+        <if test="tenantId != null">
+            and tenant_id = #{tenantId,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+</mapper>

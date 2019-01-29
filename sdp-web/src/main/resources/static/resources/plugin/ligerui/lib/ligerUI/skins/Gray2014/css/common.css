@@ -1,0 +1,85 @@
+ a{
+	text-decoration: none;    
+	/* display: block; */
+    line-height: 1.28571428571429;
+    color: #0070d2;
+} 
+a:hover{
+     background-color: #eceff5;
+     color: #0070d2;
+     cursor: pointer;
+}
+   
+.l-button-box-search{
+	margin: 3px 12px;
+	height: 24px;
+	width:auto; 
+	overflow: hidden;
+	line-height: 23px;
+	cursor: pointer;
+	position: relative;  
+	text-align:center;
+	border-radius: 0.25rem;
+	background-color: #0070d2;
+    border: 1px solid #0070d2;
+    color:white
+}    
+.l-button { 
+	height: 30px;
+	width:auto; 
+	overflow: hidden;
+	line-height: 23px;
+	cursor: pointer;
+	position: relative;  
+	text-align:center;
+	border: solid 1px #A3C0E8;
+	border-radius: 0.25rem;
+	padding-left:10px;
+    padding-right:10px;
+	color: #333333;
+}
+.l-bar-button{
+	height: 33px;
+	width:auto; 
+	overflow: hidden;
+	line-height: 23px;
+	cursor: pointer;
+	position: relative;  
+	text-align:center;
+	border: solid 1px #A3C0E8;
+	color: #333333;
+}
+.l-button-disabled{
+	background-color: #d8dde6;
+	 border: 1px solid #d8dde6; 
+	color:#333;
+}
+.l-bar-button + .l-bar-button{
+	margin-left:0;
+}
+.l-button + .l-button {
+   /*  margin-left: 10px;  */
+}
+.l-button-brand{
+	background-color: #0070d2;
+    border: 1px solid #0070d2;
+    color:white;
+}
+.l-button-destructive{
+	background-color: #c23934;
+    border: 1px solid #c23934;
+    color: white;
+}
+.l-button-green{
+	background-color: #33cc99;
+	border: 1px solid #33cc99;
+    color: white;
+}
+.l-button-pink{
+    background-color: #ff7a9d;
+    border: #ff7a9d;
+    color: white;
+}
+/* .l-button-over,.l-button:hover {
+	background-image:url('../images/ui/button-over.gif'); border-color:#D3D3D3;
+} */

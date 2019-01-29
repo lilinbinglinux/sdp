@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.serviceAccess.mapper.PProductCaseMapper">
+	<select id="findByCondition" parameterType="com.sdp.serviceAccess.entity.PProductCase"
+		resultType="com.sdp.serviceAccess.entity.PProductCase">
+		select
+		case_id "caseId",
+		order_id "orderId",
+		product_id "productId",
+		product_name
+		"productName",
+		apply_name
+		"applyName",
+		case_arr "caseAttr",
+		receipt "receipt",
+		case_status
+		"caseStatus",
+		create_date "createDate",
+		create_by "createBy",
+		tenant_id
+		"tenantId",
+		is_show "isShow",
+		case_rely_ship_Attr "caseRelyShipAttr" 
+		from p_product_case
+		where 1=1
+		<if test="tenantId != null and tenantId != ''">
+			and tenant_id=#{tenantId}
+		</if>
+		<if test="productId != null and productId != ''">
+			and product_id=#{productId}
+		</if>
+		<if test = "orderId !=null and orderId !='' ">
+		    and order_id = #{orderId}
+		</if>
+		<if test=" caseStatus != null and caseStatus != ''">
+		    and case_status =#{caseStatus}
+		</if>
+		<if test="isShow !=null and isShow !=''">
+		    and is_show = #{isShow} 
+		 </if>
+	</select>
+
+	<select id="findById" parameterType="com.sdp.serviceAccess.entity.PProductCase"
+		resultType="com.sdp.serviceAccess.entity.PProductCase">
+		select
+		case_id "caseId",
+		order_id "orderId",
+		product_id "productId",
+		product_name
+		"productName",
+		apply_name
+		"applyName",
+		case_arr "caseAttr",
+		receipt "receipt",
+		case_status 
+		"caseStatus",
+		create_date "createDate",
+		create_by "createBy",
+		tenant_id
+		"tenantId",
+		is_show "isShow",
+		case_rely_ship_Attr "caseRelyShipAttr" 
+		from p_product_case
+		where 1=1
+		<if test="tenantId != null and tenantId != ''">
+			and tenant_id=#{tenantId}
+		</if>
+		<if test="caseId != null and caseId != ''">
+			and case_id=#{caseId}
+		</if>
+		<if test="createBy !=null and createBy !=''">
+		    and create_by = #{createBy}
+		</if>
+		<if test="isShow !=null and isShow !=''">
+		    and is_show = #{isShow} 
+		 </if>
+	</select>
+
+	<select id="findAll" parameterType="com.sdp.serviceAccess.entity.PProductCase"
+		resultType="com.sdp.serviceAccess.entity.PProductCase">
+		select
+		case_id "caseId",
+		order_id "orderId",
+		product_id
+		"productId",
+		product_name
+		"productName",
+		apply_name
+		"applyName",
+		case_arr "caseAttr",
+		receipt
+		"receipt",
+		case_status 
+		"caseStatus",
+		create_date "createDate",
+		create_by
+		"createBy",
+		tenant_id
+		"tenantId",
+		is_show "isShow",
+		case_rely_ship_Attr "caseRelyShipAttr" 
+		from p_product_case
+		where 1=1
+		and
+		tenant_id = #{tenantId}
+	</select>
+
+	<insert id="saveSingle" parameterType="com.sdp.serviceAccess.entity.PProductCase">
+		insert into p_product_case
+		(case_id,
+		order_id,
+		product_id,
+		product_name,
+		apply_name,
+		case_arr,
+		receipt,
+		case_status,
+		create_date,
+		create_by,
+		tenant_id,
+		is_show,
+		case_rely_ship_Attr)
+		values (
+		#{caseId,jdbcType=VARCHAR},
+		#{orderId,jdbcType=VARCHAR},
+		#{productId,jdbcType=VARCHAR},
+		#{productName,jdbcType=VARCHAR},
+		#{applyName,jdbcType=VARCHAR},
+		#{caseAttr,jdbcType=VARCHAR},
+		#{receipt,jdbcType=VARCHAR},
+		#{caseStatus,jdbcType=VARCHAR},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{createBy,jdbcType=VARCHAR},
+		#{tenantId,jdbcType=VARCHAR},
+		#{isShow,jdbcType=VARCHAR},
+		#{caseRelyShipAttr,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.sdp.serviceAccess.entity.PProductCase">
+		update p_product_case set 
+		<if test = "targetCaseId!=null and targetCaseId !=''">
+		case_id =#{targetCaseId,jdbcType=VARCHAR},
+		</if>
+		order_id =#{orderId,jdbcType=VARCHAR},
+		product_id =#{productId,jdbcType=VARCHAR},
+		product_name =#{productName,jdbcType=VARCHAR},
+		apply_name =#{applyName,jdbcType=VARCHAR},
+		case_arr =#{caseAttr,jdbcType=VARCHAR},
+		receipt =#{receipt,jdbcType=VARCHAR},
+		case_status =#{caseStatus,jdbcType=VARCHAR},
+		create_date =#{createDate,jdbcType=TIMESTAMP},
+		create_by =#{createBy,jdbcType=VARCHAR},
+		tenant_id =#{tenantId,jdbcType=VARCHAR},
+		is_show = #{isShow,jdbcType=VARCHAR},
+		case_rely_ship_Attr=#{caseRelyShipAttr,jdbcType=VARCHAR} 
+		where 1=1 
+		and tenant_id = #{tenantId} and case_id = #{caseId} 
+	</update>
+	
+	<delete id="delete" parameterType="com.sdp.serviceAccess.entity.PProductCase">
+	delete from p_product_case where tenant_id = #{tenantId} and case_id = #{caseId}
+	</delete>
+	
+	<select id="findAllByConditionAndPage" parameterType="java.util.Map"
+		resultType="com.sdp.serviceAccess.entity.PProductCase">
+		select
+		case_id "caseId",
+		order_id "orderId",
+		product_id "productId",
+		product_name
+		"productName",
+		apply_name
+		"applyName",
+		case_arr "caseAttr",
+		receipt "receipt",
+		case_status 
+		"caseStatus",
+		create_date "createDate",
+		create_by "createBy",
+		tenant_id
+		"tenantId",
+		is_show "isShow",
+		case_rely_ship_Attr "caseRelyShipAttr" 
+		from p_product_case
+		where 1=1
+		<if test="tenantId != null and tenantId != ''">
+			and tenant_id=#{tenantId}
+		</if>
+		<if test = "loginId != null and loginId != ''">
+		    and create_by = #{loginId} 
+		</if>
+		<if test="productId != null and productId != ''">
+			and product_id=#{productId}
+		</if>
+		<if test="isShow !=null and isShow !=''">
+		    and is_show = #{isShow} 
+		 </if>
+		 <if test="caseStatus != null and caseStatus != ''">
+			and case_status=#{caseStatus}
+		</if>
+		<if test="applyName != null and applyName != ''">
+			and apply_name=#{applyName}
+		</if>
+		order by create_date desc 
+		limit #{startNo},#{size} 
+	</select>
+	
+	<select id ="count" parameterType="java.util.Map" resultType="java.lang.Integer">
+	select count(1) "ctn" from p_product_case 
+	  where 1=1
+		<if test="tenantId != null and tenantId != ''">
+			and tenant_id=#{tenantId}
+		</if>
+		<if test = "loginId != null and loginId != ''">
+		    and create_by = #{loginId} 
+		</if>
+		<if test="productId != null and productId != ''">
+			and product_id=#{productId}
+		</if>
+		<if test="isShow !=null and isShow !=''">
+		    and is_show = #{isShow} 
+		 </if>
+	</select>
+		
+	<select id="findAllByConditionAndPageWithAuth" parameterType="java.util.Map"
+		resultType="com.sdp.serviceAccess.entity.PProductCase">
+		select
+		pcase.case_id "caseId",
+		pcase.order_id "orderId",
+		pcase.product_id "productId",
+		pcase.product_name "productName",
+		pcase.apply_name "applyName",
+		pcase.case_arr "caseAttr",
+		pcase.receipt "receipt",
+		pcase.case_status "caseStatus",
+		pcase.create_date "createDate",
+		pcase.create_by "createBy",
+		pcase.tenant_id "tenantId",
+		pcase.is_show "isShow",
+		pcase.case_rely_ship_Attr "caseRelyShipAttr" 
+		from p_product_case pcase
+		<if test="providerId !=null">
+			join p_product p ON p.product_id = pcase.product_id
+		 </if>
+		where 1=1
+		<if test="tenantId != null and tenantId != ''">
+			and pcase.tenant_id=#{tenantId}
+		</if>
+		<if test = "loginId != null and loginId != ''">
+		    and pcase.create_by = #{loginId} 
+		</if>
+		<if test="productId != null and productId != ''">
+			and pcase.product_id=#{productId}
+		</if>
+		<if test="isShow !=null and isShow !=''">
+		    and pcase.is_show = #{isShow} 
+		 </if>
+		<if test="caseStatus !=null and caseStatus !=''">
+		    and pcase.case_status = #{caseStatus} 
+		 </if>
+		 <if test="providerId !=null and providerId !=''">
+			and p.create_by= #{providerId} 
+		 </if>
+		limit #{startNo},#{size} 
+	</select>
+	
+	<select id ="countWithAuth" parameterType="java.util.Map" resultType="java.lang.Integer">
+	select count(1) "ctn" from p_product_case pcase
+	<if test="providerId !=null">
+			join p_product p ON p.product_id = pcase.product_id
+		 </if>
+	  where 1=1
+		<if test="tenantId != null and tenantId != ''">
+			and pcase.tenant_id=#{tenantId}
+		</if>
+		<if test = "loginId != null and loginId != ''">
+		    and pcase.create_by = #{loginId} 
+		</if>
+		<if test="productId != null and productId != ''">
+			and pcase.product_id=#{productId}
+		</if>
+		<if test="caseStatus !=null and caseStatus !=''">
+		    and pcase.case_status = #{caseStatus} 
+		 </if>
+		 <if test="providerId !=null and providerId !=''">
+			and p.create_by= #{providerId} 
+		 </if>
+	</select>
+</mapper>

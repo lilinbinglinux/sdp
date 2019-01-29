@@ -1,0 +1,17 @@
+/target
+.metadata
+/.metadata/
+.project
+.classpath
+/.settings/
+/bin/
+/logback/
+/h2/
+.idea
+.idea/*.*
+*.iml
+node_modules
+/attachment/
+/.classpath
+/LOG_HOME_IS_UNDEFINED/*
+.factorypath

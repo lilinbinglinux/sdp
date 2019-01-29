@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.xbconsole.pageModel.PageTypeMapper">
+  <resultMap id="BaseResultMap" type="com.sdp.pageModel.entity.PageType">
+    <id column="page_type_id" jdbcType="VARCHAR" property="pageTypeId" />
+    <result column="page_type_name" jdbcType="VARCHAR" property="pageTypeName" />
+    <result column="page_parent_id" jdbcType="VARCHAR" property="pageParentId" />
+    <result column="page_type_path" jdbcType="VARCHAR" property="pageTypePath" />
+    <result column="page_sort_id" jdbcType="INTEGER" property="pageSortId" />
+    <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />    
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+  </resultMap>
+  
+  
+   <sql id="Base_Column_List">
+       page_type_id, page_type_name, page_parent_id, page_type_path,page_sort_id,
+       tenant_id,create_date, create_by, update_date, update_date,update_by
+   </sql>
+   
+   <select id="selectPage" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    select 
+    	<include refid="Base_Column_List" />
+    from page_type where 1=1 
+		<if test="pageTypeName != null">
+	    	and page_type_name LIKE '%${pageTypeName}%' 
+		</if>
+		<if test="tenantId != null">
+	    	and tenant_id = #{tenantId,jdbcType=VARCHAR}
+		</if>
+       order by page_sort_id ASC
+  </select>
+   
+    <select id="findByCondition" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from page_type where 1=1
+		<if test="pageTypeId != null and pageTypeId != ''">
+            and page_type_id = #{pageTypeId,jdbcType=VARCHAR}
+        </if>
+        <if test="pageTypeName != null">
+            and page_type_name LIKE '%${pageTypeName}%'
+        </if>
+        <if test="pageParentId != null">
+            and page_parent_id = #{pageParentId,jdbcType=VARCHAR}
+        </if>
+        <if test="pageTypePath != null">
+            and page_type_path = #{pageTypePath,jdbcType=VARCHAR}
+        </if>
+        <if test="pageSortId != null">
+            and page_sort_id = #{pageSortId,jdbcType=INTEGER}
+        </if>
+        <if test="tenantId != null">
+            and tenant_id = #{tenantId,jdbcType=VARCHAR}
+        </if>
+        <if test="createDate != null">
+            and create_date = #{createDate,jdbcType=TIMESTAMP}
+        </if>
+         <if test="createBy != null">
+            and create_by = #{createBy,jdbcType=VARCHAR}
+        </if>
+         <if test="updateDate != null and parentId != ''">
+            and update_date = #{updateDate,jdbcType=TIMESTAMP}
+        </if>
+         <if test="updateBy != null">
+            and update_by = #{updateBy,jdbcType=VARCHAR}
+        </if>
+        order by page_sort_id ASC
+	</select>
+	
+	<select id="findByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    	<include refid="Base_Column_List" />
+    from page_type where 
+    page_type_id = #{pageTypeId,jdbcType=VARCHAR}
+  </select>
+  
+   
+   <insert id="insert" parameterType="com.sdp.pageModel.entity.PageType">
+    <selectKey keyProperty="pageTypeId" resultType="string" order="BEFORE">    
+             select  replace(uuid(),'-','')   from dual  
+    </selectKey> 
+    insert into page_type ( page_type_id, page_type_name, page_parent_id, page_type_path,page_sort_id,
+      tenant_id,create_date, create_by, update_date, 
+      update_by)
+    values (
+    	#{pageTypeId ,jdbcType=VARCHAR}, 
+    	#{pageTypeName,jdbcType=VARCHAR}, 
+    	#{pageParentId,jdbcType=VARCHAR}, 
+    	#{pageTypePath,jdbcType=VARCHAR}, 
+        #{pageSortId,jdbcType=INTEGER}, 
+        #{tenantId,jdbcType=VARCHAR}, 
+        #{createDate,jdbcType=TIMESTAMP}, 
+        #{createBy,jdbcType=VARCHAR}, 
+        #{updateDate,jdbcType=TIMESTAMP}, 
+        #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  
+  <delete id="delete" parameterType="java.lang.String">
+    delete from page_type
+    where page_type_id = #{pageTypeId,jdbcType=VARCHAR}
+  </delete>
+  
+  <update id="update" parameterType="com.sdp.pageModel.entity.PageType">
+        update page_type
+        <set>
+            <if test="pageTypeName != null">
+               page_type_name= #{pageTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="pageParentId != null">
+                page_parent_id=#{pageParentId,jdbcType=VARCHAR},
+            </if>
+            <if test="pageTypePath != null">
+                page_type_path=#{pageTypePath,jdbcType=VARCHAR},
+            </if>
+            <if test="pageSortId != null">
+                page_sort_id=#{pageSortId,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                create_date=#{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by=#{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                update_date=#{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null ">
+                update_by=#{updateBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where page_type_id = #{pageTypeId,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

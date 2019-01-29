@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.servflow.pubandorder.flowchart.mapper.ProcessNodeMapper">
+	<insert id="addNode" parameterType="com.sdp.servflow.pubandorder.flowchart.model.ProcessNode">
+    insert into LAYOUT_NODE
+	    <trim prefix="(" suffix=")" suffixOverrides=",">
+	        <if test="nodeId != null">
+	                node_id,
+	        </if>
+	        <if test="nodeName != null">
+	                node_name,
+	        </if>
+	        <if test="flowChartId != null">
+	                flowChartId,
+	        </if>
+	        <if test="nodeType != null">
+	                node_type,
+	        </if>
+	        <if test="clientX != null">
+	                client_x,
+	        </if>
+	        <if test="clientY != null">
+	                client_y,
+	        </if>
+	        <if test="nodeWidth != null">
+	                node_width,
+	        </if>
+	        <if test="nodeHeight != null">
+	                node_height,
+	        </if>
+	        <if test="nodeRadius != null">
+	                node_radius,
+	        </if>
+	        <if test="creatime != null">
+	                creatime,
+	        </if>
+	        <if test="userId != null">
+	                user_id,
+	        </if>
+	        <if test="updateTime != null">
+	                update_time,
+	        </if>
+	        <if test="tenantId != null">
+	                tenant_id,
+	        </if>
+	        <if test="componentType != null">
+	                component_type,
+	        </if>
+	        <if test="pubid != null">
+	                pubid,
+	        </if>
+	        <if test="startSet != null">
+	                startSet,
+	        </if>
+	        <if test="endSet != null">
+	                endSet,
+	        </if>
+	        </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+	        <if test="nodeId != null">
+	                #{nodeId,jdbcType=VARCHAR},
+	        </if>
+	        <if test="nodeName != null">
+	                #{nodeName,jdbcType=VARCHAR},
+	        </if>
+	        <if test="flowChartId != null">
+	                #{flowChartId,jdbcType=VARCHAR},
+	        </if>
+	        <if test="nodeType != null">
+	                #{nodeType,jdbcType=VARCHAR},
+	        </if>
+	        <if test="clientX != null">
+	                #{clientX,jdbcType=VARCHAR},
+	        </if>
+	        <if test="clientY != null">
+	                #{clientY,jdbcType=VARCHAR},
+	        </if>
+	        <if test="nodeWidth != null">
+	                #{nodeWidth,jdbcType=VARCHAR},
+	        </if>
+	        <if test="nodeHeight != null">
+	                #{nodeHeight,jdbcType=VARCHAR},
+	        </if>
+	        <if test="nodeRadius != null">
+	                #{nodeRadius,jdbcType=VARCHAR},
+	        </if>
+	        <if test="creatime != null">
+	                #{creatime,jdbcType=VARCHAR},
+	        </if>
+	        <if test="userId != null">
+	                #{userId,jdbcType=VARCHAR},
+	        </if>
+	        <if test="updateTime != null">
+	                #{updateTime,jdbcType=VARCHAR},
+	        </if>
+	        <if test="tenantId != null">
+	                #{tenantId,jdbcType=VARCHAR},
+	        </if>
+	        <if test="componentType != null">
+	                #{componentType,jdbcType=VARCHAR},
+	        </if>
+	        <if test="pubid != null">
+	                #{pubid,jdbcType=VARCHAR},
+	        </if>
+	        <if test="startSet != null">
+	                #{startSet,jdbcType=VARCHAR},
+	        </if>
+	        <if test="endSet != null">
+	                #{endSet,jdbcType=VARCHAR},
+	        </if>
+	    </trim>
+    </insert>
+	
+	<delete id="deleteAll" parameterType="java.util.Map">
+		delete from LAYOUT_NODE
+		where flowChartId=#{flowChartId,jdbcType=VARCHAR} and tenant_id=#{tenant_id,jdbcType=VARCHAR}
+	</delete>
+	
+	<select id="findNodeByFId" parameterType="java.util.Map" resultType="com.sdp.servflow.pubandorder.flowchart.model.ProcessNode">
+		select 
+		node_id         "nodeId",
+		node_name       "nodeName",
+		node_type       "nodeType",
+		client_x        "clientX",
+		client_y 	    "clientY",
+		node_width      "nodeWidth",
+		node_height     "nodeHeight",
+		node_radius     "nodeRadius",
+		creatime 	    "creatime",
+		user_id 	    "userId",
+		update_time     "updateTime",
+		component_type  "componentType",
+		startSet        "startSet",
+        endSet          "endSet", 
+        pubid           "other"
+		from LAYOUT_NODE
+		where flowChartId=#{flowChartId,jdbcType=VARCHAR} and tenant_id=#{tenant_id,jdbcType=VARCHAR}
+	</select>
+	
+    <select id="selectprepubid" parameterType="String" resultType="String">
+        select pubid 
+        from layout_node 
+        where endSet = #{nodeId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectnextpubid" parameterType="String" resultType="String">
+        select pubid 
+        from layout_node 
+        where startSet = #{nodeId,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.frame.web.mapper.puborder.ServiceLogMapper">
+
+	
+	<insert id="insert" parameterType="com.sdp.servflow.pubandorder.logRecord.model.ServiceLog">
+		insert into service_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="pubid != null">
+				pubid,
+			</if>
+			<if test="layoutSerId != null">
+				layoutSerId,
+			</if>
+			<if test="requestMsg != null">
+				requestMsg,
+			</if>
+			<if test="responseMsg != null">
+				responseMsg,
+			</if>
+			<if test="requestID != null">
+				requestID,
+			</if>
+			<if test="startTime != null">
+				startTime,
+			</if>
+			<if test="endTime != null">
+				endTime,
+			</if>
+			<if test="tenant_id != null">
+				tenant_id,
+			</if>
+			<if test="usetime != null">
+				usetime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="pubid != null">
+				#{pubid,jdbcType=VARCHAR},
+			</if>
+			<if test="layoutSerId != null">
+				#{layoutSerId,jdbcType=VARCHAR},
+			</if>
+			<if test="requestMsg != null">
+				#{requestMsg,jdbcType=VARCHAR},
+			</if>
+			<if test="responseMsg != null">
+				#{responseMsg,jdbcType=VARCHAR},
+			</if>
+			<if test="requestID != null">
+				#{requestID,jdbcType=VARCHAR},
+			</if>
+			<if test="startTime != null">
+				#{startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTime != null">
+				#{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="tenant_id != null">
+				#{tenant_id,jdbcType=VARCHAR},
+			</if>
+			<if test="usetime != null">
+				#{usetime,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="update" parameterType="com.sdp.servflow.pubandorder.logRecord.model.ServiceLog">
+		update service_log
+		<set>
+			<if test="endTime != null">
+				endTime = #{endTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where requestID = #{requestID,jdbcType=VARCHAR}
+		      and pubid = #{pubid,jdbcType=VARCHAR}
+	</update>
+
+</mapper>

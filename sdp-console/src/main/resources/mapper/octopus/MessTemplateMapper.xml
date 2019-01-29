@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.sdp.cop.octopus.dao.MessTemplateDAO">
+	<resultMap id="BaseResultMap"
+		type="com.sdp.cop.octopus.entity.MessTemplate">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="titOrSub" jdbcType="VARCHAR"
+			property="titOrSub" />
+		<result column="content" jdbcType="LONGVARCHAR"
+			property="content" />
+		<result column="type" jdbcType="VARCHAR" property="type" />
+		<result column="multKeys" jdbcType="VARCHAR" property="multKeys" />
+		<result column="messSpot" jdbcType="VARCHAR"
+			property="messspot" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, name, titOrSub, content, type, multKeys, messSpot
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from mess_template
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		mess_template
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert"
+		parameterType="com.sdp.cop.octopus.entity.MessTemplate">
+		insert into mess_template (id, name, titOrSub,
+		content,
+		type, multKeys,
+		messSpot)
+		values (#{id,jdbcType=BIGINT},
+		#{name,jdbcType=VARCHAR},
+		#{titOrSub,jdbcType=VARCHAR},
+		#{content,jdbcType=LONGVARCHAR}, #{type,jdbcType=VARCHAR},
+		#{multKeys,jdbcType=VARCHAR},
+		#{messspot,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.sdp.cop.octopus.entity.MessTemplate">
+		insert into mess_template
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="titOrSub != null">
+				titOrSub,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="multKeys != null">
+				multKeys,
+			</if>
+			<if test="messspot != null">
+				messSpot,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="titOrSub != null">
+				#{titOrSub,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=VARCHAR},
+			</if>
+			<if test="multKeys != null">
+				#{multKeys,jdbcType=VARCHAR},
+			</if>
+			<if test="messspot != null">
+				#{messspot,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimarymultKeyselective"
+		parameterType="com.sdp.cop.octopus.entity.MessTemplate">
+		update mess_template
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="titOrSub != null">
+				titOrSub = #{titOrSub,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				content = #{content,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=VARCHAR},
+			</if>
+			<if test="multKeys != null">
+				multKeys = #{multKeys,jdbcType=VARCHAR},
+			</if>
+			<if test="messspot != null">
+				messSpot = #{messspot,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<select id="selectByCondition"
+		parameterType="com.sdp.cop.octopus.entity.MessTemplate"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from mess_template
+		where 1=1
+		<if test="id != null">
+			AND id = #{id,jdbcType=BIGINT},
+		</if>
+		<if test="name != null">
+			AND name = #{name,jdbcType=VARCHAR},
+		</if>
+		<if test="titOrSub != null">
+			titOrSub = #{titOrSub,jdbcType=VARCHAR},
+		</if>
+		<if test="content != null">
+			content = #{content,jdbcType=LONGVARCHAR},
+		</if>
+		<if test="type != null">
+			type = #{type,jdbcType=VARCHAR},
+		</if>
+		<if test="multKeys != null">
+			multKeys = #{multKeys,jdbcType=VARCHAR},
+		</if>
+		<if test="messspot != null">
+			messSpot = #{messspot,jdbcType=VARCHAR},
+		</if>
+	</select>
+	<update id="updateByPrimaryKey"
+		parameterType="com.sdp.cop.octopus.entity.MessTemplate">
+		update mess_template
+		set name = #{name,jdbcType=VARCHAR},
+		titOrSub = #{titOrSub,jdbcType=VARCHAR},
+		content =
+		#{content,jdbcType=LONGVARCHAR},
+		type = #{type,jdbcType=VARCHAR},
+		multKeys =
+		#{multKeys,jdbcType=VARCHAR},
+		messSpot = #{messspot,jdbcType=VARCHAR}
+		where
+		id = #{id,jdbcType=BIGINT}
+	</update>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from mess_template
+	</select>
+</mapper>

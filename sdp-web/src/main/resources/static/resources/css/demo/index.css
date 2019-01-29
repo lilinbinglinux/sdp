@@ -1,0 +1,216 @@
+@CHARSET "UTF-8";
+body{
+	background-color:#eceff4;
+}
+.content {
+    padding-right: 8px;
+    padding-left: 8px;
+    margin: 0 10px;
+}
+.part{
+	background-color:#fff;
+	border-radius:10px;
+	height:50%;
+	min-height:260px;
+	margin-top:10px;
+	padding-top:10px;
+}
+.col-md-4{
+	padding-left:5px;
+	padding-right:5px;
+}
+em {
+    color: #f00;
+}
+p.codeTitle {
+    margin: 5px 0 0;
+}
+p.title {
+    font-size: 16px;
+    border-left: 4px solid #f64241;
+    padding-left: 11px;
+    margin-bottom: 10px;
+}
+hr{
+	background-color:#ddd;
+}
+
+/*日历模块*/
+.date .dateWrap{
+	padding:20px;
+}
+.date #dateArrange{
+	margin:0 auto;
+}
+.date .ui-widget.ui-widget-content, 
+.date .ui-datepicker {
+    border: medium none;
+    height: 100%;
+    width: 100%;
+}
+.date .ui-widget-header{
+	background: transparent;
+	border: medium none;
+}
+.date .ui-datepicker select.ui-datepicker-month, 
+.date .ui-datepicker select.ui-datepicker-year {
+    border: 1px solid #d4d4d4;
+    font-size: 14px;
+    height: 25px;
+    text-align: center;
+    outline: none;
+}
+.date .ui-datepicker select.ui-datepicker-month option, 
+.date .ui-datepicker select.ui-datepicker-year option {
+    width: 100%;
+    font-size: 14px;
+    border-width: 0;
+    outline: none;
+}
+.date .ui-datepicker .ui-datepicker-title{
+	font-size:14px;
+}
+.date .ui-datepicker select.ui-datepicker-year {
+    margin-right: 3%;
+    width: 40%;
+}
+.date .ui-datepicker select.ui-datepicker-month{
+	margin-left: 5%;
+	width: 40%;
+}
+.date .ui-datepicker .ui-datepicker-prev, 
+.date .ui-datepicker .ui-datepicker-next{
+	height: 25px;
+    top: 4px;
+    width: 25px;
+}
+.date .ui-datepicker .ui-datepicker-prev span, 
+.date .ui-datepicker .ui-datepicker-next span {
+    background: transparent url("../../img/workbench/leftMore.png") repeat scroll 0 0;
+    height: 25px;
+    left: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    width: 25px;
+    cursor: pointer;
+}
+.date .ui-datepicker .ui-datepicker-next span {
+	background: transparent url("../../img/workbench/rightMore.png") no-repeat scroll center center;
+}
+.date .ui-datepicker .ui-datepicker-prev.ui-state-hover span{
+	background: transparent url("../../img/workbench/leftMoreHover.png") no-repeat scroll center center;
+}
+.date .ui-datepicker .ui-datepicker-next.ui-state-hover span {
+	background: transparent url("../../img/workbench/rightMoreHover.png") no-repeat scroll center center;
+}
+.date .ui-state-hover, 
+.date .ui-widget-content .ui-state-hover, 
+.date .ui-widget-header .ui-state-hover, 
+.date .ui-state-focus, 
+.date .ui-widget-content .ui-state-focus, 
+.date .ui-widget-header .ui-state-focus, 
+.date .ui-button:hover, 
+.date .ui-button:focus{
+	background-color: transparent;
+	border: none;
+}
+.date .ui-datepicker td a, 
+.date .ui-state-default, 
+.date .ui-widget-content .ui-state-default {
+    text-align: center;
+    border: none;
+    background-color: transparent;
+    font-size: 14px;
+    color: #323232;
+    padding: 6px 0;
+}
+.date .ui-datepicker th span{
+    color: #f74240;
+    font-size: 14px;
+}
+.date .ui-state-default:hover{
+    background: transparent url("../../img/workbench/circleBlue.png") no-repeat scroll center center;
+    background-size: auto 95%;
+}
+.date .ui-datepicker .ui-state-active{
+	color: #fff;
+	background: transparent url("../../img/workbench/circleRed.png") no-repeat scroll center center;
+	background-size: auto 95%;
+}
+
+
+/* 表格demo样式 */
+.table-wrapper .dataTables_wrapper {
+	height: 300px;
+}
+
+/*当屏幕尺寸小于1350px时，应用下面的CSS样式*/
+@media screen and (max-width: 1367px) {
+	.date .ui-datepicker td a, 
+	.date .ui-state-default, 
+	.date .ui-widget-content .ui-state-default{
+		padding: 4px 0;
+	}
+	.date .dateWrap{
+		padding:10px;
+	}
+}
+
+
+
+/*对于bootstrap的样式根据需要修改*/
+@media (min-width: 830px){
+	.col-md-4 {
+	    width: 33.33333333%;
+	}
+	.basicTopInfo .col-md-6 {
+	    width: 50%;
+	}
+	.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+	    float: left;
+	}
+}
+@media (max-width: 831px) and (min-width:500px){
+	.col-md-4 {
+	    width: 50%;
+	}
+	.basicTopInfo .col-md-4 {
+	    width: 33.33333333%;
+	}
+	.basicTopInfo .col-md-6 {
+	    width: 50%;
+	}
+	.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+	    float: left;
+	}
+	.container-fluid{
+		padding-bottom:20px;
+	}
+}
+@media (max-width: 499px){
+	.col-md-4 {
+	    width: 100%;
+	}
+	.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+	    float: none;
+	}
+	.basicTopInfo .col-md-4 {
+	    width: 33.33333333%;
+	    float: left;
+	}
+	.basicTopInfo .col-md-6 {
+	    width: 50%;
+	    float: left;
+	}
+}
+
+
+
+/*本页面的样式*/
+#links a{
+	font-size:14px;
+	display:block;
+	line-height:200%;
+	padding-left:20px;
+}

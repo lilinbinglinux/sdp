@@ -1,0 +1,220 @@
+/*header*/
+.header{
+    width: 100%;
+    /*height: 85px;*/
+    height: 60px;
+    color: #fff;
+    font-size: 15px;
+}
+.home-page-header{
+    position: absolute;
+    top: 0;
+    z-index: 100;
+}
+.other-page-header{
+    background: #223040;
+}
+.header-top{
+    width: 100%;
+    /*height: 42px;*/
+    height: 60px;
+    /*line-height: 42px;*/
+    line-height: 60px;
+    border-bottom: 1px solid #777;
+    font-size: 13px;
+}
+.header-top-inner{
+    width: 85%;
+    height: 100%;
+    margin: 0 auto;
+}
+.header-top .header-top-logo{
+    float: left;
+    font-size: 18px;
+    font-weight: bold;
+}
+.header-top .header-top-logo a{
+    color: #fff;
+}
+.header-top .header-top-logo span{
+    vertical-align: middle;
+}
+.header-top .header-top-right{
+    float: right;
+}
+.header-top-right span{
+    margin-left: 20px;
+}
+.header-top-right a{
+    color: #fff;
+}
+.header-top-right a:hover{
+    color: #337ab7;
+}
+
+.login-username{
+    /*position: relative;
+    display: none;*/
+    width: 100px;
+    height:45px;
+    text-align: center;
+    margin-left: 5%;
+}
+/*.login-username:hover {
+    color: #337ab7;
+}*/
+.login-out{
+    /*display: none;
+    position: absolute;
+    top:43px;
+    right:7.5%;
+    background: #272b2e;*/
+    font-size: 13px;
+    width: 90px;
+    text-align: center;
+    line-height: 30px;
+}
+/*.login-out a{
+    color: #fff;
+}
+.login-out a:hover {
+    color: #337ab7;
+    display: block;
+}*/
+
+/*
+.header-bottom{
+    width: 85%;
+    margin: 0 auto;
+    height: 42px;
+    line-height: 42px;
+    font-size: 15px;
+}
+.header-bottom #nav-all{
+    float: left;
+    margin-right: 50px;
+}
+.header-bottom #nav-all:hover{
+    cursor: pointer;
+    color: #337ab7;
+}
+.header-bottom #nav-service{
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+}
+.header-bottom #nav-service:hover{
+    cursor: pointer;
+    color: #337ab7;
+    border-bottom: 2px solid #337ab7;
+}
+
+#hover-nav-service{
+    position: absolute;
+    !*width: 92%;*!
+    width: 100%;
+    !*height: 80%;*!
+    top: 85px;
+    !*left: 20px;*!
+    background-color: #272b2e;
+    color: #fff;
+    font-size: 14px;
+    !*overflow-y: scroll;*!
+}
+#hover-nav-service .nav-item{
+    float: left;
+    padding: 20px 20px;
+    width: 12.5%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#hover-nav-service h4{
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: bold;
+}
+#hover-nav-service li{
+    margin-bottom: 10px;
+}
+#hover-nav-service a{
+    color: #d0d0d0;
+}
+#hover-nav-service a:hover{
+    color: #337ab7;
+    cursor:pointer;
+}
+
+#hover-nav-all{
+    width: 600px;
+    height: 100%;
+    color: #fff;
+    position: absolute;
+    top: 85px;
+    left: 0;
+}
+#hover-nav-all .nav{
+    float: left;
+    width: 200px;
+    height: 100%;
+    border-right: 1px solid hsla(0,0%,100%,.15);
+    background-color: #272b2e;
+}
+#hover-nav-all ul {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    font-size: 14px;
+    padding-left: 0;
+}
+#hover-nav-all ul li {
+    width: 100%;
+    list-style: none;
+    padding: 5px 20px;
+}
+#hover-nav-all ul li .gt{
+    float: right;
+    font-size: 14px;
+}
+#hover-nav-all .nav.first,#hover-nav-all .nav.second, #hover-nav-all .nav.third{
+    display: none;
+}
+#hover-nav-all .nav.second, #hover-nav-all .nav.third {
+    position: absolute;
+    top: 0;
+    left: 200px;
+    height: 100%;
+}
+#hover-nav-all .nav.first ul, #hover-nav-all .nav.second ul {
+    margin-top: 15px;
+}
+#hover-nav-all ul li {
+    width: 100%;
+    padding: 5px 20px;
+}
+#hover-nav-all .third-li a{
+    color:#fff;
+}
+
+#hover-nav-all .first .first-li:hover, #hover-nav-all .first .second .second-li .third .third-li:hover, #hover-nav-all .first .second .second-li:hover {
+    color: #337ab7;
+}
+#hover-nav-all .third-li a:hover,
+#hover-nav-all .second-div a:hover, #hover-nav-service h4 a:hover{
+    color: #337ab7;
+}
+
+#hover-nav-all .second-div a, #hover-nav-service h4 a{
+    cursor: pointer;
+    color: #fff;
+}
+#hover-nav-all .second-div span{
+    cursor: pointer;
+}
+
+#hover-nav-all .second-li .third ul{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 90%;
+}*/

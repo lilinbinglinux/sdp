@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.servflow.pubandorder.serve.mapper.ServeAuthMapper">
+	<select id="getAuth" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		 select * from auth where 
+		 	tenant_id =#{tenant_id}
+			and status = #{status} 
+			and ipAddr = #{ipAddr} 
+			and appId = #{appId} 
+		limit 1 
+			
+	</select> 
+	<select id="getUserAuth" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		 select * from order_interface where 
+		 <!-- 	tenant_id =#{tenant_id} -->
+		<!-- 	and  -->appId = #{appId}
+		<!-- 	and login_id =  #{login_id} -->
+		 limit 1
+	</select> 
+	<select id="getPubSer" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		 SELECT * from pub_interfaceres where
+		 	<!-- tenant_id =#{tenant_id}
+			and -->  pubid = #{pubapiId}
+		 limit 1
+	</select> 
+	<select id="getPubSerParm" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		    SELECT 
+		    *
+		     from pub_reqparam where 
+		 	tenant_id =#{tenant_id}
+			and  pubid = #{pubid}
+			<if test="type!=null and type!=''">
+			 and type = #{type}
+			</if>  
+			 order by sort
+	</select> 
+	
+</mapper>

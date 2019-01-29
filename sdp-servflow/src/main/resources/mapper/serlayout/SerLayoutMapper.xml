@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.frame.web.mapper.serlayout.SerLayoutMapper">
+	<resultMap id="BaseResultMap"
+		type="com.sdp.servflow.serlayout.process.model.ServiceInfoPo">
+		<id column="ser_ver_id" jdbcType="VARCHAR" property="serVerId" />
+		<result column="ser_id" jdbcType="VARCHAR" property="serId" />
+		<result column="ser_name" jdbcType="VARCHAR" property="serName" />
+		<result column="ser_type" jdbcType="VARCHAR" property="serType" />
+		<result column="ser_code" jdbcType="VARCHAR" property="serCode" />
+		<result column="ser_version" jdbcType="VARCHAR" property="serVersion" />
+		<result column="ser_flow" jdbcType="VARCHAR" property="serFlow" />
+		<result column="creatime" jdbcType="TIMESTAMP" property="creatTime" />
+		<result column="delflag" jdbcType="VARCHAR" property="delFlag" />
+		<result column="synchFlag" jdbcType="VARCHAR" property="synchFlag" />
+		<result column="stopflag" jdbcType="VARCHAR" property="stopFlag" />
+		<result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+		<result column="login_id" jdbcType="VARCHAR" property="loginId" />
+	</resultMap>
+
+	<select id="getServiceVersionBeanByCondition" parameterType="map"
+		resultType="com.sdp.servflow.serlayout.process.model.ServiceInfoPo">
+		select
+		v.ser_ver_id serVerId,
+		m.ser_id serId,
+		m.ser_name serName,
+		m.ser_type serType,
+		m.ser_code serCode,
+		m.synch_flag synchFlag,
+		v.ser_version serVersion,
+		v.ser_flow serFlow,
+		v.creatime creatTime,
+		v.delflag delFlag,
+		v.stopflag stopFlag,
+		v.tenant_id tenantId,
+		v.login_id loginId
+		from ser_main m left join ser_version v on m.ser_id = v.ser_id
+		where
+		m.ser_id = #{serId}
+		and v.ser_ver_id = #{serVerId}
+		and m.tenant_id = #{tenantId}
+		<if test="loginId != null">
+			and m.login_id = #{loginId,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+	<select id="getAllCount" parameterType="map" resultType="int">
+		select
+		count(*)
+		from ser_main
+		where 1=1
+		<if test="serVerId != null">
+			and ser_ver_id = #{serVerId,jdbcType=VARCHAR}
+		</if>
+		<if test="serId != null">
+			and ser_id = #{serId,jdbcType=VARCHAR}
+		</if>
+		<if test="serName != null and serName != ''">
+			and ser_name LIKE '%${serName}%'
+		</if>
+		<if test="serType != null and serType != ''">
+			and ser_type = #{serType,jdbcType=VARCHAR}
+		</if>
+		<if test="serCode != null and serCode != ''">
+			and ser_code = #{serCode,jdbcType=VARCHAR}
+		</if>
+		<if test="serVersion != null">
+			and ser_version = #{serVersion,jdbcType=VARCHAR}
+		</if>
+		<if test="serFlow != null">
+			and ser_flow = #{serFlow,jdbcType=VARCHAR}
+		</if>
+		<if test="creatTime != null">
+			and creatime = #{creatTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="delFlag != null">
+			and delflag = #{delFlag,jdbcType=VARCHAR}
+		</if>
+		<if test="stopFlag != null">
+			and stopflag = #{stopFlag,jdbcType=VARCHAR}
+		</if>
+		<if test="synchFlag != null">
+			and synch_flag = #{synchFlag,jdbcType=VARCHAR}
+		</if>
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId,jdbcType=VARCHAR}
+		</if>
+		<if test="loginId != null">
+			and login_id = #{loginId,jdbcType=VARCHAR}
+		</if>
+		<if test="typeId != null and typeId != ''">
+			and ser_type = #{typeId,jdbcType=VARCHAR}
+		</if>
+		order by creatime DESC
+	</select>
+
+	<select id="getAllEqualInfoByCondition" parameterType="map"
+		resultType="com.sdp.servflow.serlayout.process.model.ServiceInfoPo">
+		select
+		v.ser_ver_id serVerId,
+		m.ser_id serId,
+		m.ser_name serName,
+		m.ser_type serType,
+		m.ser_code serCode,
+		v.ser_version serVersion,
+		v.ser_flow serFlow,
+		date_format(v.creatime, '%Y-%c-%d %H:%i:%s' ) creatTime,
+		v.delflag delFlag,
+		v.stopflag stopFlag,
+		v.tenant_id tenantId,
+		v.login_id loginId
+		from ser_main m inner join ser_version v on m.ser_id = v.ser_id and
+		m.ser_version = v.ser_version
+		where 1=1
+		<if test="serVerId != null">
+			and v.ser_ver_id = #{serVerId,jdbcType=VARCHAR}
+		</if>
+		<if test="serId != null">
+			and m.ser_id = #{serId,jdbcType=VARCHAR}
+		</if>
+		<if test="serName != null and serName !=''">
+			and m.ser_name LIKE '%${serName}%'
+		</if>
+		<if test="serType != null">
+			and m.ser_type = #{serType,jdbcType=VARCHAR}
+		</if>
+		<if test="serCode != null and serCode!=''">
+			and m.ser_code LIKE '%${serCode}%'
+		</if>
+		<if test="serVersion != null">
+			and v.ser_version = #{serVersion,jdbcType=VARCHAR}
+		</if>
+		<if test="serFlow != null">
+			and v.ser_flow = #{serFlow,jdbcType=VARCHAR}
+		</if>
+		<if test="creatTime != null">
+			and v.creatime = #{creatTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="delFlag != null">
+			and v.delflag = #{delFlag,jdbcType=VARCHAR}
+		</if>
+		<if test="stopFlag != null">
+			and v.stopflag = #{stopFlag,jdbcType=VARCHAR}
+		</if>
+		<if test="synchFlag != null">
+			and m.synch_flag = #{synchFlag,jdbcType=VARCHAR}
+		</if>
+		<if test="tenantId != null">
+			and v.tenant_id = #{tenantId,jdbcType=VARCHAR}
+		</if>
+		<if test="loginId != null">
+			and v.login_id = #{loginId,jdbcType=VARCHAR}
+		</if>
+		<if test="typeId != null and typeId != ''">
+			and m.ser_type = #{typeId,jdbcType=VARCHAR}
+		</if>
+		order by v.creatime DESC
+		<if test="startNum != null and num != null and startNum != '' and num !=''">
+			LIMIT ${startNum},${num}
+		</if>
+	</select>
+
+	<select id="getAllByCondition" parameterType="map"
+		resultType="com.sdp.servflow.serlayout.process.model.ServiceInfoPo">
+		select
+		v.ser_ver_id serVerId,
+		m.ser_id serId,
+		m.ser_name serName,
+		m.ser_type serType,
+		m.ser_code serCode,
+		v.ser_version serVersion,
+		v.ser_flow serFlow,
+		date_format(v.creatime, '%Y-%c-%d %H:%i:%s' ) creatTime,
+		v.delflag delFlag,
+		v.stopflag stopFlag,
+		v.tenant_id tenantId,
+		v.login_id loginId
+		from ser_main m right join ser_version v on m.ser_id = v.ser_id
+		where 1=1
+		<if test="serVerId != null">
+			and v.ser_ver_id = #{serVerId,jdbcType=VARCHAR}
+		</if>
+		<if test="serId != null">
+			and m.ser_id = #{serId,jdbcType=VARCHAR}
+		</if>
+		<if test="serName != null">
+			and m.ser_name LIKE '%${serName}%'
+		</if>
+		<if test="serType != null">
+			and m.ser_type = #{serType,jdbcType=VARCHAR}
+		</if>
+		<if test="serCode != null">
+			and m.ser_code LIKE '%${serCode}%'
+		</if>
+		<if test="serVersion != null">
+			and v.ser_version = #{serVersion,jdbcType=VARCHAR}
+		</if>
+		<if test="serFlow != null">
+			and v.ser_flow = #{serFlow,jdbcType=VARCHAR}
+		</if>
+		<if test="creatTime != null">
+			and v.creatime = #{creatTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="delFlag != null">
+			and v.delflag = #{delFlag,jdbcType=VARCHAR}
+		</if>
+		<if test="synchFlag != null">
+			and m.synch_flag = #{synchFlag,jdbcType=VARCHAR}
+		</if>
+		<if test="stopFlag != null">
+			and v.stopflag = #{stopFlag,jdbcType=VARCHAR}
+		</if>
+		<if test="tenantId != null">
+			and v.tenant_id = #{tenantId,jdbcType=VARCHAR}
+		</if>
+		<if test="loginId != null">
+			and v.login_id = #{loginId,jdbcType=VARCHAR}
+		</if>
+		<if test="typeId != null and typeId != ''">
+			and m.ser_type = #{typeId,jdbcType=VARCHAR}
+		</if>
+		order by v.creatime DESC
+		<if test="startNum != null and num != null">
+			LIMIT ${startNum},${num}
+		</if>
+	</select>
+
+</mapper>

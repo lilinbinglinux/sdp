@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.frame.web.mapper.puborder.ProjectBeanMapper">
+	<resultMap type="com.sdp.servflow.pubandorder.pub.model.ProjectBean" id="BaseResultMap">
+		<id column="proid" jdbcType="VARCHAR" property="proid" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="proecode" jdbcType="VARCHAR" property="proecode" />
+		<result column="proversion" jdbcType="VARCHAR" property="proversion" />
+		<result column="prodescribe" jdbcType="VARCHAR" property="prodescribe" />
+		<result column="parentId" jdbcType="VARCHAR" property="parentId" />
+		<result column="typeId" jdbcType="VARCHAR" property="typeId" />
+		<result column="createdate" jdbcType="VARCHAR" property="createdate" />
+		<result column="tenant_id" jdbcType="VARCHAR" property="tenant_id" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		proid, name, proecode, proversion, prodescribe, parentId, typeId,createdate, tenant_id
+	</sql>
+
+	<select id="selectAll" parameterType="map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from PUB_PRO where 1=1
+		<if test="typeId != null">
+		    and typeId = #{typeId,jdbcType=VARCHAR}
+		</if>
+		<if test="pubid != null">
+            and parentId = #{pubid,jdbcType=VARCHAR}
+        </if>
+        <if test="tenant_id != null">
+            and tenant_id = #{tenant_id,jdbcType=VARCHAR}
+        </if>
+	</select>
+	
+	<select id="getAllByCondition" resultType="com.sdp.servflow.pubandorder.pub.model.ProjectBean" parameterType="map"> 
+		select
+		<include refid="Base_Column_List" />
+		from PUB_PRO where 1=1 
+		 <if test="proid != null">
+            and proid = #{proid,jdbcType=VARCHAR}
+        </if>
+        <if test="name != null and name != ''">
+            and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="proecode != null">
+            and proecode = #{proecode,jdbcType=VARCHAR}
+        </if>
+        <if test="proversion != null">
+            and proversion = #{proversion,jdbcType=VARCHAR}
+        </if>
+        <if test="prodescribe != null">
+            and prodescribe = #{prodescribe,jdbcType=VARCHAR}
+        </if>
+        <if test="parentId != null">
+            and parentId = #{parentId,jdbcType=VARCHAR}
+        </if>
+        <if test="typeId != null">
+            and typeId = #{typeId,jdbcType=VARCHAR}
+        </if>
+        <if test="tenant_id != null">
+            and tenant_id = #{tenant_id,jdbcType=VARCHAR}
+        </if>
+	</select>
+	
+	<select id="getByPrimaryKey" parameterType="java.lang.String" resultType="com.sdp.servflow.pubandorder.pub.model.ProjectBean">
+		select
+		<include refid="Base_Column_List" />
+		from PUB_PRO where proid = #{proid,jdbcType=VARCHAR}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		PUB_PRO
+		where proid = #{proid,jdbcType=VARCHAR}
+	</delete>
+	
+	<insert id="insert" parameterType="com.sdp.servflow.pubandorder.pub.model.ProjectBean">
+		insert into PUB_PRO
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="proid != null">
+				proid,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="proecode != null">
+				proecode,
+			</if>
+			<if test="proversion != null">
+				proversion,
+			</if>
+			<if test="prodescribe != null">
+				prodescribe,
+			</if>
+			<if test="parentId != null">
+				parentId,
+			</if>
+			<if test="typeId != null">
+				typeId,
+			</if>
+			<if test="createdate != null">
+				createdate,
+			</if>
+			<if test="tenant_id != null">
+				tenant_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="proid != null">
+				#{proid,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="proecode != null">
+				#{proecode,jdbcType=VARCHAR},
+			</if>
+			<if test="proversion != null">
+				#{proversion,jdbcType=VARCHAR},
+			</if>
+			<if test="prodescribe != null">
+				#{prodescribe,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=VARCHAR},
+			</if>
+			<if test="typeId != null">
+				#{typeId,jdbcType=VARCHAR},
+			</if>
+			<if test="createdate != null">
+				#{createdate,jdbcType=VARCHAR},
+			</if>
+			<if test="tenant_id != null">
+				#{tenant_id,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.sdp.servflow.pubandorder.pub.model.ProjectBean">
+		update PUB_PRO
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="proecode != null">
+				proecode = #{proecode,jdbcType=VARCHAR},
+			</if>
+			<if test="proversion != null">
+				proversion = #{proversion,jdbcType=VARCHAR},
+			</if>
+			<if test="prodescribe != null">
+				prodescribe = #{prodescribe,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where proid = #{proid,jdbcType=VARCHAR}
+	</update>
+
+</mapper>

@@ -1,0 +1,627 @@
+html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dl, dt, dd, ol, form, input, textarea, th, td, select {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    min-height: 100%;
+    font-family: MicrosoftYaHei;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+img {
+    border: none;
+    vertical-align: middle;
+}
+
+a, a:hover, a:focus, a:active, a:visited {
+    text-decoration: none;
+}
+
+input, textarea {
+    outline: none;
+    border: none;
+}
+
+textarea {
+    resize: none;
+    overflow: auto;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+.clearfix:after {
+    content: ".";
+    width: 0;
+    height: 0;
+    visibility: hidden;
+    display: block;
+    clear: both;
+    overflow: hidden;
+}
+
+/* 单行文本溢出 */
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 多行文本溢出 */
+.mult_line_ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+/* bootstrapTable样式修改 */
+.fixed-table-body {
+    height: auto;
+}
+.table-responsive {
+    margin-top: 15px;
+}
+
+/* 表格中的a标签 */
+table a.inner-ahref:hover {
+    color: #1890ff;
+    text-decoration: none;
+}
+
+/* 禁用模态框的提交a标签 */
+.bconsole-modal-footer a.modal-submit.disabled {
+    pointer-events: none;
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    opacity: 0.5;
+}
+
+/* S搜索框 */
+.bconsole-fr {
+    float: right;
+}
+.bconsole-form-group {
+    position: relative;
+}
+.bconsole-fr .bconsole-form-control {
+    box-shadow: none;
+    border-radius: 18px;
+    height: 35px;
+}
+.bconsole-width-200 {
+    width: 200px !important;
+}
+.bconsole-form-group .glyphicon {
+    position: absolute;
+    right: 10px;
+    top: 11px;
+    width: 16px;
+    height: 16px;
+}
+/* E搜索框 */
+
+
+/* S页面标题 */
+.image-page-title h3 {
+    display: inline-block;
+    color: #000000;
+}
+.page-info-header {
+    font-size: 14px;
+    font-weight: bold;
+    height: 30px;
+    border-bottom: 1px solid #d9d9d9;
+    margin-bottom: 20px;
+    color: #333333;
+}
+.page-info-header > span {
+    font-weight: bold;
+    margin-right: 9px;
+}
+/* E页面标题 */
+
+
+/* S按钮 */
+button.save-hollow-btn {
+    width: 215px;
+    height: 40px;
+}
+button.cancle-btn {
+    width: 87px;
+    height: 40px;
+}
+/* E按钮 */
+
+
+/* S自定义上传文件 */
+.file-upload-custom {
+    display: inline-block;
+    padding: 9px;
+    text-align: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 2px;
+    border: 1px dashed #d8d8d8;
+}
+.file-upload-icon{
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    background: url('../../../img/bcm/image/add.png');
+}
+/* E自定义上传文件 */
+
+
+/* S自定义滚动条 */
+::-webkit-scrollbar-track-piece {
+    background-color: #fff;
+    -webkit-border-radius: 0;
+}
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-thumb:vertical {
+    height: 50px;
+    background-color: #999;
+    -webkit-border-radius: 4px;
+    outline: 2px solid #fff;
+    outline-offset: -2px;
+    border: 2px solid #fff;
+}
+::-webkit-scrollbar-thumb:hover {
+    height: 50px;
+    background-color: #9f9f9f;
+    -webkit-border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:horizontal {
+    width: 5px;
+    background-color: #CCCCCC;
+    -webkit-border-radius: 6px;
+}
+/* E自定义滚动条 */
+
+
+/* S自定义dropdown式下拉框 */
+.dropdown-form-select {
+    float: right;
+    margin-left: 10px;
+}
+.dropdown-form-select button {
+    width: 90px;
+    height: 35px;
+    border-radius: 18px;
+    border: solid 1px #cccccc;
+    color: #626262;
+}
+.dropdown-form-select .btn-default:focus:active,
+.dropdown-form-select .btn-default:hover,
+.dropdown-form-select .btn-default:focus,
+.dropdown-form-select .btn-default.focus,
+.dropdown-form-select .btn-default:active,
+.open > .dropdown-toggle.btn-default:hover,
+.open > .dropdown-toggle.btn-default:focus,
+.open > .dropdown-toggle.btn-default.focus {
+    color: #626262;
+    background-color: #fff;
+    border-color: #cccccc;
+}
+.dropdown-form-select .dropdown-menu {
+    min-width: 90px;
+    height: 97px;
+    background-color: #ffffff;
+    box-shadow: 0 3px 13px 0 rgba(74, 74, 74, 0.3);
+    margin-top: 7px;
+    border-radius: 0;
+}
+.dropdown-menu > li > a {
+    width: 100%;
+    height: 29px;
+    line-height: 29px;
+    padding: 0;
+    color: #626262;
+    display: inline-block;
+}
+/* E自定义dropdown式下拉框 */
+
+
+/* S下拉框搜索框查询组合 */
+.beconsole-input-group{
+    width: 270px;
+    height: 35px;
+    border: 1px solid #d9d9d9;
+    box-sizing: border-box;
+    border-radius: 35px;
+    position: relative;
+}
+.beconsole-input-group .beconsole-biner-button{
+    width: 103px;
+    border: none;
+    height: 35px;
+    border-top-left-radius: 35px;
+    border-bottom-left-radius: 35px;
+    padding: 0 18px 0 0;
+    position: relative;
+    overflow: hidden;
+}
+.beconsole-input-group .beconsole-biner-button:hover:active,
+.beconsole-input-group .beconsole-biner-button:focus:active{
+    outline: none;
+}
+.beconsole-input-group .beconsole-biner-button .inner-text{
+    display: inline-block;
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    overflow: hidden;
+}
+.beconsole-input-group .beconsole-biner-button .caret{
+    position: absolute;
+    right: 10px;
+    top: 15px;
+}
+.beconsole-input-group .beconsole-biner-input{
+    width: 166px;
+    border: none;
+    box-shadow: none;
+    height: 35px;
+    padding-right: 30px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.beconsole-input-group .beconsole-group-line{
+    position: absolute;
+    height: 23px;
+    border-left: 1px solid #e0e0e0;
+    z-index: 22;
+    top: 6px;
+}
+.beconsole-input-group .glyphicon-search{
+    position: absolute;
+    right: 10px;
+    top: 11px;
+    width: 16px;
+    height: 16px;
+    z-index: 50;
+    cursor: pointer;
+}
+.input-group-addon:not(:first-child):not(:last-child),
+.input-group-btn:not(:first-child):not(:last-child),
+.input-group .form-control:not(:first-child):not(:last-child){
+    border-radius: 0 35px 35px 0;
+}
+/* E下拉框搜索框查询组合 */
+
+
+/* S更多操作 */
+#moreActions .actions-item1 a:before,
+#moreActions .actions-item2 a:before,
+#moreActions .actions-item3 a:before{
+    content: "";
+    width: 14px;
+    height: 14px;
+    vertical-align: sub;
+    padding-left: 12px;
+    padding-right: 5px;
+    margin-left: 12px;
+}
+#moreActions .actions-item1 a:before{
+    background: url('../../../img/bcm/image/config.png') no-repeat;
+}
+#moreActions .actions-item2 a:before{
+    background: url('../../../img/common/delete.png') no-repeat;
+    background-size: 14px 14px;
+}
+#moreActions .actions-item3 a:before{
+    width: 13px;
+    height: 13px;
+    background: url('../../../img/bcm/image/disabled.png') no-repeat;
+}
+/* E更多操作 */
+
+
+/* S表单输入提示 */
+.input-prompt{
+    color: #999999;
+    font-size: 14px;
+    margin-top: 9px;
+    display: block;
+}
+.input-prompt + .help-block{
+    top: 25%;
+}
+/* E表单输入提示 */
+
+
+/* S卡片式展现数据（等分布局第一种） */
+.card-parent-wrap{
+    overflow: hidden;
+}
+.card-parent{
+    margin-right: -20px;
+    overflow: hidden;
+}
+.card-child{
+    float: left;
+    width: 25%;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+    background-clip: content-box;
+}
+.card-child-inner{
+    height:100%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: solid 1px #eeeeee;
+}
+/* E卡片式展现数据（等分布局第一种） */
+
+
+/* S卡片式展现数据（bootstrap布局第二种） */
+.card-item-container{
+    padding: 15px;
+    float: left;
+}
+.card-item {
+    width: 100%;
+    transition: 0.3s;
+    cursor: pointer;
+    border: 1px solid #eeeeee;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+.card-item:hover{
+    border: 1px solid #333;
+}
+.no-project-tips{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+/* E卡片式展现数据（bootstrap布局第二种） */
+
+
+/* S点击表单获取焦点 placeholder消失 */
+input:focus::-webkit-input-placeholder { /* WebKit browsers */
+    color: transparent;
+}
+input:focus:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: transparent;
+}
+input:focus::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: transparent;
+}
+input:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: transparent;
+}
+
+textarea:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+textarea:focus:-moz-placeholder {
+    color: transparent;
+}
+textarea:focus::-moz-placeholder {
+    color: transparent;
+}
+textarea:focus:-ms-input-placeholder {
+    color: transparent;
+}
+/* E点击表单获取焦点 placeholder消失 */
+
+
+/* S步骤条 */
+.image-steps {
+    width: 100%;
+    height: 63px;
+    padding: 0 20px;
+    color: #999999;
+    margin-bottom: 13px;
+}
+.image-step-item {
+    width: 45%;
+    display: inline-block;
+}
+.image-step-end {
+    display: inline-block;
+}
+.image-step-top {
+    position: relative;
+    height: 26px;
+}
+.image-step-icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: solid 2px #cccccc;
+    border-radius: 50%;
+    /*cursor: pointer;*/
+    cursor: initial;
+    margin-top: 4px;
+}
+.image-step-line {
+    width: calc(100% - 32px);
+    height: 2px;
+    background-color: #e0e0e0;
+    position: absolute;
+    top: 13px;
+    left: 25px;
+}
+.image-step-line.green-line{
+    background-color: #29cc97;
+}
+.image-step-title {
+    margin-top: 7px;
+}
+.image-step-active .image-step-icon {
+    width: 26px;
+    height: 26px;
+    background-color: #bef0e0;
+    margin-top: 0;
+    border: solid 2px #bef0e0;
+    /*cursor: initial;*/
+}
+.image-step-active .image-step-icon:before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-color: #29cc97;
+    border-radius: 50%;
+    margin-top: 2px;
+    margin-left: 2px;
+}
+.image-step-active .image-step-icon + .image-step-line {
+    width: calc(100% - 40px);
+    left: 33px;
+}
+.image-step-active .image-step-title {
+    color: #333333;
+}
+/* E步骤条 */
+
+
+/* S日志窗口 */
+#logWindow{
+    width: 98%;
+    margin-left: 1%;
+    max-height: 800px;
+    background-color: #f6f6f6;
+    border: solid 1px #cccccc;
+    position: relative;
+    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    padding-right: 0;
+    padding-bottom: 0;
+}
+#logWindow.all {
+    z-index: 1000000;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin-left: 0;
+    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+#logWindow .log-nav{
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background-color: #f6f6f6;
+    margin: 0;
+}
+#logWindow .log-nav>div{
+    padding-right: 24px;
+}
+#logWindow .log-nav img{
+    cursor: pointer;
+}
+#logWindow .log-container{
+    padding: 0 10px 10px 20px;
+    overflow: auto;
+    /*background-color: black;
+    color: #37fc34;*/
+    background-color: #f6f6f6;
+    max-height: 748px;
+}
+#logWindow pre{
+    /*background: none repeat scroll 0 0 black;
+    color: #37fc34;*/
+    background-color: #f6f6f6;
+    border: 0;
+    padding: 0;
+    font-size: 12px;
+    overflow: hidden;
+    float: left;
+}
+#logWindow .print-log-span{
+    overflow: hidden;
+    float: left;
+}
+/* E日志窗口 */
+
+
+/* S列表中状态颜色 */
+.status-gray{
+    color: #999999;
+}
+.status-yellow{
+    color: #fec400;
+}
+.status-green{
+    color: #29cc97;
+}
+.status-red{
+    color: #da3610;
+}
+/* E列表中状态颜色 */
+
+
+/* S两栏布局（左侧标签页，右侧基本信息） */
+.image-content-left{
+    float:left;
+    width:81%;
+    margin-right: 1.7%;
+    padding: 26px 28px;
+}
+.image-content-right{
+    float: right;
+    width: 17.3%;
+    /*min-width: 167px;*/
+    padding: 50px 0;
+}
+.right-basic-header{
+    height: 78px;
+    text-align: center;
+}
+.right-basic-info {
+    margin:61px 0 0 45px;
+}
+.right-basic-header p{
+    margin-top: 15px;
+    font-size: 16px;
+    color: #333333;
+}
+.right-basic-info li{
+    font-size: 14px;
+    color: #999999;
+    margin-top: 15px;
+}
+.right-basic-info li span{
+    color: #333333;
+}
+@media screen and (max-width: 1013px) {
+    .right-basic-info{
+        margin: 61px 0 0 20px;
+    }
+}
+/* E两栏布局（左侧标签页，右侧基本信息） */
+
+
+/* S启停操作按钮 */
+.btn-start-stop{
+
+}
+/* E启停操作按钮 */

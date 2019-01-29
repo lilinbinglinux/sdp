@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.frame.web.mapper.role.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.sdp.frame.web.entity.role.Role">
+    <id column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="ORD" jdbcType="DECIMAL" property="ord" />
+    <result column="TENANT_ID" jdbcType="VARCHAR" property="tenantId" />
+  </resultMap>
+  <resultMap id="ResourcesResultMap" type="com.sdp.frame.web.entity.resources.Resources">
+    <id column="RESOURCES_ID" jdbcType="VARCHAR" property="resourcesId" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="APP_SYSTEM_ID" jdbcType="VARCHAR" property="appSystemId" />
+    <result column="RESOURCES_TYPE_ID" jdbcType="VARCHAR" property="resourcesTypeId" />
+    <result column="RESOURCES_NAME" jdbcType="VARCHAR" property="resourcesName" />
+    <result column="URL" jdbcType="VARCHAR" property="url" />
+    <result column="EXT1" jdbcType="VARCHAR" property="ext1" />
+    <result column="EXT2" jdbcType="VARCHAR" property="ext2" />
+    <result column="EXT3" jdbcType="VARCHAR" property="ext3" />
+    <result column="EXT4" jdbcType="VARCHAR" property="ext4" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="ORD" jdbcType="DECIMAL" property="ord" />
+    <result column="PATH" jdbcType="VARCHAR" property="path" />
+    <result column="CREATE_ID" jdbcType="VARCHAR" property="createId" />
+    <result column="ONLY_READ" jdbcType="DECIMAL" property="onlyRead" />
+    <result column="FROM_SIGN" jdbcType="VARCHAR" property="fromSign" />
+    <result column="MODIFY_FIELDS" jdbcType="VARCHAR" property="modifyFields" />
+    <result column="TENANT_ID" jdbcType="VARCHAR" property="tenantId" />
+    <result column="RESOURCES_NAME" jdbcType="VARCHAR" property="text" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ROLE_ID, PARENT_ID, ROLE_NAME, MEMO, ORD, TENANT_ID
+  </sql>
+  <select id="selectAll" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PURE_ROLE WHERE 1=1
+    <if test="roleName!=null and roleName != ''">
+         AND ROLE_NAME LIKE '%${roleName}%'
+    </if>
+  </select>
+  <select id="selectResourcesByRoleId" parameterType="java.lang.String" resultMap="ResourcesResultMap">
+    SELECT T2.*
+  	from PURE_ROLE T, PURE_ROLE_AUTH T1, PURE_RESOURCES T2
+ 	where T.ROLE_ID = T1.ROLE_ID
+   	AND T1.RESOURCES_ID = T2.RESOURCES_ID
+   	AND T.ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteResourcesByRoleId" parameterType="java.lang.String">
+    delete from PURE_ROLE_AUTH
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PURE_ROLE
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from PURE_ROLE
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sdp.frame.web.entity.role.Role">
+    insert into PURE_ROLE (ROLE_ID, PARENT_ID, ROLE_NAME, 
+      MEMO, ORD, TENANT_ID
+      )
+    values (#{roleId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR}, #{ord,jdbcType=DECIMAL}, #{tenantId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sdp.frame.web.entity.role.Role">
+    insert into PURE_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        ROLE_ID,
+      </if>
+      <if test="parentId != null">
+        PARENT_ID,
+      </if>
+      <if test="roleName != null">
+        ROLE_NAME,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="ord != null">
+        ORD,
+      </if>
+      <if test="tenantId != null">
+        TENANT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="ord != null">
+        #{ord,jdbcType=DECIMAL},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sdp.frame.web.entity.role.Role">
+    update PURE_ROLE
+    <set>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null">
+        ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="ord != null">
+        ORD = #{ord,jdbcType=DECIMAL},
+      </if>
+      <if test="tenantId != null">
+        TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sdp.frame.web.entity.role.Role">
+    update PURE_ROLE
+    set PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      ORD = #{ord,jdbcType=DECIMAL},
+      TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </update>
+  
+  <delete id="deleteResourceRoleRef" parameterType="String">
+      DELETE FROM PURE_ROLE_AUTH WHERE ROLE_ID = #{roleId}
+  </delete>
+  
+  <delete id="deleteUserRoleRef"  parameterType="String">
+      DELETE FROM PURE_USER_ROLE WHERE ROLE_ID = #{roleId}
+  </delete>
+  
+  <insert id="insertRoleResourceRef" parameterType="map">
+      INSERT INTO PURE_ROLE_AUTH (ID,ROLE_ID,RESOURCES_ID) VALUES (#{id},#{roleId},#{resourcesId})
+  </insert>
+</mapper>

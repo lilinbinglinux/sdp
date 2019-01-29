@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.serviceAccess.mapper.PProductPackageMapper">
+	<select id="findAll" parameterType="com.sdp.serviceAccess.entity.PProductPackage"
+		resultType="com.sdp.serviceAccess.entity.PProductPackage">
+		select
+		package_id "packageId",
+		product_id "productId",
+		package_name
+		"packageName",
+		package_stutas "packageStatus",
+		package_introd
+		"packageIntrdo",
+		detailed_introd "detailedIntrdo",
+		package_attr
+		"packageAttr",
+		package_control_attr "packageControlAttr",
+		rec_flag
+		"recFlag",
+		order_type "orderType",
+		control_type "controlType",
+		sort_id
+		"sortId",
+		create_date "createDate",
+		create_by "createBy",
+		tenant_id
+		"tenantId"
+		from p_product_package
+		where 1=1
+		<if test="tenantId != null and tenantId != ''">
+			and tenant_id = #{tenantId}
+		</if>
+	</select>
+
+	<select id="findById" parameterType="com.sdp.serviceAccess.entity.PProductPackage"
+		resultType="com.sdp.serviceAccess.entity.PProductPackage">
+		select
+		package_id "packageId",
+		product_id "productId",
+		package_name
+		"packageName",
+		package_stutas "packageStatus",
+		package_introd
+		"packageIntrdo",
+		detailed_introd "detailedIntrdo",
+		package_attr
+		"packageAttr",
+		package_control_attr "packageControlAttr",
+		rec_flag
+		"recFlag",
+		order_type "orderType",
+		control_type "controlType",
+		sort_id
+		"sortId",
+		create_date "createDate",
+		create_by "createBy",
+		tenant_id
+		"tenantId"
+		from p_product_package 
+		where 1=1 
+		<if test="tenantId != null and tenantId != ''">
+			and tenant_id = #{tenantId}
+		</if>
+		<if test="packageId!=null and packageId !=''">
+			and package_id = #{packageId}
+		</if>
+	</select>
+
+	<insert id="saveSingle" parameterType="com.sdp.serviceAccess.entity.PProductPackage">
+		insert into
+		p_product_package
+		(
+		package_id ,
+		product_id ,
+		package_name ,
+		package_stutas ,
+		package_introd ,
+		detailed_introd ,
+		package_attr ,
+		package_control_attr,
+		rec_flag ,
+		order_type ,
+		control_type ,
+		sort_id ,
+		create_date ,
+		create_by ,
+		tenant_id)
+		values(
+		#{packageId,jdbcType=VARCHAR},
+		#{productId,jdbcType=VARCHAR},
+		#{packageName,jdbcType=VARCHAR},
+		#{packageStatus,jdbcType=VARCHAR},
+		#{packageIntrdo,jdbcType=VARCHAR},
+		#{detailedIntrdo,jdbcType=VARCHAR},
+		#{packageAttr,jdbcType=VARCHAR},
+		#{packageControlAttr,jdbcType=VARCHAR},
+		#{recFlag,jdbcType=VARCHAR},
+		#{orderType,jdbcType=VARCHAR},
+		#{controlType,jdbcType=VARCHAR},
+		#{sortId,jdbcType=INTEGER},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{createBy,jdbcType=VARCHAR},
+		#{tenantId,jdbcType=VARCHAR}
+		)
+	</insert>
+	<update id="update" parameterType="com.sdp.serviceAccess.entity.PProductPackage">
+		update p_product_package 
+		set 
+		package_id = #{packageId,jdbcType=VARCHAR},
+		product_id = #{productId,jdbcType=VARCHAR},
+		package_name = #{packageName,jdbcType=VARCHAR},
+		package_stutas = #{packageStatus,jdbcType=VARCHAR},
+		package_introd = #{packageIntrdo,jdbcType=VARCHAR},
+		detailed_introd = #{detailedIntrdo,jdbcType=VARCHAR},
+		package_attr = #{packageAttr,jdbcType=VARCHAR},
+		package_control_attr= #{packageControlAttr,jdbcType=VARCHAR},
+		rec_flag = #{recFlag,jdbcType=VARCHAR},
+		order_type = #{orderType,jdbcType=VARCHAR},
+		control_type = #{controlType,jdbcType=VARCHAR},
+		sort_id = #{sortId,jdbcType=INTEGER},
+		create_date = #{createDate,jdbcType=TIMESTAMP},
+		create_by = #{createBy,jdbcType=VARCHAR},
+		tenant_id = #{tenantId,jdbcType=VARCHAR} 
+		where tenant_id = #{tenantId} and package_id = #{packageId} 
+	</update>
+	<delete id="delete" parameterType="com.sdp.serviceAccess.entity.PProductPackage">
+	  delete from p_product_package 
+	  where tenant_id =#{tenantId} and package_id=#{packageId} 
+	</delete>
+	<select id="maxSort" resultType="java.lang.Integer">
+	select max(sort_id) from p_product_package 
+	</select>
+	<select id="findAllByCondition" parameterType="com.sdp.serviceAccess.entity.PProductPackage"
+		resultType="com.sdp.serviceAccess.entity.PProductPackage">
+		select
+		package_id "packageId",
+		product_id "productId",
+		package_name
+		"packageName",
+		package_stutas "packageStatus",
+		package_introd
+		"packageIntrdo",
+		detailed_introd "detailedIntrdo",
+		rec_flag
+		"recFlag",
+		order_type "orderType",
+		control_type "controlType",
+		sort_id
+		"sortId",
+		create_date "createDate",
+		create_by "createBy",
+		tenant_id
+		"tenantId"
+		from p_product_package
+		where 1=1
+		<if test="tenantId != null and tenantId != ''">
+			and tenant_id = #{tenantId}
+		</if>
+		<if test="productId != null and productId !='' ">
+		    and product_id = #{productId} 
+		</if>
+	</select>
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdp.servflow.logSer.log.mapper.CodeTableMapper">
+    <resultMap id="CodeTable" type="com.sdp.servflow.logSer.log.model.CodeTable">
+        <result column="recId" jdbcType="INTEGER" property="recId" />
+        <result column="code" jdbcType="VARCHAR" property="code" />
+        <result column="desc" jdbcType="VARCHAR" property="desc" />
+        <result column="type" jdbcType="VARCHAR" property="type" />
+        <result column="location" jdbcType="VARCHAR" property="location" />
+    </resultMap>
+    <select id="selectFailMsg" resultType="com.sdp.servflow.logSer.log.model.CodeTable">
+        select * from codetable where code = #{code}
+    </select>
+</mapper>
