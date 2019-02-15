@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @author lumeiling
- * @package com.bonc.bcm.controller
+ * @package com.sdp.bcm.controller
  * @create 2019/1/14 下午6:38
  **/
 

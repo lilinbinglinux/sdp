@@ -1,5 +1,5 @@
 package com.sdp.servflow.pubandorder.apiemploy;
-/*package com.bonc.servflow.pubandorder.apiemploy;
+/*package com.sdp.servflow.pubandorder.apiemploy;
 
 import java.io.BufferedReader;
 import java.text.SimpleDateFormat;
@@ -19,17 +19,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bonc.servflow.common.BaseException;
-import com.bonc.servflow.common.CurrentUserUtils;
-import com.bonc.servflow.common.IPHelper;
-import com.bonc.servflow.pubandorder.apiemploy.adapter.JsonParamAdapter;
-import com.bonc.servflow.pubandorder.apiemploy.adapter.XmlParamAdapter;
-import com.bonc.servflow.pubandorder.common.Response;
-import com.bonc.servflow.pubandorder.security.model.SecurityCodeBean;
-import com.bonc.servflow.pubandorder.security.service.SecurityCodeService;
-import com.bonc.servflow.pubandorder.serve.ServeAuth;
-import com.bonc.servflow.pubandorder.util.IContants;
-import com.bonc.servflow.pubandorder.util.StringTypeUtil;
+import com.sdp.servflow.common.BaseException;
+import com.sdp.servflow.common.CurrentUserUtils;
+import com.sdp.servflow.common.IPHelper;
+import com.sdp.servflow.pubandorder.apiemploy.adapter.JsonParamAdapter;
+import com.sdp.servflow.pubandorder.apiemploy.adapter.XmlParamAdapter;
+import com.sdp.servflow.pubandorder.common.Response;
+import com.sdp.servflow.pubandorder.security.model.SecurityCodeBean;
+import com.sdp.servflow.pubandorder.security.service.SecurityCodeService;
+import com.sdp.servflow.pubandorder.serve.ServeAuth;
+import com.sdp.servflow.pubandorder.util.IContants;
+import com.sdp.servflow.pubandorder.util.StringTypeUtil;
 import com.ssoConfig.service.ISecurityApiService;
 import com.ssoConfig.util.CurrentThreadContext;
 

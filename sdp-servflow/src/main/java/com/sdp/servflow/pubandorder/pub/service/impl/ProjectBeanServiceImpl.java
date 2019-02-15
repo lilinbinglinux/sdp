@@ -31,32 +31,32 @@ public class ProjectBeanServiceImpl implements ProjectBeanService{
 	
     @Override
     public Map selectAll(String start, String length, Map<String, Object> paramMap) {
-    	return daoHelper.queryForPageList("com.bonc.frame.web.mapper.puborder.ProjectBeanMapper.selectAll", paramMap, start, length);
+    	return daoHelper.queryForPageList("com.sdp.frame.web.mapper.puborder.ProjectBeanMapper.selectAll", paramMap, start, length);
     }
     
     @Override
     public int insert(ProjectBean project) {
-    	return daoHelper.insert("com.bonc.frame.web.mapper.puborder.ProjectBeanMapper.insert", project);
+    	return daoHelper.insert("com.sdp.frame.web.mapper.puborder.ProjectBeanMapper.insert", project);
     }
     
     @Override
     public int update(ProjectBean project) {
-    	return daoHelper.update("com.bonc.frame.web.mapper.puborder.ProjectBeanMapper.updateByPrimaryKey", project);
+    	return daoHelper.update("com.sdp.frame.web.mapper.puborder.ProjectBeanMapper.updateByPrimaryKey", project);
     }
 
     @Override
     public int deleteByProId(String proid) {
-        return daoHelper.delete("com.bonc.frame.web.mapper.puborder.ProjectBeanMapper.deleteByPrimaryKey", proid);
+        return daoHelper.delete("com.sdp.frame.web.mapper.puborder.ProjectBeanMapper.deleteByPrimaryKey", proid);
     }
 
     @Override
     public List<ProjectBean> getAllByCondition(Map<String,String> map) {
-        return daoHelper.queryForList("com.bonc.frame.web.mapper.puborder.ProjectBeanMapper.getAllByCondition",map);
+        return daoHelper.queryForList("com.sdp.frame.web.mapper.puborder.ProjectBeanMapper.getAllByCondition",map);
     }
 
     @Override
     public ProjectBean getProById(String proid) {
-        return (ProjectBean)daoHelper.queryOne("com.bonc.frame.web.mapper.puborder.ProjectBeanMapper.getByPrimaryKey",proid);
+        return (ProjectBean)daoHelper.queryOne("com.sdp.frame.web.mapper.puborder.ProjectBeanMapper.getByPrimaryKey",proid);
     }
 
 }

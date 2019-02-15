@@ -119,7 +119,7 @@ public class DynamicDataSourceRegister {
 				String url = dsMap.get("url").toString();
 				String username = dsMap.get("username").toString();
 				String password = dsMap.get("password").toString();
-				//            if(driver-class-name.equalsIgnoreCase("com.bonc.xcloud.jdbc.XCloudDriver")){
+				//            if(driver-class-name.equalsIgnoreCase("com.sdp.xcloud.jdbc.XCloudDriver")){
 				//            	dataSourceType = (Class<? extends DataSource>) Class.forName((String) DATASOURCE_TYPE_DEFAULT);
 				//            }else{
 				//            	dataSourceType = (Class<? extends DataSource>) Class.forName((String) type);
@@ -216,7 +216,7 @@ public class DynamicDataSourceRegister {
 			values.remove("username");
 			values.remove("password");
 			dataSourcePropertyValues = new MutablePropertyValues(values);
-		}else if(dataSourceType.equals("com.bonc.xcloud.jdbc.XCloudDriver")){
+		}else if(dataSourceType.equals("com.sdp.xcloud.jdbc.XCloudDriver")){
 			//			Map<String, Object> rpr = new RelaxedPropertyResolver(env, "spring.xcloud.datasource").getSubProperties(".");
 			Map<String, Object> values = new HashMap<String, Object>();
 			// 排除已经设置的属性

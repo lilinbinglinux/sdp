@@ -28,55 +28,55 @@ public class RoleServiceImpl implements RoleService{
 	
 	@Override
 	public Map selectAll(String start, String length,Map<String,Object>paramMap) {
-		return daoHelper.queryForPageList("com.bonc.frame.web.mapper.role.RoleMapper.selectAll", paramMap, start, length);
+		return daoHelper.queryForPageList("com.sdp.frame.web.mapper.role.RoleMapper.selectAll", paramMap, start, length);
 	}
 
 	@Override
 	public Role selectByRoleId(String roleId) {
-		return (Role)daoHelper.queryOne("com.bonc.frame.web.mapper.role.RoleMapper.selectByPrimaryKey", roleId);
+		return (Role)daoHelper.queryOne("com.sdp.frame.web.mapper.role.RoleMapper.selectByPrimaryKey", roleId);
 	}
 
 	@Override
 	public List<Resources> selectResourcesByRoleId(String roleId) {
-		return daoHelper.queryForList("com.bonc.frame.web.mapper.role.RoleMapper.selectResourcesByRoleId", roleId);
+		return daoHelper.queryForList("com.sdp.frame.web.mapper.role.RoleMapper.selectResourcesByRoleId", roleId);
 	}
 
 	@Override
 	public int deleteResourcesByRoleId(String roleId) {
-		return daoHelper.delete("com.bonc.frame.web.mapper.role.RoleMapper.deleteResourcesByRoleId", roleId);
+		return daoHelper.delete("com.sdp.frame.web.mapper.role.RoleMapper.deleteResourcesByRoleId", roleId);
 	}
 
 	@Override
 	public int update(Role role) {
-		return daoHelper.update("com.bonc.frame.web.mapper.role.RoleMapper.updateByPrimaryKeySelective", role);
+		return daoHelper.update("com.sdp.frame.web.mapper.role.RoleMapper.updateByPrimaryKeySelective", role);
 	}
 
 	@Override
 	public int insert(Role role) {
-		return daoHelper.insert("com.bonc.frame.web.mapper.role.RoleMapper.insertSelective", role);
+		return daoHelper.insert("com.sdp.frame.web.mapper.role.RoleMapper.insertSelective", role);
 	}
 
 	@Transactional
 	@Override
 	public int deleteByRoleId(String roleId) {
-		daoHelper.delete("com.bonc.frame.web.mapper.role.RoleMapper.deleteResourceRoleRef", roleId);
-		daoHelper.delete("com.bonc.frame.web.mapper.role.RoleMapper.deleteUserRoleRef", roleId);
-		return daoHelper.delete("com.bonc.frame.web.mapper.role.RoleMapper.deleteByPrimaryKey", roleId);
+		daoHelper.delete("com.sdp.frame.web.mapper.role.RoleMapper.deleteResourceRoleRef", roleId);
+		daoHelper.delete("com.sdp.frame.web.mapper.role.RoleMapper.deleteUserRoleRef", roleId);
+		return daoHelper.delete("com.sdp.frame.web.mapper.role.RoleMapper.deleteByPrimaryKey", roleId);
 	}
 
 	@Transactional
 	@Override
 	public void insertRoleResourceRef(List<Map> list,String roleId) throws Exception {
-		daoHelper.delete("com.bonc.frame.web.mapper.role.RoleMapper.deleteResourceRoleRef", roleId);
+		daoHelper.delete("com.sdp.frame.web.mapper.role.RoleMapper.deleteResourceRoleRef", roleId);
 		for(Map<String,Object> map:list){
 			map.put("id", IdUtil.createId());
-			daoHelper.insert("com.bonc.frame.web.mapper.role.RoleMapper.insertRoleResourceRef", map);
+			daoHelper.insert("com.sdp.frame.web.mapper.role.RoleMapper.insertRoleResourceRef", map);
 		}
 	}
 
 	@Override
 	public List<Role> selectAll() {
-		return daoHelper.queryForList("com.bonc.frame.web.mapper.role.RoleMapper.selectAll");
+		return daoHelper.queryForList("com.sdp.frame.web.mapper.role.RoleMapper.selectAll");
 	}
 
 }

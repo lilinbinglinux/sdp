@@ -31,22 +31,22 @@ public class ServiceApiTypeServiceImpl implements ServiceApiTypeService{
 
     @Override
     public List<ServiceApiTypeBean> getAllByCondition(Map<String, String> map) {
-        return daoHelper.queryForList("com.bonc.frame.web.mapper.puborder.ServiceApiTypeMapper.getAllByCondition", map);
+        return daoHelper.queryForList("com.sdp.frame.web.mapper.puborder.ServiceApiTypeMapper.getAllByCondition", map);
     }
 
     @Override
     public int insert(ServiceApiTypeBean serviceApiTypeBean) {
-        return daoHelper.insert("com.bonc.frame.web.mapper.puborder.ServiceApiTypeMapper.insert", serviceApiTypeBean);
+        return daoHelper.insert("com.sdp.frame.web.mapper.puborder.ServiceApiTypeMapper.insert", serviceApiTypeBean);
     }
 
     @Override
     public int update(ServiceApiTypeBean serviceApiTypeBean) {
-        return daoHelper.update("com.bonc.frame.web.mapper.puborder.ServiceApiTypeMapper.updateByPrimaryKey",serviceApiTypeBean);
+        return daoHelper.update("com.sdp.frame.web.mapper.puborder.ServiceApiTypeMapper.updateByPrimaryKey",serviceApiTypeBean);
     }
 
     @Override
     public int delete(String apiTypeId) {
-        return daoHelper.delete("com.bonc.frame.web.mapper.puborder.ServiceApiTypeMapper.deleteByPrimaryKey",apiTypeId);
+        return daoHelper.delete("com.sdp.frame.web.mapper.puborder.ServiceApiTypeMapper.deleteByPrimaryKey",apiTypeId);
     }
 
     @Override

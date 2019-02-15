@@ -1,6 +1,6 @@
 /*
  * 文件名：SendRecordDao.java
- * 版权：Copyright by www.bonc.com.cn
+ * 版权：Copyright by www.sdp.com.cn
  * 描述：
  * 修改人：zyz
  * 修改时间：2017年5月22日
@@ -38,7 +38,7 @@ public class SendRecordDao {
 	@Autowired
 	private DaoHelper			daoHelper;
 
-	private static String		BaseMapperUrl	= "com.bonc.cop.octopus.dao.SendRecordDao.";
+	private static String		BaseMapperUrl	= "com.sdp.cop.octopus.dao.SendRecordDao.";
 
 	public int save(SendRecordInfo info) {
 		if (info.getRecordId() == null) {

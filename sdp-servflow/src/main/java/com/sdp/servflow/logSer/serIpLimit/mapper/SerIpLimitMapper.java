@@ -14,7 +14,7 @@ public class SerIpLimitMapper {
 	@Resource
     private DaoHelper daoHelper;
 	
-	private final String baseMapperSouth="com.bonc.servflow.logSer.serIpLimit.mapper.SerIpLimitMapper."; 
+	private final String baseMapperSouth="com.sdp.servflow.logSer.serIpLimit.mapper.SerIpLimitMapper."; 
 
 	public Date selectLastModifiedTimeSerIpLimit(String schemaName) {
 		return (Date) daoHelper.queryOne(baseMapperSouth+"selectLastModifiedTimeSerIpLimit",schemaName);

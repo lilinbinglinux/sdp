@@ -28,7 +28,7 @@ public class ResourceLogImpl implements ResourcesLogService{
 		if(log!=null){
 			log.setLogId(IdUtil.createId());
 			log.setLogDate(new Date());
-			daoHelper.insert("com.bonc.frame.web.mapper.log.ResourceLogMapper.insertSelective", log);
+			daoHelper.insert("com.sdp.frame.web.mapper.log.ResourceLogMapper.insertSelective", log);
 		}
 		
 	}

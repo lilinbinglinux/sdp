@@ -17,7 +17,7 @@ public class MessTemplateDAO {
 	@Autowired
 	private DaoHelper daoHelper;
 
-	private static String BaseMapperUrl = "com.bonc.cop.octopus.dao.MessTemplateDAO.";
+	private static String BaseMapperUrl = "com.sdp.cop.octopus.dao.MessTemplateDAO.";
 
 	public int deleteByPrimaryKey(Long id)
 	{

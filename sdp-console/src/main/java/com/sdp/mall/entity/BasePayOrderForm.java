@@ -10,7 +10,7 @@ package com.sdp.mall.entity;
 //* @date 2018年7月17日  
 //
 //*/  
-//package com.bonc.mall.entity;
+//package com.sdp.mall.entity;
 //
 //import java.util.List;
 //

@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * @author lumeiling
- * @package com.bonc.code.entity
+ * @package com.sdp.code.entity
  * @create 2018-12-2018/12/14 下午5:59
  **/
 public class PCodeItem {

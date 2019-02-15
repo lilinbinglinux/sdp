@@ -1,6 +1,6 @@
 /*
  * 文件名：AppBindDepartmentDao.java
- * 版权：Copyright by www.bonc.com.cn
+ * 版权：Copyright by www.sdp.com.cn
  * 描述：
  * 修改人：zyz
  * 修改时间：2017年7月20日
@@ -41,7 +41,7 @@ public class AppBindDepartmentDao{
     @Autowired
     private DaoHelper daoHelper;
     
-    private static String BaseMapperUrl = "com.bonc.cop.octopus.dao.AppBindDepartmentDao.";
+    private static String BaseMapperUrl = "com.sdp.cop.octopus.dao.AppBindDepartmentDao.";
     /**
      * Description: <br>
      * 根据app名字查询记录

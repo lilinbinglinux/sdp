@@ -29,7 +29,7 @@ public class MessageDAO {
 	@Autowired
 	private DaoHelper daoHelper;
 
-	private static String BaseMapperUrl = "com.bonc.cop.octopus.dao.MessageDAO.";
+	private static String BaseMapperUrl = "com.sdp.cop.octopus.dao.MessageDAO.";
 
 	public int deleteByPrimaryKey(Long id) {
 		return this.daoHelper.delete(BaseMapperUrl + "deleteByPrimaryKey", id);

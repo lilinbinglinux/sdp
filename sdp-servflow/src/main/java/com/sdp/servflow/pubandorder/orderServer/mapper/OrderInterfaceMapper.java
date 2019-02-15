@@ -38,7 +38,7 @@ public class OrderInterfaceMapper {
     */
     public List<OrderInterfaceBean> getOrderInterfaces(PublishBo publishBo) {
         return daoHelper.queryForList(
-            "com.bonc.servflow.pubandorder.serve.mapper.ServerMapper.getOrderInterfaces", publishBo);
+            "com.sdp.servflow.pubandorder.serve.mapper.ServerMapper.getOrderInterfaces", publishBo);
     }
 
     /**
@@ -50,7 +50,7 @@ public class OrderInterfaceMapper {
      */
     public Map selectInterfaceOrder(Map<String, Object> paramMap, String start, String length) {
         return daoHelper.queryForPageList(
-                "com.bonc.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.selectInterfaceOrder", paramMap,start,length);
+                "com.sdp.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.selectInterfaceOrder", paramMap,start,length);
     }
 
     /**
@@ -59,22 +59,22 @@ public class OrderInterfaceMapper {
      */
     public void updateByPrimaryKey(OrderInterfaceBean orderInterfaceBean) {
          daoHelper.update(
-                "com.bonc.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.updateByPrimaryKey", orderInterfaceBean);
+                "com.sdp.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.updateByPrimaryKey", orderInterfaceBean);
     }
 
     public Map selectMine(Map<String, Object> paramMap, String start, String length) {
-        return daoHelper.queryForPageList("com.bonc.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.selectMine", paramMap,start,length);
+        return daoHelper.queryForPageList("com.sdp.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.selectMine", paramMap,start,length);
     }
 
     public void deleteOrderInter(Map<String, String> paramMap) {
-        daoHelper.delete("com.bonc.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.deleteByPrimaryKey", paramMap);
+        daoHelper.delete("com.sdp.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.deleteByPrimaryKey", paramMap);
     }
 
     public void deleteBySerIdAndVersion(Map<String, String> paramMap) {
-        daoHelper.delete("com.bonc.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.deleteBySerIdAndVersion", paramMap);
+        daoHelper.delete("com.sdp.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.deleteBySerIdAndVersion", paramMap);
     }
 
     public OrderInterfaceBean selectByOrderId(String orderId) {
-        return (OrderInterfaceBean) daoHelper.queryOne("com.bonc.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.selectByOrderId",orderId);
+        return (OrderInterfaceBean) daoHelper.queryOne("com.sdp.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.selectByOrderId",orderId);
     }
 }

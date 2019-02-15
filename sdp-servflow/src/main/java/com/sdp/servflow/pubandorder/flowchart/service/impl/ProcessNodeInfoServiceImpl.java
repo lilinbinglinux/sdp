@@ -18,7 +18,7 @@ public class ProcessNodeInfoServiceImpl implements ProcessNodeInfoService{
 	
 	@Override
 	public void addInfo(ProcessNodeInfo processNodeInfo) {
-	    daoHelper.insert("com.bonc.servflow.pubandorder.flowchart.mapper.ProcessNodeInfoMapper.addInfo", processNodeInfo);
+	    daoHelper.insert("com.sdp.servflow.pubandorder.flowchart.mapper.ProcessNodeInfoMapper.addInfo", processNodeInfo);
 	}
 
 }

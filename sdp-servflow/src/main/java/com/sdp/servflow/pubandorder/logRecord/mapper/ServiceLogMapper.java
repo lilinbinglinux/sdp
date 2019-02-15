@@ -14,11 +14,11 @@ public class ServiceLogMapper {
     
     
     public int insert(ServiceLog log) {
-        return daoHelper.insert("com.bonc.frame.web.mapper.puborder.ServiceLogMapper.insert", log);
+        return daoHelper.insert("com.sdp.frame.web.mapper.puborder.ServiceLogMapper.insert", log);
     }
     
     public int update(ServiceLog log) {
-        return daoHelper.update("com.bonc.frame.web.mapper.puborder.ServiceLogMapper.update", log);
+        return daoHelper.update("com.sdp.frame.web.mapper.puborder.ServiceLogMapper.update", log);
     }
     
 }

@@ -63,7 +63,7 @@ public class FlowChartServiceImpl implements FlowChartService{
 	 */
 	@Override
 	public void addFlowChart(FlowChart flowChart) {
-	    daoHelper.insert("com.bonc.servflow.pubandorder.flowchart.mapper.FlowChartMapper.addFlowChart", flowChart);
+	    daoHelper.insert("com.sdp.servflow.pubandorder.flowchart.mapper.FlowChartMapper.addFlowChart", flowChart);
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class FlowChartServiceImpl implements FlowChartService{
 	 */
 	@Override
 	public void updateFlowChart(FlowChart flowChart) {
-	    daoHelper.update("com.bonc.servflow.pubandorder.flowchart.mapper.FlowChartMapper.updateFlowChart",flowChart );
+	    daoHelper.update("com.sdp.servflow.pubandorder.flowchart.mapper.FlowChartMapper.updateFlowChart",flowChart );
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class FlowChartServiceImpl implements FlowChartService{
 	public void deleteFlowChart(Map<String, String> map) {
 		processNodeJoinService.deleteAll(map);
 		processNodeService.deleteAll(map);
-		daoHelper.delete("com.bonc.servflow.pubandorder.flowchart.mapper.FlowChartMapper.deleteFlowChart", map);
+		daoHelper.delete("com.sdp.servflow.pubandorder.flowchart.mapper.FlowChartMapper.deleteFlowChart", map);
 	}
 	
 	/**
@@ -89,7 +89,7 @@ public class FlowChartServiceImpl implements FlowChartService{
 	 */
 	@Override
 	public void updateName(FlowChart flowChart) {
-	    daoHelper.update("com.bonc.servflow.pubandorder.flowchart.mapper.FlowChartMapper.updateName", flowChart);
+	    daoHelper.update("com.sdp.servflow.pubandorder.flowchart.mapper.FlowChartMapper.updateName", flowChart);
 	}
 
 	/**
@@ -97,12 +97,12 @@ public class FlowChartServiceImpl implements FlowChartService{
 	 */
 	@Override
 	public FlowChart findByIdAndTenantId(Map<String, String> map) {
-	    return (FlowChart)daoHelper.queryOne("com.bonc.servflow.pubandorder.flowchart.mapper.FlowChartMapper.findByIdAndTenantId", map);
+	    return (FlowChart)daoHelper.queryOne("com.sdp.servflow.pubandorder.flowchart.mapper.FlowChartMapper.findByIdAndTenantId", map);
 	}
 
     @Override
     public Map selectAll(String start, String length, Map<String, Object> paramMap) {
-        return daoHelper.queryForPageList("com.bonc.servflow.pubandorder.flowchart.mapper.FlowChartMapper.selectAll", paramMap, start, length);
+        return daoHelper.queryForPageList("com.sdp.servflow.pubandorder.flowchart.mapper.FlowChartMapper.selectAll", paramMap, start, length);
     }
 
     @Override

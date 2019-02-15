@@ -1,6 +1,6 @@
 /*
  * 文件名：EnterWeixinMessageBean.java
- * 版权：Copyright by www.bonc.com.cn
+ * 版权：Copyright by www.sdp.com.cn
  * 描述：
  * 修改人：zyz
  * 修改时间：2017年7月20日

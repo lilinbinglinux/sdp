@@ -28,7 +28,7 @@ window.operateEvents = {
 		});
 	},
 	'click .productName': function (e, value, row, index) {
-		window.location.href = "http://bconsole.bonc.com/paas/component/"+row.productId+"/node/?serviceId=" + row.caseId + "&menu=false";
+		window.location.href = "http://bconsole.sdp.com/paas/component/"+row.productId+"/node/?serviceId=" + row.caseId + "&menu=false";
 	},
 	'click .svcStart': function (e, value, row, index) {
 		$(e.target).parent().prev().empty();

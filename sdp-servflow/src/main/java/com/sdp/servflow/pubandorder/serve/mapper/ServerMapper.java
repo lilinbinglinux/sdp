@@ -39,6 +39,6 @@ public class ServerMapper {
     @SuppressWarnings("unchecked")
     public HashMap<String, String> getServerFlow(HashMap<String, Object> hashMap) {
         return (HashMap<String, String>)daoHelper.queryOne(
-            "com.bonc.servflow.pubandorder.serve.mapper.ServerMapper.getServerFlow", hashMap);
+            "com.sdp.servflow.pubandorder.serve.mapper.ServerMapper.getServerFlow", hashMap);
     }
 }

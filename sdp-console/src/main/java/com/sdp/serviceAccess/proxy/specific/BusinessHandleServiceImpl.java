@@ -236,7 +236,7 @@ public class BusinessHandleServiceImpl implements BusinessHandleService {
 			if (BusinessHandleServiceImpl.RESULT_CODE_SUCCESS.equals(result.get(BusinessHandleServiceImpl.RESULT_CODE_NAME))) {
 				updateInstanceState(instanceInfo, com.sdp.common.constant.Dictionary.InstanceWorkState.RUNNING.value, com.sdp.common.constant.Dictionary.NodeState.RUNNING.value);
 			} else {
-				//updateInstanceState(instanceInfo,com.bonc.common.constant.Dictionary.InstanceState.EXCEPTION.value, com.bonc.common.constant.Dictionary.NodeState.EXCEPTION.value);
+				//updateInstanceState(instanceInfo,com.sdp.common.constant.Dictionary.InstanceState.EXCEPTION.value, com.sdp.common.constant.Dictionary.NodeState.EXCEPTION.value);
 				status.setCode(com.sdp.common.constant.Dictionary.HttpStatus.SERVER_INTERVAL_ERROR.value);
 				status.setMessage((String) result.get("errDesc"));
 				return status;
@@ -246,7 +246,7 @@ public class BusinessHandleServiceImpl implements BusinessHandleService {
 			logger.error("服务启动回调方法：startSVCOfHandleFeedback出错");
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 
-			//updateInstanceState(instanceInfo,com.bonc.common.constant.Dictionary.InstanceState.EXCEPTION.value, com.bonc.common.constant.Dictionary.NodeState.EXCEPTION.value);
+			//updateInstanceState(instanceInfo,com.sdp.common.constant.Dictionary.InstanceState.EXCEPTION.value, com.sdp.common.constant.Dictionary.NodeState.EXCEPTION.value);
 
 			status.setCode(com.sdp.common.constant.Dictionary.HttpStatus.SERVER_INTERVAL_ERROR.value);
 			status.setMessage("服务启动失败");
@@ -292,7 +292,7 @@ public class BusinessHandleServiceImpl implements BusinessHandleService {
 			if (BusinessHandleServiceImpl.RESULT_CODE_SUCCESS.equals(result.get(BusinessHandleServiceImpl.RESULT_CODE_NAME))) {
 				updateInstanceState(instanceInfo, com.sdp.common.constant.Dictionary.InstanceWorkState.STOP.value, com.sdp.common.constant.Dictionary.NodeState.STOP.value);
 			} else {
-				//updateInstanceState(instanceInfo,com.bonc.common.constant.Dictionary.InstanceState.EXCEPTION.value, com.bonc.common.constant.Dictionary.NodeState.EXCEPTION.value);
+				//updateInstanceState(instanceInfo,com.sdp.common.constant.Dictionary.InstanceState.EXCEPTION.value, com.sdp.common.constant.Dictionary.NodeState.EXCEPTION.value);
 				status.setCode(com.sdp.common.constant.Dictionary.HttpStatus.SERVER_INTERVAL_ERROR.value);
 				status.setMessage((String) result.get("errDesc"));
 				return status;
@@ -302,7 +302,7 @@ public class BusinessHandleServiceImpl implements BusinessHandleService {
 			logger.error("服务停止回调方法：startSVCOfHandleFeedback出错");
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 
-			//updateInstanceState(instanceInfo,com.bonc.common.constant.Dictionary.InstanceState.EXCEPTION.value, com.bonc.common.constant.Dictionary.NodeState.EXCEPTION.value);
+			//updateInstanceState(instanceInfo,com.sdp.common.constant.Dictionary.InstanceState.EXCEPTION.value, com.sdp.common.constant.Dictionary.NodeState.EXCEPTION.value);
 
 			status.setCode(com.sdp.common.constant.Dictionary.HttpStatus.SERVER_INTERVAL_ERROR.value);
 			status.setMessage("服务停止失败");
@@ -351,7 +351,7 @@ public class BusinessHandleServiceImpl implements BusinessHandleService {
 				//3.删除服务实例
 				caseMapper.delete(instanceInfo);
 			} else {
-				//updateInstanceState(instanceInfo,com.bonc.common.constant.Dictionary.InstanceState.EXCEPTION.value, com.bonc.common.constant.Dictionary.NodeState.EXCEPTION.value);
+				//updateInstanceState(instanceInfo,com.sdp.common.constant.Dictionary.InstanceState.EXCEPTION.value, com.sdp.common.constant.Dictionary.NodeState.EXCEPTION.value);
 				status.setCode(com.sdp.common.constant.Dictionary.HttpStatus.SERVER_INTERVAL_ERROR.value);
 				status.setMessage("服务删除失败");
 				return status;
@@ -361,7 +361,7 @@ public class BusinessHandleServiceImpl implements BusinessHandleService {
 			logger.error("服务删除回调方法：startSVCOfHandleFeedback出错");
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 
-			//updateInstanceState(instanceInfo,com.bonc.common.constant.Dictionary.InstanceState.EXCEPTION.value, com.bonc.common.constant.Dictionary.NodeState.EXCEPTION.value);
+			//updateInstanceState(instanceInfo,com.sdp.common.constant.Dictionary.InstanceState.EXCEPTION.value, com.sdp.common.constant.Dictionary.NodeState.EXCEPTION.value);
 
 			status.setCode(com.sdp.common.constant.Dictionary.HttpStatus.SERVER_INTERVAL_ERROR.value);
 			status.setMessage("服务删除失败");

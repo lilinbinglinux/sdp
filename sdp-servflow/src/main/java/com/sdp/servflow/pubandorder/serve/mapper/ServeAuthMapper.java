@@ -40,7 +40,7 @@ public class ServeAuthMapper {
     @SuppressWarnings("unchecked")
     public HashMap<String, Object> getAuth(HashMap<String, Object> hashMap) {
         return (HashMap<String, Object>)daoHelper.queryOne(
-            "com.bonc.servflow.pubandorder.serve.mapper.ServeAuthMapper.getAuth", hashMap);
+            "com.sdp.servflow.pubandorder.serve.mapper.ServeAuthMapper.getAuth", hashMap);
     }
     /***
      * 
@@ -54,7 +54,7 @@ public class ServeAuthMapper {
     @SuppressWarnings("unchecked")
     public HashMap<String, Object> getUserAuth(HashMap<String, Object> res) {
         return (HashMap<String, Object>)daoHelper.queryOne(
-            "com.bonc.servflow.pubandorder.serve.mapper.ServeAuthMapper.getUserAuth", res);
+            "com.sdp.servflow.pubandorder.serve.mapper.ServeAuthMapper.getUserAuth", res);
     };
     /***
      * 
@@ -68,11 +68,11 @@ public class ServeAuthMapper {
     @SuppressWarnings("unchecked")
     public HashMap<String, Object> getPubSer(HashMap<String, Object> res) {
         return (HashMap<String, Object>)daoHelper.queryOne(
-            "com.bonc.servflow.pubandorder.serve.mapper.ServeAuthMapper.getPubSer", res);
+            "com.sdp.servflow.pubandorder.serve.mapper.ServeAuthMapper.getPubSer", res);
     };
     public List<HashMap<String, Object>> getPubSerParm(Map<String, Object> pubSer) {
         return daoHelper.queryForList(
-            "com.bonc.servflow.pubandorder.serve.mapper.ServeAuthMapper.getPubSerParm", pubSer);
+            "com.sdp.servflow.pubandorder.serve.mapper.ServeAuthMapper.getPubSerParm", pubSer);
     };
 
 }

@@ -26,12 +26,12 @@ public class SysConfigSerMapper  {
     private DaoHelper daoHelper;
     @SuppressWarnings({"unchecked", "rawtypes"})
     public List<HashMap<String, Object>> getCodeTable() {
-        return (List)daoHelper.queryForList("com.bonc.servflow.pubandorder.init.sysConfig.mapper.SysConfigSerMapper.getCodeTable", null);
+        return (List)daoHelper.queryForList("com.sdp.servflow.pubandorder.init.sysConfig.mapper.SysConfigSerMapper.getCodeTable", null);
     };
     public KafkaPropertiy getKafka() {
-        return (KafkaPropertiy)daoHelper.queryOne("com.bonc.servflow.pubandorder.init.sysConfig.mapper.SysConfigSerMapper.getKafka", null);
+        return (KafkaPropertiy)daoHelper.queryOne("com.sdp.servflow.pubandorder.init.sysConfig.mapper.SysConfigSerMapper.getKafka", null);
     }
     public int updateKafka(KafkaPropertiy kafka) {
-        return daoHelper.update("com.bonc.servflow.pubandorder.init.sysConfig.mapper.SysConfigSerMapper.updateKafka", kafka);
+        return daoHelper.update("com.sdp.servflow.pubandorder.init.sysConfig.mapper.SysConfigSerMapper.updateKafka", kafka);
     }
 }

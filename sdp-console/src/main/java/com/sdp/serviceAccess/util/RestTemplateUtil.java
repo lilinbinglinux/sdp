@@ -2,7 +2,7 @@
  * Copyright ©1997-2018 BONC Corporation, All Rights Reserved.
  * @Title: RestTemplateUtil.java
  * @Prject: channelcoord
- * @Package: com.bonc.utils
+ * @Package: com.sdp.utils
  * @Description: TODO
  * @Company: BONC
  * @author: LiJinfeng  

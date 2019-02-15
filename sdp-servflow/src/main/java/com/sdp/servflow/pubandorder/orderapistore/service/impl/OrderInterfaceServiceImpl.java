@@ -75,7 +75,7 @@ public class OrderInterfaceServiceImpl implements OrderInterfaceService{
 
     @Override
     public OrderInterfaceBean selectContextPage(String serId) {
-        OrderInterfaceBean orderInterfaceBean = (OrderInterfaceBean) daoHelper.queryOne("com.bonc.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.selectContextPage",serId);
+        OrderInterfaceBean orderInterfaceBean = (OrderInterfaceBean) daoHelper.queryOne("com.sdp.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.selectContextPage",serId);
         return orderInterfaceBean;
     }
 
@@ -178,7 +178,7 @@ public class OrderInterfaceServiceImpl implements OrderInterfaceService{
                     orderId, 0,null);
         }
 
-        daoHelper.insert("com.bonc.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.insert",orderInterfaceBean);
+        daoHelper.insert("com.sdp.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.insert",orderInterfaceBean);
         return orderId;
     }
 
@@ -204,7 +204,7 @@ public class OrderInterfaceServiceImpl implements OrderInterfaceService{
         }
 
 
-        return daoHelper.update("com.bonc.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.update",orderInterfaceBean);
+        return daoHelper.update("com.sdp.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.update",orderInterfaceBean);
     }
 
     @Override
@@ -250,7 +250,7 @@ public class OrderInterfaceServiceImpl implements OrderInterfaceService{
         map.put("repUserId", orderInterfaceBean.getRepUserId());
         map.put("checkStatus", orderInterfaceBean.getCheckStatus());
         map.put("tenantId", orderInterfaceBean.getTenantId());
-        return daoHelper.queryForList("com.bonc.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.getAllByCondition",map);
+        return daoHelper.queryForList("com.sdp.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.getAllByCondition",map);
     }
 
     @Override
@@ -290,6 +290,6 @@ public class OrderInterfaceServiceImpl implements OrderInterfaceService{
 
     @Override
     public OrderInterfaceBean selectGetSerNameByOrderId(String orderId) {
-        return (OrderInterfaceBean) daoHelper.queryOne("com.bonc.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.selectGetSerNameByPrimaryKey",orderId);
+        return (OrderInterfaceBean) daoHelper.queryOne("com.sdp.servflow.pubandorder.serve.mapper.OrderInterfaceMapper.selectGetSerNameByPrimaryKey",orderId);
     }
 }

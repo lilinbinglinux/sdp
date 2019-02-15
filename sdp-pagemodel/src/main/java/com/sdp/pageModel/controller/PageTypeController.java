@@ -21,7 +21,7 @@ import com.sdp.pageModel.service.PageTypeService;
   @ClassName: PageModuleController
 * @author zy
 * @date 2018年4月16日
-* @company:www.bonc.com.cn
+* @company:www.sdp.com.cn
  */
 @Controller
 @RequestMapping("/v1/pageType")

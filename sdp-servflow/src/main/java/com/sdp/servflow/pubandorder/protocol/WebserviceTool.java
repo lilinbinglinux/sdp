@@ -2,7 +2,7 @@ package com.sdp.servflow.pubandorder.protocol;
 /**
  * 
  *//*
-package com.bonc.servflow.pubandorder.protocol;
+package com.sdp.servflow.pubandorder.protocol;
 
 import java.io.IOException;
 import java.io.StringReader;

@@ -6,7 +6,7 @@ package com.sdp.serviceAccess.util;
   @ClassName: Generator
 * @author zy
 * @date 2018年8月9日
-* @company:www.bonc.com.cn
+* @company:www.sdp.com.cn
  */
 public class Generator {// ==============================Fields===========================================
     /** 开始时间截 (2015-01-01) */

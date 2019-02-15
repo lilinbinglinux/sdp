@@ -56,7 +56,7 @@ public class PProductPackageServiceImpl implements IPProductPackageService{
 	private PProductMapper productMapper;
 
 	/* (non-Javadoc)
-	 * @see com.bonc.serviceAccess.service.IPProductPackageService#createPackage(com.bonc.serviceAccess.entity.PProductPackage)
+	 * @see com.sdp.serviceAccess.service.IPProductPackageService#createPackage(com.sdp.serviceAccess.entity.PProductPackage)
 	 */
 	@Override
 	@Transactional(rollbackFor=Exception.class)
@@ -94,7 +94,7 @@ public class PProductPackageServiceImpl implements IPProductPackageService{
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bonc.serviceAccess.service.IPProductPackageService#singlePackageInfo(java.lang.String)
+	 * @see com.sdp.serviceAccess.service.IPProductPackageService#singlePackageInfo(java.lang.String)
 	 */
 	@Override
 	public PProductPackage singlePackageInfo(String productPackageId) {
@@ -144,7 +144,7 @@ public class PProductPackageServiceImpl implements IPProductPackageService{
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bonc.serviceAccess.service.IPProductPackageService#updatePackage(com.bonc.serviceAccess.entity.PProductPackage)
+	 * @see com.sdp.serviceAccess.service.IPProductPackageService#updatePackage(com.sdp.serviceAccess.entity.PProductPackage)
 	 */
 	@Override
 	@Transactional(rollbackFor=Exception.class)
@@ -193,7 +193,7 @@ public class PProductPackageServiceImpl implements IPProductPackageService{
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bonc.serviceAccess.service.IPProductPackageService#deletePackage(com.bonc.serviceAccess.entity.PProductPackage)
+	 * @see com.sdp.serviceAccess.service.IPProductPackageService#deletePackage(com.sdp.serviceAccess.entity.PProductPackage)
 	 */
 	@Override
 	@Transactional(rollbackFor=Exception.class)
@@ -217,7 +217,7 @@ public class PProductPackageServiceImpl implements IPProductPackageService{
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bonc.serviceAccess.service.IPProductPackageService#productPackages(java.lang.String)
+	 * @see com.sdp.serviceAccess.service.IPProductPackageService#productPackages(java.lang.String)
 	 */
 	@Override
 	public Map<String,Object> productPackages(String productId) {
@@ -267,7 +267,7 @@ public class PProductPackageServiceImpl implements IPProductPackageService{
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bonc.serviceAccess.service.IPProductPackageService#singlePackageInfo(java.lang.String, java.lang.String)
+	 * @see com.sdp.serviceAccess.service.IPProductPackageService#singlePackageInfo(java.lang.String, java.lang.String)
 	 */
 	@Override
 	public PProductPackage singlePackageInfo(String productPackageId, String tenantId) {
@@ -314,7 +314,7 @@ public class PProductPackageServiceImpl implements IPProductPackageService{
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bonc.serviceAccess.service.IPProductPackageService#productPackages(java.lang.String, java.lang.String)
+	 * @see com.sdp.serviceAccess.service.IPProductPackageService#productPackages(java.lang.String, java.lang.String)
 	 */
 	@Override
 	public Map<String, Object> productPackages(String productId, String tenantId) {

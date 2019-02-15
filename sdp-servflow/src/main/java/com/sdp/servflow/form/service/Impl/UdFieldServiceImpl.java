@@ -19,34 +19,34 @@ public class UdFieldServiceImpl implements UdFieldService{
 
 	@Override
 	public Map selectByTablename(String start, String length, Map<String,Object>paramMap) {
-		return daoHelper.queryForPageList("com.bonc.frame.web.mapper.form.UdFileldMapper.selectByTablename",paramMap,start, length);
+		return daoHelper.queryForPageList("com.sdp.frame.web.mapper.form.UdFileldMapper.selectByTablename",paramMap,start, length);
 	}
 
 	@Override
 	public List<Map<String, Object>> selectByTablename1(Map<String, Object> paramMap) {
-		return  daoHelper.queryForList("com.bonc.frame.web.mapper.form.UdFileldMapper.selectByTablename",paramMap);
+		return  daoHelper.queryForList("com.sdp.frame.web.mapper.form.UdFileldMapper.selectByTablename",paramMap);
 	}
 
 
 	@Override
 	public int insert(UdField udField) {
-		return daoHelper.insert("com.bonc.frame.web.mapper.form.UdFileldMapper.insertSelective", udField);
+		return daoHelper.insert("com.sdp.frame.web.mapper.form.UdFileldMapper.insertSelective", udField);
 	}
 
 	@Override
 	public UdField selectById(String id) {
 		// TODO Auto-generated method stub
-		return (UdField) daoHelper.queryOne("com.bonc.frame.web.mapper.form.UdFileldMapper.selectByPrimaryKey", id);
+		return (UdField) daoHelper.queryOne("com.sdp.frame.web.mapper.form.UdFileldMapper.selectByPrimaryKey", id);
 	}
 
 	@Override
 	public int update(UdField udField) {
-		return daoHelper.update("com.bonc.frame.web.mapper.form.UdFileldMapper.updateByPrimaryKeySelective", udField);
+		return daoHelper.update("com.sdp.frame.web.mapper.form.UdFileldMapper.updateByPrimaryKeySelective", udField);
 	}
 	
 	@Override
 	public int updateField(UdField udField) {
-		return daoHelper.update("com.bonc.frame.web.mapper.form.UdFileldMapper.updateByPrimaryKey", udField);
+		return daoHelper.update("com.sdp.frame.web.mapper.form.UdFileldMapper.updateByPrimaryKey", udField);
 
 	}
 

@@ -32,7 +32,7 @@ public class PageResJoinService {
 	 @Autowired
 	 private PageModuleTypeService pageModuleTypeService;
 	    
-	 private static String BaseMapperUrl = "com.bonc.xbconsole.pageModel.PageResJoinMapper.";
+	 private static String BaseMapperUrl = "com.sdp.xbconsole.pageModel.PageResJoinMapper.";
 	    
     /**
      * 输出日志

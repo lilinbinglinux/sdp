@@ -14,7 +14,7 @@ var processHtml =
     '           </div>' +
     '           <div id="shortcutDesc" style="width: auto;">快捷键说明</div>' +
     '           <div class="conHref" style="width: auto;">' +
-    '               <a href="https://code.bonc.com.cn/confluence/pages/viewpage.action?pageId=14581995"' +
+    '               <a href="https://code.sdp.com.cn/confluence/pages/viewpage.action?pageId=14581995"' +
     '                   target="_blank">confluence说明文档</a>' +
     '           </div>' +
     '       </div>' +

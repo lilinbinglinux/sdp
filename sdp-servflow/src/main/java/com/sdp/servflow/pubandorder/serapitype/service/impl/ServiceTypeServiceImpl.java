@@ -35,17 +35,17 @@ public class ServiceTypeServiceImpl implements ServiceTypeService{
 
     @Override
     public List<ServiceTypeBean> getAllByCondition(Map<String, String> map) {
-        return daoHelper.queryForList("com.bonc.frame.web.mapper.puborder.ServiceTypeMapper.getAllByCondition", map);
+        return daoHelper.queryForList("com.sdp.frame.web.mapper.puborder.ServiceTypeMapper.getAllByCondition", map);
     }
 
     @Override
     public List<ServiceTypeBean> selectgetTimeByCondition(ServiceTypeBean serviceTypeBean) {
-        return daoHelper.queryForList("com.bonc.frame.web.mapper.puborder.ServiceTypeMapper.selectPage", serviceTypeBean);
+        return daoHelper.queryForList("com.sdp.frame.web.mapper.puborder.ServiceTypeMapper.selectPage", serviceTypeBean);
     }
 
     @Override
     public List<ServiceTypeBean> getAllEqalsByCondition(Map<String, String> map) {
-        return daoHelper.queryForList("com.bonc.frame.web.mapper.puborder.ServiceTypeMapper.getAllEqalsByCondition", map);
+        return daoHelper.queryForList("com.sdp.frame.web.mapper.puborder.ServiceTypeMapper.getAllEqalsByCondition", map);
     }
 
     @Override
@@ -57,17 +57,17 @@ public class ServiceTypeServiceImpl implements ServiceTypeService{
         Map<String, Object> map = getPath(serviceTypeBean.getSerTypeId(), serviceTypeBean.getParentId(), serviceTypeBean.getSerTypeName());
         serviceTypeBean.setIdPath((String) map.get("idPath"));
         serviceTypeBean.setNamePath((String) map.get("namePath"));
-        return daoHelper.insert("com.bonc.frame.web.mapper.puborder.ServiceTypeMapper.insert", serviceTypeBean);
+        return daoHelper.insert("com.sdp.frame.web.mapper.puborder.ServiceTypeMapper.insert", serviceTypeBean);
     }
 
     @Override
     public int update(ServiceTypeBean serviceTypeBean) {
-        return daoHelper.update("com.bonc.frame.web.mapper.puborder.ServiceTypeMapper.updateByPrimaryKey",serviceTypeBean);
+        return daoHelper.update("com.sdp.frame.web.mapper.puborder.ServiceTypeMapper.updateByPrimaryKey",serviceTypeBean);
     }
 
     @Override
     public int delete(String serTypeId) {
-        return daoHelper.delete("com.bonc.frame.web.mapper.puborder.ServiceTypeMapper.deleteByPrimaryKey",serTypeId);
+        return daoHelper.delete("com.sdp.frame.web.mapper.puborder.ServiceTypeMapper.deleteByPrimaryKey",serTypeId);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class ServiceTypeServiceImpl implements ServiceTypeService{
 
 	@Override
 	public ServiceTypeBean selectByPrimaryKey(String id) {
-		return (ServiceTypeBean)daoHelper.queryOne("com.bonc.frame.web.mapper.puborder.ServiceTypeMapper.selectByPrimaryKey",id);
+		return (ServiceTypeBean)daoHelper.queryOne("com.sdp.frame.web.mapper.puborder.ServiceTypeMapper.selectByPrimaryKey",id);
 	}
 
 	@Override

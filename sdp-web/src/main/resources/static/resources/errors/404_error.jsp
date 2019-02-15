@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" isErrorPage="true" %>
-<%@ page import="com.bonc.frame.util.RequestUtil" %>
-<%@ page import="com.bonc.frame.util.ResponseMessage" %>
+<%@ page import="com.sdp.frame.util.RequestUtil" %>
+<%@ page import="com.sdp.frame.util.ResponseMessage" %>
 <%
    String webpath = request.getContextPath();
    boolean isAjax = RequestUtil.isAjaxReq(request);

@@ -28,7 +28,7 @@ public class UserAuthicationLoader implements AuthicationLoader{
 	@Override
 	public List<Object> authLoader(Object object) {
 		if(object instanceof User){			
-			return daoHelper.queryForList("com.bonc.frame.web.mapper.resources.ResourcesMapper.selectUserRoleResource", ((User)object).getUserId());
+			return daoHelper.queryForList("com.sdp.frame.web.mapper.resources.ResourcesMapper.selectUserRoleResource", ((User)object).getUserId());
 		}
 		return null;
 	}

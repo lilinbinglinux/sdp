@@ -93,7 +93,7 @@ public class PProductCaseServiceImpl implements IPProductCaseService {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.bonc.serviceAccess.service.IPProductCaseService#saveCase(com.bonc.
+	 * com.sdp.serviceAccess.service.IPProductCaseService#saveCase(com.sdp.
 	 * serviceAccess.entity.PProductCase)
 	 */
 	@Override
@@ -190,7 +190,7 @@ public class PProductCaseServiceImpl implements IPProductCaseService {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.bonc.serviceAccess.service.IPProductCaseService#updateCase(com.bonc.
+	 * com.sdp.serviceAccess.service.IPProductCaseService#updateCase(com.sdp.
 	 * serviceAccess.entity.PProductCase)
 	 */
 	@Override
@@ -232,7 +232,7 @@ public class PProductCaseServiceImpl implements IPProductCaseService {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.bonc.serviceAccess.service.IPProductCaseService#deleteCase(com.bonc.
+	 * com.sdp.serviceAccess.service.IPProductCaseService#deleteCase(com.sdp.
 	 * serviceAccess.entity.PProductCase)
 	 */
 	@Override
@@ -259,9 +259,9 @@ public class PProductCaseServiceImpl implements IPProductCaseService {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.bonc.serviceAccess.service.IPProductCaseService#findByProduct(com.
+	 * com.sdp.serviceAccess.service.IPProductCaseService#findByProduct(com.
 	 * bonc.serviceAccess.entity.PProductCase,
-	 * com.bonc.serviceAccess.entity.PProduct)
+	 * com.sdp.serviceAccess.entity.PProduct)
 	 */
 	@Override
 	public Pagination findByProduct(Map<String,Object> params, Pagination page, boolean isNeedCompare) {
@@ -481,7 +481,7 @@ public class PProductCaseServiceImpl implements IPProductCaseService {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.bonc.serviceAccess.service.IPProductCaseService#singleCase(com.bonc.
+	 * com.sdp.serviceAccess.service.IPProductCaseService#singleCase(com.sdp.
 	 * serviceAccess.entity.PProductCase)
 	 */
 	@Override
@@ -614,9 +614,9 @@ public class PProductCaseServiceImpl implements IPProductCaseService {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.bonc.serviceAccess.service.IPProductCaseService#findByProduct(com.
+	 * com.sdp.serviceAccess.service.IPProductCaseService#findByProduct(com.
 	 * bonc.serviceAccess.entity.PProductCase,
-	 * com.bonc.serviceAccess.entity.PProduct)
+	 * com.sdp.serviceAccess.entity.PProduct)
 	 */
 	@Override
 	public Pagination findCasePageWithAuth(PProductCase productCase, Pagination page) {

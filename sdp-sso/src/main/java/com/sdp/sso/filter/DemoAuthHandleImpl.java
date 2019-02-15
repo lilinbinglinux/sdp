@@ -1,21 +1,14 @@
 package com.sdp.sso.filter;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.apache.commons.lang3.StringUtils;
-import org.jasig.cas.client.authentication.AttributePrincipal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.bonc.security.client.SecurityClient;
 import com.bonc.security.entity.Userinfo;
-import com.bonc.sso.client.IAuthHandle;
 import com.sdp.SpringApplicationContext;
 import com.sdp.frame.security.authication.provider.NormalAuthicationProvider;
 import com.sdp.frame.security.util.Constant;

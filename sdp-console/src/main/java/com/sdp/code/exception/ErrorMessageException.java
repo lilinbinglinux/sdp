@@ -2,7 +2,7 @@ package com.sdp.code.exception;
 
 /**
  * @author lumeiling
- * @package com.bonc.code.exception
+ * @package com.sdp.code.exception
  * @create 2018-12-2018/12/17 下午3:04
  **/
 public class ErrorMessageException extends RuntimeException{

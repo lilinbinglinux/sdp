@@ -30,7 +30,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 	/**
 	 * 组织机构相关操作Mapper的命名空间
 	 */
-	private final String orgMapperNameSpace = "com.bonc.base.organization.mapper.";
+	private final String orgMapperNameSpace = "com.sdp.base.organization.mapper.";
 
 	@Override
 	//查询所有的组织机构
@@ -143,13 +143,13 @@ public class OrganizationServiceImpl implements OrganizationService {
 
 	@Override
 	public List<Orgnization> orgListTree() {
-		List<Orgnization> list = daoHelper.queryForList("com.bonc.base.organization.mapper.selectAllOrg", null);
+		List<Orgnization> list = daoHelper.queryForList("com.sdp.base.organization.mapper.selectAllOrg", null);
 		return convertTree(list);
 	}
 
 	@Override
 	public Map<String, Object> getOrgByCondition(Map<String, Object> paramMap, String start, String length) {
-		return daoHelper.queryForPageList("com.bonc.base.organization.mapper.selectPage", paramMap,start,length);
+		return daoHelper.queryForPageList("com.sdp.base.organization.mapper.selectPage", paramMap,start,length);
 	}
 
 	

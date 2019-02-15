@@ -38,14 +38,14 @@ public class SecurityCodeServiceImpl implements SecurityCodeService{
 
     @Override
     public List<SecurityCodeBean> getAllByCondition(Map<String, String> map) {
-        return daoHelper.queryForList("com.bonc.servflow.pubandorder.security.mapper.SecurityCodeBeanMapper.getAllByCondition", map);
+        return daoHelper.queryForList("com.sdp.servflow.pubandorder.security.mapper.SecurityCodeBeanMapper.getAllByCondition", map);
     }
 
     @Override
     public void insert(SecurityCodeBean securityCodeBean) {
         securityCodeBean.setTenant_id(CurrentUserUtils.getInstance().getUser().getTenantId());
         securityCodeBean.setLogin_id(CurrentUserUtils.getInstance().getUser().getLoginId());
-        daoHelper.insert("com.bonc.servflow.pubandorder.security.mapper.SecurityCodeBeanMapper.insert", securityCodeBean);
+        daoHelper.insert("com.sdp.servflow.pubandorder.security.mapper.SecurityCodeBeanMapper.insert", securityCodeBean);
     }
 
     @Override

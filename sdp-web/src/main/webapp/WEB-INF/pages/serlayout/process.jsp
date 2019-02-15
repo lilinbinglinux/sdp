@@ -58,7 +58,7 @@
 							<img src="${pageContext.request.contextPath}/resources/plugin/raphael/img/tool-help.png" class="toolimg">
 					   </div>
 			           <div class="conHref">
-			                <a href="https://code.bonc.com.cn/confluence/pages/viewpage.action?pageId=14581995"
+			                <a href="https://code.sdp.com.cn/confluence/pages/viewpage.action?pageId=14581995"
 							   target="_blank">
 							   <img src="${pageContext.request.contextPath}/resources/plugin/raphael/img/tool-note.png" class="toolimg">
 							</a>

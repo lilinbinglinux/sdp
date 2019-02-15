@@ -88,7 +88,7 @@ public class Invoke {
       //  String url = "file:C:/Users/Administrator/Desktop/esb/jars/20170912/xorder.jar"; // 包路径定义  
           String url = "file:C:/Users/Administrator/Desktop/esb/jars/2017912/xorder.jar"; // 包路径定义  
         
-        String className = "com.bonc.servflow.test.TestEncapsulation";  
+        String className = "com.sdp.servflow.test.TestEncapsulation";  
         String method = "execute";  
         HashMap<String,Object> sysParam = new HashMap<String,Object>();
         sysParam.put("method", "ABILITY_10002002");

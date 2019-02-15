@@ -34,7 +34,7 @@ public class TimeAop {
 
 	private static final Logger LOG =  LoggerFactory.getLogger(TimeAop.class);
 
-	@Pointcut("execution(* com.bonc.serviceAccess.service.impl.*.*(..))")
+	@Pointcut("execution(* com.sdp.serviceAccess.service.impl.*.*(..))")
 	public void annotationPointCut() {
 	}
 

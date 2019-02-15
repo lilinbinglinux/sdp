@@ -16,7 +16,7 @@ public class FlowControlMapper {
 	@Resource
     private DaoHelper daoHelper;
 	
-	private final String baseMapperSouth="com.bonc.servflow.logSer.flowControl.mapper.FlowControlMapper.";
+	private final String baseMapperSouth="com.sdp.servflow.logSer.flowControl.mapper.FlowControlMapper.";
 
 	public List<CounterBean> selectInitDate() {
 		return daoHelper.queryForList(baseMapperSouth+"selectInitDate");

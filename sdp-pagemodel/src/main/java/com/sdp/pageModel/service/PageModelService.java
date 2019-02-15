@@ -21,7 +21,7 @@ import com.sdp.pageModel.entity.PageModel;
   @ClassName: PageModelService
 * @author zy
 * @date 2018年4月16日
-* @company:www.bonc.com.cn
+* @company:www.sdp.com.cn
  */
 @Service
 public class PageModelService{
@@ -34,7 +34,7 @@ public class PageModelService{
     @Autowired
     private DaoHelper daoHelper;
     
-    private static String BaseMapperUrl = "com.bonc.xbconsole.pageModel.PageModelMapper.";
+    private static String BaseMapperUrl = "com.sdp.xbconsole.pageModel.PageModelMapper.";
 	
 
 	/**

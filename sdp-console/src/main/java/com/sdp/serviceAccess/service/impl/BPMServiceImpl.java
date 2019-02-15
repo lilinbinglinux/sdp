@@ -34,7 +34,7 @@ import com.sdp.util.WebClientUtil;
   @ClassName: BPMServiceImpl
  * @author zy
  * @date 2018年8月9日
- * @company:www.bonc.com.cn
+ * @company:www.sdp.com.cn
  */
 @Service
 public class BPMServiceImpl implements IBPMService{

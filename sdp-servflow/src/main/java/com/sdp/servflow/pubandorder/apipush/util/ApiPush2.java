@@ -1,17 +1,17 @@
 package com.sdp.servflow.pubandorder.apipush.util;
-//package com.bonc.servflow.pubandorder.apipush.util;
+//package com.sdp.servflow.pubandorder.apipush.util;
 //
 //import com.alibaba.fastjson.JSON;
 //import com.alibaba.fastjson.JSONObject;
-//import com.bonc.servflow.common.CurrentUserUtils;
-//import com.bonc.servflow.pubandorder.orderapistore.model.OrderInterfaceBean;
-//import com.bonc.servflow.pubandorder.orderapistore.service.OrderInterfaceService;
-//import com.bonc.servflow.pubandorder.orderapistore.util.GetParam;
-//import com.bonc.servflow.pubandorder.servicebasic.model.ServiceMainBean;
-//import com.bonc.servflow.pubandorder.servicebasic.model.ServiceVersionBean;
-//import com.bonc.servflow.pubandorder.servicebasic.service.ServiceMainService;
-//import com.bonc.servflow.pubandorder.servicebasic.service.ServiceVersionService;
-//import com.bonc.servflow.pubandorder.util.HanyuPinyinUtil;
+//import com.sdp.servflow.common.CurrentUserUtils;
+//import com.sdp.servflow.pubandorder.orderapistore.model.OrderInterfaceBean;
+//import com.sdp.servflow.pubandorder.orderapistore.service.OrderInterfaceService;
+//import com.sdp.servflow.pubandorder.orderapistore.util.GetParam;
+//import com.sdp.servflow.pubandorder.servicebasic.model.ServiceMainBean;
+//import com.sdp.servflow.pubandorder.servicebasic.model.ServiceVersionBean;
+//import com.sdp.servflow.pubandorder.servicebasic.service.ServiceMainService;
+//import com.sdp.servflow.pubandorder.servicebasic.service.ServiceVersionService;
+//import com.sdp.servflow.pubandorder.util.HanyuPinyinUtil;
 //import net.sf.json.JSONArray;
 //import org.apache.http.HttpResponse;
 //import org.apache.http.client.ClientProtocolException;

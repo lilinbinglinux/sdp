@@ -1,5 +1,5 @@
 package com.sdp.servflow.webservice;
-//package com.bonc.servflow.webservice;
+//package com.sdp.servflow.webservice;
 //
 //import javax.xml.ws.Endpoint;
 //
@@ -17,7 +17,7 @@ package com.sdp.servflow.webservice;
 // * @date 2017年9月25日
 // */
 //@Configuration
-//@ComponentScan(basePackages = "com.bonc.servflow.webservice")
+//@ComponentScan(basePackages = "com.sdp.servflow.webservice")
 //public class CxfConfig {
 //	@Bean
 //    public ServletRegistrationBean webservicedispatcherServlet() {

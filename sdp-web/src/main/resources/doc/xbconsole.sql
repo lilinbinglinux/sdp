@@ -139,7 +139,7 @@ CREATE TABLE `log_dictionary` (
   `dayTotalCount` int(10) DEFAULT NULL,
   `tableName` varchar(16) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `dic_dayDateTime` (`dayDateTime`) USING BTREE
+  UNIQUE KEY `dic_dayDateTime` (`dayDateTime`) 
 ) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -205,7 +205,7 @@ CREATE TABLE `method_lock` (
   `methodName` varchar(32) NOT NULL DEFAULT '' COMMENT '锁定的方法名',
   `methodDesc` varchar(64) NOT NULL DEFAULT '方法描述信息',
   `updateTime` int(8) NOT NULL COMMENT '保存时间 格式 yyyymmdd',
-  UNIQUE KEY `methodName_updateTime` (`methodName`,`updateTime`) USING BTREE
+  UNIQUE KEY `methodName_updateTime` (`methodName`,`updateTime`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='锁定中的方法';
 
 -- ----------------------------
@@ -1404,8 +1404,8 @@ CREATE TABLE `sql_table_ser` (
   `ides` int(10) NOT NULL COMMENT '序号',
   `teachers` varchar(10) NOT NULL COMMENT '人数',
   PRIMARY KEY (`idds`,`ides`,`teachers`),
-  KEY `idds` (`idds`) USING BTREE,
-  KEY `ides` (`ides`) USING BTREE
+  KEY `idds` (`idds`) ,
+  KEY `ides` (`ides`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -1440,7 +1440,7 @@ DROP TABLE IF EXISTS `statistics_lock`;
 CREATE TABLE `statistics_lock` (
   `instanceId` int(10) NOT NULL COMMENT '实例全局id(具有唯一性和一次性)',
   `updateTime` varchar(12) NOT NULL COMMENT '保存时间 格式 yyyymmddhhmm',
-  UNIQUE KEY `updateTime` (`updateTime`) USING BTREE
+  UNIQUE KEY `updateTime` (`updateTime`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='锁定中的方法';
 
 -- ----------------------------
@@ -1469,90 +1469,3 @@ INSERT INTO `sys_common_cfg` VALUES ('1004', 'http://172.16.11.59/xIntegration/v
 INSERT INTO `sys_common_cfg` VALUES ('1005', 'http://172.16.11.59/xIntegration/soap/apisPublish', '异步订阅webservice(无参数版)');
 INSERT INTO `sys_common_cfg` VALUES ('1006', 'http://172.16.11.59/xIntegration/v1/apisEmploy/casPublish?tenantId=%s&appId=%s', 'cas单点（http）');
 
--- ----------------------------
--- Table structure for table1
--- ----------------------------
-DROP TABLE IF EXISTS `table1`;
-CREATE TABLE `table1` (
-  `column1` int(10) NOT NULL COMMENT '列1',
-  `column2` datetime(4) DEFAULT NULL COMMENT '列2',
-  PRIMARY KEY (`column1`),
-  KEY `column1` (`column1`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of table1
--- ----------------------------
-
--- ----------------------------
--- Table structure for table2
--- ----------------------------
-DROP TABLE IF EXISTS `table2`;
-CREATE TABLE `table2` (
-  `lie1` int(10) NOT NULL COMMENT '列1',
-  `lie2` datetime(4) DEFAULT NULL COMMENT '列2',
-  PRIMARY KEY (`lie1`),
-  KEY `lie1` (`lie1`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of table2
--- ----------------------------
-
--- ----------------------------
--- Table structure for table3
--- ----------------------------
-DROP TABLE IF EXISTS `table3`;
-CREATE TABLE `table3` (
-  `col1` int(10) NOT NULL COMMENT '列1',
-  `col2` datetime(4) DEFAULT NULL COMMENT '列2',
-  PRIMARY KEY (`col1`),
-  KEY `col1` (`col1`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of table3
--- ----------------------------
-
--- ----------------------------
--- Table structure for table_a
--- ----------------------------
-DROP TABLE IF EXISTS `table_a`;
-CREATE TABLE `table_a` (
-  `column1` int(10) NOT NULL AUTO_INCREMENT,
-  `column2` int(10) DEFAULT NULL,
-  PRIMARY KEY (`column1`),
-  UNIQUE KEY `column1` (`column1`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of table_a
--- ----------------------------
-
--- ----------------------------
--- Table structure for tt
--- ----------------------------
-DROP TABLE IF EXISTS `tt`;
-CREATE TABLE `tt` (
-  `id` int(11) DEFAULT NULL,
-  `count` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of tt
--- ----------------------------
-
--- ----------------------------
--- Table structure for user
--- ----------------------------
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
-  `id` varchar(32) NOT NULL COMMENT '主键',
-  `name` varchar(255) DEFAULT '' COMMENT '返回编码',
-  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '描述信息',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of user
--- ----------------------------

@@ -1,11 +1,11 @@
 package com.sdp.mall.entity;
-//package com.bonc.mall.entity;
+//package com.sdp.mall.entity;
 //
 //import java.util.Date;
 //
 //import javax.persistence.Entity;
 //
-//import com.bonc.common.entity.BaseInfo;
+//import com.sdp.common.entity.BaseInfo;
 //
 ///**
 // * 
@@ -13,7 +13,7 @@ package com.sdp.mall.entity;
 //  @ClassName: CChargeAttrValueInfo
 //* @author zy
 //* @date 2018年5月8日
-//* @company:www.bonc.com.cn
+//* @company:www.sdp.com.cn
 // */
 //@Entity
 //public class CChargeAttrValueInfo extends BaseInfo{

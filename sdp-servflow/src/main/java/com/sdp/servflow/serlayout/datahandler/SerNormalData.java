@@ -126,7 +126,7 @@ public class SerNormalData {
 	
 	
 	private List<ServiceInfoPo> getServiceVersionBeanByCondition(Map<String,String> map) {
-        return daoHelper.queryForList("com.bonc.frame.web.mapper.serlayout.SerLayoutMapper.getServiceVersionBeanByCondition",map);
+        return daoHelper.queryForList("com.sdp.frame.web.mapper.serlayout.SerLayoutMapper.getServiceVersionBeanByCondition",map);
     }
 
 	

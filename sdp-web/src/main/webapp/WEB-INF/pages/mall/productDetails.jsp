@@ -245,7 +245,7 @@
 </div>
 
 <%--嵌入bcm--%>
-<iframe src="http://bconsole.bonc.com/paas/singleSignOn" style="height: 50%;width: 70%;display: none"></iframe>
+<iframe src="http://bconsole.sdp.com/paas/singleSignOn" style="height: 50%;width: 70%;display: none"></iframe>
 
 <%@ include file="footer.jsp" %>
 </body>

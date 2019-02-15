@@ -43,7 +43,7 @@ public class WhiteListServiceImpl implements WhiteListService {
         whiteListBean.setIpID(IdUtil.createId());
         whiteListBean.setCreateTime(new Date());
         whiteListBean.setTenantId(CurrentUserUtils.getInstance().getUser().getTenantId());
-        return daoHelper.insert("com.bonc.servflow.pubandorder.mapper.WhiteListMapper.insert",whiteListBean);
+        return daoHelper.insert("com.sdp.servflow.pubandorder.mapper.WhiteListMapper.insert",whiteListBean);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class WhiteListServiceImpl implements WhiteListService {
     public int delete(String orderId) {
         //将将过滤IP从内存删除
         serIpLimitManager.removeSerIpLimitRule(CurrentUserUtils.getInstance().getUser().getTenantId(),orderId);
-        return daoHelper.delete("com.bonc.servflow.pubandorder.mapper.WhiteListMapper.delete", orderId);
+        return daoHelper.delete("com.sdp.servflow.pubandorder.mapper.WhiteListMapper.delete", orderId);
     }
 
     @Override
@@ -81,6 +81,6 @@ public class WhiteListServiceImpl implements WhiteListService {
         map.put("ipAddr", whiteListBean.getIpAddr());
         map.put("nameType", whiteListBean.getNameType());
         map.put("tenantId", whiteListBean.getTenantId());
-        return daoHelper.queryForList("com.bonc.servflow.pubandorder.mapper.WhiteListMapper.getAllByCondition",map);
+        return daoHelper.queryForList("com.sdp.servflow.pubandorder.mapper.WhiteListMapper.getAllByCondition",map);
     }
 }

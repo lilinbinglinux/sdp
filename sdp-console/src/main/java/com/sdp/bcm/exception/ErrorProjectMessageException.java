@@ -2,7 +2,7 @@ package com.sdp.bcm.exception;
 
 /**
  * @author lumeiling
- * @package com.bonc.bcm.exception
+ * @package com.sdp.bcm.exception
  * @create 2018-12-2018/12/18 下午3:40
  **/
 

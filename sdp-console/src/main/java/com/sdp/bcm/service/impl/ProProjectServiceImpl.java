@@ -22,7 +22,7 @@ import java.util.Map;
 
 /**
  * @author lumeiling
- * @package com.bonc.bcm.service.impl
+ * @package com.sdp.bcm.service.impl
  * @create 2018-11-2018/11/23 下午1:51
  **/
 
@@ -36,7 +36,7 @@ public class ProProjectServiceImpl {
     /**
      * 指向 mybatis 命名空间
      */
-    private static String BaseMapperUrl = "com.bonc.bcm.ProProjectMapper.";
+    private static String BaseMapperUrl = "com.sdp.bcm.ProProjectMapper.";
 
     @Autowired
     private HttpServletRequest request;

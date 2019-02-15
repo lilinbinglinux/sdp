@@ -1,5 +1,5 @@
 package com.sdp.servflow.pubandorder.format;
-/*package com.bonc.servflow.pubandorder.format;
+/*package com.sdp.servflow.pubandorder.format;
 *//**
  * 
  * json和其他格式互转

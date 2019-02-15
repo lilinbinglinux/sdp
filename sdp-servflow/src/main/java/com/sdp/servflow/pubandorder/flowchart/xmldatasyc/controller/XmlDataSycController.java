@@ -1,5 +1,5 @@
 package com.sdp.servflow.pubandorder.flowchart.xmldatasyc.controller;
-//package com.bonc.servflow.pubandorder.flowchart.xmldatasyc.controller;
+//package com.sdp.servflow.pubandorder.flowchart.xmldatasyc.controller;
 //
 //import java.io.BufferedInputStream;
 //import java.io.File;
@@ -17,7 +17,7 @@ package com.sdp.servflow.pubandorder.flowchart.xmldatasyc.controller;
 //import org.springframework.web.bind.annotation.RestController;
 //
 //import com.alibaba.fastjson.JSONObject;
-//import com.bonc.servflow.pubandorder.flowchart.xmldatasyc.service.DBToXmlService;
+//import com.sdp.servflow.pubandorder.flowchart.xmldatasyc.service.DBToXmlService;
 //
 ///**
 // * 

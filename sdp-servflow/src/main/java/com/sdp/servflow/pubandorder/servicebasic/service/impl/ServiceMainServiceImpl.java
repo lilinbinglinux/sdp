@@ -44,42 +44,42 @@ public class ServiceMainServiceImpl implements ServiceMainService{
 
     @Override
     public List<ServiceMainBean> getAllByConditionLikeName(Map<String, String> map) {
-        return daoHelper.queryForList("com.bonc.frame.web.mapper.puborder.ServiceMainMapper.getAllByConditionLikeName",map);
+        return daoHelper.queryForList("com.sdp.frame.web.mapper.puborder.ServiceMainMapper.getAllByConditionLikeName",map);
     }
     
     @Override
     public List<ServiceMainBean> getAllByCondition(Map<String, String> map) {
-        return daoHelper.queryForList("com.bonc.frame.web.mapper.puborder.ServiceMainMapper.getAllByCondition",map);
+        return daoHelper.queryForList("com.sdp.frame.web.mapper.puborder.ServiceMainMapper.getAllByCondition",map);
     }
 
     @Override
     public List<ServiceMainBean> getBySerNameAndVersion(Map<String, String> map) {
-        return daoHelper.queryForList("com.bonc.frame.web.mapper.puborder.ServiceMainMapper.getBySerNameAndVersion",map);
+        return daoHelper.queryForList("com.sdp.frame.web.mapper.puborder.ServiceMainMapper.getBySerNameAndVersion",map);
     }
 
     @Override
     public Map<String, Object> getAllAndSerTypeName(Map<String, Object> paramMap, String start, String length) {
-        return daoHelper.queryForPageList("com.bonc.frame.web.mapper.puborder.ServiceMainMapper.getAllAndSerTypeName", paramMap, start, length);
+        return daoHelper.queryForPageList("com.sdp.frame.web.mapper.puborder.ServiceMainMapper.getAllAndSerTypeName", paramMap, start, length);
     }
 
     @Override
     public Map<String, Object> selectPage(Map<String, Object> paramMap, String start, String length) {
-        return daoHelper.queryForPageList("com.bonc.frame.web.mapper.puborder.ServiceMainMapper.selectPage", paramMap,start,length);
+        return daoHelper.queryForPageList("com.sdp.frame.web.mapper.puborder.ServiceMainMapper.selectPage", paramMap,start,length);
     }
 
     @Override
     public int insert(ServiceMainBean serviceMainBean) {
-        return daoHelper.insert("com.bonc.frame.web.mapper.puborder.ServiceMainMapper.insert",serviceMainBean);
+        return daoHelper.insert("com.sdp.frame.web.mapper.puborder.ServiceMainMapper.insert",serviceMainBean);
     }
 
     @Override
     public int update(ServiceMainBean serviceMainBean) {
-        return daoHelper.update("com.bonc.frame.web.mapper.puborder.ServiceMainMapper.updateByPrimaryKey",serviceMainBean);
+        return daoHelper.update("com.sdp.frame.web.mapper.puborder.ServiceMainMapper.updateByPrimaryKey",serviceMainBean);
     }
 
     @Override
     public int delete(String serId) {
-        return daoHelper.delete("com.bonc.frame.web.mapper.puborder.ServiceMainMapper.deleteByPrimaryKey",serId);
+        return daoHelper.delete("com.sdp.frame.web.mapper.puborder.ServiceMainMapper.deleteByPrimaryKey",serId);
     }
 
     @Override
@@ -92,6 +92,6 @@ public class ServiceMainServiceImpl implements ServiceMainService{
 
     @Override
 	public ServiceMainBean getByPrimaryKey(String serId) {
-		return (ServiceMainBean)daoHelper.queryOne("com.bonc.frame.web.mapper.puborder.ServiceMainMapper.getByPrimaryKey", serId);
+		return (ServiceMainBean)daoHelper.queryOne("com.sdp.frame.web.mapper.puborder.ServiceMainMapper.getByPrimaryKey", serId);
 	}
 }

@@ -23,12 +23,12 @@ public class ParamFlowChartBeanServiceImpl implements ParamFlowChartBeanService{
 
     @Override
     public void insert(ParamFlowChartBean paramFlowChartBean) {
-        daoHelper.insert("com.bonc.frame.web.mapper.puborder.flowChart.ParamFlowChartBeanMapper.insert", paramFlowChartBean);
+        daoHelper.insert("com.sdp.frame.web.mapper.puborder.flowChart.ParamFlowChartBeanMapper.insert", paramFlowChartBean);
     }
     
     @Override
     public void updateByPrimaryKey(ParamFlowChartBean paramFlowChartBean) {
-        daoHelper.update("com.bonc.frame.web.mapper.puborder.flowChart.ParamFlowChartBeanMapper.updateByPrimaryKey", paramFlowChartBean);
+        daoHelper.update("com.sdp.frame.web.mapper.puborder.flowChart.ParamFlowChartBeanMapper.updateByPrimaryKey", paramFlowChartBean);
     }
 	
     //处理传回来的串存入数据库
@@ -67,12 +67,12 @@ public class ParamFlowChartBeanServiceImpl implements ParamFlowChartBeanService{
 
     @Override
     public void deleteByCondition(Map<String, String> map) {
-        daoHelper.delete("com.bonc.frame.web.mapper.puborder.flowChart.ParamFlowChartBeanMapper.deleteByCondition", map);
+        daoHelper.delete("com.sdp.frame.web.mapper.puborder.flowChart.ParamFlowChartBeanMapper.deleteByCondition", map);
     }
 
     @Override
     public List<ParamFlowChartBean> getAllByCondition(Map<String, String> map) {
-        return daoHelper.queryForList("com.bonc.frame.web.mapper.puborder.flowChart.ParamFlowChartBeanMapper.getAllByCondition", map);
+        return daoHelper.queryForList("com.sdp.frame.web.mapper.puborder.flowChart.ParamFlowChartBeanMapper.getAllByCondition", map);
     }
     
     
@@ -142,7 +142,7 @@ public class ParamFlowChartBeanServiceImpl implements ParamFlowChartBeanService{
 
     @Override
     public String paramIsCount(String flowChartId) {
-        return (String)daoHelper.queryOne("com.bonc.frame.web.mapper.puborder.flowChart.ParamFlowChartBeanMapper.paramIsCount", flowChartId);
+        return (String)daoHelper.queryOne("com.sdp.frame.web.mapper.puborder.flowChart.ParamFlowChartBeanMapper.paramIsCount", flowChartId);
     }
 
 	@Override
@@ -152,7 +152,7 @@ public class ParamFlowChartBeanServiceImpl implements ParamFlowChartBeanService{
 		 parammap.put("pubid", pubid);
 		 parammap.put("flowChartId", flowChartId);
 		 parammap.put("type", "3");
-		return daoHelper.queryForList("com.bonc.frame.web.mapper.puborder.flowChart.ParamFlowChartBeanMapper.findCondition", parammap);
+		return daoHelper.queryForList("com.sdp.frame.web.mapper.puborder.flowChart.ParamFlowChartBeanMapper.findCondition", parammap);
 	}
 
     

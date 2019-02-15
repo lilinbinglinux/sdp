@@ -35,12 +35,12 @@ public class InterfaceOrderBeanServiceImpl implements InterfaceOrderBeanService{
     
     @Override
     public Map selectMine(String start, String length, Map<String, Object> paramMap) {
-        return daoHelper.queryForPageList("com.bonc.frame.web.mapper.puborder.InterfaceOrderBeanMapper.selectmine", paramMap, start, length);
+        return daoHelper.queryForPageList("com.sdp.frame.web.mapper.puborder.InterfaceOrderBeanMapper.selectmine", paramMap, start, length);
     }
 
     @Override
     public InterfaceOrderBean selectByPrimaryKey(String orderId) {
-        return (InterfaceOrderBean)daoHelper.queryOne("com.bonc.frame.web.mapper.puborder.InterfaceOrderBeanMapper.selectByPrimaryKey", orderId);
+        return (InterfaceOrderBean)daoHelper.queryOne("com.sdp.frame.web.mapper.puborder.InterfaceOrderBeanMapper.selectByPrimaryKey", orderId);
     }
     
     @Override
@@ -55,33 +55,33 @@ public class InterfaceOrderBeanServiceImpl implements InterfaceOrderBeanService{
         interfaceOrder.setLogin_id(CurrentUserUtils.getInstance().getUser().getLoginId());
         interfaceOrder.setCheckstatus("100");
         
-        daoHelper.insert("com.bonc.frame.web.mapper.puborder.InterfaceOrderBeanMapper.insert", interfaceOrder);
+        daoHelper.insert("com.sdp.frame.web.mapper.puborder.InterfaceOrderBeanMapper.insert", interfaceOrder);
         return orderid;
     }
 
     @Override
     public void updateOrderInter(InterfaceOrderBean interfaceOrderBean) {
-        daoHelper.update("com.bonc.frame.web.mapper.puborder.InterfaceOrderBeanMapper.updateByPrimaryKey", interfaceOrderBean);
+        daoHelper.update("com.sdp.frame.web.mapper.puborder.InterfaceOrderBeanMapper.updateByPrimaryKey", interfaceOrderBean);
     }
 
     @Override
     public void deleteOrderInter(String orderId) {
-        daoHelper.delete("com.bonc.frame.web.mapper.puborder.InterfaceOrderBeanMapper.deleteByPrimaryKey", orderId);
+        daoHelper.delete("com.sdp.frame.web.mapper.puborder.InterfaceOrderBeanMapper.deleteByPrimaryKey", orderId);
     }
 
     @Override
     public String selectPubApiId(String orderid) {
-        return (String)daoHelper.queryOne("com.bonc.frame.web.mapper.puborder.InterfaceOrderBeanMapper.selectpubapiId", orderid);
+        return (String)daoHelper.queryOne("com.sdp.frame.web.mapper.puborder.InterfaceOrderBeanMapper.selectpubapiId", orderid);
     }
 
     @Override
     public String getMaxAppId() {
-        return (String)daoHelper.queryOne("com.bonc.frame.web.mapper.puborder.InterfaceOrderBeanMapper.getMaxAppId");
+        return (String)daoHelper.queryOne("com.sdp.frame.web.mapper.puborder.InterfaceOrderBeanMapper.getMaxAppId");
     }
     
     @Override
     public List<InterfaceOrderBean> getAllByCondition(Map<String, String> map) {
-        return daoHelper.queryForList("com.bonc.frame.web.mapper.puborder.InterfaceOrderBeanMapper.getAllByCondition",map);
+        return daoHelper.queryForList("com.sdp.frame.web.mapper.puborder.InterfaceOrderBeanMapper.getAllByCondition",map);
     }
     
     @Override
@@ -106,7 +106,7 @@ public class InterfaceOrderBeanServiceImpl implements InterfaceOrderBeanService{
 
     @Override
     public InterfaceOrderBean upSort(String sort) {
-        return (InterfaceOrderBean)daoHelper.queryOne("com.bonc.frame.web.mapper.puborder.InterfaceOrderBeanMapper.upsort", sort);
+        return (InterfaceOrderBean)daoHelper.queryOne("com.sdp.frame.web.mapper.puborder.InterfaceOrderBeanMapper.upsort", sort);
     }
 
 }

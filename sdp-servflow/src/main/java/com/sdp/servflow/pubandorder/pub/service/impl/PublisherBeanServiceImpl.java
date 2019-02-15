@@ -33,47 +33,47 @@ public class PublisherBeanServiceImpl implements PublisherBeanService{
     @SuppressWarnings("rawtypes")
     @Override
     public Map selectAll(String start, String length, Map<String, Object> paramMap) {
-    	return daoHelper.queryForPageList("com.bonc.frame.web.mapper.puborder.PublisherBeanMapper.selectAll", paramMap, start, length);
+    	return daoHelper.queryForPageList("com.sdp.frame.web.mapper.puborder.PublisherBeanMapper.selectAll", paramMap, start, length);
     }
     
     @SuppressWarnings("rawtypes")
     @Override
     public Map selectPage(String start, String length, Map<String, Object> paramMap) {
-        return daoHelper.queryForPageList("com.bonc.frame.web.mapper.puborder.PublisherBeanMapper.selectPage", paramMap, start, length);
+        return daoHelper.queryForPageList("com.sdp.frame.web.mapper.puborder.PublisherBeanMapper.selectPage", paramMap, start, length);
     }
     
     @Override
     public int insert(PublisherBean publisher) {
-    	return daoHelper.insert("com.bonc.frame.web.mapper.puborder.PublisherBeanMapper.insertInterface", publisher);
+    	return daoHelper.insert("com.sdp.frame.web.mapper.puborder.PublisherBeanMapper.insertInterface", publisher);
     }
     
     @Override
     public int update(PublisherBean publisher) {
-    	return daoHelper.update("com.bonc.frame.web.mapper.puborder.PublisherBeanMapper.updateByPrimaryKey", publisher);
+    	return daoHelper.update("com.sdp.frame.web.mapper.puborder.PublisherBeanMapper.updateByPrimaryKey", publisher);
     }
 
     @Override
     public int deleteByPubId(String pubid) {
-        return daoHelper.delete("com.bonc.frame.web.mapper.puborder.PublisherBeanMapper.deleteByPrimaryKey", pubid);
+        return daoHelper.delete("com.sdp.frame.web.mapper.puborder.PublisherBeanMapper.deleteByPrimaryKey", pubid);
     }
     
     @Override
     public int deleteByCondition(Map<String,String> map) {
-        return daoHelper.delete("com.bonc.frame.web.mapper.puborder.PublisherBeanMapper.deleteByCondition", map);
+        return daoHelper.delete("com.sdp.frame.web.mapper.puborder.PublisherBeanMapper.deleteByCondition", map);
     }
 
     @Override
     public List<PublisherBean> getAllByCondition(Map<String,String> map) {
-        return daoHelper.queryForList("com.bonc.frame.web.mapper.puborder.PublisherBeanMapper.getAllByCondition",map);
+        return daoHelper.queryForList("com.sdp.frame.web.mapper.puborder.PublisherBeanMapper.getAllByCondition",map);
     }
 
     @Override
     public PublisherBean getPubById(String pubid) {
-        return (PublisherBean)daoHelper.queryOne("com.bonc.frame.web.mapper.puborder.PublisherBeanMapper.getByPrimaryKey", pubid);
+        return (PublisherBean)daoHelper.queryOne("com.sdp.frame.web.mapper.puborder.PublisherBeanMapper.getByPrimaryKey", pubid);
     }
 
     public int deletePubParamByPubCondition(Map<String, Object> condition) {
-        return daoHelper.delete("com.bonc.frame.web.mapper.puborder.PublisherBeanMapper.deletePubParamByPubCondition", condition);
+        return daoHelper.delete("com.sdp.frame.web.mapper.puborder.PublisherBeanMapper.deletePubParamByPubCondition", condition);
      }
 
 }

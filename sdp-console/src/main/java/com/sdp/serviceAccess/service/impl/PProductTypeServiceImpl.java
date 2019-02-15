@@ -50,7 +50,7 @@ public class PProductTypeServiceImpl implements IPProductTypeService{
 	private PProductMapper proMapper;
 
 	/* (non-Javadoc)
-	 * @see com.bonc.serviceAccess.service.IPProductTypeService#categoryInfos(com.bonc.servflow.logSer.log.model.page.Pagination, com.bonc.serviceAccess.entity.PProductType)
+	 * @see com.sdp.serviceAccess.service.IPProductTypeService#categoryInfos(com.sdp.servflow.logSer.log.model.page.Pagination, com.sdp.serviceAccess.entity.PProductType)
 	 */
 	@Override
 	public void categoryInfos(Pagination page, PProductType productType) {
@@ -81,7 +81,7 @@ public class PProductTypeServiceImpl implements IPProductTypeService{
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bonc.serviceAccess.service.IPProductTypeService#createCategory(com.bonc.serviceAccess.entity.PProductType)
+	 * @see com.sdp.serviceAccess.service.IPProductTypeService#createCategory(com.sdp.serviceAccess.entity.PProductType)
 	 */
 	@Override
 	@Transactional(rollbackFor=Exception.class)
@@ -115,7 +115,7 @@ public class PProductTypeServiceImpl implements IPProductTypeService{
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bonc.serviceAccess.service.IPProductTypeService#updateCategory(com.bonc.serviceAccess.entity.PProductType)
+	 * @see com.sdp.serviceAccess.service.IPProductTypeService#updateCategory(com.sdp.serviceAccess.entity.PProductType)
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -147,7 +147,7 @@ public class PProductTypeServiceImpl implements IPProductTypeService{
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bonc.serviceAccess.service.IPProductTypeService#deleteCategory(com.bonc.serviceAccess.entity.PProductType)
+	 * @see com.sdp.serviceAccess.service.IPProductTypeService#deleteCategory(com.sdp.serviceAccess.entity.PProductType)
 	 */
 	@Override
 	@Transactional(rollbackFor=Exception.class)
@@ -180,7 +180,7 @@ public class PProductTypeServiceImpl implements IPProductTypeService{
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bonc.serviceAccess.service.IPProductTypeService#allCates()
+	 * @see com.sdp.serviceAccess.service.IPProductTypeService#allCates()
 	 */
 	@Override
 	public List<PProductType> allCates() {
@@ -196,7 +196,7 @@ public class PProductTypeServiceImpl implements IPProductTypeService{
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bonc.serviceAccess.service.IPProductTypeService#verfyCateCode(com.bonc.serviceAccess.entity.PProductType)
+	 * @see com.sdp.serviceAccess.service.IPProductTypeService#verfyCateCode(com.sdp.serviceAccess.entity.PProductType)
 	 */
 	@Override
 	public Boolean verfyCateCode(String typeCode,String typeId) {
@@ -225,7 +225,7 @@ public class PProductTypeServiceImpl implements IPProductTypeService{
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bonc.serviceAccess.service.IPProductTypeService#singleCate(com.bonc.serviceAccess.entity.PProductType)
+	 * @see com.sdp.serviceAccess.service.IPProductTypeService#singleCate(com.sdp.serviceAccess.entity.PProductType)
 	 */
 	@Override
 	public PProductType singleCate(String typeId) {

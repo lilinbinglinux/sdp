@@ -46,17 +46,17 @@ public class ServiceInfoPoServiceImpl implements ServiceInfoPoService{
 
 	@Override
 	public List<ServiceInfoPo> getAllByCondition(Map<String,String> map) {
-		return daoHelper.queryForList("com.bonc.frame.web.mapper.serlayout.SerLayoutMapper.getAllByCondition",map);
+		return daoHelper.queryForList("com.sdp.frame.web.mapper.serlayout.SerLayoutMapper.getAllByCondition",map);
 	}
 	
 	@Override
 	public List<ServiceInfoPo> getAllEqualInfoByCondition(Map<String,String> map) {
-		return daoHelper.queryForList("com.bonc.frame.web.mapper.serlayout.SerLayoutMapper.getAllEqualInfoByCondition",map);
+		return daoHelper.queryForList("com.sdp.frame.web.mapper.serlayout.SerLayoutMapper.getAllEqualInfoByCondition",map);
 	}
 	
 	@Override
 	public int getAllCount(Map<String,String> map) {
-		return (int) daoHelper.queryOne("com.bonc.frame.web.mapper.serlayout.SerLayoutMapper.getAllCount",map);
+		return (int) daoHelper.queryOne("com.sdp.frame.web.mapper.serlayout.SerLayoutMapper.getAllCount",map);
 	}
 	
 	@Override

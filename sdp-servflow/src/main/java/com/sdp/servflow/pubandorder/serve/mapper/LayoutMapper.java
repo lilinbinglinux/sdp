@@ -39,11 +39,11 @@ public class LayoutMapper {
     */
     public List<HashMap<String, Object>> getLayoutOrder(HashMap<String, Object> hashMap) {
         return daoHelper.queryForList(
-            "com.bonc.servflow.pubandorder.serve.mapper.LayoutMapper.getLayoutOrder", hashMap);
+            "com.sdp.servflow.pubandorder.serve.mapper.LayoutMapper.getLayoutOrder", hashMap);
     }
     public List<HashMap<String, Object>> getLayoutSort(HashMap<String, Object> hashMap) {
         return daoHelper.queryForList(
-            "com.bonc.servflow.pubandorder.serve.mapper.LayoutMapper.getLayoutSort", hashMap);
+            "com.sdp.servflow.pubandorder.serve.mapper.LayoutMapper.getLayoutSort", hashMap);
     }
     /***
      * 
@@ -56,7 +56,7 @@ public class LayoutMapper {
      */
     public List<HashMap<String, Object>> getLayout(HashMap<String, Object> hashMap) {
         return daoHelper.queryForList(
-            "com.bonc.servflow.pubandorder.serve.mapper.LayoutMapper.getLayout", hashMap);
+            "com.sdp.servflow.pubandorder.serve.mapper.LayoutMapper.getLayout", hashMap);
     }
     
 }

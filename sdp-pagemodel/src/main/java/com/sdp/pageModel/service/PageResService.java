@@ -54,7 +54,7 @@ public class PageResService {
      */
     private static final Logger LOG = LoggerFactory.getLogger(PageResService.class);
     
-    private static String BaseMapperUrl = "com.bonc.xbconsole.pageModel.PageResMapper.";
+    private static String BaseMapperUrl = "com.sdp.xbconsole.pageModel.PageResMapper.";
 
     public List<PageRes> findByCondition(Map<String,Object> paramsmap){
     	return daoHelper.queryForList(BaseMapperUrl+"findByCondition", paramsmap);

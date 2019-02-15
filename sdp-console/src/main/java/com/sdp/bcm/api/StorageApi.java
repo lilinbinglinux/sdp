@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  * @author lumeiling
- * @package com.bonc.bcm.api
+ * @package com.sdp.bcm.api
  * @create 2019/1/14 下午5:04
  **/
 public interface StorageApi {

@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" isErrorPage="true" %>
 <%@ page import="java.io.*" %>
-<%@ page import="com.bonc.frame.util.RequestUtil" %>
-<%@ page import="com.bonc.frame.util.ResponseMessage" %>
-<%@ page import="com.bonc.frame.util.SystemPropertiesUtils" language="java"%>
+<%@ page import="com.sdp.frame.util.RequestUtil" %>
+<%@ page import="com.sdp.frame.util.ResponseMessage" %>
+<%@ page import="com.sdp.frame.util.SystemPropertiesUtils" language="java"%>
 <%
    String webpath = request.getContextPath();
    String errormsg  = "";

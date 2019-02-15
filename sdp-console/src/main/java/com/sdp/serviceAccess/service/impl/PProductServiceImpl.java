@@ -62,9 +62,9 @@ public class PProductServiceImpl implements IPProductService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bonc.serviceAccess.service.IPProductService#allProducts(com.bonc.
+	 * @see com.sdp.serviceAccess.service.IPProductService#allProducts(com.sdp.
 	 * xintegration.logSer.log.model.page.Pagination,
-	 * com.bonc.serviceAccess.entity.PProduct)
+	 * com.sdp.serviceAccess.entity.PProduct)
 	 */
 	@Override
 	public Pagination allProducts(Pagination page, PProduct product, boolean isOrderCondition) {
@@ -136,7 +136,7 @@ public class PProductServiceImpl implements IPProductService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bonc.serviceAccess.service.IPProductService#createProduct(com.bonc.
+	 * @see com.sdp.serviceAccess.service.IPProductService#createProduct(com.sdp.
 	 * serviceAccess.entity.PProduct)
 	 */
 	@Override
@@ -192,7 +192,7 @@ public class PProductServiceImpl implements IPProductService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bonc.serviceAccess.service.IPProductService#singleProduct(com.bonc.
+	 * @see com.sdp.serviceAccess.service.IPProductService#singleProduct(com.sdp.
 	 * serviceAccess.entity.PProduct)
 	 */
 	@Override
@@ -255,7 +255,7 @@ public class PProductServiceImpl implements IPProductService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bonc.serviceAccess.service.IPProductService#modifyStatus(com.bonc.
+	 * @see com.sdp.serviceAccess.service.IPProductService#modifyStatus(com.sdp.
 	 * serviceAccess.entity.PProduct)
 	 */
 	@Override
@@ -286,7 +286,7 @@ public class PProductServiceImpl implements IPProductService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bonc.serviceAccess.service.IPProductService#updateProItems(com.bonc.
+	 * @see com.sdp.serviceAccess.service.IPProductService#updateProItems(com.sdp.
 	 * serviceAccess.entity.PProduct)
 	 */
 	@Override
@@ -339,7 +339,7 @@ public class PProductServiceImpl implements IPProductService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.bonc.serviceAccess.service.IPProductService#verfyProductCode(java.lang.
+	 * com.sdp.serviceAccess.service.IPProductService#verfyProductCode(java.lang.
 	 * String)
 	 */
 	@Override
@@ -363,7 +363,7 @@ public class PProductServiceImpl implements IPProductService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bonc.serviceAccess.service.IPProductService#modifyProduct(com.bonc.
+	 * @see com.sdp.serviceAccess.service.IPProductService#modifyProduct(com.sdp.
 	 * serviceAccess.entity.PProduct,
 	 * org.springframework.web.multipart.MultipartFile)
 	 */
@@ -424,7 +424,7 @@ public class PProductServiceImpl implements IPProductService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.bonc.serviceAccess.service.IPProductService#productInfosByCat(java.lang.
+	 * com.sdp.serviceAccess.service.IPProductService#productInfosByCat(java.lang.
 	 * String)
 	 */
 	@Override
@@ -648,9 +648,9 @@ public class PProductServiceImpl implements IPProductService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.bonc.serviceAccess.service.IPProductService#allProducts(com.bonc.
+	 * @see com.sdp.serviceAccess.service.IPProductService#allProducts(com.sdp.
 	 * xintegration.logSer.log.model.page.Pagination,
-	 * com.bonc.serviceAccess.entity.PProduct)
+	 * com.sdp.serviceAccess.entity.PProduct)
 	 */
 	@Override
 	public Integer allProductsCntWithAuth(PProduct product) {

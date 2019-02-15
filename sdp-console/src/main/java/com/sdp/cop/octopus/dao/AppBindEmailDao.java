@@ -1,6 +1,6 @@
 /*
  * 文件名：AppEmailAddrRecordInfo.java
- * 版权：Copyright by www.bonc.com.cn
+ * 版权：Copyright by www.sdp.com.cn
  * 描述：
  * 修改人：zyz
  * 修改时间：2017年7月7日
@@ -35,7 +35,7 @@ public class AppBindEmailDao {
 	@Autowired
 	private DaoHelper daoHelper;
 
-	private static String BaseMapperUrl = "com.bonc.cop.octopus.dao.AppBindEmailDao.";
+	private static String BaseMapperUrl = "com.sdp.cop.octopus.dao.AppBindEmailDao.";
 
 	/**
 	 * Description: <br>

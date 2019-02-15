@@ -27,36 +27,36 @@ public class ServiceVersionServiceImpl implements ServiceVersionService{
 
     @Override
     public List<ServiceVersionBean> getAllByCondition(Map<String, String> map) {
-        return daoHelper.queryForList("com.bonc.frame.web.mapper.puborder.ServiceVersionMapper.getAllByCondition",map);
+        return daoHelper.queryForList("com.sdp.frame.web.mapper.puborder.ServiceVersionMapper.getAllByCondition",map);
     }
 
     @Override
     public int insert(ServiceVersionBean serviceVersionBean) {
-        return daoHelper.insert("com.bonc.frame.web.mapper.puborder.ServiceVersionMapper.insert",serviceVersionBean);
+        return daoHelper.insert("com.sdp.frame.web.mapper.puborder.ServiceVersionMapper.insert",serviceVersionBean);
     }
 
     @Override
     public int update(ServiceVersionBean serviceVersionBean) {
-        return daoHelper.update("com.bonc.frame.web.mapper.puborder.ServiceVersionMapper.updateByPrimaryKey",serviceVersionBean);
+        return daoHelper.update("com.sdp.frame.web.mapper.puborder.ServiceVersionMapper.updateByPrimaryKey",serviceVersionBean);
     }
 
     @Override
     public int delete(String serVersion) {
-        return daoHelper.delete("com.bonc.frame.web.mapper.puborder.ServiceVersionMapper.deleteByPrimaryKey",serVersion);
+        return daoHelper.delete("com.sdp.frame.web.mapper.puborder.ServiceVersionMapper.deleteByPrimaryKey",serVersion);
     }
 
     @Override
     public int deleteBySerId(ServiceVersionBean serviceVersionBean) {
-        return daoHelper.delete("com.bonc.frame.web.mapper.puborder.ServiceVersionMapper.deleteBySerId",serviceVersionBean);
+        return daoHelper.delete("com.sdp.frame.web.mapper.puborder.ServiceVersionMapper.deleteBySerId",serviceVersionBean);
     }
 
     @Override
 	public ServiceVersionBean getByPrimaryKey(String serVerId) {
-		return (ServiceVersionBean)daoHelper.queryOne("com.bonc.frame.web.mapper.puborder.ServiceVersionMapper.getByPrimaryKey", serVerId);
+		return (ServiceVersionBean)daoHelper.queryOne("com.sdp.frame.web.mapper.puborder.ServiceVersionMapper.getByPrimaryKey", serVerId);
 	}
 
 	@Override
 	public List<ServiceVersionBean> getMaxVersionByCondition(Map<String,String> map) {
-		return daoHelper.queryForList("com.bonc.frame.web.mapper.puborder.ServiceVersionMapper.getMaxVersionByCondition",map);
+		return daoHelper.queryForList("com.sdp.frame.web.mapper.puborder.ServiceVersionMapper.getMaxVersionByCondition",map);
 	}
 }

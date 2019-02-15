@@ -22,26 +22,26 @@ public class PubFlowChartBeanServiceImpl implements PubFlowChartBeanService{
 
     @Override
     public void insert(PubFlowChartBean pubFlowChartBean) {
-        daoHelper.insert("com.bonc.frame.web.mapper.puborder.flowChart.PubFlowChartBeanMapper.insert", pubFlowChartBean);
+        daoHelper.insert("com.sdp.frame.web.mapper.puborder.flowChart.PubFlowChartBeanMapper.insert", pubFlowChartBean);
     }
 
     @Override
     public void deleteByCondition(Map<String, String> map) {
-        daoHelper.delete("com.bonc.frame.web.mapper.puborder.flowChart.PubFlowChartBeanMapper.deleteByCondition", map);
+        daoHelper.delete("com.sdp.frame.web.mapper.puborder.flowChart.PubFlowChartBeanMapper.deleteByCondition", map);
     }
 
     @Override
     public List<PubFlowChartBean> select(String flowChartId) {
-        return daoHelper.queryForList("com.bonc.frame.web.mapper.puborder.flowChart.PubFlowChartBeanMapper.select", flowChartId);
+        return daoHelper.queryForList("com.sdp.frame.web.mapper.puborder.flowChart.PubFlowChartBeanMapper.select", flowChartId);
     }
 
 	@Override
 	public PubFlowChartBean getConditionBypubid(Map<String, String> map) {
-		return (PubFlowChartBean) daoHelper.queryOne("com.bonc.frame.web.mapper.puborder.flowChart.PubFlowChartBeanMapper.selectBypubId", map);
+		return (PubFlowChartBean) daoHelper.queryOne("com.sdp.frame.web.mapper.puborder.flowChart.PubFlowChartBeanMapper.selectBypubId", map);
 	}
 
     @Override
     public List<PubFlowChartBean> getAllByCondition(Map<String, String> map) {
-        return daoHelper.queryForList("com.bonc.frame.web.mapper.puborder.flowChart.PubFlowChartBeanMapper.getAllByCondition", map);
+        return daoHelper.queryForList("com.sdp.frame.web.mapper.puborder.flowChart.PubFlowChartBeanMapper.getAllByCondition", map);
     }
 }

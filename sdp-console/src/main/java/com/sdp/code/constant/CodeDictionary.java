@@ -3,7 +3,7 @@ package com.sdp.code.constant;
 
 /**
  * @author lumeiling
- * @package com.bonc.code.constant
+ * @package com.sdp.code.constant
  * @create 2018-12-2018/12/17 下午2:27
  **/
 public class CodeDictionary {

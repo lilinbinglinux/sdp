@@ -34,7 +34,7 @@ public abstract class ShowFactory {
     // 同步订阅的请求头模板
     public static final String SOAP_SYN_REQUEST =
 
-        " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservice.bonc.com/\">    \n"
+        " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservice.sdp.com/\">    \n"
                                                   + "     <soapenv:Header/>                                                                                                       \n"
                                                   + "     <soapenv:Body>                                                                                                          \n "
                                                   + "         <web:apis>                                                                                                          \n"
@@ -46,7 +46,7 @@ public abstract class ShowFactory {
     // 同步订阅的请求头模板
     public static final String SOAP_SYN_RESPONSE = " <soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">     \n"
                                                    + "     <soap:Body>                                                            \n"
-                                                   + "         <ns1:apisResponse xmlns:ns1=\"http://webservice.bonc.com/\">         \n"
+                                                   + "         <ns1:apisResponse xmlns:ns1=\"http://webservice.sdp.com/\">         \n"
                                                    + "             <return>                                                       \n"
                                                    + "                 <requestId>可以用来查询本次访问的唯一记录</requestId>    \n"
                                                    + "                 <respCode>00000</respCode>                                 \n"
@@ -58,7 +58,7 @@ public abstract class ShowFactory {
                                                    + " </soap:Envelope>                                                           \n";
 
     // 异步的请求体
-    public static final String SOAP_ASY_REQUEST = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservice.bonc.com/\"> \n"
+    public static final String SOAP_ASY_REQUEST = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservice.sdp.com/\"> \n"
                                                   + "    <soapenv:Header/>                                                                                               \n"
                                                   + "    <soapenv:Body>                                                                                                  \n"
                                                   + "        <web:apisPublish>                                                                                          \n"
@@ -70,7 +70,7 @@ public abstract class ShowFactory {
     // 异步的响应体
     public static final String SOAP_ASY_RESPONSE = " <soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">      \n"
                                                    + "     <soap:Body>                                                             \n"
-                                                   + "         <ns1:apisPublishResponse xmlns:ns1=\"http://webservice.bonc.com/\">   \n"
+                                                   + "         <ns1:apisPublishResponse xmlns:ns1=\"http://webservice.sdp.com/\">   \n"
                                                    + "             <return>                                                        \n"
                                                    + "                 <respCode>00000</respCode>                                  \n"
                                                    + "                 <respDesc>调用成功</respDesc>                               \n"

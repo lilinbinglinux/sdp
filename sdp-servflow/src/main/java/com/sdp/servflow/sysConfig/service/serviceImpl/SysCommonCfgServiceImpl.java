@@ -15,6 +15,6 @@ public class SysCommonCfgServiceImpl implements SysCommonCfgService {
 
     @Override
     public SysCommonCfg selectByKey(String cfg_key) {
-        return (SysCommonCfg)daoHelper.queryOne("com.bonc.frame.web.mapper.sys_config.SysCommonCfgMapper.selectByKey",cfg_key);
+        return (SysCommonCfg)daoHelper.queryOne("com.sdp.frame.web.mapper.sys_config.SysCommonCfgMapper.selectByKey",cfg_key);
     }
 }

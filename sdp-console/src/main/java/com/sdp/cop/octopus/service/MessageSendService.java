@@ -1,6 +1,6 @@
 /*
  * 文件名：EmailService.java
- * 版权：Copyright by www.bonc.com.cn
+ * 版权：Copyright by www.sdp.com.cn
  * 描述：
  * 修改人：zyz
  * 修改时间：2017年5月18日
@@ -181,7 +181,7 @@ public class MessageSendService {
         }
         
         for (String toMail : vertifyMails) {
-            boolean flag = MailValid.valid(toMail, "mail.bonc.com.cn");
+            boolean flag = MailValid.valid(toMail, "mail.sdp.com.cn");
             if (!flag){
                 invalidMail.add(toMail);
             };

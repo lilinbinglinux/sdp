@@ -1,6 +1,6 @@
 /*
  * 文件名：BounceEmailRecordDao.java
- * 版权：Copyright by www.bonc.com.cn
+ * 版权：Copyright by www.sdp.com.cn
  * 描述：
  * 修改人：zyz
  * 修改时间：2017年7月6日
@@ -43,7 +43,7 @@ public class BounceEmailRecordDao {
 	@Autowired
 	private DaoHelper			daoHelper;
 
-	private static String		BaseMapperUrl	= "com.bonc.cop.octopus.dao.BounceEmailRecordDao.";
+	private static String		BaseMapperUrl	= "com.sdp.cop.octopus.dao.BounceEmailRecordDao.";
 	
     public List<BounceEmailLog> findByAppAndOriEmaTo(String app, String oriEmaTo) {
     	Map<String, String> map = new HashMap<String, String>();

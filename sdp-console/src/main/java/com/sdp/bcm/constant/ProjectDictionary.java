@@ -3,7 +3,7 @@ package com.sdp.bcm.constant;
 
 /**
  * @author lumeiling
- * @package com.bonc.bcm.constant
+ * @package com.sdp.bcm.constant
  * @create 2018-12-2018/12/18 下午3:39
  **/
 public class ProjectDictionary {

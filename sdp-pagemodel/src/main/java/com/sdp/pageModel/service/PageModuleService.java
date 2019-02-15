@@ -46,7 +46,7 @@ public class PageModuleService {
 	@Autowired
 	private PageResService pageResService;
 
-	private static String BaseMapperUrl = "com.bonc.xbconsole.pageModel.PageModuleMapper.";
+	private static String BaseMapperUrl = "com.sdp.xbconsole.pageModel.PageModuleMapper.";
 
 	/**
 	 * 输出日志

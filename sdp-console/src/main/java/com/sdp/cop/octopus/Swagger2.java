@@ -1,6 +1,6 @@
 /*
  * 文件名：Swagger2.java
- * 版权：Copyright by www.bonc.com.cn
+ * 版权：Copyright by www.sdp.com.cn
  * 描述：
  * 修改人：zyz
  * 修改时间：2017年7月26日
@@ -40,7 +40,7 @@ public class Swagger2 {
         return new Docket(DocumentationType.SWAGGER_2)
                     .apiInfo(apiInfo())
                     .select()
-                    .apis(RequestHandlerSelectors.basePackage("com.bonc.cop.octopus.controller"))
+                    .apis(RequestHandlerSelectors.basePackage("com.sdp.cop.octopus.controller"))
                     .paths(PathSelectors.any())
                     .build();
     }

@@ -15,9 +15,9 @@ package com.sdp.sso.filter;
 //
 //import com.alibaba.fastjson.JSONArray;
 //import com.alibaba.fastjson.JSONObject;
-//import com.bonc.frame.security.util.Constant;
-//import com.bonc.frame.web.entity.user.User;
-//import com.bonc.frame.web.service.user.UserService;
+//import com.sdp.frame.security.util.Constant;
+//import com.sdp.frame.web.entity.user.User;
+//import com.sdp.frame.web.service.user.UserService;
 //import com.fream.SpringApplicationContext;
 //import com.ssoConfig.service.ISecurityApiService;
 //import com.ssoConfig.util.CurrentThreadContext;

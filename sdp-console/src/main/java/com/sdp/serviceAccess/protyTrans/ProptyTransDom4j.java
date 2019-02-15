@@ -35,7 +35,7 @@ import com.mysql.jdbc.StringUtils;
 public class ProptyTransDom4j implements ProptyTransBase{
 
 	/* (non-Javadoc)
-	 * @see com.bonc.serviceAccess.ProptyTransBase#transToXml(java.util.List)
+	 * @see com.sdp.serviceAccess.ProptyTransBase#transToXml(java.util.List)
 	 */
 	@Override
 	public String transToXml(List<Map<String, Map<String,String>>> proties,String listRoot,String mapRoot) {
@@ -76,7 +76,7 @@ public class ProptyTransDom4j implements ProptyTransBase{
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bonc.serviceAccess.ProptyTransBase#transToBean(java.lang.String)
+	 * @see com.sdp.serviceAccess.ProptyTransBase#transToBean(java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override

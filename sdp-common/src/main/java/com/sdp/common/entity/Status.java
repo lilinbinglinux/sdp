@@ -1,6 +1,6 @@
 /*
  * 文件名：Status.java
- * 版权：Copyright by www.bonc.com.cn
+ * 版权：Copyright by www.sdp.com.cn
  * 描述：
  * 修改人：zhoutao
  * 修改时间：2017年3月14日

@@ -21,17 +21,17 @@ public class ProcessNodeJoinServiceImpl implements ProcessNodeJoinService{
 
 	@Override
 	public void addJoin(ProcessNodeJoin processNodeJoin) {
-	    daoHelper.insert("com.bonc.servflow.pubandorder.flowchart.mapper.NodeJoinMapper.addJoin", processNodeJoin);
+	    daoHelper.insert("com.sdp.servflow.pubandorder.flowchart.mapper.NodeJoinMapper.addJoin", processNodeJoin);
 	}
 
 	@Override
 	public List<ProcessNodeJoin> findAllByFlowId(Map<String, String> map) {
-	    return daoHelper.queryForList("com.bonc.servflow.pubandorder.flowchart.mapper.NodeJoinMapper.findAllByFlowId", map);
+	    return daoHelper.queryForList("com.sdp.servflow.pubandorder.flowchart.mapper.NodeJoinMapper.findAllByFlowId", map);
 	}
 
 	@Override
 	public void deleteAll(Map<String, String> map) {
-	    daoHelper.delete("com.bonc.servflow.pubandorder.flowchart.mapper.NodeJoinMapper.deleteAll", map);
+	    daoHelper.delete("com.sdp.servflow.pubandorder.flowchart.mapper.NodeJoinMapper.deleteAll", map);
 	}
 
 }

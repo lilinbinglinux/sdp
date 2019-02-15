@@ -1,5 +1,5 @@
 package com.sdp.servflow.logSer.pre;
-//package com.bonc.servflow.logSer.pre;
+//package com.sdp.servflow.logSer.pre;
 //
 //import org.springframework.boot.context.properties.ConfigurationProperties;
 //

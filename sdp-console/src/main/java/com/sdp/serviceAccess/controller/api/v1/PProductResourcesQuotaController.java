@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.bonc.security.entity.Tenantinfo;
 import com.sdp.common.page.Pagination;
 import com.sdp.serviceAccess.service.IProductResQuotaService;
 

@@ -27,26 +27,26 @@ public class SerApplicationServiceImpl implements SerApplicationService{
 
     @Override
     public List<SerApplicationBean> getAllByCondition(Map<String, String> map) {
-        return daoHelper.queryForList("com.bonc.frame.web.mapper.puborder.SerApplicationMapper.getAllByCondition", map);
+        return daoHelper.queryForList("com.sdp.frame.web.mapper.puborder.SerApplicationMapper.getAllByCondition", map);
     }
 
     @Override
     public Map<String, Object> selectPage(Map<String, Object> paramMap, String start, String length) {
-        return daoHelper.queryForPageList("com.bonc.frame.web.mapper.puborder.SerApplicationMapper.selectPage", paramMap, start, length);
+        return daoHelper.queryForPageList("com.sdp.frame.web.mapper.puborder.SerApplicationMapper.selectPage", paramMap, start, length);
     }
 
     @Override
     public int insert(SerApplicationBean serApplicationBean) {
-        return daoHelper.insert("com.bonc.frame.web.mapper.puborder.SerApplicationMapper.insert", serApplicationBean);
+        return daoHelper.insert("com.sdp.frame.web.mapper.puborder.SerApplicationMapper.insert", serApplicationBean);
     }
 
     @Override
     public int update(SerApplicationBean serApplicationBean) {
-        return daoHelper.update("com.bonc.frame.web.mapper.puborder.SerApplicationMapper.updateByPrimaryKey", serApplicationBean);
+        return daoHelper.update("com.sdp.frame.web.mapper.puborder.SerApplicationMapper.updateByPrimaryKey", serApplicationBean);
     }
 
     @Override
     public int delete(String applicationId) {
-        return daoHelper.delete("com.bonc.frame.web.mapper.puborder.SerApplicationMapper.deleteByPrimaryKey", applicationId);
+        return daoHelper.delete("com.sdp.frame.web.mapper.puborder.SerApplicationMapper.deleteByPrimaryKey", applicationId);
     }
 }

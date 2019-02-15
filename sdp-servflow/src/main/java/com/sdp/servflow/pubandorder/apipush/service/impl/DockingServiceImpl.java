@@ -51,27 +51,27 @@ public class DockingServiceImpl implements DockingService{
 
     @Override
     public List<DockingBean> getAllByCondition(Map<String, String> map) {
-        return daoHelper.queryForList("com.bonc.frame.web.mapper.puborder.apiPush.DockingBeanMapper.getAllByCondition", map);
+        return daoHelper.queryForList("com.sdp.frame.web.mapper.puborder.apiPush.DockingBeanMapper.getAllByCondition", map);
     }
 
     @Override
     public void insert(DockingBean dockingBean) {
-        daoHelper.insert("com.bonc.frame.web.mapper.puborder.apiPush.DockingBeanMapper.insert", dockingBean);
+        daoHelper.insert("com.sdp.frame.web.mapper.puborder.apiPush.DockingBeanMapper.insert", dockingBean);
     }
 
     @Override
     public void update(DockingBean dockingBean) {
-        daoHelper.update("com.bonc.frame.web.mapper.puborder.apiPush.DockingBeanMapper.updateByPrimaryKey", dockingBean);
+        daoHelper.update("com.sdp.frame.web.mapper.puborder.apiPush.DockingBeanMapper.updateByPrimaryKey", dockingBean);
     }
 
     @Override
     public void delete(String orderId) {
-        daoHelper.delete("com.bonc.frame.web.mapper.puborder.apiPush.DockingBeanMapper.deleteByPrimaryKey", orderId);
+        daoHelper.delete("com.sdp.frame.web.mapper.puborder.apiPush.DockingBeanMapper.deleteByPrimaryKey", orderId);
     }
 
     @Override
     public JSON deleteById(String id) {
-        int n = daoHelper.delete("com.bonc.frame.web.mapper.puborder.apiPush.DockingBeanMapper.deleteById", id);
+        int n = daoHelper.delete("com.sdp.frame.web.mapper.puborder.apiPush.DockingBeanMapper.deleteById", id);
         Map<String, Object> map = new HashMap<String, Object>();
         if (n > 0){
             map.put("result", "success");

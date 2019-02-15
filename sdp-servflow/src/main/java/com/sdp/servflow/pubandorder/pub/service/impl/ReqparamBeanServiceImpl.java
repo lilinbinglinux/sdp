@@ -52,12 +52,12 @@ public class ReqparamBeanServiceImpl implements ReqparamBeanService{
     @Override
     public Map selectAll(String start,  String length, Map<String, Object> paramMap) {
         paramMap.put("parentId", "ROOT");
-    	return daoHelper.queryForPageList("com.bonc.frame.web.mapper.puborder.ReqparamBean.selectAll", paramMap, start, length);
+    	return daoHelper.queryForPageList("com.sdp.frame.web.mapper.puborder.ReqparamBean.selectAll", paramMap, start, length);
     }
     
     @Override
     public int insert(ReqparamBean reqModel) {
-    	return daoHelper.insert("com.bonc.frame.web.mapper.puborder.ReqparamBean.insert", reqModel);
+    	return daoHelper.insert("com.sdp.frame.web.mapper.puborder.ReqparamBean.insert", reqModel);
     }
     	
     /**
@@ -164,27 +164,27 @@ public class ReqparamBeanServiceImpl implements ReqparamBeanService{
 	
     @Override
     public int update(ReqparamBean reqModel) {
-    	return daoHelper.update("com.bonc.frame.web.mapper.puborder.ReqparamBean.updateByPrimaryKey", reqModel);
+    	return daoHelper.update("com.sdp.frame.web.mapper.puborder.ReqparamBean.updateByPrimaryKey", reqModel);
     }
     
     @Override
     public int deleteByParamId(String id){
-        return daoHelper.delete("com.bonc.frame.web.mapper.puborder.ReqparamBean.deleteByPrimaryKey", id);
+        return daoHelper.delete("com.sdp.frame.web.mapper.puborder.ReqparamBean.deleteByPrimaryKey", id);
     }
     
     @Override
     public void deleteByCondition(Map<String, String> map) {
-        daoHelper.delete("com.bonc.frame.web.mapper.puborder.ReqparamBean.deleteByCondition", map);
+        daoHelper.delete("com.sdp.frame.web.mapper.puborder.ReqparamBean.deleteByCondition", map);
     }
     
     @Override
     public ReqparamBean getParamById(String id) {
-        return (ReqparamBean)daoHelper.queryOne("com.bonc.frame.web.mapper.puborder.ReqparamBean.getByPrimaryKey", id);
+        return (ReqparamBean)daoHelper.queryOne("com.sdp.frame.web.mapper.puborder.ReqparamBean.getByPrimaryKey", id);
     }
 
     @Override
     public List<ReqparamBean> getAllByCondition(Map<String, Object> paramMap) {
-        return daoHelper.queryForList("com.bonc.frame.web.mapper.puborder.ReqparamBean.getAllByCondition", paramMap);
+        return daoHelper.queryForList("com.sdp.frame.web.mapper.puborder.ReqparamBean.getAllByCondition", paramMap);
     }
     
     /**
@@ -210,7 +210,7 @@ public class ReqparamBeanServiceImpl implements ReqparamBeanService{
      */
     @Override
     public int getCountReqParam(String pubid) {
-        return (int)daoHelper.queryOne("com.bonc.frame.web.mapper.puborder.ReqparamBean.getCountReqParam", pubid);
+        return (int)daoHelper.queryOne("com.sdp.frame.web.mapper.puborder.ReqparamBean.getCountReqParam", pubid);
     }
 
     @Override
@@ -508,12 +508,12 @@ public class ReqparamBeanServiceImpl implements ReqparamBeanService{
     
     @Override
     public ReqparamBean upsort(Map<String, Object> map) {
-        return (ReqparamBean)daoHelper.queryOne("com.bonc.frame.web.mapper.puborder.ReqparamBean.upsort", map);
+        return (ReqparamBean)daoHelper.queryOne("com.sdp.frame.web.mapper.puborder.ReqparamBean.upsort", map);
     }
 
     @Override
     public ReqparamBean downSort(Map<String, Object> map) {
-        return (ReqparamBean)daoHelper.queryOne("com.bonc.frame.web.mapper.puborder.ReqparamBean.downSort", map);
+        return (ReqparamBean)daoHelper.queryOne("com.sdp.frame.web.mapper.puborder.ReqparamBean.downSort", map);
     }
 }
 

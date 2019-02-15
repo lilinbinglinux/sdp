@@ -4,7 +4,7 @@ package com.sdp.serviceAccess.proxy.impl.defaults;
  * Copyright ©1997-2018 BONC Corporation, All Rights Reserved.
  * @Title: DefaultOperationComponent.java
  * @Prject: bconsole
- * @Package: com.bonc.serviceAccess.proxy.impl
+ * @Package: com.sdp.serviceAccess.proxy.impl
  * @Description: TODO
  * @Company: BONC
  * @author: LiJinfeng  

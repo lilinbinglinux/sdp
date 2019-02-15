@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * @author lumeiling
- * @package com.bonc.bcm.entity
+ * @package com.sdp.bcm.entity
  * @create 2018-11-2018/11/23 下午12:34
  **/
 public class ProProject {

@@ -7,7 +7,7 @@ import com.sdp.common.entity.NetClientException;
 
 /**
  * @author lumeiling
- * @package com.bonc.bcm.api
+ * @package com.sdp.bcm.api
  * @create 2019/1/14 下午5:05
  **/
 public class StorageClient {

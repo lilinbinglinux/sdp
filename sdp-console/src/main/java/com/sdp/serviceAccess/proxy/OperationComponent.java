@@ -2,7 +2,7 @@
  * Copyright ©1997-2018 BONC Corporation, All Rights Reserved.
  * @Title: OperationComponent.java
  * @Prject: bconsole
- * @Package: com.bonc.serviceAccess.proxy
+ * @Package: com.sdp.serviceAccess.proxy
  * @Description: TODO
  * @Company: BONC
  * @author: LiJinfeng  

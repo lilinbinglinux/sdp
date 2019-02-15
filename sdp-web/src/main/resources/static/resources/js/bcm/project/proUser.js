@@ -279,7 +279,7 @@ function initUsers() {
 
     // 直接调用接口
     // $.ajax({
-    //     url:"http://bconsole.bonc.com/security/rest/user/list",
+    //     url:"http://bconsole.sdp.com/security/rest/user/list",
     //     type:"GET",
     //     contentType:"application/json; charset=utf-8",
     //     data:{

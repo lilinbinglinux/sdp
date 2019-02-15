@@ -59,7 +59,7 @@ public class PProductNodeServiceImpl implements IPProductNodeService{
 	private PProductMapper productMapper;
 
 	/* (non-Javadoc)
-	 * @see com.bonc.serviceAccess.service.IPProductNodeService#saveNode(java.util.List)
+	 * @see com.sdp.serviceAccess.service.IPProductNodeService#saveNode(java.util.List)
 	 */
 	@Override
 	public Status saveNode(List<PProductNode> nodes) {
@@ -74,7 +74,7 @@ public class PProductNodeServiceImpl implements IPProductNodeService{
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bonc.serviceAccess.service.IPProductNodeService#caseByNodes(com.bonc.serviceAccess.entity.PProductCase)
+	 * @see com.sdp.serviceAccess.service.IPProductNodeService#caseByNodes(com.sdp.serviceAccess.entity.PProductCase)
 	 */
 	@Override
 	public Map<String, Object> caseByNodes(PProductCase productCase,Pagination page,boolean isNeedCompare) {

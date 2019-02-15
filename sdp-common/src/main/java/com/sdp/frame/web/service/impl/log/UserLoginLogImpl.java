@@ -18,12 +18,12 @@ public class UserLoginLogImpl implements UserLoginLogService{
 	
 	@Override
 	public Map selectAll(String start, String length, Map<String, Object> paramMap) {
-		return daoHelper.queryForPageList("com.bonc.frame.web.mapper.log.UserLoginLogMapper.selectAll", paramMap, start, length);
+		return daoHelper.queryForPageList("com.sdp.frame.web.mapper.log.UserLoginLogMapper.selectAll", paramMap, start, length);
 	}
 
     @Override
     public void deleteLoginMessage(Integer date) {
-        daoHelper.delete("com.bonc.frame.web.mapper.log.UserLoginLogMapper.deleteLoginMessage", date);
+        daoHelper.delete("com.sdp.frame.web.mapper.log.UserLoginLogMapper.deleteLoginMessage", date);
     }
 
 }

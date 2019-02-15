@@ -55,7 +55,7 @@ public class PageTypeService {
     @Autowired
     private PageModelService pageModelService;
     
-    private static String BaseMapperUrl = "com.bonc.xbconsole.pageModel.PageTypeMapper.";
+    private static String BaseMapperUrl = "com.sdp.xbconsole.pageModel.PageTypeMapper.";
     
     public List<PageType> findByCondition(Map<String,Object> paramsmap){
     	return daoHelper.queryForList(BaseMapperUrl+"findByCondition", paramsmap);

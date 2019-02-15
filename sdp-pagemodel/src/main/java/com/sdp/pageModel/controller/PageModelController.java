@@ -26,7 +26,7 @@ import net.sf.json.JSONObject;
   @ClassName: PageModelController
 * @author zy
 * @date 2018年4月16日
-* @company:www.bonc.com.cn
+* @company:www.sdp.com.cn
  */
 @Controller
 @RequestMapping("v1/pageModel")

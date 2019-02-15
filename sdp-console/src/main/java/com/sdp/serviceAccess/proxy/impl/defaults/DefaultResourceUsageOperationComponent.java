@@ -2,7 +2,7 @@
  * Copyright ©1997-2018 BONC Corporation, All Rights Reserved.
  * @Title: DefaultGetResourceUsageOperationComponent.java
  * @Prject: bconsole
- * @Package: com.bonc.serviceAccess.proxy.impl.defaults
+ * @Package: com.sdp.serviceAccess.proxy.impl.defaults
  * @Description: TODO
  * @Company: BONC
  * @author: LiJinfeng  

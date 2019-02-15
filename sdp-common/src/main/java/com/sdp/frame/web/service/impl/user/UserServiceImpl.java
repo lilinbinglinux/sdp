@@ -32,17 +32,17 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public Map selectAll(String start,String length) {
-		return (Map) daoHelper.queryForPageList("com.bonc.base.user.UserMapper.selectAll", null,start,length);
+		return (Map) daoHelper.queryForPageList("com.sdp.base.user.UserMapper.selectAll", null,start,length);
 	}
 
 	@Override
 	public User selectByUserId(String userId) {
-		return (User)daoHelper.queryOne("com.bonc.base.user.UserMapper.selectByPrimaryKey", userId);
+		return (User)daoHelper.queryOne("com.sdp.base.user.UserMapper.selectByPrimaryKey", userId);
 	}
 
 	@Override
 	public User selectByLoginId(String loginId) {
-		return (User)daoHelper.queryOne("com.bonc.base.user.UserMapper.selectByLoginId", loginId);
+		return (User)daoHelper.queryOne("com.sdp.base.user.UserMapper.selectByLoginId", loginId);
 	}
 
 	@Override
@@ -57,17 +57,17 @@ public class UserServiceImpl implements UserService{
 		}
 		String orgIds = user.getOrgId();
 		if(!StringUtils.isBlank(orgIds)){
-			daoHelper.delete("com.bonc.base.user.UserMapper.deleteUserOrgRef", user.getUserId());
+			daoHelper.delete("com.sdp.base.user.UserMapper.deleteUserOrgRef", user.getUserId());
 			String args[]  = orgIds.split(",");
 			for(String arg:args){
 				Map<String,Object> paramMap = new HashMap<String,Object>();
 				paramMap.put("userId", user.getUserId());
 				paramMap.put("orgId", arg);
-				daoHelper.insert("com.bonc.base.user.UserMapper.insertUserOrgRef", paramMap);
+				daoHelper.insert("com.sdp.base.user.UserMapper.insertUserOrgRef", paramMap);
 			}
 			user.setOrgId(null);
 		}
-		return daoHelper.update("com.bonc.base.user.UserMapper.updateByPrimaryKeySelective", user);
+		return daoHelper.update("com.sdp.base.user.UserMapper.updateByPrimaryKeySelective", user);
 	}
 
 	@Override
@@ -93,11 +93,11 @@ public class UserServiceImpl implements UserService{
 				Map<String,Object> paramMap = new HashMap<String,Object>();
 				paramMap.put("userId", user.getUserId());
 				paramMap.put("orgId", arg);
-				daoHelper.insert("com.bonc.base.user.UserMapper.insertUserOrgRef", paramMap);
+				daoHelper.insert("com.sdp.base.user.UserMapper.insertUserOrgRef", paramMap);
 			}
 			user.setOrgId(null);
 		}
-		return daoHelper.insert("com.bonc.base.user.UserMapper.insertSelective", user);
+		return daoHelper.insert("com.sdp.base.user.UserMapper.insertSelective", user);
 				
 	}
 
@@ -107,22 +107,22 @@ public class UserServiceImpl implements UserService{
 		if(userId.equals("admin")){
 			throw new Exception("超级管理员用户无法删除！");
 		}
-		daoHelper.delete("com.bonc.base.user.UserMapper.deleteUserOrgRef", userId);
-		daoHelper.delete("com.bonc.base.user.UserMapper.deleteUserRoleRef", userId);
-		daoHelper.delete("com.bonc.base.user.UserMapper.deleteUserAuthRef", userId);
-		daoHelper.delete("com.bonc.base.user.UserMapper.deleteByPrimaryKey", userId);
+		daoHelper.delete("com.sdp.base.user.UserMapper.deleteUserOrgRef", userId);
+		daoHelper.delete("com.sdp.base.user.UserMapper.deleteUserRoleRef", userId);
+		daoHelper.delete("com.sdp.base.user.UserMapper.deleteUserAuthRef", userId);
+		daoHelper.delete("com.sdp.base.user.UserMapper.deleteByPrimaryKey", userId);
 		return 0;
 	}
 
 	@Override
 	public List<Resources> selectUserResource(String userId) {
-		return daoHelper.queryForList("com.bonc.frame.web.mapper.resources.ResourcesMapper.selectUserRoleResource", userId);
+		return daoHelper.queryForList("com.sdp.frame.web.mapper.resources.ResourcesMapper.selectUserRoleResource", userId);
 	}
 
 	@Override
 	public void doUserLoginLog(UserLoginLog log) {
 		log.setLoginDate(new Date());
-		daoHelper.insert("com.bonc.base.user.UserMapper.insertLoginLog", log);
+		daoHelper.insert("com.sdp.base.user.UserMapper.insertLoginLog", log);
 	}
 
 	@Override
@@ -136,7 +136,7 @@ public class UserServiceImpl implements UserService{
 			}
 			paramMap.put("orgIds", sb.deleteCharAt(sb.length()-1).toString());
 		}
-		return daoHelper.queryForPageList("com.bonc.base.user.UserMapper.selectUserByCondition", paramMap,start,length);
+		return daoHelper.queryForPageList("com.sdp.base.user.UserMapper.selectUserByCondition", paramMap,start,length);
 	}
 
 	@Override
@@ -144,21 +144,21 @@ public class UserServiceImpl implements UserService{
 		User user  =new User();
 		user.setUserId(userId);
 		user.setPassword(MD5Util.Bit32(orgPasswd));
-		daoHelper.update("com.bonc.base.user.UserMapper.updateByPrimaryKeySelective", user);
+		daoHelper.update("com.sdp.base.user.UserMapper.updateByPrimaryKeySelective", user);
 	}
 
 	@Transactional
 	@Override
 	public void userAuth(List<Map> list, String userId) {
-		daoHelper.delete("com.bonc.base.user.UserMapper.deleteUserRoleRef", userId);
+		daoHelper.delete("com.sdp.base.user.UserMapper.deleteUserRoleRef", userId);
 		for(Map map : list){
-			daoHelper.insert("com.bonc.base.user.UserMapper.insertUserRoleRef", map);
+			daoHelper.insert("com.sdp.base.user.UserMapper.insertUserRoleRef", map);
 		}
 		
 	}
 
 	@Override
 	public List<Map> selectRoleByUser(String userId) {
-		return daoHelper.queryForList("com.bonc.base.user.UserMapper.selectRoleByUser",userId);
+		return daoHelper.queryForList("com.sdp.base.user.UserMapper.selectRoleByUser",userId);
 	}
 }

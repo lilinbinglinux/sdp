@@ -26,7 +26,7 @@ import com.sdp.frame.web.entity.user.User;
   @ClassName: AuthAop
 * @author zy
 * @date 2018年9月4日
-* @company:www.bonc.com.cn
+* @company:www.sdp.com.cn
 * Modification History:
 * Date         Author          Version            Description
 *---------------------------------------------------------*
@@ -38,7 +38,7 @@ public class AuthAop {
 
 	private static final Logger LOG =  LoggerFactory.getLogger(AuthAop.class);
 	
-	@Pointcut("execution(* com.bonc.serviceAccess.controller.rest.*.auth_*(..))")
+	@Pointcut("execution(* com.sdp.serviceAccess.controller.rest.*.auth_*(..))")
 	public void annotationPointCut() {
 	}
 	/**

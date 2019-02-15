@@ -1,18 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.bonc.frame.util.SystemPropertiesUtils"
+<%@ page import="com.sdp.frame.util.SystemPropertiesUtils"
 	language="java"%>
-<%@ page import="com.bonc.frame.util.UserUtil"
+<%@ page import="com.sdp.frame.util.UserUtil"
 	language="java"%>
 <%@ page import="java.util.List"
 	language="java"%>
-<%@ page import="com.bonc.frame.web.entity.user.User"
+<%@ page import="com.sdp.frame.web.entity.user.User"
 	language="java"%>
-<%@ page import="com.bonc.frame.web.entity.orgnization.Orgnization"
+<%@ page import="com.sdp.frame.web.entity.orgnization.Orgnization"
 	language="java"%>
-<%@ page import="com.bonc.frame.security.util.Constant"
+<%@ page import="com.sdp.frame.security.util.Constant"
 	language="java"%>
-<%@ page import="com.bonc.frame.util.DateUtil"
+<%@ page import="com.sdp.frame.util.DateUtil"
 	language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%

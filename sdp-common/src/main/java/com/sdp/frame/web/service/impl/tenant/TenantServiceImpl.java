@@ -19,33 +19,33 @@ public class TenantServiceImpl implements TenantService{
 
 	@Override
 	public Map selectAll(String start, String length, Map<String, Object> paramMap) {
-		return daoHelper.queryForPageList("com.bonc.frame.web.mapper.tenant.TenantMapper.selectAll", paramMap, start, length);
+		return daoHelper.queryForPageList("com.sdp.frame.web.mapper.tenant.TenantMapper.selectAll", paramMap, start, length);
 	}
 
 	@Override
 	public int deleteByTenantId(String tenantId) {
 		
-		return daoHelper.delete("com.bonc.frame.web.mapper.tenant.TenantMapper.deleteByPrimaryKey", tenantId);
+		return daoHelper.delete("com.sdp.frame.web.mapper.tenant.TenantMapper.deleteByPrimaryKey", tenantId);
 	}
 
 	@Override
 	public int insert(Tenant tenant) {
-		return daoHelper.insert("com.bonc.frame.web.mapper.tenant.TenantMapper.insertSelective", tenant);
+		return daoHelper.insert("com.sdp.frame.web.mapper.tenant.TenantMapper.insertSelective", tenant);
 	}
 
 	@Override
 	public Tenant selectByTenantId(String tenantId) {
-		return (Tenant)daoHelper.queryOne("com.bonc.frame.web.mapper.tenant.TenantMapper.selectByPrimaryKey", tenantId);
+		return (Tenant)daoHelper.queryOne("com.sdp.frame.web.mapper.tenant.TenantMapper.selectByPrimaryKey", tenantId);
 	}
 
 	@Override
 	public int update(Tenant tenant) {
-		return daoHelper.update("com.bonc.frame.web.mapper.tenant.TenantMapper.updateByPrimaryKeySelective", tenant);
+		return daoHelper.update("com.sdp.frame.web.mapper.tenant.TenantMapper.updateByPrimaryKeySelective", tenant);
 	}
 
 	@Override
 	public List<Tenant> getAll() {
-		return daoHelper.queryForList("com.bonc.frame.web.mapper.tenant.TenantMapper.getAll");
+		return daoHelper.queryForList("com.sdp.frame.web.mapper.tenant.TenantMapper.getAll");
 	}
 
 }

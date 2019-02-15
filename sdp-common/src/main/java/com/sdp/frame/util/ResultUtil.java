@@ -13,7 +13,7 @@ public class ResultUtil {
 	
 	/**
 	 * 创建执行正确的返回结果信息
-	 * @return com.bonc.framework.web.vo.ResponseResult
+	 * @return com.sdp.framework.web.vo.ResponseResult
 	 */
 	public static ResponseResult createSuccessInfo(){
 		ResponseResult result = new ResponseResult();
@@ -23,7 +23,7 @@ public class ResultUtil {
 	/**
 	 * 创建执行正确的返回结果信息
 	 * @param msg 提示信息
-	 * @return com.bonc.framework.web.vo.ResponseResult
+	 * @return com.sdp.framework.web.vo.ResponseResult
 	 */
 	public static ResponseResult createSuccessInfo(String msg){
 		ResponseResult result = createSuccessInfo();
@@ -34,7 +34,7 @@ public class ResultUtil {
 	 * 创建执行正确的返回结果信息
 	 * @param msg 提示信息
 	 * @param data 返回数据
-	 * @return com.bonc.framework.web.vo.ResponseResult
+	 * @return com.sdp.framework.web.vo.ResponseResult
 	 */
 	public static ResponseResult createSuccessInfo(String msg,Object data){
 		ResponseResult result = createSuccessInfo();
@@ -45,7 +45,7 @@ public class ResultUtil {
 	
 	/**
 	 * 创建执行异常的返回结果信息
-	 * @return com.bonc.framework.web.vo.ResponseResult
+	 * @return com.sdp.framework.web.vo.ResponseResult
 	 */
 	public static ResponseResult createFailInfo(){
 		ResponseResult result = new ResponseResult();
@@ -55,7 +55,7 @@ public class ResultUtil {
 	/**
 	 * 创建执行异常的返回结果信息
 	 * @param msg 提示信息
-	 * @return com.bonc.framework.web.vo.ResponseResult
+	 * @return com.sdp.framework.web.vo.ResponseResult
 	 */
 	public static ResponseResult createFailInfo(String msg){
 		ResponseResult result = createFailInfo();
@@ -66,7 +66,7 @@ public class ResultUtil {
 	 * 创建执行异常的返回结果信息
 	 * @param msg 提示信息
 	 * @param data 返回数据
-	 * @return com.bonc.framework.web.vo.ResponseResult
+	 * @return com.sdp.framework.web.vo.ResponseResult
 	 */
 	public static ResponseResult createFailInfo(String msg,Object data){
 		ResponseResult result = createFailInfo();

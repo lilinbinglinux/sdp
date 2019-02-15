@@ -36,7 +36,7 @@ public class OrderParamBeanServiceImpl implements OrderParamBeanService{
     
     @Override
     public int insert(OrderParamBean orderModel) {
-        return daoHelper.insert("com.bonc.frame.web.mapper.puborder.MineOrderBeanMapper.insert", orderModel);
+        return daoHelper.insert("com.sdp.frame.web.mapper.puborder.MineOrderBeanMapper.insert", orderModel);
     }
 
     /**
@@ -113,7 +113,7 @@ public class OrderParamBeanServiceImpl implements OrderParamBeanService{
 
     @Override
     public Map selectParam(String start, String length, Map<String, Object> paramMap) {
-        return daoHelper.queryForPageList("com.bonc.frame.web.mapper.puborder.MineOrderBeanMapper.selectParam", paramMap, start, length);
+        return daoHelper.queryForPageList("com.sdp.frame.web.mapper.puborder.MineOrderBeanMapper.selectParam", paramMap, start, length);
     }
     
     

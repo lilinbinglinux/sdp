@@ -1,6 +1,6 @@
 /*
  * 文件名：MailVaild.java
- * 版权：Copyright by www.bonc.com.cn
+ * 版权：Copyright by www.sdp.com.cn
  * 描述：
  * 修改人：zyz
  * 修改时间：2017年7月3日
@@ -44,7 +44,7 @@ import org.xbill.DNS.Type;
  */
 public class MailValid {
 /*    public static void main(String[] args) {
-        System.out.println(new MailValid().valid("zyz_qing@163.com", "mail.bonc.com.cn"));
+        System.out.println(new MailValid().valid("zyz_qing@163.com", "mail.sdp.com.cn"));
     }
 */
     /**

@@ -5,7 +5,7 @@
   Time: 16:04
   Describe: 公共引入
 --%>
-<%-- <%@ page import="com.bonc.security.client.*,com.bonc.security.entity.*,com.bonc.security.util.*"%>
+<%-- <%@ page import="com.sdp.security.client.*,com.sdp.security.entity.*,com.sdp.security.util.*"%>
 <%
     String skinPath = "red-skin";
     String loginId = LoginUtil.getLoginId(request);

@@ -2,7 +2,7 @@ package com.sdp.bcm.entity;
 
 /**
  * @author lumeiling
- * @package com.bonc.bcm.entity
+ * @package com.sdp.bcm.entity
  * @create 2018-11-2018/11/27 下午7:48
  **/
 public class ProUser {

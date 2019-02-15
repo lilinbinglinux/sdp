@@ -57,27 +57,27 @@ public class SerspLoginBeanServiceImpl implements SerspLoginBeanService{
 
 	@Override
 	public Map selectPage(String start, String length, Map<String, Object> paramMap) {
-		return daoHelper.queryForPageList("com.bonc.frame.web.mapper.sso.SerspLoginBeanMapper.selectPage", paramMap,start,length);
+		return daoHelper.queryForPageList("com.sdp.frame.web.mapper.sso.SerspLoginBeanMapper.selectPage", paramMap,start,length);
 	}
 
 	@Override
 	public SerspLoginBean getAllByPrimaryKey(String spLoginId ) {
-		return (SerspLoginBean)daoHelper.queryOne("com.bonc.frame.web.mapper.sso.SerspLoginBeanMapper.getAllByPrimaryKey", spLoginId);
+		return (SerspLoginBean)daoHelper.queryOne("com.sdp.frame.web.mapper.sso.SerspLoginBeanMapper.getAllByPrimaryKey", spLoginId);
 	}
 
 	@Override
 	public List<SerspLoginBean> getAllByCondition(Map<String, String> map) {
-		return daoHelper.queryForList("com.bonc.frame.web.mapper.sso.SerspLoginBeanMapper.getAllByCondition",map);
+		return daoHelper.queryForList("com.sdp.frame.web.mapper.sso.SerspLoginBeanMapper.getAllByCondition",map);
 	}
 
 	@Override
 	public void insert(SerspLoginBean serspLoginBean) {
-		daoHelper.insert("com.bonc.frame.web.mapper.sso.SerspLoginBeanMapper.insert", serspLoginBean);
+		daoHelper.insert("com.sdp.frame.web.mapper.sso.SerspLoginBeanMapper.insert", serspLoginBean);
 	}
 
 	@Override
 	public void update(SerspLoginBean serspLoginBean) {
-		daoHelper.update("com.bonc.frame.web.mapper.sso.SerspLoginBeanMapper.update", serspLoginBean);
+		daoHelper.update("com.sdp.frame.web.mapper.sso.SerspLoginBeanMapper.update", serspLoginBean);
 	}
 
 	@Override

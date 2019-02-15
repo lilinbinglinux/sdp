@@ -12,7 +12,7 @@ import java.util.Map;
   @ClassName: WebClientUtil
 * @author zy
 * @date 2018年8月9日
-* @company:www.bonc.com.cn
+* @company:www.sdp.com.cn
 * Modification History:
 * Date         Author          Version            Description
 *---------------------------------------------------------*

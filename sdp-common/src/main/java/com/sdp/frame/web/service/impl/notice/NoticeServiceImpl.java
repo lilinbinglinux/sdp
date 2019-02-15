@@ -28,12 +28,12 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public Map<String, Object> getNoticeByCondition(
 			Map<String, Object> paramMap, String start, String length) {
-		return (Map) daoHelper.queryForPageList("com.bonc.frame.web.mapper.notice.NoticeMapper.pageQuery", paramMap,start,length);
+		return (Map) daoHelper.queryForPageList("com.sdp.frame.web.mapper.notice.NoticeMapper.pageQuery", paramMap,start,length);
 	}
 
 	@Override
 	public Notice selectByNoticeId(String noticeId) {
-		return (Notice)daoHelper.queryOne("com.bonc.frame.web.mapper.notice.NoticeMapper.selectByPrimaryKey", noticeId);
+		return (Notice)daoHelper.queryOne("com.sdp.frame.web.mapper.notice.NoticeMapper.selectByPrimaryKey", noticeId);
 	}
 
 	@Override
@@ -41,23 +41,23 @@ public class NoticeServiceImpl implements NoticeService{
 	public int insert(Notice notice) throws Exception {
 		notice.setNoticeId(IdUtil.createId());
 		notice.setPubdate(new Date());
-		return daoHelper.insert("com.bonc.frame.web.mapper.notice.NoticeMapper.insertSelective", notice);
+		return daoHelper.insert("com.sdp.frame.web.mapper.notice.NoticeMapper.insertSelective", notice);
 	}
 
 	@Override
 	@Transactional
 	public int update(Notice notice) {
-		return daoHelper.update("com.bonc.frame.web.mapper.notice.NoticeMapper.updateByPrimaryKeySelective", notice);
+		return daoHelper.update("com.sdp.frame.web.mapper.notice.NoticeMapper.updateByPrimaryKeySelective", notice);
 	}
 
 	@Override
 	@Transactional
 	public int deleteSendNoticeByNoticeId(List<String> noticeIdList) throws Exception {
 		for(String noticeId : noticeIdList){			
-			daoHelper.delete("com.bonc.frame.web.mapper.notice.NoticeMapper.deleteByPrimaryKey", noticeId);
+			daoHelper.delete("com.sdp.frame.web.mapper.notice.NoticeMapper.deleteByPrimaryKey", noticeId);
 			Map<String,String> paramMap = new HashMap<String,String>();
 			paramMap.put("noticeId", noticeId);
-			daoHelper.delete("com.bonc.frame.web.mapper.notice.NoticeMapper.deleteRecNotice", paramMap);
+			daoHelper.delete("com.sdp.frame.web.mapper.notice.NoticeMapper.deleteRecNotice", paramMap);
 		}
 		return noticeIdList.size();
 	}
@@ -73,7 +73,7 @@ public class NoticeServiceImpl implements NoticeService{
 		Map paramMap = new HashMap();
 		Map<String,String> userMap = new HashMap<String,String>();
 		for(String orgId : orgIdList){
-			userIdList = daoHelper.queryForList("com.bonc.base.user.UserMapper.selectUserByOrgId", orgId);
+			userIdList = daoHelper.queryForList("com.sdp.base.user.UserMapper.selectUserByOrgId", orgId);
 			for(User user :userIdList){
 				userMap.put(user.getUserId(), "");
 			}
@@ -82,7 +82,7 @@ public class NoticeServiceImpl implements NoticeService{
 			paramMap.put("noticeId", notice.getNoticeId());
 			paramMap.put("userId", userId);
 			paramMap.put("isRead", -1);
-			daoHelper.insert("com.bonc.frame.web.mapper.notice.NoticeMapper.insertPublishNotice", paramMap);
+			daoHelper.insert("com.sdp.frame.web.mapper.notice.NoticeMapper.insertPublishNotice", paramMap);
 		}
 		notice.setState("1");//更改公告状态为发布成功
 		this.update(notice);
@@ -97,7 +97,7 @@ public class NoticeServiceImpl implements NoticeService{
 		paramMap.put("userId", userId);
 		for(String noticeId : noticeIdList){			
 			paramMap.put("noticeId", noticeId);
-			daoHelper.delete("com.bonc.frame.web.mapper.notice.NoticeMapper.deleteRecNotice", paramMap);
+			daoHelper.delete("com.sdp.frame.web.mapper.notice.NoticeMapper.deleteRecNotice", paramMap);
 		}
 		return noticeIdList.size();
 	}
@@ -107,7 +107,7 @@ public class NoticeServiceImpl implements NoticeService{
 		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
 		Map paramMap = new HashMap();
 		paramMap.put("userId", userId);
-		Map resultMap = (Map) daoHelper.queryForPageList("com.bonc.frame.web.mapper.notice.NoticeMapper.selectUnreadNotice", paramMap,"0","4");
+		Map resultMap = (Map) daoHelper.queryForPageList("com.sdp.frame.web.mapper.notice.NoticeMapper.selectUnreadNotice", paramMap,"0","4");
 		List<Notice> resultList = (List)resultMap.get("data");
 		for(Notice notice : resultList){
 			notice.setPubTime(sdf.format(notice.getPubdate()));;
@@ -120,31 +120,31 @@ public class NoticeServiceImpl implements NoticeService{
 	public ResponseResult markRead(String loginUserId) {
 		Map<String,String> paramMap = new HashMap<String,String>();
 		paramMap.put("userId", loginUserId);
-		daoHelper.update("com.bonc.frame.web.mapper.notice.NoticeMapper.markRead", paramMap);
+		daoHelper.update("com.sdp.frame.web.mapper.notice.NoticeMapper.markRead", paramMap);
 		return ResultUtil.createSuccessInfo();
 	}
 
 	@Override
 	//已发送公告
 	public Map<String, Object> noticeSend(Map<String, Object> paramMap, String start, String length) {
-		return (Map<String, Object>) daoHelper.queryForPageList("com.bonc.frame.web.mapper.notice.NoticeMapper.pageNoticeSend", paramMap,start,length);
+		return (Map<String, Object>) daoHelper.queryForPageList("com.sdp.frame.web.mapper.notice.NoticeMapper.pageNoticeSend", paramMap,start,length);
 	}
 
 	@Override
 	//已收到公告
 	public Map<String, Object> noticeRec(Map<String, Object> paramMap, String start, String length) {
-		return (Map<String, Object>) daoHelper.queryForPageList("com.bonc.frame.web.mapper.notice.NoticeMapper.pageNoticeRec", paramMap,start,length);
+		return (Map<String, Object>) daoHelper.queryForPageList("com.sdp.frame.web.mapper.notice.NoticeMapper.pageNoticeRec", paramMap,start,length);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public Notice selectNoticeDetail(String noticeId,String loginUserId) {
-		Notice result = (Notice)daoHelper.queryOne("com.bonc.frame.web.mapper.notice.NoticeMapper.selectByNoticeId", noticeId);
+		Notice result = (Notice)daoHelper.queryOne("com.sdp.frame.web.mapper.notice.NoticeMapper.selectByNoticeId", noticeId);
 		Map<String,String> paramMap = new HashMap<String,String>();
 		paramMap.put("userId", loginUserId);
 		paramMap.put("noticeId", noticeId);
-		daoHelper.update("com.bonc.frame.web.mapper.notice.NoticeMapper.markRead", paramMap);
+		daoHelper.update("com.sdp.frame.web.mapper.notice.NoticeMapper.markRead", paramMap);
 		return result;
 	}
 

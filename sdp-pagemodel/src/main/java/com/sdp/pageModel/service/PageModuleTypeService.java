@@ -33,7 +33,7 @@ public class PageModuleTypeService {
 	@Autowired
 	private PageModuleService pageModuleService;
 	    
-	private static String BaseMapperUrl = "com.bonc.xbconsole.pageModel.PageModuleTypeMapper.";
+	private static String BaseMapperUrl = "com.sdp.xbconsole.pageModel.PageModuleTypeMapper.";
 	    
    /**
     * 输出日志

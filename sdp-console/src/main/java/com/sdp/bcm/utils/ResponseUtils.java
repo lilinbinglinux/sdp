@@ -4,7 +4,7 @@ package com.sdp.bcm.utils;
  * 返回结果实体
  * 格式：{"codeus":0,"message":"xxx","data":xxx}
  * @author lumeiling
- * @package com.bonc.bcm.utils
+ * @package com.sdp.bcm.utils
  * @create 2018-12-2018/12/21 下午2:38
  **/
 public class ResponseUtils {

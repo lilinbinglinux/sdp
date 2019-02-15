@@ -50,27 +50,27 @@ public class ProcessNodeServiceImpl implements ProcessNodeService{
 
 	@Override
 	public void addNode(ProcessNode processNode){
-	    daoHelper.insert("com.bonc.servflow.pubandorder.flowchart.mapper.ProcessNodeMapper.addNode", processNode);
+	    daoHelper.insert("com.sdp.servflow.pubandorder.flowchart.mapper.ProcessNodeMapper.addNode", processNode);
 	}
 
 	@Override
 	public void deleteAll(Map<String, String> map) {
-	    daoHelper.delete("com.bonc.servflow.pubandorder.flowchart.mapper.ProcessNodeMapper.deleteAll", map);
+	    daoHelper.delete("com.sdp.servflow.pubandorder.flowchart.mapper.ProcessNodeMapper.deleteAll", map);
 	}
 
 	@Override
 	public List<ProcessNode> findNodeByFId(Map<String, String> map) {
-	    return daoHelper.queryForList("com.bonc.servflow.pubandorder.flowchart.mapper.ProcessNodeMapper.findNodeByFId", map);
+	    return daoHelper.queryForList("com.sdp.servflow.pubandorder.flowchart.mapper.ProcessNodeMapper.findNodeByFId", map);
 	}
 
 	@Override
 	public String selectPrePubId(String nodeId){
-        return (String)daoHelper.queryOne("com.bonc.servflow.pubandorder.flowchart.mapper.ProcessNodeMapper.selectprepubid", nodeId);
+        return (String)daoHelper.queryOne("com.sdp.servflow.pubandorder.flowchart.mapper.ProcessNodeMapper.selectprepubid", nodeId);
 	}
 
     @Override
     public String selectNextPubId(String nodeId) {
-        return (String)daoHelper.queryOne("com.bonc.servflow.pubandorder.flowchart.mapper.ProcessNodeMapper.selectnextpubid", nodeId);
+        return (String)daoHelper.queryOne("com.sdp.servflow.pubandorder.flowchart.mapper.ProcessNodeMapper.selectnextpubid", nodeId);
     }
 
     /**

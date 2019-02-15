@@ -1,5 +1,5 @@
 package com.sdp.servflow.pubandorder.flowchart.xmldatasyc.service.impl;
-//package com.bonc.servflow.pubandorder.flowchart.xmldatasyc.service.impl;
+//package com.sdp.servflow.pubandorder.flowchart.xmldatasyc.service.impl;
 //
 //import java.io.BufferedInputStream;
 //import java.io.File;
@@ -22,10 +22,10 @@ package com.sdp.servflow.pubandorder.flowchart.xmldatasyc.service.impl;
 //import org.springframework.boot.context.properties.ConfigurationProperties;
 //import org.springframework.stereotype.Service;
 //
-//import com.bonc.servflow.pubandorder.flowchart.xmldatasyc.dao.Connecter;
-//import com.bonc.servflow.pubandorder.flowchart.xmldatasyc.dao.TableInfoConfig;
-//import com.bonc.servflow.pubandorder.flowchart.xmldatasyc.parser.DBToXML;
-//import com.bonc.servflow.pubandorder.flowchart.xmldatasyc.service.DBToXmlService;
+//import com.sdp.servflow.pubandorder.flowchart.xmldatasyc.dao.Connecter;
+//import com.sdp.servflow.pubandorder.flowchart.xmldatasyc.dao.TableInfoConfig;
+//import com.sdp.servflow.pubandorder.flowchart.xmldatasyc.parser.DBToXML;
+//import com.sdp.servflow.pubandorder.flowchart.xmldatasyc.service.DBToXmlService;
 //
 //@Service
 //@ConfigurationProperties(prefix = "system.conf", ignoreUnknownFields = true)
